@@ -1,6 +1,6 @@
 ---
 tags: [pr-retro, theme/testing, severity/high]
-prs: ["#5078", "#5033", "#5104", "#5132", "#5268"]
+prs: ["#5078", "#5033", "#5104", "#5132", "#5268", "#5335"]
 status: recurring
 ---
 
@@ -36,6 +36,9 @@ Multiple distinct sub-issues, all under "what should this test actually cover, a
 **PR #5104** — hasbi-ashshidiq23 quoted the team's actual written guideline back to Krisna after a comment was resolved without confirming the reviewer was satisfied:
 > "Ideally, a conversation should be marked as resolved by its starter... When you aren't the conversation starter: Make sure that they have no other concerns... Confirm them that you may resolve the conversation." Follow-up: "kalau resolve itu ga masuk notif sih, jadi kadang aku ga aware kalo commentnya udh di resolve — jadi lebih aman mention lagi aja kalo udah beres."
 
+### 7. Hard-to-mock time source
+**PR #5335** — agissept: "Coba di ganti ke Carbon semua supaya bisa di-mock" — native `DateTime`/timestamp calls mixed into domain code that should consistently use `Carbon`, so tests can freeze or mock the current time instead of depending on the wall clock.
+
 ## Why it matters
 Sub-issues 1–2 waste CI time and reviewer attention on cases the test pyramid already handles elsewhere (unit tests for logic branches, one shared `OAuthFilterIntegrationTest` for auth rejection). Sub-issue 3 is a false sense of coverage — asserting fields one at a time silently lets a new, untested field slip through. Sub-issue 4 adds noise that makes reviewers ask "why does this exist" instead of reviewing the actual behavior under test. Sub-issue 6 is a real, named team norm — resolving it wrong repeatedly erodes trust that concerns were actually addressed. Note also [[02 Explicit Failure Over Silent Fallbacks]]: the #5268 bug (logged-out user path never tested) is this same "what should the test actually cover" question, just with a bigger blast radius.
 
@@ -46,6 +49,7 @@ Sub-issues 1–2 waste CI time and reviewer attention on cases the test pyramid 
 - Every mock/stub/manual cleanup should have a one-line reason attached (in a comment or just in your own head) — "what does this simulate that the real object/behavior can't." If there's no answer, delete it.
 - On resolving a review conversation you didn't start: reply once, then let the starter resolve it — or explicitly say "resolved, ping if you still have concerns" so it surfaces without relying on the (non-notifying) resolve button.
 - **Explicit checklist item for logged-out / anonymous flows**: whenever a feature touches something conditionally available to authenticated users, add a test case for the unauthenticated path before shipping — this is the direct lesson from #5268.
+- Any domain code that reads the current time: use `Carbon` consistently (not native `DateTime`/`time()`), so tests can freeze or mock it — see #5335.
 
 ## Related
 [[00 Index]] · [[02 Explicit Failure Over Silent Fallbacks]] · [[03 Reuse Before You Build]] · [[10 PR and Team Process Hygiene]]

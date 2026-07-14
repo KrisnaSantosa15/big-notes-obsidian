@@ -10,6 +10,7 @@ A self-review pass to run **before** opening a PR, ordered by how much a miss he
 - [ ] Named the business rule for this change out loud — is it a decision/validation (→ Specification) or a pure read (→ ViewModel)? [[01 Actions Must Stay Thin]]
 - [ ] Grepped the domain folder (`Dicoding/Domain/{Domain}`) and shared test bases (`ExtraAssertions.php`, `ExtraIntegrationTestHelpers.php`, `TestHelpers/*`) for an existing VO/helper before writing a new one. [[03 Reuse Before You Build]]
 - [ ] Read the whole Gateway class (+ one sibling Gateway) before adding a new query method — is the data already fetched somewhere nearby? [[04 Query Efficiency]]
+- [ ] New aggregate: does every constructor/method parameter vary today (not just hypothetically), and does every getter expose something the aggregate computed rather than echo an input back? [[12 Aggregate Design]]
 
 ## While writing code
 - [ ] Every `?? X` / `empty()` fallback: is this a real default, or am I hiding a "precondition failed" branch that should throw or be explicit instead? [[02 Explicit Failure Over Silent Fallbacks]]
@@ -22,7 +23,7 @@ A self-review pass to run **before** opening a PR, ordered by how much a miss he
 - [ ] Diffed changed files against the PR title — does every file trace back to what the title says? Split out anything that doesn't. [[10 PR and Team Process Hygiene]]
 - [ ] Rebased against `master`.
 - [ ] New guideline/convention doc? Land it as its own PR asking for explicit sign-off, not bundled into a feature PR. [[10 PR and Team Process Hygiene]]
-- [ ] Naming self-check: temporal state (`old`/`new`), boolean predicates (no `get` prefix), file placement matches sibling types. [[08 Naming and File Organization]]
+- [ ] Naming self-check: temporal state (`old`/`new`), boolean predicates (no `get` prefix), file placement matches sibling types, and — if naming a new domain/enum concept — does product/UI copy already use a different term for the same thing? [[08 Naming and File Organization]]
 - [ ] Test self-check: no re-testing of framework-guaranteed behavior (OAuth filter rejection), `assertEqual`/`assertObjectHasPropertyStructure` over field-by-field asserts, no unexplained mocks, negative cases first, no unused imports. [[06 Test Discipline]]
 
 ## During review

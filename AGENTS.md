@@ -21,23 +21,23 @@ agent) should follow when the user's request matches its trigger phrase.
 
 ### Vault - daily writing, capture, find
 
-| Command | What it does | Read this file |
-|---|---|---|
-| `/obsidian-board-hygiene` | Bulk-triage a kanban board - surface stale items and archive, reschedule, or mark them done in one pass | `.opencode/commands/obsidian-board-hygiene.md` |
-| `/obsidian-board` | Show or update a kanban board - flags overdue items, updates from conversation | `.opencode/commands/obsidian-board.md` |
-| `/obsidian-capture` | Quick idea capture - zero friction, saves to your ideas folder and mentions in daily note | `.opencode/commands/obsidian-capture.md` |
-| `/obsidian-catchup` | Review and process everything captured on the go from the Telegram journal bot - voice, text, images, PDFs, links - waiting in the catchup queue. You pull it when you are back at the laptop; nothing is processed autonomously. | `.opencode/commands/obsidian-catchup.md` |
-| `/obsidian-daily` | Create or update today's daily note - pulls calendar events, overdue tasks, and conversation context | `.opencode/commands/obsidian-daily.md` |
-| `/obsidian-find` | Smart vault search - returns results with context, not just filenames | `.opencode/commands/obsidian-find.md` |
-| `/obsidian-log` | Log this work or dev session to the vault - infers project from context | `.opencode/commands/obsidian-log.md` |
-| `/obsidian-person` | Create or update a person note from conversation context | `.opencode/commands/obsidian-person.md` |
-| `/obsidian-project` | Create or update a project note - adds to board and daily note automatically | `.opencode/commands/obsidian-project.md` |
-| `/obsidian-projects` | Live project status from git + local docs - infers all context from vault notes, no config required | `.opencode/commands/obsidian-projects.md` |
-| `/obsidian-recap` | Summarize a time period from the vault - today, week, or month | `.opencode/commands/obsidian-recap.md` |
-| `/obsidian-recurring` | Track a recurring obligation (payment, filing, ops) with a cadence and a computed next-due date | `.opencode/commands/obsidian-recurring.md` |
-| `/obsidian-save` | Save everything worth keeping from this conversation to the vault | `.opencode/commands/obsidian-save.md` |
-| `/obsidian-task` | Add a task to the right kanban board with inferred priority and due date | `.opencode/commands/obsidian-task.md` |
-| `/obsidian-world` | Load your identity, values, priorities, and current state in one shot - with progressive context levels to avoid burning tokens | `.opencode/commands/obsidian-world.md` |
+| Command                   | What it does                                                                                                                                                                                                                      | Read this file                                 |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `/obsidian-board-hygiene` | Bulk-triage a kanban board - surface stale items and archive, reschedule, or mark them done in one pass                                                                                                                           | `.opencode/commands/obsidian-board-hygiene.md` |
+| `/obsidian-board`         | Show or update a kanban board - flags overdue items, updates from conversation                                                                                                                                                    | `.opencode/commands/obsidian-board.md`         |
+| `/obsidian-capture`       | Quick idea capture - zero friction, saves to your ideas folder and mentions in daily note                                                                                                                                         | `.opencode/commands/obsidian-capture.md`       |
+| `/obsidian-catchup`       | Review and process everything captured on the go from the Telegram journal bot - voice, text, images, PDFs, links - waiting in the catchup queue. You pull it when you are back at the laptop; nothing is processed autonomously. | `.opencode/commands/obsidian-catchup.md`       |
+| `/obsidian-daily`         | Create or update today's daily note - pulls calendar events, overdue tasks, and conversation context                                                                                                                              | `.opencode/commands/obsidian-daily.md`         |
+| `/obsidian-find`          | Smart vault search - returns results with context, not just filenames                                                                                                                                                             | `.opencode/commands/obsidian-find.md`          |
+| `/obsidian-log`           | Log this work or dev session to the vault - infers project from context                                                                                                                                                           | `.opencode/commands/obsidian-log.md`           |
+| `/obsidian-person`        | Create or update a person note from conversation context                                                                                                                                                                          | `.opencode/commands/obsidian-person.md`        |
+| `/obsidian-project`       | Create or update a project note - adds to board and daily note automatically                                                                                                                                                      | `.opencode/commands/obsidian-project.md`       |
+| `/obsidian-projects`      | Live project status from git + local docs - infers all context from vault notes, no config required                                                                                                                               | `.opencode/commands/obsidian-projects.md`      |
+| `/obsidian-recap`         | Summarize a time period from the vault - today, week, or month                                                                                                                                                                    | `.opencode/commands/obsidian-recap.md`         |
+| `/obsidian-recurring`     | Track a recurring obligation (payment, filing, ops) with a cadence and a computed next-due date                                                                                                                                   | `.opencode/commands/obsidian-recurring.md`     |
+| `/obsidian-save`          | Save everything worth keeping from this conversation to the vault                                                                                                                                                                 | `.opencode/commands/obsidian-save.md`          |
+| `/obsidian-task`          | Add a task to the right kanban board with inferred priority and due date                                                                                                                                                          | `.opencode/commands/obsidian-task.md`          |
+| `/obsidian-world`         | Load your identity, values, priorities, and current state in one shot - with progressive context levels to avoid burning tokens                                                                                                   | `.opencode/commands/obsidian-world.md`         |
 
 ### Thinking - synthesis, decisions, learning, reviews
 

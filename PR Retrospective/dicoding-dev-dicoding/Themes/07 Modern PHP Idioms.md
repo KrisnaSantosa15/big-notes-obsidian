@@ -1,6 +1,6 @@
 ---
 tags: [pr-retro, theme/php-idioms, severity/low]
-prs: ["#5017", "#5033", "#5132", "#5224"]
+prs: ["#5017", "#5033", "#5132", "#5224", "#5286", "#5324"]
 status: recurring
 ---
 
@@ -26,6 +26,11 @@ Two related habits: (a) not using PHP 8 constructor property promotion where it 
 > "kenapa ga langsung Integer aja?" (generic/loose type used where a specific type hint was available)
 
 **PR #5033** — same idea applied to test doubles: *"Karena sudah pasti array, maka tidak perlu pengecekan `is_array` lagi"*, and *"Spesifik string kan? Gunakan type spesifik aja."*
+
+**Dead/redundant code left in, PR #5286 / #5324** — same family, one step earlier than a redundant guard (code that does nothing at all, not just an unnecessary check):
+> hasbi-ashshidiq23: "ini perlu kah? di import tapi tidak digunakan" (unused import)
+> hasbi-ashshidiq23: "kenapa ini cek 2 port yg sama?" (the same condition checked twice)
+> AlexzPurewoko: "Property ini sudah tidak digunakan lagi" (unused property left after a refactor)
 
 ## Why it matters
 Every instance here is dead code that exists purely because the author didn't trust (or didn't check) a guarantee the type system already enforces. It's harmless individually, but it compounds into noise: a reader has to verify "is this cast/check actually doing something" every time they hit one, which is wasted cognitive load multiplied across the whole diff.

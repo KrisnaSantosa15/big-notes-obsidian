@@ -1,6 +1,6 @@
 ---
 tags: [pr-retro, theme/architecture, severity/high]
-prs: ["#5104", "#5078", "#5033"]
+prs: ["#5104", "#5078", "#5033", "#5324"]
 status: recurring
 ---
 
@@ -29,6 +29,13 @@ Business rules kept leaking into `Web/Api/*Action` classes instead of living in 
 
 > AlexzPurewoko: "Sebenarnya, tidak perlu menggunakan '@action' disini mengingat kita sudah mengadopsi invokable Action... Kemudian define functional `__invoke()` dalam public function dari action-nya"
 
+**PR #5324** — same "which layer owns this" question, but for a class that isn't an Action or Specification at all: a non-transactional business-rule class (`BootcampAsahPromotionEligibilityChecker`) was placed under the `UseCases` namespace instead of `Infrastructure Services`:
+
+> dimasmds: "BTW kenapa checker ada di use case namespace ya? Sorry aku miss di awalnya"
+> dimasmds: "Karena berkas `BootcampAsahPromotionEligibilityChecker` bukan usecase dan seharusnya memang bukan usecase. Usecase itu ada kontrak dengan `UseCaseSpecification` dan behavior-nya ngaruh ke transaction db yang ter-locking."
+
+Fixed in the immediate follow-up PR #5325 ("Move promotion eligibility checkers to Infrastructure Services").
+
 ## Why it matters
 Two failure directions, same root cause — **not stopping to ask "which layer owns this decision?" before writing code**:
 1. Action calling Gateway directly = business rule (e.g. enrollment validation) becomes untestable in isolation and invisible to anyone reading the Specification layer.
@@ -42,6 +49,7 @@ Deciding the shape of Action → UseCase wiring *while* writing the Action, inst
 - Grep for an existing Specification/ViewModel in the same domain first (see [[03 Reuse Before You Build]]) — `Dicoding/UseCases/{Domain}` and `Dicoding/Web/VM/{Domain}` are the two candidate homes.
 - When scaffolding, use the `make-ddd` skill (`make:ddd`) — it generates the Action/Specification/Gateway split already wired to the 4-layer rule, removing the temptation to shortcut it by hand.
 - If genuinely unsure which layer owns a rule, ask in PR description proactively rather than let two reviewers debate it after the fact — see [[10 PR and Team Process Hygiene]].
+- A class isn't automatically a UseCase just because it lives near one — dimasmds's litmus test from #5324: a real UseCase has a `UseCaseSpecification` contract and its behavior affects a locked DB transaction. If a business-rule class does neither, it likely belongs in Infrastructure Services instead.
 
 ## Related
 [[00 Index]] · [[05 Self-Documenting Code]] · [[10 PR and Team Process Hygiene]]

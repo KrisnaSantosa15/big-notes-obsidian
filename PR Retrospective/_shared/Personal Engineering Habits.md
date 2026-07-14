@@ -61,6 +61,10 @@ opening a PR.
 Ambiguous names for "before vs after" state, generic names where the domain
 concept was known, `getX()` for boolean predicates instead of `isX()`/`hasX()`.
 → full evidence: [[dicoding-dev-dicoding/Themes/08 Naming and File Organization]]
+- 2026-07-14: recurred 3x in dicoding-dev/dicoding (#5286, #5316, #5324) —
+  new sub-pattern: product/UI terminology drifting from the backend/domain
+  term for the same concept, caught by two reviewers independently in one
+  PR. Severity bumped Low → Medium in that repo given the frequency.
 
 ## Related
 [[00 Index]]
