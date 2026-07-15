@@ -40,6 +40,36 @@ Vault operations log, one file per day.
 
 - [[Logs/2026-07-14]] - today's log, init entry
 
+## Projects
+
+Active and archived projects.
+
+- [[Projects/Dicoding Platform]] - dicoding-dev/dicoding codebase architecture + canonical DDD/TDD/Clean Code reference example (EmailDraftCreation), verified green 2026-07-15
+
+## People
+
+One note per person.
+
+- [[People/Krisna]] - vault owner; studying DDD/TDD/Clean Code via the Dicoding codebase (as of 2026-07-15)
+
+## Companies
+
+Employers / orgs referenced.
+
+- [[Companies/Dicoding]] - Indonesian tech-education platform; repo `dicoding-dev/dicoding`
+
+## Daily
+
+One note per day, `YYYY-MM-DD.md`.
+
+- [[Daily/2026-07-15]] - Dicoding codebase study session; canonical clean-code example identified
+
+## Dev Logs
+
+Work/dev session logs, `Dev Logs/YYYY-MM-DD - Project Name.md`.
+
+- [[Dev Logs/2026-07-15 - Dicoding Platform]] - codebase architecture study; EmailDraftCreation verified green
+
 ## Root files
 
 - [[_CLAUDE.md]] - Claude operating manual for this vault (this init generated it)

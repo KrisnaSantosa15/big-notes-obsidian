@@ -55,9 +55,9 @@ This vault is **Obsidian-style** (no `wiki/` folder at root). Only two folders e
 | `Research/` | Research command outputs (`/research`, `/research-deep`, `/x-read`, `/x-pulse`, `/youtube`, `/podcast`, NotebookLM) | Exists, empty |
 | `Logs/` | Vault operations log, one file per day (`YYYY-MM-DD.md`) | Exists (created this init) |
 | `Bases/` | Obsidian Base views (Projects, People, Tasks, Daily) | Exists (created this init) |
-| `Daily/` | One note per day, `YYYY-MM-DD.md` | Not yet created |
-| `Projects/` | Active and archived projects | Not yet created |
-| `People/` | One note per person | Not yet created |
+| `Daily/` | One note per day, `YYYY-MM-DD.md` | Exists (`Daily/2026-07-15.md`) |
+| `Projects/` | Active and archived projects | Exists (`Projects/Dicoding Platform.md`) |
+| `People/` | One note per person | Exists (`People/Krisna.md`) |
 | `Tasks/` | Standalone task notes | Not yet created |
 | `Ideas/` | Captured ideas (`/obsidian-capture`) | Not yet created |
 | `Knowledge/` | Reference material, ADRs | Not yet created |
@@ -164,7 +164,7 @@ Item format:
 
 ## Projects Currently Active
 
-> None logged yet in `Projects/` (folder doesn't exist). The only tracked work artifact is the `dicoding-dev/dicoding` repo via PR Retrospective, which isn't a project note.
+> - [[Projects/Dicoding Platform]] (status: active, created 2026-07-15) - the `dicoding-dev/dicoding` codebase studied as a DDD/TDD/Clean Code reference; holds the canonical `EmailDraftCreation` example.
 
 ---
 
