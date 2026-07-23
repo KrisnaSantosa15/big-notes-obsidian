@@ -92,3 +92,4 @@ When a PRD is split into stacked phases (#5335 domain → #5340 usecases → #53
 
 - 2026-07-15 - Architecture mapped, canonical example identified & verified. See [[Dev Logs/2026-07-15 - Dicoding Platform]].
 - 2026-07-15 - Monthly Add-Ons Phase 1 review feedback resolved (API redesign), Phase 6 integration tests debugged. See [[Dev Logs/2026-07-15 - Monthly Add-Ons Phase 6]].
+- 2026-07-23 - Deeper DDD layering reference captured: decision rules for aggregate vs action vs query-repo/VM, testing conventions, and the 2-PR (domain / infra+web+spec) splitting pattern. See [[Knowledge/DDD 4-Layer Architecture (Dicoding)]].
