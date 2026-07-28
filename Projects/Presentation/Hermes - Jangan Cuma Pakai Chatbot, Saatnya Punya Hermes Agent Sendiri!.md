@@ -66,3 +66,11 @@ asdsd
 ### 4. Hands-on: Konfigurasi dan Run Hermes Agent Pertamamu!
 
 asdasd
+
+
+## References:
+https://www.hostinger.com/id/tutorial/apa-itu-hermes-agent/
+https://blog.stackademic.com/forget-chatbots-hermes-agent-is-an-ai-that-actually-learns-from-you-d8d517be7b88
+https://www.analyticsvidhya.com/blog/2026/05/hermes-agent-guide/
+https://composio.dev/content/openclaw-vs-hermes-agent
+https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/do-more-with-ai/general-ai/understanding-ai-agents-vs-chatbots?form=MA13N0
