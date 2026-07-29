@@ -166,3 +166,6 @@ https://blog.stackademic.com/forget-chatbots-hermes-agent-is-an-ai-that-actually
 https://www.analyticsvidhya.com/blog/2026/05/hermes-agent-guide/
 https://composio.dev/content/openclaw-vs-hermes-agent
 https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/do-more-with-ai/general-ai/understanding-ai-agents-vs-chatbots?form=MA13N0
+
+PPT Slides:
+https://docs.google.com/presentation/d/1EKmhGy7_W8Kmk3srWwpaFqiAjDbeBiOspbbS2SNZCfw/edit?usp=sharing
