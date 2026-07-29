@@ -127,6 +127,8 @@ Daritadi kita cuman bahas teorinya aja ya. Nah di bagian ini mari kita mulai unt
 
 	Yang terakhir adalah eksekusi, kita tinggal pake aja hermes agent yang sudah kita configure tadi. 
 
+	Ini link bot devcoach yang sudah kita integrasikan barusan. silakan kalian pakai aja. Tapi inget, ini pake model gratis jadi sangat wajar kalo misalkan nanti hasil jawabannya kurang sesuai atau bahkan gagal. Selain itu, aku juga akan mematikan bot telegram ini beberapa jam kemudian yaa. `https://t.me/hermes_devcoach_bot`
+
 
 ## References:
 https://www.hostinger.com/id/tutorial/apa-itu-hermes-agent/
