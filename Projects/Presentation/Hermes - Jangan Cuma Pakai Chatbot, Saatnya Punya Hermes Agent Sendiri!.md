@@ -61,7 +61,14 @@ Coba bayangkan kalo misalkan tugas ini dilakukan berkali-kali, tentu saja Hermes
 
 Sebetulnya, bagaimana sih cara kerja Hermes Agent? Nah, kita balik lagi ke dokumentasi resmi dari Nous Research, Hermes Agent memiliki sebuah learning loop yang memungkinkan Hermes membuat skill baru secara otomatis, mencari riwayat percakapan dan mengingat konteks percakapan sebelumnya. Dengan kata lain, Hermes Agent dapat belajar dari interaksi sebelumnya dan meningkatkan kemampuannya seiring waktu.
 
-...
+Setidaknya ada 5 tahapan yang dilakukan.
+1. **Observe:** Di tahap overserve ini hermes agent menerima tugas dari kita sebagai user, lalu dia akan cek konteks, skils dan tools yang tersedia. 
+2. **Execute:** Setelah memiliki konteks yang cukup, dia akan mengeksekusi perintah tadi menggunakan tools yang sudah dicek tadi, misalnya ada 70 tools, dia akan pilih kira-kira tools mana yang sesuai untuk tugas tersebut.
+3. **Reflect:** Setelah berhasil dieksekusi dan tugasnya selesai, hermes agent akan melakukan review apa yang sudah berhasil dan apa yang gagal, biasanya dia akan menyimpan sebagai memory atau bahkan skills di tahap ke 4 yaitu crystalize
+	![[self-improvement-review.png|661]]
+	![[memory-update.png]]
+4. **Crystalize:** Dia akan menyimpan pattern yang selalu berulang menjadi sebuah skills, sehingga nanti bisa digunakan lagi dengan lebih efisien, misalkan meminimalkan thinking bagaimana cara untuk solve task ini karena dulu pernah dicoba hermes dan berhasil kenapa harus melakukan secara manual lagi.
+5. **Reuse:** Dan yang terakhir ini reuse. Selanjutnya, jika ada tugas yang mirip dia akan load skills yang dibuat dan recall memory yang sesuai lalu melakukan improvement terhadap tugas tersebut. Dan 5 tahapan ini tersebut terus diulang, makanya disebut sebagai learning loop.
 
 ### 3. Use Cases Hermes
 
@@ -116,9 +123,12 @@ Daritadi kita cuman bahas teorinya aja ya. Nah di bagian ini mari kita mulai unt
 
 	Khusus untuk bagian gateway, kita bisa gunakan telegram supaya lebih mudah. Caranya adalah. Kita ke telegram, kemudian cari bot father, setelah itu tinggal ketik `/newbot`. Lalu kita kasih nama dan kasih username. Setelah itu Bot Father akan otomatis memberikan kita token yang bisa dipake. Dan ingat bahwa token ini sensitif ya, karena bisa dipake sama banyak orang kalo misalkan bocor. Aku tidak sensor disini karena token ini tidak valid dan cuman contoh aja.
 
+	![[bot-father.png]]
+
 	Di konfigurasi ini kita bisa set model apa yang digunakan, providernya apa, tools yang bisa dipake apa aja dan lain sebagainya. Kita untuk sekarang cukup konfigurasi model dan gateway aja yaa. Untuk lengkapnya nanti akan ada sesi devcoach ekslusif yang akan memandu kalian secara mendalam terkait hal ini, jadi jangan lupa untuk selalu ikuti sesi devocoachnya yaa.
 
 	Ahh bang kalo terminal aku sulit solanya jarang pake. Ohh jangan salah, hermes agent ini juga ada versi desktopnya meskipun itu di linux, kita tinggal ketikan perintah ini di terminal:
+	
 	`hermes desktop`
 
 	Maka dia akan otomatis build versi desktopnya. Dan inilah hasilnya. Kita bisa dengan gampang konfigurasi semua hal disini
@@ -129,7 +139,7 @@ Daritadi kita cuman bahas teorinya aja ya. Nah di bagian ini mari kita mulai unt
 
 	Ini link bot devcoach yang sudah kita integrasikan barusan. silakan kalian pakai aja. Tapi inget, ini pake model gratis jadi sangat wajar kalo misalkan nanti hasil jawabannya kurang sesuai atau bahkan gagal. Selain itu, aku juga akan mematikan bot telegram ini beberapa jam kemudian yaa. `https://t.me/hermes_devcoach_bot`
 
-
+Nah itulah mungkin yang bisa aku share terkait hermes agent. 
 ## References:
 https://www.hostinger.com/id/tutorial/apa-itu-hermes-agent/
 https://blog.stackademic.com/forget-chatbots-hermes-agent-is-an-ai-that-actually-learns-from-you-d8d517be7b88
