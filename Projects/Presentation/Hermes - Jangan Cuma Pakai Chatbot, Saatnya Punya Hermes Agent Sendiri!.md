@@ -39,22 +39,26 @@ Oke sampai sini paham yaa. Jadi intinya, perbedaan utama antara Chatbot dan AI A
 
 Nah, sekarang kita masuk ke pembahasan utama kita yaitu Hermes Agent. Apa itu Hermes Agent?
 
+![[hermes-agent.png]]
+
 Berdasarkan dokumentasi resmi dari Nous Research, Hermes Agent adalah sebuah AI Agent yang memiliki kemampuan untuk melakukan self-improving, artinya semakin kita banyak berinteraksi dengan Hermes Agent, maka Hermes Agent akan semakin pintar. Selain itu juga Hermes agent dilengkapi dengan learning loop yang memungkinkan Hermes membuat skill baru secara otomatis, mencari riwayat percakapan dan mengingat konteks percakapan sebelumnya. Dengan kata lain, Hermes Agent dapat belajar dari interaksi sebelumnya dan meningkatkan kemampuannya seiring waktu.
 
 Bayangin aja, kalo kita punya orang yang ngerti banget tentang kita, maunya apa, sukanya apa, seneng ga kira-kira? Nah, itu lah yang dimiliki oleh Hermes Agent. Ia bisa menjadi asisten pribadi kita yang dapat memahami kebutuhan dan preferensi kita dengan lebih baik.
 #### Openclaw
 
-Lalu apa bedanya dengan Openclaw? Nah, sebetulnya OpenClaw juga merupakan AI Agent yang sama seperti openclaw tapi fokusnya lebih ke gateway/jembatan antara AI Agent dengan messaging platform seperti WhatsApp, Telegram, Discord, dan lain-lain. Yang paling membedakan adalah Openclaw tidak memiliki kemampuan self-improving seperti Hermes Agent. Jadi, meskipun kita dapat membuat AI Agent dengan Openclaw, AI Agent tersebut tidak akan dapat belajar dan meningkatkan kemampuannya seiring waktu seperti Hermes Agent, meskipun kita juga bisa konfigurasi supaya Openclaw bisa melakukan self-improving, tapi itu tidak semudah Hermes Agent yang secara native sudah memiliki kemampuan tersebut.
+![[hermes-vs-openclaw.png]]
 
-Aku punya salah satu contoh singkat perbandingan Openclaw dan Hermes Agent, ini aku ambil dari sebuah video Youtube. Misalkan kita instruksikan dua Agent ini untuk membuat sebuah draft untuk video Youtube, lalu di akhir prompt kita bilang "Ini sering aku lakukan beberapa kali". Nah, si Hermes Agent akan akan membuat skill baru secara otomatis untuk menyimpan konteks tersebut lalu mengerjakan draft video Youtube tersebut. Sedangkan Openclaw akan mengerjakan draft video Youtube tersebut tanpa membuat skill apapun.
+Lalu apa bedanya dengan Openclaw? Nah, sebetulnya OpenClaw juga merupakan AI Agent yang sama seperti Hermes.Bedanya, OpenClaw lebih berfokus pada integrasi dan orkestrasi, misalnya menghubungkan AI Agent dengan WhatsApp, Telegram, Discord, atau berbagai layanan lainnya sehingga AI dapat menjalankan workflow secara otomatis. **Sementara itu, Hermes Agent lebih berfokus pada kemampuan belajar.** Hermes sudah memiliki fitur _self-improving_, _learning loop_, dan _persistent memory_ secara native. Artinya, semakin sering kita berinteraksi dengannya, Hermes dapat belajar dari pengalaman, mengingat konteks sebelumnya, bahkan meningkatkan kemampuannya seiring waktu. Sebenarnya  OpenClaw juga bisa dibuat self improving dengan konfigurasi atau penambahan komponen tertentu. Namun, prosesnya tidak sesederhana Hermes Agent karena pada Hermes fitur-fitur tersebut memang sudah menjadi bagian dari desain utamanya.
 
-Di iterasi pertama mungkin tidak ada bedanya karena sama-sama menghasilkan draft video Youtube. Namun, di iterasi kedua, ketika kita memberikan instruksi yang sama, si Hermes Agent akan mengingat konteks sebelumnya dan menggunakn skill baru tadi, sehingga hasilnya akan lebih baik dan efisien karena tahu apa yang harus dikerjakan berdasarkan iterasi sebelumnya. Sedangkan Openclaw akan mengulang proses yang sama tanpa mengingat konteks sebelumnya, sehingga hasilnya mungkin tidak seefisien Hermes Agent.
+Aku punya salah satu contoh singkat perbandingan Openclaw dan Hermes Agent, ini aku ambil dari sebuah video Youtube. Misalkan kita instruksikan dua Agent ini untuk membuat sebuah draft untuk video Youtube, lalu di akhir prompt kita bilang "Ini sering aku lakukan beberapa kali". Nah, si Hermes Agent akan akan membuat skill baru secara otomatis tanpa disuruh, lalu  menyimpan konteks tersebut dan mengerjakan draft video Youtube tersebut. Sedangkan Openclaw akan mengerjakan draft video Youtube tersebut tanpa membuat skill apapun.
 
-Coba bayangkan kalo misalkan tugas ini dilakukan berkali-kali, tentu saja Hermes Agent akan lebih efisien dan efektif dalam menyelesaikan tugas tersebut dibandingkan dengan Openclaw. Ini adalah salah satu contoh bagaimana kemampuan self-improving dari Hermes Agent dapat memberikan keuntungan yang signifikan dalam jangka panjang.
+Di iterasi pertama mungkin tidak ada bedanya karena sama-sama menghasilkan draft video Youtube. Namun, di iterasi kedua, ketika kita memberikan instruksi yang sama, si Hermes Agent akan mengingat konteks sebelumnya dan menggunakn skill baru tadi, sehingga hasilnya akan lebih baik dan efisien karena tahu apa yang harus dikerjakan berdasarkan iterasi sebelumnya. Sedangkan Openclaw akan mengulang proses yang sama tanpa menggunakan konteks sebelumnya, sehingga hasilnya mungkin tidak seefisien Hermes Agent.
 
 ![[hermes-testing.png]]
 
-![[openclaw-testing.png]]
+![[openclaw-testing.png|697]]
+
+Coba bayangkan kalo misalkan tugas ini dilakukan berkali-kali, tentu saja Hermes Agent akan lebih efisien dan efektif dalam menyelesaikan tugas tersebut dibandingkan dengan Openclaw. Ini adalah salah satu contoh bagaimana kemampuan self-improving dari Hermes Agent dapat memberikan keuntungan yang signifikan dalam jangka panjang.
 
 ![[cost-gap.png]]
 ### 2. Cara Kerja Hermes Agent
