@@ -99,6 +99,8 @@ Dan semua hal yang tadi dilakukan itu akan dikirimkan ke discord dan disimpan di
 
 Di samping 4 hal tersebut, aku juga sedang mencoba untuk mengintegrasikan hermes agent dengan threads, jadi nanti setelah berhasil mencari daily fun fact dia tidak hanya mengirimkan ke discord tapi juga ke threads. Cuman saat ini belum aku eksekusi karena perlu ada persiapan seperti token untuk akses ke threadsnya.
 
+![[social-media-use-case.png]]
+
 Sebetulnya, workflow seperti ini tuh sering digunakan diluaran sana loh temen-temen, jadi misalkan kita jadwalkan hermes ini untuk mencari sesuatu hal yang menarik, berikan summary, bikin draft postingan ke sosial media lalu kirimkan. Aku menemukan banyak sekali orang orang melakukannya bahkan untuk bikin video youtube. Ada agent yang bikin skripnya, ada agent yang bikin suaranya, ada agent yang bikin videonya. Ada juga agent yang tugasnya bikin draft deskripsi lalu mengirimkannya ke youtube.
 
 Mungkin di sini teman-teman punya ide workflow yang lain yang bisa dikerjakan oleh si Hermes ini. Misalnya untuk develop game, website, portfolio atau yang lainnya. Kalo masih bingung mau dipake apa si hermes ini, coba tanya ke diri sendiri. Biasanya aku suka FOMO sama hal apa? 
@@ -106,6 +108,8 @@ Atau temen-temen disini adalah seoarang mahasiswa dan lagi skripsian, nah bisa j
 
 Nah kalo mas Inggih sendiri, ada ga use case yang biasa digunakan kalo misalkan pake AI agent ini, pake openclaw atau pake hermes agent mungkin?
 ### 4. Hands-on: Konfigurasi dan Run Hermes Agent Pertamamu!
+
+**Black Briding Slide**: Saatnya bikin Hermes Agent Pertamamu!
 
 Daritadi kita cuman bahas teorinya aja ya. Nah di bagian ini mari kita mulai untuk konfigurasi hermes agent. Setidaknya ada 3 step yang dilakukan:
 1. Instalasi
