@@ -104,8 +104,28 @@ Daritadi kita cuman bahas teorinya aja ya. Nah di bagian ini mari kita mulai unt
 	**Windows (native)**
 	`iex (irm https://hermes-agent.nousresearch.com/install.ps1) `
 
+	Udah itu aja temen-temen untuk instalasinya, selanjutnya ke bagian yang paling seru yaitu konfigurasi.
+	
 2. Konfigurasi
+
+	Nah Di bagian ini yang menurut aku seru karena banyak hal yang bisa kita eksplorasi. Cara konfigurasinya juga sangat-sangat mudah, cukup satu perintah juga yaitu:
+	
+	`hermes setup`
+	
+	Udah, kita ikutin aja yang perlu dikonfigurasi, kalo gamau semua dikonfigurasi tinggal skip-skip aja.
+
+	Khusus untuk bagian gateway, kita bisa gunakan telegram supaya lebih mudah. Caranya adalah. Kita ke telegram, kemudian cari bot father, setelah itu tinggal ketik `/newbot`. Lalu kita kasih nama dan kasih username. Setelah itu Bot Father akan otomatis memberikan kita token yang bisa dipake. Dan ingat bahwa token ini sensitif ya, karena bisa dipake sama banyak orang kalo misalkan bocor. Aku tidak sensor disini karena token ini tidak valid dan cuman contoh aja.
+
+	Di konfigurasi ini kita bisa set model apa yang digunakan, providernya apa, tools yang bisa dipake apa aja dan lain sebagainya. Kita untuk sekarang cukup konfigurasi model dan gateway aja yaa. Untuk lengkapnya nanti akan ada sesi devcoach ekslusif yang akan memandu kalian secara mendalam terkait hal ini, jadi jangan lupa untuk selalu ikuti sesi devocoachnya yaa.
+
+	Ahh bang kalo terminal aku sulit solanya jarang pake. Ohh jangan salah, hermes agent ini juga ada versi desktopnya meskipun itu di linux, kita tinggal ketikan perintah ini di terminal:
+	`hermes desktop`
+
+	Maka dia akan otomatis build versi desktopnya. Dan inilah hasilnya. Kita bisa dengan gampang konfigurasi semua hal disini
+
 3. Eksekusi
+
+	Yang terakhir adalah eksekusi, kita tinggal pake aja hermes agent yang sudah kita configure tadi. 
 
 
 ## References:
