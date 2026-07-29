@@ -61,6 +61,8 @@ Coba bayangkan kalo misalkan tugas ini dilakukan berkali-kali, tentu saja Hermes
 
 Sebetulnya, bagaimana sih cara kerja Hermes Agent? Nah, kita balik lagi ke dokumentasi resmi dari Nous Research, Hermes Agent memiliki sebuah learning loop yang memungkinkan Hermes membuat skill baru secara otomatis, mencari riwayat percakapan dan mengingat konteks percakapan sebelumnya. Dengan kata lain, Hermes Agent dapat belajar dari interaksi sebelumnya dan meningkatkan kemampuannya seiring waktu.
 
+...
+
 ### 3. Use Cases Hermes
 
 Aku udah install hermes nih bang tapi bingung dipake buat apa ya?
@@ -84,9 +86,26 @@ Sebetulnya, workflow seperti ini tuh sering digunakan diluaran sana loh temen-te
 
 Mungkin di sini teman-teman punya ide workflow yang lain yang bisa dikerjakan oleh si Hermes ini. Misalnya untuk develop game, website, portfolio atau yang lainnya. Kalo masih bingung mau dipake apa si hermes ini, coba tanya ke diri sendiri. Biasanya aku suka FOMO sama hal apa? 
 Atau temen-temen disini adalah seoarang mahasiswa dan lagi skripsian, nah bisa juga minta si hermes ini untuk setiap harisnya ngasih 1 jurnal yang bisa kita baca summarynya. sehingga nanti ketika pas bikin skripsi ngga perlu nyari-nyari lagi.
+
+Nah kalo mas Inggih sendiri, ada ga use case yang biasa digunakan kalo misalkan pake AI agent ini, pake openclaw atau pake hermes agent mungkin?
 ### 4. Hands-on: Konfigurasi dan Run Hermes Agent Pertamamu!
 
-asdasd
+Daritadi kita cuman bahas teorinya aja ya. Nah di bagian ini mari kita mulai untuk konfigurasi hermes agent. Setidaknya ada 3 step yang dilakukan:
+1. Instalasi
+	Di bagian instalasi ini ada banyak pilihannya, mau di Linux, MacOS, Windows bahkan Android pake Termux. Tinggal dipilih aja sesuai kebutuhan. Bahkan ada juga di VPS, kalo yang di VPS ini gampang banget, tinggal satu klik, tunggu beberapa menit, jadi tuh hermes agent nya.
+
+	Selain itu, versi MacOS dan Windows itu punya versi desktopnya, makin gampang untuk konfigurasi kalo ada yang ga pengen pake CLI.
+
+	Cara instalasinya sangat sederhana teman-teman cukup copy paste saja perintah ini ke terminal atau powershell, tunggu, trus langsung jadi:
+	
+	**Linux / macOS / WSL2 / Android (Termux)**
+	` curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash`
+
+	**Windows (native)**
+	`iex (irm https://hermes-agent.nousresearch.com/install.ps1) `
+
+2. Konfigurasi
+3. Eksekusi
 
 
 ## References:
