@@ -97,7 +97,7 @@ Jadi setiap harinya, hermes ini ditugaskan untuk memberikan laporan kepada aku 4
 
 Dan semua hal yang tadi dilakukan itu akan dikirimkan ke discord dan disimpan di second brain hermes yaitu Obsidian. Ada yang pernah denger terkait second brain? Nah terkait hal ini mungkin nanti akan ada sesi khusus yang membahas terkait obsidian dan second brain ini, jadi pantengin terus devcoach yaa teman-teman.
 
-Di samping 4 hal tersebut, aku juga sedang mencoba untuk mengintegrasikan hermes agent dengan threads, jadi nanti setelah berhasil mencari daily fun fact dia tidak hanya mengirimkan ke discord tapi juga ke threads. Cuman saat ini belum aku eksekusi karena perlu ada persiapan seperti token untuk akses ke threadsnya.
+	Di samping 4 hal tersebut, aku juga sedang mencoba untuk mengintegrasikan hermes agent dengan threads, jadi nanti setelah berhasil mencari daily fun fact dia tidak hanya mengirimkan ke discord tapi juga ke threads. Cuman saat ini belum aku eksekusi karena perlu ada persiapan seperti token untuk akses ke threadsnya.
 
 ![[social-media-use-case.png]]
 
@@ -110,6 +110,8 @@ Nah kalo mas Inggih sendiri, ada ga use case yang biasa digunakan kalo misalkan 
 ### 4. Hands-on: Konfigurasi dan Run Hermes Agent Pertamamu!
 
 **Black Briding Slide**: Saatnya bikin Hermes Agent Pertamamu!
+
+![[3-step-config.png]]
 
 Daritadi kita cuman bahas teorinya aja ya. Nah di bagian ini mari kita mulai untuk konfigurasi hermes agent. Setidaknya ada 3 step yang dilakukan:
 1. Instalasi
@@ -135,23 +137,26 @@ Daritadi kita cuman bahas teorinya aja ya. Nah di bagian ini mari kita mulai unt
 	
 	Udah, kita ikutin aja yang perlu dikonfigurasi, kalo gamau semua dikonfigurasi tinggal skip-skip aja.
 
-	Khusus untuk bagian gateway, kita bisa gunakan telegram supaya lebih mudah. Caranya adalah. Kita ke telegram, kemudian cari bot father, setelah itu tinggal ketik `/newbot`. Lalu kita kasih nama dan kasih username. Setelah itu Bot Father akan otomatis memberikan kita token yang bisa dipake. Dan ingat bahwa token ini sensitif ya, karena bisa dipake sama banyak orang kalo misalkan bocor. Aku tidak sensor disini karena token ini tidak valid dan cuman contoh aja.
-
-	![[bot-father.png]]
-
-	Di konfigurasi ini kita bisa set model apa yang digunakan, providernya apa, tools yang bisa dipake apa aja dan lain sebagainya. Kita untuk sekarang cukup konfigurasi model dan gateway aja yaa. Untuk lengkapnya nanti akan ada sesi devcoach ekslusif yang akan memandu kalian secara mendalam terkait hal ini, jadi jangan lupa untuk selalu ikuti sesi devocoachnya yaa.
-
-	Ahh bang kalo terminal aku sulit solanya jarang pake. Ohh jangan salah, hermes agent ini juga ada versi desktopnya meskipun itu di linux, kita tinggal ketikan perintah ini di terminal:
-	
-	`hermes desktop`
-
-	Maka dia akan otomatis build versi desktopnya. Dan inilah hasilnya. Kita bisa dengan gampang konfigurasi semua hal disini
-
 3. Eksekusi
 
 	Yang terakhir adalah eksekusi, kita tinggal pake aja hermes agent yang sudah kita configure tadi. 
 
-	Ini link bot devcoach yang sudah kita integrasikan barusan. silakan kalian pakai aja. Tapi inget, ini pake model gratis jadi sangat wajar kalo misalkan nanti hasil jawabannya kurang sesuai atau bahkan gagal. Selain itu, aku juga akan mematikan bot telegram ini beberapa jam kemudian yaa. `https://t.me/hermes_devcoach_bot`
+
+#### Next Configuration
+Khusus untuk bagian gateway, kita bisa gunakan telegram supaya lebih mudah. Caranya adalah. Kita ke telegram, kemudian cari bot father, setelah itu tinggal ketik `/newbot`. Lalu kita kasih nama dan kasih username. Setelah itu Bot Father akan otomatis memberikan kita token yang bisa dipake. Dan ingat bahwa token ini sensitif ya, karena bisa dipake sama banyak orang kalo misalkan bocor. Aku tidak sensor disini karena token ini tidak valid dan cuman contoh aja.
+![[bot-father-search.png]]
+
+![[bot-father.png]]
+
+Di konfigurasi ini kita bisa set model apa yang digunakan, providernya apa, tools yang bisa dipake apa aja dan lain sebagainya. Kita untuk sekarang cukup konfigurasi model dan gateway aja yaa. Untuk lengkapnya nanti akan ada sesi devcoach ekslusif yang akan memandu kalian secara mendalam terkait hal ini, jadi jangan lupa untuk selalu ikuti sesi devocoachnya yaa.
+
+Ahh bang kalo terminal aku sulit solanya jarang pake. Ohh jangan salah, hermes agent ini juga ada versi desktopnya meskipun itu di linux, kita tinggal ketikan perintah ini di terminal:
+
+`hermes desktop`
+
+Maka dia akan otomatis build versi desktopnya. Dan inilah hasilnya. Kita bisa dengan gampang konfigurasi semua hal disini
+
+Ini link bot devcoach yang sudah kita integrasikan barusan. silakan kalian pakai aja. Tapi inget, ini pake model gratis jadi sangat wajar kalo misalkan nanti hasil jawabannya kurang sesuai atau bahkan gagal. Selain itu, aku juga akan mematikan bot telegram ini beberapa jam kemudian yaa. `https://t.me/hermes_devcoach_bot`
 
 Nah itulah mungkin yang bisa aku share terkait hermes agent. 
 ## References:
