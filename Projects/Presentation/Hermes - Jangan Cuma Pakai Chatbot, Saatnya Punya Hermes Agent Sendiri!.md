@@ -60,9 +60,21 @@ Coba bayangkan kalo misalkan tugas ini dilakukan berkali-kali, tentu saja Hermes
 ![[closed-learning-loop.png]]
 
 Sebetulnya, bagaimana sih cara kerja Hermes Agent? Nah, kita balik lagi ke dokumentasi resmi dari Nous Research, Hermes Agent memiliki sebuah learning loop yang memungkinkan Hermes membuat skill baru secara otomatis, mencari riwayat percakapan dan mengingat konteks percakapan sebelumnya. Dengan kata lain, Hermes Agent dapat belajar dari interaksi sebelumnya dan meningkatkan kemampuannya seiring waktu.
+
 ### 3. Use Cases Hermes
 
-asdsd
+Aku udah install hermes nih bang tapi bingung dipake buat apa ya?
+
+Tenang temen-temen, banyak hal yang bisa dilakukan oleh si Hermes ini. Bahkan, di dokumentasi resmi sendiri ada list use case apa saja yang dilakukan komunitas, misalkan jadi personal asisstant, content creation, research dan lain sebagainya.
+
+![[hermes-use-cases.png|697]]
+
+Biar ga bingung mari kita coba hermes agent yang sudah aku konfigurasi. 
+Jadi setiap harinya, hermes ini ditugaskan untuk memberikan laporan kepada aku 4 hal.
+1. **Daily Fun Fact:** Setiap jam 8 Pagi, aku minta hermes ini untuk memberikan daily fun fact. Jadi setiap harinya pukul 8 pagi dia akan memberikan fun fact terkait apapun itu, dan aku suruh agar jangan memberikan funfact yang sama setiap harinya karena dia pernah tuh selama 1 minggu memberikan fun fact yang sama terus. 
+2. **Daily AI Paper Deep Dive:** Nah Kalo ini kebetulan aku sering FOMO  terkait paper yang lagi trending atau baru diluncurkan. Jadi aku gamau ketinggalan baca artikel jurnal tentang AI, Machine Learning, Deep Learning dan lain sebagainya. Jadi setiap jam 7.30 Pagi aku minta Hermes untuk mencarikan aku satu paper yang menarik, baca sampai selesai, berikan summary nya lalu aku minta hermes ini untuk memberikan opini dia. Jadi aku ga cuman menjadikan hermes ini asisten tapi juga sebagai teman diskusi, Bahkan aku bilang di SOUL.md nya bahwa dia itu bebas mau beropini apapun.
+3. **AI Trending Twitter:** Nah untuk use case ini sangat-sangat membantu aku dalam menghilangkan rasa FOMO, di X atau twitter itu kan biasanya informasi informasi baru berdatangan seperti misalkan kemarin kimi K3, atau informasi hangat lainnya. Dengan adanya hermes agent yang bisa search di X aku bisa mendapatkan informasi yang lagi hangat di diperbincangkan di bidang AI tanpa harus scroll-scroll dan malah terdistraksi sama konten lainnya. 
+4. 
 ### 4. Hands-on: Konfigurasi dan Run Hermes Agent Pertamamu!
 
 asdasd
