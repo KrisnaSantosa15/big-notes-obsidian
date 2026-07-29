@@ -8,7 +8,7 @@
 
 Halo teman-teman. Selamat sore, perkenalkan, Aku Krisna. Di kesempatan kali ini, aku mau bahas terkait dengan Hermes Agent. Tapi sebelum itu, aku mau tanya nih, siapa di sini yang suka pakai ChatGPT? Atau mungkin Gemini? atau Kimi malah yang lagi trending? Yukk Absen dulu...
 
-Wahh sepertinya banyak juga yaa, yang suka pakai. Oke kalo gitu, aku ganti deh pertanyaannya. Siapa disini yang pernah pake Openclaw? Atau mungkin Hermes Agent? Ada ga? yuk absen lagi... Mungkin mas Inggih pernah pake atau sering pake mungkin?
+Wahh sepertinya banyak juga yaa, yang suka pakai. Oke kalo gitu, aku ganti deh pertanyaannya. Siapa disini yang pernah pake Openclaw? Atau mungkin Hermes Agent? Ada ga? yuk absen lagi... Mungkin mas Inggih pernah pake atau sering pake malah?
 
 Nah bagi yang belum tau terkait hermes agent, selamat datang di sesi ini. Dan bagi yang sudah tau, selamat dan silakan simak sesi ini sampai habis.
 
@@ -23,13 +23,15 @@ Mari kita mulai dari pengenalan perbedaan antara Chatbot dan AI Agent.
 
 Tadi di awal aku tanya siapa yang suka pakai ChatGPT, Gemini, atau Kimi. Nah, itu semua adalah contoh dari Chatbot. Kenapa disebut Chatbot? Karena mereka itu dirancang untuk meniru percakapan manusia melalui teks atau suara. Chatbot biasanya memiliki kemampuan terbatas dan hanya dapat merespons pertanyaan atau perintah yang telah diprogram sebelumnya. Ada versi yang rule based atau berdasarkan aturan, ada juga berbasis generative AI seperti ChatGPT, Gemini, dan Kimi. Namun, meskipun generative AI memiliki kemampuan untuk menghasilkan jawaban yang lebih kompleks, mereka tetap memiliki keterbatasan dalam memahami konteks dan melakukan tindakan yang lebih kompleks.
 
+![[ai-agent-vs-chatbot.png]]
+
 Sebagai contoh, kalo kita tanya ke ChatGPT, "Siapa presiden Indonesia saat ini?" maka ChatGPT akan memberikan jawaban yang sesuai dengan data yang ada. Namun, jika kita tanya pertanyaan yang lebih kompleks atau membutuhkan pemahaman konteks yang lebih dalam, ChatGPT mungkin tidak dapat memberikan jawaban yang memadai.
 
 Di sisi lain, AI Agent seperti Hermes Agent memiliki kemampuan yang lebih canggih. AI Agent dapat memahami konteks, belajar dari interaksi sebelumnya, dan bahkan dapat melakukan tindakan tertentu berdasarkan pemahaman tersebut. Dengan kata lain, AI Agent tidak hanya merespons pertanyaan, tetapi juga dapat mengambil inisiatif untuk menyelesaikan tugas atau memberikan rekomendasi yang relevan.
 
-![[ai-agent-vs-chatbot.png]]
+![[kapan-chatbot-bisa-disebut-ai-agent.png]]
 
-Loh kan Chatgpt juga bisa seperti itu? Betul sekali! Lalu kapan Chatbot bisa disebagai AI Agent? Nah, Chatbot bisa disebut sebagai AI Agent ketika ia dilengkapi dengan tools tambahan seperti code interpreter, web browser, dan lain-lain. Dengan adanya tools tambahan ini, Chatbot memiliki konteks yang cukup untuk dapat melakukan tugas yang lebih kompleks dan memberikan jawaban yang lebih relevan.
+Loh tapi kan bang Chatgpt juga bisa seperti itu? Betul sekali! Lalu kapan Chatbot bisa disebagai AI Agent? Nah, Chatbot bisa disebut sebagai AI Agent ketika ia dilengkapi dengan tools tambahan seperti code interpreter, web browser, dan lain-lain. Dengan adanya tools tambahan ini, Chatbot memiliki konteks yang cukup untuk dapat melakukan tugas yang lebih kompleks dan memberikan jawaban yang lebih relevan.
 
 Oke sampai sini paham yaa. Jadi intinya, perbedaan utama antara Chatbot dan AI Agent adalah kemampuan mereka dalam memahami konteks dan melakukan tindakan yang lebih kompleks.
 
