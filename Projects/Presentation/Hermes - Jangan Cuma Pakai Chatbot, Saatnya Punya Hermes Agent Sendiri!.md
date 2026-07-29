@@ -142,6 +142,7 @@ Daritadi kita cuman bahas teorinya aja ya. Nah di bagian ini mari kita mulai unt
 	Yang terakhir adalah eksekusi, kita tinggal pake aja hermes agent yang sudah kita configure tadi. 
 
 
+#### Hands-On
 #### Next Configuration
 Khusus untuk bagian gateway, kita bisa gunakan telegram supaya lebih mudah. Caranya adalah. Kita ke telegram, kemudian cari bot father, setelah itu tinggal ketik `/newbot`. Lalu kita kasih nama dan kasih username. Setelah itu Bot Father akan otomatis memberikan kita token yang bisa dipake. Dan ingat bahwa token ini sensitif ya, karena bisa dipake sama banyak orang kalo misalkan bocor. Aku tidak sensor disini karena token ini tidak valid dan cuman contoh aja.
 ![[bot-father-search.png]]
