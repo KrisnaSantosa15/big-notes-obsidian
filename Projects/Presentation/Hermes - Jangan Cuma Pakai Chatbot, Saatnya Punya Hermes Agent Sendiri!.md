@@ -63,9 +63,11 @@ Coba bayangkan kalo misalkan tugas ini dilakukan berkali-kali, tentu saja Hermes
 ![[cost-gap.png]]
 ### 2. Cara Kerja Hermes Agent
 
+**Black Bridging Slide**: Sebetulnya, bagaimana sih cara kerja Hermes Agent? 
+
 ![[closed-learning-loop.png]]
 
-Sebetulnya, bagaimana sih cara kerja Hermes Agent? Nah, kita balik lagi ke dokumentasi resmi dari Nous Research, Hermes Agent memiliki sebuah learning loop yang memungkinkan Hermes membuat skill baru secara otomatis, mencari riwayat percakapan dan mengingat konteks percakapan sebelumnya. Dengan kata lain, Hermes Agent dapat belajar dari interaksi sebelumnya dan meningkatkan kemampuannya seiring waktu.
+Nah, kita balik lagi ke dokumentasi resmi dari Nous Research, Hermes Agent memiliki sebuah learning loop yang memungkinkan Hermes membuat skill baru secara otomatis, mencari riwayat percakapan dan mengingat konteks percakapan sebelumnya. Dengan kata lain, Hermes Agent dapat belajar dari interaksi sebelumnya dan meningkatkan kemampuannya seiring waktu.
 
 Setidaknya ada 5 tahapan yang dilakukan.
 1. **Observe:** Di tahap overserve ini hermes agent menerima tugas dari kita sebagai user, lalu dia akan cek konteks, skils dan tools yang tersedia. 
@@ -77,6 +79,8 @@ Setidaknya ada 5 tahapan yang dilakukan.
 5. **Reuse:** Dan yang terakhir ini reuse. Selanjutnya, jika ada tugas yang mirip dia akan load skills yang dibuat dan recall memory yang sesuai lalu melakukan improvement terhadap tugas tersebut. Dan 5 tahapan ini tersebut terus diulang, makanya disebut sebagai learning loop.
 
 ### 3. Use Cases Hermes
+
+**Black Briding Slide**: udah install hermes, tapi bingung dipake apa?
 
 Aku udah install hermes nih bang tapi bingung dipake buat apa ya?
 
