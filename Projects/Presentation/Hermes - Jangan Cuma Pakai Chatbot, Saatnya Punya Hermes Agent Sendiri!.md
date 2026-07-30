@@ -50,7 +50,7 @@ Bayangin aja, kalo kita punya orang yang ngerti banget tentang kita, maunya apa,
 
 ![[hermes-vs-openclaw.png]]
 
-Lalu apa bedanya dengan Openclaw? Nah, sebetulnya OpenClaw juga merupakan AI Agent yang sama seperti Hermes.Bedanya, OpenClaw lebih berfokus pada integrasi dan orkestrasi, misalnya menghubungkan AI Agent dengan WhatsApp, Telegram, Discord, atau berbagai layanan lainnya sehingga AI dapat menjalankan workflow secara otomatis. **Sementara itu, Hermes Agent lebih berfokus pada kemampuan belajar.** Hermes sudah memiliki fitur _self-improving_, _learning loop_, dan _persistent memory_ secara native. Artinya, semakin sering kita berinteraksi dengannya, Hermes dapat belajar dari pengalaman, mengingat konteks sebelumnya, bahkan meningkatkan kemampuannya seiring waktu. Sebenarnya  OpenClaw juga bisa dibuat self improving dengan konfigurasi atau penambahan komponen tertentu. Namun, prosesnya tidak sesederhana Hermes Agent karena pada Hermes fitur-fitur tersebut memang sudah menjadi bagian dari desain utamanya.
+Lalu apa bedanya dengan Openclaw? Nah, sebetulnya OpenClaw juga merupakan AI Agent yang sama seperti Hermes. Bedanya, OpenClaw lebih berfokus pada integrasi dan orkestrasi, misalnya menghubungkan AI Agent dengan WhatsApp, Telegram, Discord, atau berbagai layanan lainnya sehingga AI dapat menjalankan workflow secara otomatis. **Sementara itu, Hermes Agent lebih berfokus pada kemampuan belajar.** Hermes sudah memiliki fitur _self-improving_, _learning loop_, dan _persistent memory_ secara native. Artinya, semakin sering kita berinteraksi dengannya, Hermes dapat belajar dari pengalaman, mengingat konteks sebelumnya, bahkan meningkatkan kemampuannya seiring waktu. Sebenarnya  OpenClaw juga bisa dibuat self improving dengan konfigurasi atau penambahan komponen tertentu. Namun, prosesnya tidak sesederhana Hermes Agent karena pada Hermes fitur-fitur tersebut memang sudah menjadi bagian dari desain utamanya.
 
 Aku punya salah satu contoh singkat perbandingan Openclaw dan Hermes Agent, ini aku ambil dari sebuah video Youtube. Misalkan kita instruksikan dua Agent ini untuk membuat sebuah draft untuk video Youtube, lalu di akhir prompt kita bilang "Ini sering aku lakukan beberapa kali". Nah, si Hermes Agent akan akan membuat skill baru secara otomatis tanpa disuruh, lalu  menyimpan konteks tersebut dan mengerjakan draft video Youtube tersebut. Sedangkan Openclaw akan mengerjakan draft video Youtube tersebut tanpa membuat skill apapun.
 
@@ -72,14 +72,18 @@ Coba bayangkan kalo misalkan tugas ini dilakukan berkali-kali, tentu saja Hermes
 Nah, kita balik lagi ke dokumentasi resmi dari Nous Research, Hermes Agent memiliki sebuah learning loop yang memungkinkan Hermes membuat skill baru secara otomatis, mencari riwayat percakapan dan mengingat konteks percakapan sebelumnya. Dengan kata lain, Hermes Agent dapat belajar dari interaksi sebelumnya dan meningkatkan kemampuannya seiring waktu.
 
 Setidaknya ada 5 tahapan yang dilakukan.
-1. **Observe:** Di tahap overserve ini hermes agent menerima tugas dari kita sebagai user, lalu dia akan cek konteks, skils dan tools yang tersedia. 
-2. **Execute:** Setelah memiliki konteks yang cukup, dia akan mengeksekusi perintah tadi menggunakan tools yang sudah dicek tadi, misalnya ada 70 tools, dia akan pilih kira-kira tools mana yang sesuai untuk tugas tersebut.
-3. **Reflect:** Setelah berhasil dieksekusi dan tugasnya selesai, hermes agent akan melakukan review apa yang sudah berhasil dan apa yang gagal, biasanya dia akan menyimpan sebagai memory atau bahkan skills di tahap ke 4 yaitu crystalize
-	![[self-improvement-review.png|661]]
-	![[memory-update.png]]
-4. **Crystalize:** Dia akan menyimpan pattern yang selalu berulang menjadi sebuah skills, sehingga nanti bisa digunakan lagi dengan lebih efisien, misalkan meminimalkan thinking bagaimana cara untuk solve task ini karena dulu pernah dicoba hermes dan berhasil kenapa harus melakukan secara manual lagi.
-5. **Reuse:** Dan yang terakhir ini reuse. Selanjutnya, jika ada tugas yang mirip dia akan load skills yang dibuat dan recall memory yang sesuai lalu melakukan improvement terhadap tugas tersebut. Dan 5 tahapan ini tersebut terus diulang, makanya disebut sebagai learning loop.
+1. **Tugas dari User:** Di tahap ini, hermes akan menerima prompt dari user, misalkan kita minta hermes untuk cari informasi tentang sesuatu. Lalu setelah itu dia lanjut ke tahap kedua
+2. **Pahami Konteks:** Setelah hermes menerima prompt yang diberikan oleh user, hermes akan memahami konteks dari prompt tersebut dengan mencari memory dan skill yang relevan dengan kebutuhan.
+3. **Eksekusi:** Setelah prompt berhasil dipahami dan siap eksekusi, hermes akan menggunakan tools dan skill yang sudah dipilih tadi sampai tugasnya selesai. Sebetulnya bisa jadi dari eksekusi ini balik lagi ke prompt user untuk meminta klarifikasi, tapi agar sederhana kita ambil contoh pendekatan ini.
+4. **Review:** Nah setelah Tugas itu dieksekusi, hermes akan melakukan review terhadap tugas tadi, apa yang berjalan baik dan apa yang gagal. Biasanya dia akan update memory atau bahkan bikin skill sendiri tanpa kita suruh.
+5. **Belajar:** Yang terakhir belajar, dan pada tahapan inilah hermes menyimpan skill atau memory tadi, kemudian ketika ada prompt yang masuk dengan konteks yang mirip maka dia akan menggunakan memory dan skill tadi sehingga prosesnya akan lebih efisien.
 
+Nah berikut adalah contoh dari hermes agent yang melakukan update memory dan skill setelah melakukan suatu tugas. 
+![[self-improvement-review.png|661]]
+![[memory-update.png]]
+
+Tapi berdasarkan dokumentasi resmi dari Hermes, tidak semua tugas itu dibuat sebuah skill atau dimasukan ke memory, tapi ada kriterianya. Yaitu, update memory dilakukan setelah 10 Prompt, dan skills setiap 10 kali invocation/tool use dalam satu turn.
+![[hermes-criteria.png]]
 ### 3. Use Cases Hermes
 
 **Black Briding Slide**: udah install hermes, tapi bingung dipake apa?
@@ -92,6 +96,9 @@ Tenang temen-temen, banyak hal yang bisa dilakukan oleh si Hermes ini. Bahkan, d
 
 Biar ga bingung mari kita coba hermes agent yang sudah aku konfigurasi. 
 Jadi setiap harinya, hermes ini ditugaskan untuk memberikan laporan kepada aku 4 hal.
+
+![[my-use-cases.png]]
+
 1. **Daily Fun Fact:** Setiap jam 8 Pagi, aku minta hermes ini untuk memberikan daily fun fact. Jadi setiap harinya pukul 8 pagi dia akan memberikan fun fact terkait apapun itu, dan aku suruh agar jangan memberikan funfact yang sama setiap harinya karena dia pernah tuh selama 1 minggu memberikan fun fact yang sama terus. 
 2. **Daily AI Paper Deep Dive:** Nah Kalo ini kebetulan aku sering FOMO  terkait paper yang lagi trending atau baru diluncurkan. Jadi aku gamau ketinggalan baca artikel jurnal tentang AI, Machine Learning, Deep Learning dan lain sebagainya. Jadi setiap jam 7.30 Pagi aku minta Hermes untuk mencarikan aku satu paper yang menarik, baca sampai selesai, berikan summary nya lalu aku minta hermes ini untuk memberikan opini dia. Jadi aku ga cuman menjadikan hermes ini asisten tapi juga sebagai teman diskusi, Bahkan aku bilang di SOUL.md nya bahwa dia itu bebas mau beropini apapun.
 3. **AI Trending Twitter:** Nah untuk use case ini sangat-sangat membantu aku dalam menghilangkan rasa FOMO, di X atau twitter itu kan biasanya informasi informasi baru berdatangan seperti misalkan kemarin kimi K3, atau informasi hangat lainnya. Dengan adanya hermes agent yang bisa search di X aku bisa mendapatkan informasi yang lagi hangat di diperbincangkan di bidang AI tanpa harus scroll-scroll dan malah terdistraksi sama konten lainnya. 
@@ -159,6 +166,8 @@ Ahh bang kalo terminal aku sulit solanya jarang pake. Ohh jangan salah, hermes a
 
 Maka dia akan otomatis build versi desktopnya. Dan inilah hasilnya. Kita bisa dengan gampang konfigurasi semua hal disini
 
+![[hermes-devcoach-telegram.png]]
+
 Ini link bot devcoach yang sudah kita integrasikan barusan. silakan kalian pakai aja. Tapi inget, ini pake model gratis jadi sangat wajar kalo misalkan nanti hasil jawabannya kurang sesuai atau bahkan gagal. Selain itu, aku juga akan mematikan bot telegram ini beberapa jam kemudian yaa. `https://t.me/hermes_devcoach_bot`
 
 Nah itulah mungkin yang bisa aku share terkait hermes agent. 
@@ -168,3 +177,6 @@ https://blog.stackademic.com/forget-chatbots-hermes-agent-is-an-ai-that-actually
 https://www.analyticsvidhya.com/blog/2026/05/hermes-agent-guide/
 https://composio.dev/content/openclaw-vs-hermes-agent
 https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/do-more-with-ai/general-ai/understanding-ai-agents-vs-chatbots?form=MA13N0
+
+PPT Slides:
+https://docs.google.com/presentation/d/1EKmhGy7_W8Kmk3srWwpaFqiAjDbeBiOspbbS2SNZCfw/edit?usp=sharing
