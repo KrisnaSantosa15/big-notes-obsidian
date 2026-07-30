@@ -29,6 +29,8 @@ Sebagai contoh, kalo kita tanya ke ChatGPT, "Siapa presiden Indonesia saat ini?"
 
 Di sisi lain, AI Agent seperti Hermes Agent memiliki kemampuan yang lebih canggih. AI Agent dapat memahami konteks, belajar dari interaksi sebelumnya, dan bahkan dapat melakukan tindakan tertentu berdasarkan pemahaman tersebut. Dengan kata lain, AI Agent tidak hanya merespons pertanyaan, tetapi juga dapat mengambil inisiatif untuk menyelesaikan tugas atau memberikan rekomendasi yang relevan.
 
+**Sebetulnya ada banyak banget definisi bedanya chatbot dan AI Agent, misalkan Chatbot tidak punya lopp, sedangkan AI Agent punya loop, Chatbot tidak punya thinking AI Agent punya dan lain sebagainya. Tapi disini kita pakai aja definisi yang mudah**
+
 ![[kapan-chatbot-bisa-disebut-ai-agent.png]]
 
 Loh tapi kan bang Chatgpt juga bisa seperti itu? Betul sekali! Lalu kapan Chatbot bisa disebagai AI Agent? Nah, Chatbot bisa disebut sebagai AI Agent ketika ia dilengkapi dengan tools tambahan seperti code interpreter, web browser, dan lain-lain. Dengan adanya tools tambahan ini, Chatbot memiliki konteks yang cukup untuk dapat melakukan tugas yang lebih kompleks dan memberikan jawaban yang lebih relevan.
@@ -97,7 +99,7 @@ Jadi setiap harinya, hermes ini ditugaskan untuk memberikan laporan kepada aku 4
 
 Dan semua hal yang tadi dilakukan itu akan dikirimkan ke discord dan disimpan di second brain hermes yaitu Obsidian. Ada yang pernah denger terkait second brain? Nah terkait hal ini mungkin nanti akan ada sesi khusus yang membahas terkait obsidian dan second brain ini, jadi pantengin terus devcoach yaa teman-teman.
 
-	Di samping 4 hal tersebut, aku juga sedang mencoba untuk mengintegrasikan hermes agent dengan threads, jadi nanti setelah berhasil mencari daily fun fact dia tidak hanya mengirimkan ke discord tapi juga ke threads. Cuman saat ini belum aku eksekusi karena perlu ada persiapan seperti token untuk akses ke threadsnya.
+Di samping 4 hal tersebut, aku juga sedang mencoba untuk mengintegrasikan hermes agent dengan threads, jadi nanti setelah berhasil mencari daily fun fact dia tidak hanya mengirimkan ke discord tapi juga ke threads. Cuman saat ini belum aku eksekusi karena perlu ada persiapan seperti token untuk akses ke threadsnya.
 
 ![[social-media-use-case.png]]
 
