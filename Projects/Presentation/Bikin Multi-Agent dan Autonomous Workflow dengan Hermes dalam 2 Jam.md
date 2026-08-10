@@ -78,6 +78,8 @@ Sources:
 > *I have a self hosted Honcho instance as an external memory tool, it drains a ton of tokens but it is definitely worth it.*
 > https://www.reddit.com/r/hermesagent/comments/1tpck95/can_someone_explain_to_me_the_actual_benefits_of/
 
+Official Mnemosyne:
+https://github.com/mnemosyne-oss/mnemosyne/blob/main/docs/hermes-integration.md
 ### Obsidian
 
 Apa knowledge atau informasi yang disimpan secara sengaja untuk dijadikan sebagai sumber agent
@@ -87,3 +89,68 @@ Apa knowledge atau informasi yang disimpan secara sengaja untuk dijadikan sebaga
 - Kita juga harus secara ekspllisit bilang simpan ke obsidian atau second brain atau hal yang relate kesana baru hermes akan simpan ini, beda dengan memory native atau memory tambahan tadi. Meskipun sebetulnya bisa saja kita konfigurasi setiap pre-tool-call maka cek obsidian, tapi bukan secara alami dari kapabilitas obsidian.
 
 - handons pake supermemory
+
+
+Honcho Local Setup
+1. Clone the repository
+```
+git clone https://github.com/plastic-labs/honcho.git
+cd honcho
+```
+2. Setup Env Vars
+```
+cp .env.template .env
+
+# OPEN THE .env THEN OVERRIDES:
+LLM_OPENAI_API_KEY=sk-xxxx
+DERIVER_MODEL_CONFIG__TRANSPORT=openai
+DERIVER_MODEL_CONFIG__MODEL=deepseek-v4-flash-free
+DERIVER_MODEL_CONFIG__OVERRIDES__BASE_URL=https://opencode.ai/zen/go/v1
+
+```
+3. Config docker-composer.yml
+```
+cp docker-compose.yml.example docker-compose.yml
+
+# OPEN THE docker-compose.yml THEN OVERRIDES PORTS
+database:
+	image: pgvector/pgvector:pg15
+	restart: unless-stopped
+	ports:
+		- "127.0.0.1:54321:5432" #-> 54321
+		  
+redis:
+	image: redis:8.2
+	restart: unless-stopped
+	ports:
+		- "127.0.0.1:6381:6379" #-> 6381
+```
+4. Run the service
+```
+docker compose up -d --build
+```
+5. Setup Honcho on Hermes
+```
+hermes honcho setup
+
+# Then follow the instructions
+```
+> Konfigurasi tersebut hanya berdampak kepada current/default profile. Jika ingin ke semua profile yang ada, gunakan:
+> ```
+> hermes honcho sync
+> ```
+6. Test
+```
+# Memory status
+hermes memory status
+
+# Honcho Status
+hermes honcho status
+```
+7. Agar bisa memverifikasi secara langsung, kita bisa download openconcho untuk melihat apa saja yang ada di honcho memory. karena honcho tidak menyediakan dashboard secara native, oleh karena itu kita gunakan saja opensource project
+```
+https://github.com/offendingcommit/openconcho/releases/tag/v0.16.1
+```
+8. Lalu kita coba untuk chat ke hermes di new session, minimal 2 turn dia akan menyimpan ke honcho. Untuk summary sendiri dia tidak realtime, dia akan melakukan proses queue agar session tadi bisa diproses di background ketika sudah tidak digunakan. Selain itu, honcho juga punya threshold agar bisa dijadikan summary (1000 token): https://honcho.dev/docs/v3/documentation/core-concepts/reasoning#how-it-works
+9. session yang diproses di background tadi dinamakan sebagai dream atau dreaming di mana honcho akan memanfaatkan LLM yang sudah dikonfigurasi tadi untuk melakukan berbagai hal seperti: menggabungkan informasi, mengambil kesimpulan, deductive reasoning, Summary optimization: https://plasticlabs.ai/blog/posts/Honcho-3
+10. 
