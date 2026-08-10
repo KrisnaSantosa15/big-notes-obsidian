@@ -135,22 +135,35 @@ hermes honcho setup
 
 # Then follow the instructions
 ```
+
+![[honcho-setup.png]]
+
 > Konfigurasi tersebut hanya berdampak kepada current/default profile. Jika ingin ke semua profile yang ada, gunakan:
 > ```
 > hermes honcho sync
 > ```
-6. Test
+6. Verify
 ```
+# Configuration
+cat ~/.hermes/honcho.json
+
 # Memory status
 hermes memory status
 
 # Honcho Status
 hermes honcho status
 ```
-7. Agar bisa memverifikasi secara langsung, kita bisa download openconcho untuk melihat apa saja yang ada di honcho memory. karena honcho tidak menyediakan dashboard secara native, oleh karena itu kita gunakan saja opensource project
+
+![[honcho-status.png]]
+
+7. Live verification
+	Agar bisa memverifikasi secara langsung, kita bisa download openconcho untuk melihat apa saja yang ada di honcho memory. karena honcho tidak menyediakan dashboard secara native, oleh karena itu kita gunakan saja opensource project
 ```
 https://github.com/offendingcommit/openconcho/releases/tag/v0.16.1
 ```
+
+![[Pasted image 20260810154245.png]]
+
 8. Lalu kita coba untuk chat ke hermes di new session, minimal 2 turn dia akan menyimpan ke honcho. Untuk summary sendiri dia tidak realtime, dia akan melakukan proses queue agar session tadi bisa diproses di background ketika sudah tidak digunakan. Selain itu, honcho juga punya threshold agar bisa dijadikan summary (1000 token): https://honcho.dev/docs/v3/documentation/core-concepts/reasoning#how-it-works
 9. session yang diproses di background tadi dinamakan sebagai dream atau dreaming di mana honcho akan memanfaatkan LLM yang sudah dikonfigurasi tadi untuk melakukan berbagai hal seperti: menggabungkan informasi, mengambil kesimpulan, deductive reasoning, Summary optimization: https://plasticlabs.ai/blog/posts/Honcho-3
 10. 
