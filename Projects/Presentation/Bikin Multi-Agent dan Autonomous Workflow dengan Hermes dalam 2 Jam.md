@@ -88,7 +88,7 @@ Apa knowledge atau informasi yang disimpan secara sengaja untuk dijadikan sebaga
 - Misalkan kita sedang mengerjakan project x, kemudian menyuruh hermes menyimpan ini ke obsidian, maka dia akan menyimpan dan menjadikan sebagai informasi tambahan.
 - Kita juga harus secara ekspllisit bilang simpan ke obsidian atau second brain atau hal yang relate kesana baru hermes akan simpan ini, beda dengan memory native atau memory tambahan tadi. Meskipun sebetulnya bisa saja kita konfigurasi setiap pre-tool-call maka cek obsidian, tapi bukan secara alami dari kapabilitas obsidian.
 
-- handons pake supermemory
+- handons pake honcho
 
 
 Honcho Local Setup
