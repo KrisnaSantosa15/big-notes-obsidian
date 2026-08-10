@@ -68,6 +68,15 @@ Ingatan Hermes tentang kita yang disimpan dan dikelola dalam satu sistem, lebih
 
 - Disini hermes bisa melakukan query ke memory provider untuk mencari ingatan yang ada, misalkan kita pernah bilang bahwa "Saya lebih suka bahasa pemrograman python daripada PHP", 6 bulan kemudian kita bilang "saya ingin membuat software X" maka si hermes akan retrieve memory tadi dan menghasilkan Relevant Memory: User prefers Python than PHP
 - Jadi dengan adanya memory provider ini, hermes bisa mencari memory yang relevan jauh lebih baik dibandingkan native memory dia yang biasanya acak-acakan.
+- Tapi menggunakan memory provider ini ada kekurangannya yaitu kita harus menyediakan satu model yang khusus untuk mendapatkan summary dari memory yang disimpan hermes. 
+Official Docs: https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers#honcho
+
+Sources:
+>   *I'm using Mnemosyne for persistant agent memory. It's been working pretty seamlessly now for a few weeks.*
+> https://www.reddit.com/r/hermesagent/comments/1v5cxo8/which_hermes_memory_do_you_recommend/
+
+> *I have a self hosted Honcho instance as an external memory tool, it drains a ton of tokens but it is definitely worth it.*
+> https://www.reddit.com/r/hermesagent/comments/1tpck95/can_someone_explain_to_me_the_actual_benefits_of/
 
 ### Obsidian
 
