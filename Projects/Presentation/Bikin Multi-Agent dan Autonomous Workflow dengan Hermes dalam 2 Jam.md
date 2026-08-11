@@ -62,12 +62,14 @@ Ingatan Hermes tentang kita yang disimpan dalam sebuah file, biasanya terbatas
 
 - Tanpa memory provider pun Hermes udah punya memori bawaan yang cukup bagus, misalkan aku bilang, nama saya krisna, saya suka Machine Learning. Maka Hermes akan menyimpan memori tersebut kedalam file USER.md seperti: User's name is Krisna and currently into Machine Learning atau MEMORY.md: User's active projects are in /workspace/projects. Berdasarkan dokumentasi resmi nous research ada USER.md dan MEMORY.md bedanya adalah:
 
-###### USER.md
+#### USER.md
+
 - User prefers technical explanations.
 - User is working on AI Agent topics.
 - User prefers practical examples.
 
-###### MEMORY.md
+#### MEMORY.md
+
 - Previously discussed Hermes memory providers.
 - Previously configured Hermes with Tailscale.
 - Working on a Hermes presentation.
@@ -82,7 +84,8 @@ Ingatan Hermes tentang kita yang disimpan dan dikelola dalam satu sistem, lebih 
 
 - Disini hermes bisa melakukan query ke memory provider untuk mencari ingatan yang ada, misalkan kita pernah bilang bahwa "Saya lebih suka bahasa pemrograman python daripada PHP", 6 bulan kemudian kita bilang "saya ingin membuat software X" maka si hermes akan retrieve memory tadi dan menghasilkan Relevant Memory: User prefers Python than PHP
 - Jadi dengan adanya memory provider ini, hermes bisa mencari memory yang relevan jauh lebih baik dibandingkan native memory dia yang biasanya acak-acakan.
-- Tapi menggunakan memory provider ini ada kekurangannya yaitu kita harus menyediakan satu model yang khusus untuk mendapatkan summary dari memory yang disimpan hermes. 
+- Tapi menggunakan memory provider ini ada kekurangannya yaitu kita harus menyediakan satu model yang khusus untuk mendapatkan summary dari memory yang disimpan hermes.
+
 Official Docs: https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers#honcho
 
 Sources:
@@ -94,6 +97,7 @@ Sources:
 
 Official Mnemosyne:
 https://github.com/mnemosyne-oss/mnemosyne/blob/main/docs/hermes-integration.md
+
 ### Obsidian
 
 Apa knowledge atau informasi yang disimpan secara sengaja untuk dijadikan sebagai sumber agent
@@ -105,8 +109,8 @@ Apa knowledge atau informasi yang disimpan secara sengaja untuk dijadikan sebaga
 - handons pake honcho
 - handons pake supermemory
 
+### Honcho Local Setup
 
-Honcho Local Setup
 1. Clone the repository
 ```
 git clone https://github.com/plastic-labs/honcho.git
@@ -157,6 +161,7 @@ hermes honcho setup
 > ```
 > hermes honcho sync
 > ```
+
 6. Verify
 ```
 # Configuration
@@ -179,17 +184,18 @@ https://github.com/offendingcommit/openconcho/releases/tag/v0.16.1
 
 ![[openconcho-dark.png]]
 ![[openconcho-light.png]]
+
 8. Lalu kita coba untuk chat ke hermes di new session, minimal 2 turn dia akan menyimpan ke honcho. Untuk summary sendiri dia tidak realtime, dia akan melakukan proses queue agar session tadi bisa diproses di background ketika sudah tidak digunakan. Selain itu, honcho juga punya threshold agar bisa dijadikan summary (1000 token): https://honcho.dev/docs/v3/documentation/core-concepts/reasoning#how-it-works
 9. session yang diproses di background tadi dinamakan sebagai dream atau dreaming di mana honcho akan memanfaatkan LLM yang sudah dikonfigurasi tadi untuk melakukan berbagai hal seperti: menggabungkan informasi, mengambil kesimpulan, deductive reasoning, Summary optimization: https://plasticlabs.ai/blog/posts/Honcho-3
 
+### Profile Configurations
 
-
-#### Profile Configurations
 1. Orchestrator
 	- Description
 		Breaks goals into tasks and routes work to specialized agents.
 	- Soul.md
-	```
+
+```
 # ROLE
 
 You are the Kanban Orchestrator and Technical Lead.
@@ -274,11 +280,13 @@ A project is complete only when:
 * QA has approved the implementation.
 * No remediation tasks remain.
 * No unresolved blockers remain.
-	```
+```
+
 2. Backend Enginer
 	- Description
 		Implements backend APIs, business logic, and tests.
 	- Soul.md
+
 ```
 # ROLE
 You are a Senior Backend Engineer.
@@ -333,10 +341,12 @@ Include when applicable:
 * known_risks
 * review_notes
 ```
-2. Frontend Engineer
+
+3. Frontend Engineer
 	- Description
 		Implements frontend design best practices, UI/UX, and e2e tests.
 	- Soul.md
+
 ```
 # ROLE
 You are a Senior Frontend Engineer.
@@ -390,11 +400,13 @@ Include when applicable:
 * known_risks
 * review_notes
 ```
-2. QA
+
+4. QA
 	- Description
 		Senior Software Quality Assurance
 	- Soul.md
-	```
+
+```
 # ROLE
 You are a Senior Software Quality Assurance Engineer.
 
@@ -435,9 +447,10 @@ When validation is finished:
 - Call `kanban_complete(...)`.
 - Treat completion as "QA validation finished", not "project completed".
 Use `kanban_block(...)` only when validation cannot meaningfully proceed.
-	```
+```
 
 ### Default Profile SOUL.md
+
 ```
 # SOUL
 You are Hoshi, my autonomous operator and thought partner.
@@ -569,7 +582,6 @@ Your job is not to chat. Your job is to help turn intent into shipped reality.
 ```
 
 ---
-
 
 ## Buffer & Q&A (5 menit)
 
