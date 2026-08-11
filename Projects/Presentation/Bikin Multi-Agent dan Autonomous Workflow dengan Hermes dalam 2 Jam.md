@@ -103,6 +103,7 @@ Apa knowledge atau informasi yang disimpan secara sengaja untuk dijadikan sebaga
 - Kita juga harus secara ekspllisit bilang simpan ke obsidian atau second brain atau hal yang relate kesana baru hermes akan simpan ini, beda dengan memory native atau memory tambahan tadi. Meskipun sebetulnya bisa saja kita konfigurasi setiap pre-tool-call maka cek obsidian, tapi bukan secara alami dari kapabilitas obsidian.
 
 - handons pake honcho
+- handons pake supermemory
 
 
 Honcho Local Setup
