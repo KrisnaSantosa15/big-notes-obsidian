@@ -15,6 +15,8 @@
 - Konfigurasi sederhana
 - Coba task membuat kalkulator sederhana
 
+Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, gateway dan lain sebagainya. Lalu coba untuk membuat kalkulator sederhana.
+
 ## 2. Dari Single Agent ke Multi-Agent
 
 - raise issue/kenapa single agent tidak cukup? dan membutuhkan multi agent?

@@ -74,8 +74,8 @@ Test repository biasanya digabung sekalian dalam PR yang sama dengan aggregate -
 
 Pengerjaan fitur biasanya dipecah jadi 2 PR:
 
-1. **PR Domain** - enums, events, aggregate, value objects, repository, gateway (method gateway dikosongkan), unit test. Boleh sekalian bikin aggregate + repository + gateway di PR ini, dengan isi method gateway diisi belakangan.
-2. **PR Infrastructure + Web + Spec** - integration test, specification (orkestrasi use case), mengisi body method gateway di PR 1, Action, Response (Blade/API).
+1. **PR Domain** - enums, events, aggregate, value objects, repository, gateway (method gateway dikosongkan), unit test. Boleh sekalian bikin aggregate + repository + gateway di PR ini, dengan isi method gateway diisi belakangan. Repository interface sudah tidak digunakan lagi.
+2. **PR Infrastructure + Web + Spec** - integration test, specification (orkestrasi use case), mengisi body method gateway di PR 1, Action, Response (Blade/API). Response kemungkinan besar tidak digunakan lagi, better dimasukan ke Action.
 
 ## Contoh Referensi
 
