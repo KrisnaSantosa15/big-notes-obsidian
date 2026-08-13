@@ -1,10 +1,32 @@
 # Bikin Multi-Agent dan Autonomous Workflow dengan Hermes dalam 2 Jam
 
-> awal-awal kita konfigurasi seperti sesi sebelumnya tapi tidak menyentuh teori apa itu agent bedanya dengan chatbot, beda openclaw & hermes tapi langsung ke instalasi secara cepat, aku akan bilang cek video sebelumnya agar lebih detial. setelah itu aku mulai coba hasil konfigurasi itu secar singkat, mungkin minta calculator sederhana, kemudian buka studi kasus yang membutuhkan beberapa agent seperti Backend, Frontend, Orchestrator, dan QA, kemudian coba hal yang sederhana menggunakan multi agent tersebut.
 
 ## Opening (5 menit)
 
-> Validasi pengalaman peserta dari sesi sebelumnya: "siapa yang udah coba install Hermes tapi masih ngerasa itu cuma chatbot yang lebih pinter dikit?" Lanjut janjikan outcome konkret sesi ini: "2 jam dari sekarang, kalian bakal punya tim agent sendiri (orchestrator, backend, frontend, QA) yang kerja otomatis lewat kanban board, dan udah dikasih memory biar gak mulai dari nol tiap sesi."
+>  Halo semuanya, selamat siang. Selamat datang di sesi devcoach eksklusif ini. Perkenalkan, nama aku Krisna Santosa, disini aku mau sharing terkait hermes agent.
+> 
+> Sebelum aku mulai sesinya, aku mau tanya dulu, disini siapa yang udah pernah install hermes agent? atau baru denger terkait hermes agent? boleh ketika 0 bagi yang belum tau, ketik 1 bagi yang udah tau.
+> 
+> Oke, rata-rata udah pada tau yaa. Disini kita akan bahas hermes lebih jauh lagi bukan hanya instalasi. Sebetulnya ini adalah sesi lanjutan dari pembahasan hermes agent. Buat yang penasaran terkait basic apa itu hermes agent, bedanya sama chatbot dan bagaimana konfigurasinya bisa cek video youtube berikut yaa. 
+> 
+> ![[jangan-cuma-pake-chatbot.png]]
+> 
+> https://www.google.com/url?q=https://www.youtube.com/live/gP2PY5DJXbA?si%3DzMUUkxif1qdOei1a&sa=D
+> 
+> Di sesi eksluasif ini akan kita bahas mulai dari instalasi sampai ke multi-agent. Setidaknya ada 4 hal seperti outline berikut.
+> 1. Quick Setup & Warm Up (20 menit)
+> Disini kita coba untuk melakukan instalasi, konfigurasi termasuk gateway, model, dan SOUL.md. Lalu kita coba untuk membuat hal sederhana dengan agent ini.
+> 
+> 2. Dari Single Agent ke Multi-Agent (25 menit)
+> Disini kita akan membahas kapan kita butuh multi-agent dan kenapa kita harus menggunakan multi-agent
+> 
+> 3. Membangun Autonomous Workflow dengan Kanban Board (40 menit)
+> Nah Di sesi ketiga ini kita coba konfigurasi multi agent dan autonomous workflow, kita coba juga bikin sesuatu dengan multi agent ini.
+> 
+> 4. Giving Your Agent a Memory (25 menit)
+> Yang ke 4 kita akan coba cek memory yang ada di hermes agent. Dan apakah kamu benar-benar butuh memory tambahan?
+> 
+> Kalo misalkan ada pertanyaan bisa langsung drop aja di kolom komentar yaa, nanti aku coba untuk jawab, jadi tidak perlu nunggu sesi QnA. Atau kita bisa coba juga drop pertanyaan ke si hermesnya, menarik tuh sepertinya
 
 ## Outline
 
@@ -19,6 +41,7 @@
 ## 1. Quick Setup & Warm Up (20 menit)
 
 - Membahas Instalasi
+	- 
 	- Jalur cepat resmi: installer one-liner (`curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash` di Linux/macOS/WSL2/Termux, atau `iex (irm https://hermes-agent.nousresearch.com/install.ps1)` di Windows) sudah otomatis clone repo + install semua dependency, lanjut `hermes setup --portal` buat login, set provider Nous, dan aktifin Tool Gateway dalam satu command - skip opsi-opsi manual biar hemat waktu
 - Konfigurasi sederhana
 - Coba task membuat kalkulator sederhana
