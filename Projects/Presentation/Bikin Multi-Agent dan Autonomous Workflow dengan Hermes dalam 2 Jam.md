@@ -1,6 +1,6 @@
 # Bikin Multi-Agent dan Autonomous Workflow dengan Hermes dalam 2 Jam
 
-
+https://docs.google.com/presentation/d/1WaeWjdozPwtraZaBk8fX6X9nWOIRFghKQWDt-L_9LaY/edit?slide=id.g3f9a5d34af2_0_7#slide=id.g3f9a5d34af2_0_7
 ## Opening (5 menit)
 
 >  Halo semuanya, selamat siang. Selamat datang di sesi devcoach eksklusif ini. Perkenalkan, nama aku Krisna Santosa, disini aku mau sharing terkait hermes agent.
@@ -49,7 +49,11 @@
 	- Disini kita akan coba untuk mengkonfigurasi gateway dan SOUL.md
 	- gateway adalah sebuah jembatan antara hermes agent dengan messaging tools apapun seperti telegram, discord, whatsapp dan lain sebagainya.
 	- Selain itu ada juga SOUL.md, soul adalah sebuah identitas dari agent kita, dan inilah system prompt pertama yang akan di load oleh hermes, baiknya berisi siapa agent ini, bagaimana cara merespon dan apa yang tidak boleh dilakukan. Ada best practices yang bisa kita implementasikan, isi dari SOUL.md harusnya general seperti tone, personality, communication style, bukan repo specific command, project structure ataupun commands.
+- Coba cari model free yang ada di hermes, lalu copy lalu tanyakan ke agent nya mana model yang memiliki context window banyak.
 - Coba task membuat kalkulator sederhana
+- ```
+  Buatkan kalkulator sederhana dengan HTML+CSS dan JS. Buat folder baru di dalam project lalu implementasikan disana.
+  ```
 
 Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, gateway dan lain sebagainya. Lalu coba untuk membuat kalkulator sederhana.
 
@@ -57,6 +61,7 @@ Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, g
 
 - raise issue/kenapa single agent tidak cukup? dan membutuhkan multi agent?
 	- Kasus kalkulator tadi sangat sederhana, bisa saja dikerjakan sama satu agent aja. Tapi sekarang coba bayangkan jika kita disuruh untuk bikin software yang jauh lebih kompleks misalkan aplikasi booking dokter seperti halodoc. Kita perlu PRD/requirement, desain database, bikin API, UI, test sama deployment. Banyak kan yang harus dikerjakan. 
+	- ![[single-to-multi-agent.png]]
 	- Apakah satu agent bisa untuk membuat semua itu? ya tentu bisa tapi ada beberapa keterbatasan. 
 		- Pertama adalah konteksnya terlalu besar kalo satu agent disuruh implement semua itu, belum lagi jika nanti harus debugging terkait masalah yang muncul, semua konteks masuk ke satu agent aja. Itu bagus kalo modelnya mampu menyimpan banyak konteks, tapi ingat semakin banyak konteks bukan berarti model semakin bagus tapi malah semakin ngawur karena perlu banyak hal yang dipertimbangkan bahkan mungkin ada beberapa hal yang harusnya agent ga perlu tau atau biasa kita sebut sebagai **Context Rot**.
 		- Ada beberapa paper yang membahas terkait ini, semakin banyak konteks bukan berarti jawaban semakin bagus. Contohnya adalah paper Lost in the middle: https://aclanthology.org/2024.tacl-1.9.pdf. Ilustrasinya mengganmbarkan, semakin banyak konteks, justru akurasi/hasilnya semakin turun
