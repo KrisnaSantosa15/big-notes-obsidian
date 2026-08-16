@@ -13,6 +13,9 @@
 > 
 > https://www.google.com/url?q=https://www.youtube.com/live/gP2PY5DJXbA?si%3DzMUUkxif1qdOei1a&sa=D
 > 
+> Kalau mau mencoba hasil eksplorasi kita di video pertama, bisa langsung akses aja link berikut untuk ngobrol sama hermes devcoach.
+> t.me/hermes_devcoach_bot
+> 
 > Di sesi eksluasif ini akan kita bahas mulai dari instalasi sampai ke multi-agent. Setidaknya ada 4 hal seperti outline berikut.
 > 1. Quick Setup & Warm Up (20 menit)
 > Disini kita coba untuk melakukan instalasi, konfigurasi termasuk gateway, model, dan SOUL.md. Lalu kita coba untuk membuat hal sederhana dengan agent ini.
@@ -41,9 +44,11 @@
 ## 1. Quick Setup & Warm Up (20 menit)
 
 - Membahas Instalasi
-	- 
 	- Jalur cepat resmi: installer one-liner (`curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash` di Linux/macOS/WSL2/Termux, atau `iex (irm https://hermes-agent.nousresearch.com/install.ps1)` di Windows) sudah otomatis clone repo + install semua dependency, lanjut `hermes setup --portal` buat login, set provider Nous, dan aktifin Tool Gateway dalam satu command - skip opsi-opsi manual biar hemat waktu
 - Konfigurasi sederhana
+	- Disini kita akan coba untuk mengkonfigurasi gateway dan SOUL.md
+	- gateway adalah sebuah jembatan antara hermes agent dengan messaging tools apapun seperti telegram, discord, whatsapp dan lain sebagainya.
+	- Selain itu ada juga SOUL.md, soul adalah sebuah identitas dari agent kita, dan inilah system prompt pertama yang akan di load oleh hermes, baiknya berisi siapa agent ini, bagaimana cara merespon dan apa yang tidak boleh dilakukan. Ada best practices yang bisa kita implementasikan, isi dari SOUL.md harusnya general seperti tone, personality, communication style, bukan repo specific command, project structure ataupun commands.
 - Coba task membuat kalkulator sederhana
 
 Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, gateway dan lain sebagainya. Lalu coba untuk membuat kalkulator sederhana.
