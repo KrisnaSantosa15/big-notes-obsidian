@@ -56,9 +56,15 @@ Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, g
 ## 2. Dari Single Agent ke Multi-Agent (25 menit)
 
 - raise issue/kenapa single agent tidak cukup? dan membutuhkan multi agent?
-- Jawaban: Karena membutuhkan peran berbeda agar terhindar dari bias, kita sebagai manusia aja selalu ada bias
-- Jelaskan Keuntungan multi agent: terhindar dari bias, kekurangan: boros token, apalgi untuk task sederhana seperti membuat kalkulator
-- Demo built aplikasi kalkulator sederhana
+	- Kasus kalkulator tadi sangat sederhana, bisa saja dikerjakan sama satu agent aja. Tapi sekarang coba bayangkan jika kita disuruh untuk bikin software yang jauh lebih kompleks misalkan aplikasi booking dokter seperti halodoc. Kita perlu PRD/requirement, desain database, bikin API, UI, test sama deployment. Banyak kan yang harus dikerjakan. 
+	- Apakah satu agent bisa untuk membuat semua itu? ya tentu bisa tapi ada beberapa keterbatasan. 
+		- Pertama adalah konteksnya terlalu besar kalo satu agent disuruh implement semua itu, belum lagi jika nanti harus debugging terkait masalah yang muncul, semua konteks masuk ke satu agent aja. Itu bagus kalo modelnya mampu menyimpan banyak konteks, tapi ingat semakin banyak konteks bukan berarti model semakin bagus tapi malah semakin ngawur karena perlu banyak hal yang dipertimbangkan bahkan mungkin ada beberapa hal yang harusnya agent ga perlu tau atau biasa kita sebut sebagai **Context Rot**.
+		- Ada beberapa paper yang membahas terkait ini, semakin banyak konteks bukan berarti jawaban semakin bagus. Contohnya adalah paper Lost in the middle: https://aclanthology.org/2024.tacl-1.9.pdf. Ilustrasinya mengganmbarkan, semakin banyak konteks, justru akurasi/hasilnya semakin turun
+		- Berikut adalah ilustrasinya. LLM memiliki kecenderungan dalam mengambil konteks terutama konteks awal dan konteks akhir. Ada 2 bias, primacy bias dan recency bias. Primacy bias itu adalah kecenderungan model yang mengambil konteks itu di awal saja, jadi si model menganggap konteks awal adalah yang paling penting, sisanya tidak. kemudian recency bias adalah kecenderungan model yang mengambil konteks di akhir saja, yang mana si model menganggap konteks di akhir itu adalah yang paling penting. Lalu yang di tengah-tengah itu biasanya penuh dengan distraksi jadinya malah context rot atau context yang hanya menjadi distraksi bagi model. https://www.trychroma.com/research/context-rot.
+		![[lost-in-the-middle-illustration.jpg]]
+- Dari kasus ini kita mengetahui kapan harus menggunakan multi agent, kapan harus single agent.
+- Yaitu Karena setiap tugas itu membutuhkan peran berbeda agar terhindar dari bias tadi. selain itu jika kita gunakan satu agent bisa saja berhalusinasi, fitur A aman dari sisi security karena sudah ada testnya, tapi ternyata ketika direview oleh agent lain ada celah yang bisa digunakan untuk eksploitasi, nah ini yang bahaya. Kita sebagai manusia juga ada bias, menurut kita fitur A itu udah selesai dan aman, tapi menurut orang lain ketika dibaca ada cara lain yang lebih optimal atau lebih aman. Itu contohnya.
+- Tapi, harus diingat bahwa penggunaan multi agent ini boros token. Jadi kalau mau implementasi multi agent coba tanya dulu ke diri sendiri, butuh dan cocok ga untuk studi kasus saya?
 
 ## 3. Membangun Autonomous Workflow dengan Kanban Board (40 menit)
 
