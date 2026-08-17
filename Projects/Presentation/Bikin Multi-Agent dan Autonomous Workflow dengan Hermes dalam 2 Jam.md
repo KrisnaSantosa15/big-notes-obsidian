@@ -82,6 +82,7 @@ Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, g
 	- Berikut adalah contoh profile dari konfigurasi hermes agent yang aku lakukan
 	- ![[hermes-profiles.png]]
 	- Opsi cepat: siapin 1 profile yang udah jadi (keempat role sekaligus) di GitHub sendiri pake fitur Profile Distributions sebelum sesi (`.gitignore` buat exclude auth.json/.env/memories/sessions, plus manifest `distribution.yaml`), peserta tinggal `hermes profile install github.com/<username>/<nama-profile>` - gak perlu configure 4 profile dari nol pas hands-on
+	- ![[remediation.png]]
 - Konfigurasi setiap profile (model, description, SOUL.md, available tools[context 7])
 - Coba membuat kalkulator sederhana tapi dengan multi agent workflow
 - Lihat kanban board
@@ -763,7 +764,7 @@ Tujuannya nunjukkin satu agent ngerjain backend+frontend+test sekaligus - biasan
 Task yang dimasukkan ke kanban Triage (lewat orchestrator):
 
 ```
-Buat aplikasi web Rock-Paper-Scissors: user vs komputer (pilihan komputer random), 3 tombol pilihan (batu/gunting/kertas), tampilkan hasil menang/kalah/seri, dan sertakan test otomatis yang membuktikan logic menang-kalah benar untuk semua kombinasi.
+Buat aplikasi web Rock-Paper-Scissors: user vs komputer (pilihan komputer random), 3 tombol pilihan (batu/gunting/kertas), tampilkan hasil menang/kalah/seri, dan sertakan test otomatis yang membuktikan logic menang-kalah benar untuk semua kombinasi. Gunakan Kanban board multi agent workflow
 ```
 
 Decomposer bakal mecah task ini ke masing-masing profile (backend bikin logic, frontend bikin UI, qa bikin test) secara otomatis berdasarkan deskripsi profile yang sudah di-set sebelumnya.
