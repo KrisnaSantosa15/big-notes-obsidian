@@ -74,6 +74,9 @@ Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, g
 ## 3. Membangun Autonomous Workflow dengan Kanban Board (40 menit)
 
 - Membuat profile: orchestrator, backend engineer, frontend engineer, qa engineer
+	- Untuk Membuat multi agent workflow kita bisa memanfaatkan fitur kanban board yang ada di hermes agent. Fungsi dari kanban ini nantinya akan jadi sumber tugas dari masing-masing agent.
+	- Nah berikut adalah contoh arsitektur yang akan kita buat di sesi kali ini. Ada 4 agent: Orchestrator, Backend Engineer, Frontend Engineer, dan QA. Orchestrator bertanggung jawab untuk breakdown task besar menjadi task kecil dan mendelegasikan ke BE, FE atau QA. BE bertanggung jawab terkait urusan logic bisnis, FE terkait UI dan QA terkait verifikasi/testing.
+	- ![[multi-agent-workflow.png]]
 	- Opsi cepat: siapin 1 profile yang udah jadi (keempat role sekaligus) di GitHub sendiri pake fitur Profile Distributions sebelum sesi (`.gitignore` buat exclude auth.json/.env/memories/sessions, plus manifest `distribution.yaml`), peserta tinggal `hermes profile install github.com/<username>/<nama-profile>` - gak perlu configure 4 profile dari nol pas hands-on
 - Konfigurasi setiap profile (model, description, SOUL.md, available tools[context 7])
 - Coba membuat kalkulator sederhana tapi dengan multi agent workflow
