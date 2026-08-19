@@ -104,7 +104,9 @@ Nah tadi kita sudah membuat project kalkulator sederhana, tapi coba bayangin kal
 
 	Sekarang kita sudah punya multi agent gateway tapi ada satu masalah, agent-agent tadi tidak tahu menahu kita itu sedang bekerja dengan project apa. yang mereka tau adalah mengerjakan tugas yang di assign oleh orchestrator tanpa tau konteks lebih jauhnya.
 	Ini tidak jadi masalah jika projectnya satu kali jadi, gimana kalo project tersebut membutuhkan update/maintenance/inovasi secara terus menerus, tentunya agent-agent tadi harus tau apa yang pernah dia lakukan, fitur apa yang pernah di develop. Nah disinilah memory diperlukan.
-
+	
+	![[agent-with-memory.png]]
+	
 	Apakah memory bawaan tidak cukup? ohh tentu cukup tapi memory tersebut hanya diketahui oleh masing-masing agent bukan satu memory bisa dikonsumsi semua agents. Bahkan di dokumentasi resmi hermes agent bilang bahwa profile itu memiliki memory masing-masing, jika butuh satu memory yang terpusat membutuhkan external memory:
 	![[hermes-multiagent-memory.png]]
 	Source: https://hermes-agent.nousresearch.com/docs/user-guide/profiles
