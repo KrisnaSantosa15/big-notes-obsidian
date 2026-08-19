@@ -76,13 +76,22 @@ Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, g
 - Membuat profile: orchestrator, backend engineer, frontend engineer, qa engineer
 	- Untuk Membuat multi agent workflow kita bisa memanfaatkan fitur kanban board yang ada di hermes agent. Fungsi dari kanban ini nantinya akan jadi sumber tugas dari masing-masing agent.
 	- Nah berikut adalah contoh arsitektur yang akan kita buat di sesi kali ini. Ada 4 agent: Orchestrator, Backend Engineer, Frontend Engineer, dan QA. Orchestrator bertanggung jawab untuk breakdown task besar menjadi task kecil dan mendelegasikan ke BE, FE atau QA. BE bertanggung jawab terkait urusan logic bisnis, FE terkait UI dan QA terkait verifikasi/testing.
+	- Nanti jika semua task sudah selesai, maka orchestrator akan melakukan review lagi apakah sudah sesuai atau belum, jika belum sesuai maka akan dibuatkan remediation card kepada agent yang bersangkutan.
 	- ![[multi-agent-workflow.png]]
+	- Nah berikut contohnya ketika orchestrator mereview ulang kerjaan dari agent tadi dan ternyata ada bug yang ditemukan, kemudian orchestrator langsung membuatkan remediation cardnya kepada frontend engineer.
+	- ![[remediation.png]]
 	- Nanti bentuk kanban board itu setidaknya akan seperti ini. Mari kita mulai konfigurasi ke-4 profile itu. Dimulai dari orchestrator.
 	- ![[kanban-board.png]]
 	- Berikut adalah contoh profile dari konfigurasi hermes agent yang aku lakukan
 	- ![[hermes-profiles.png]]
-	- Opsi cepat: siapin 1 profile yang udah jadi (keempat role sekaligus) di GitHub sendiri pake fitur Profile Distributions sebelum sesi (`.gitignore` buat exclude auth.json/.env/memories/sessions, plus manifest `distribution.yaml`), peserta tinggal `hermes profile install github.com/<username>/<nama-profile>` - gak perlu configure 4 profile dari nol pas hands-on
-	- ![[remediation.png]]
+	- Oke mari kita mulai konfigurasinya dari awal untuk membuat beberapa agent tadi: orchestrator, backend-engineer, frontend-engineer dan qa-engineer
+	- keitk `hermes dashbord` di terminal, lalu ke profiles->build->masukkan data-datanya. Nanti tinggal customize skill dan tools apa saja yang mau ditambahkan.
+	- Ada opsi yang cepat jika teman-teman tidak mau melakukan konfigurasi secara manual, aku sudah siapkan profile yang bisa diinstal dengan command berikut `hermes profile install https://github.com/KrisnaSantosa15/hermes-orchestrator --alias` ini lebih gampang, jadi agent teman-teman disini sama dengan apa yang aku punya nanti kalau aku melakukan update terhadap profile ini dapat dengan mudah menjalankan command ini: `hermes profile update`
+	- Agent repos:
+		- https://github.com/KrisnaSantosa15/hermes-qa-engineer
+		- https://github.com/KrisnaSantosa15/hermes-orchestrator
+		- https://github.com/KrisnaSantosa15/hermes-frontend-engineer
+		- https://github.com/KrisnaSantosa15/hermes-backend-engineer
 - Konfigurasi setiap profile (model, description, SOUL.md, available tools[context 7])
 - Coba membuat kalkulator sederhana tapi dengan multi agent workflow
 - Lihat kanban board
