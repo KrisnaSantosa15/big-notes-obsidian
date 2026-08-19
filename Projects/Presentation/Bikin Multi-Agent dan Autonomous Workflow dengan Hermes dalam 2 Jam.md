@@ -49,6 +49,7 @@ https://docs.google.com/presentation/d/1WaeWjdozPwtraZaBk8fX6X9nWOIRFghKQWDt-L_9
 	- Disini kita akan coba untuk mengkonfigurasi gateway dan SOUL.md
 	- gateway adalah sebuah jembatan antara hermes agent dengan messaging tools apapun seperti telegram, discord, whatsapp dan lain sebagainya.
 	- Selain itu ada juga SOUL.md, soul adalah sebuah identitas dari agent kita, dan inilah system prompt pertama yang akan di load oleh hermes, baiknya berisi siapa agent ini, bagaimana cara merespon dan apa yang tidak boleh dilakukan. Ada best practices yang bisa kita implementasikan, isi dari SOUL.md harusnya general seperti tone, personality, communication style, bukan repo specific command, project structure ataupun commands.
+### Hands-on
 - Coba cari model free yang ada di hermes, lalu copy lalu tanyakan ke agent nya mana model yang memiliki context window banyak.
 - Coba task membuat kalkulator sederhana
 - ```
@@ -57,7 +58,7 @@ https://docs.google.com/presentation/d/1WaeWjdozPwtraZaBk8fX6X9nWOIRFghKQWDt-L_9
 
 Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, gateway dan lain sebagainya. Lalu coba untuk membuat kalkulator sederhana.
 
-## 2. Dari Single Agent ke Multi-Agent (25 menit)
+## 2. Dari Single Agent ke Multi-Agent, full teori (25 menit)
 
 - raise issue/kenapa single agent tidak cukup? dan membutuhkan multi agent?
 	- Kasus kalkulator tadi sangat sederhana, bisa saja dikerjakan sama satu agent aja. Tapi sekarang coba bayangkan jika kita disuruh untuk bikin software yang jauh lebih kompleks misalkan aplikasi booking dokter seperti halodoc. Kita perlu PRD/requirement, desain database, bikin API, UI, test sama deployment. Banyak kan yang harus dikerjakan. 
@@ -84,6 +85,8 @@ Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, g
 	- ![[kanban-board.png]]
 	- Berikut adalah contoh profile dari konfigurasi hermes agent yang aku lakukan
 	- ![[hermes-profiles.png]]
+### Hands-on
+``
 	- Oke mari kita mulai konfigurasinya dari awal untuk membuat beberapa agent tadi: orchestrator, backend-engineer, frontend-engineer dan qa-engineer
 	- keitk `hermes dashbord` di terminal, lalu ke profiles->build->masukkan data-datanya. Nanti tinggal customize skill dan tools apa saja yang mau ditambahkan.
 	- Ada opsi yang cepat jika teman-teman tidak mau melakukan konfigurasi secara manual, aku sudah siapkan profile yang bisa diinstal dengan command berikut `hermes profile install https://github.com/KrisnaSantosa15/hermes-orchestrator --alias` ini lebih gampang, jadi agent teman-teman disini sama dengan apa yang aku punya nanti kalau aku melakukan update terhadap profile ini dapat dengan mudah menjalankan command ini: `hermes profile update`
@@ -112,11 +115,13 @@ Nah tadi kita sudah membuat project kalkulator sederhana, tapi coba bayangin kal
 	Source: https://hermes-agent.nousresearch.com/docs/user-guide/profiles
 
 	Mari kita telisik lebih dalam maksud dari memory di hermes itu seperti apa?
+- Apakah Kamu perlu menggunakan memory provider lain?
 - Apa bedanya dengan native dan dengan provider memory lain? Tambahkan Miskonsepsi Obsidian
 
 ### Native Memory
 
 Ingatan Hermes tentang kita yang disimpan dalam sebuah file, biasanya terbatas
+![[hermes-native-memory.png]]
 
 - Tanpa memory provider pun Hermes udah punya memori bawaan yang cukup bagus, misalkan aku bilang, nama saya krisna, saya suka Machine Learning. Maka Hermes akan menyimpan memori tersebut kedalam file USER.md seperti: User's name is Krisna and currently into Machine Learning atau MEMORY.md: User's active projects are in /workspace/projects. Berdasarkan dokumentasi resmi nous research ada USER.md dan MEMORY.md bedanya adalah:
 
@@ -137,6 +142,7 @@ Ingatan Hermes tentang kita yang disimpan dalam sebuah file, biasanya terbatas
 - Nah disinilah peran dari Memory Provider hadir, dia memberikan solusi untuk mencari/retrieve memory secara otomatis dari banyaknya sesi percakapan tadi.
 
 ### Memory Provider
+![[hermes-memory-provider.png]]
 
 Ingatan Hermes tentang kita yang disimpan dan dikelola dalam satu sistem, lebih canggih
 
@@ -157,16 +163,14 @@ Official Mnemosyne:
 https://github.com/mnemosyne-oss/mnemosyne/blob/main/docs/hermes-integration.md
 
 ### Obsidian
-
+![[obsidian-second-brain.png]]
 Apa knowledge atau informasi yang disimpan secara sengaja untuk dijadikan sebagai sumber agent
 
 - Nah ada juga obsidian yang digunakan sebagai second brain, ini juga biasanya digunakan oleh banyak orang sebagai knowledge. Jadi bukan memory native atau tambahan tapi lebih ke tempat penyimpanan segala hal yang ingin kita simpan.
 - Misalkan kita sedang mengerjakan project x, kemudian menyuruh hermes menyimpan ini ke obsidian, maka dia akan menyimpan dan menjadikan sebagai informasi tambahan.
 - Kita juga harus secara ekspllisit bilang simpan ke obsidian atau second brain atau hal yang relate kesana baru hermes akan simpan ini, beda dengan memory native atau memory tambahan tadi. Meskipun sebetulnya bisa saja kita konfigurasi setiap pre-tool-call maka cek obsidian, tapi bukan secara alami dari kapabilitas obsidian.
 
-- handons pake honcho
-- handons pake supermemory
-
+### Hands-on
 ### Honcho Local Setup
 
 1. Clone the repository
