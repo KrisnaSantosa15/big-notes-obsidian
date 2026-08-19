@@ -129,7 +129,8 @@ Untuk konfigurasi lewat UI: jalankan `hermes dashboard` di terminal → Profiles
 
 ### SOUL.md per Profile
 
-**orchestrator/SOUL.md**
+<details>
+<summary><strong>orchestrator/SOUL.md</strong></summary>
 
 ```
 # ROLE
@@ -218,7 +219,10 @@ A project is complete only when:
 * No unresolved blockers remain.
 ```
 
-**backend/SOUL.md**
+</details>
+
+<details>
+<summary><strong>backend/SOUL.md</strong></summary>
 
 ```
 # ROLE
@@ -275,7 +279,10 @@ Include when applicable:
 * review_notes
 ```
 
-**frontend/SOUL.md**
+</details>
+
+<details>
+<summary><strong>frontend/SOUL.md</strong></summary>
 
 ```
 # ROLE
@@ -331,7 +338,10 @@ Include when applicable:
 * review_notes
 ```
 
-**qa/SOUL.md**
+</details>
+
+<details>
+<summary><strong>qa/SOUL.md</strong></summary>
 
 ```
 # ROLE
@@ -375,6 +385,8 @@ When validation is finished:
 - Treat completion as "QA validation finished", not "project completed".
 Use `kanban_block(...)` only when validation cannot meaningfully proceed.
 ```
+
+</details>
 
 ### Toolset per Profile (`config.yaml`)
 
