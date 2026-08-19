@@ -249,6 +249,16 @@ https://github.com/offendingcommit/openconcho/releases/tag/v0.16.1
 8. Lalu kita coba untuk chat ke hermes di new session, minimal 2 turn dia akan menyimpan ke honcho. Untuk summary sendiri dia tidak realtime, dia akan melakukan proses queue agar session tadi bisa diproses di background ketika sudah tidak digunakan. Selain itu, honcho juga punya threshold agar bisa dijadikan summary (1000 token): https://honcho.dev/docs/v3/documentation/core-concepts/reasoning#how-it-works
 9. session yang diproses di background tadi dinamakan sebagai dream atau dreaming di mana honcho akan memanfaatkan LLM yang sudah dikonfigurasi tadi untuk melakukan berbagai hal seperti: menggabungkan informasi, mengambil kesimpulan, deductive reasoning, Summary optimization: https://plasticlabs.ai/blog/posts/Honcho-3
 
+## Studi Kasus Lain
+Jika kita memiliki tugas yang berulang, misalkan setiap jam 10 saya ingin agar hermes membaca paper penelitian terbaru tentang AI. Lalu saya ingin agar penelitian itu dijadikan sebagai referensi untuk membuat protitipenya menggunakan multi agent workflow, lalu buatkan laporan ke saya.
+
+Atau teman-teman disini seorang content creator dan ingin membuat dan upload konten setiap jam 5 sore. Ketika membuat konten itu kita harus melakukan riset, bikin skrip, dan lain sebagainya. Mungkin bisa kita gunakan hermes dengan kemampuan multi agent ini untuk membuat konten. Misal kita buat 5 agent seperti di gambar ini, masing-masing punya tanggung jawab.
+
+Langkah untuk membuatnya cukup sederhana yaitu hanya tinggal prompting hermes, misal seperti ini:
+saya ingin membuat sebuah konten, carikan konten yang sedang viral, berikan summarynya, gunakan multi agent workflow.
+
+![[social-media-use-case.png]]
+
 ## Buffer & Q&A (25 menit)
 
 - Slot cadangan kalau ada section yang molor (paling rawan: section 3)
