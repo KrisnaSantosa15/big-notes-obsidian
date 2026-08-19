@@ -17,31 +17,31 @@ https://docs.google.com/presentation/d/1WaeWjdozPwtraZaBk8fX6X9nWOIRFghKQWDt-L_9
 > t.me/hermes_devcoach_bot
 > 
 > Di sesi eksluasif ini akan kita bahas mulai dari instalasi sampai ke multi-agent. Setidaknya ada 4 hal seperti outline berikut.
-> 1. Quick Setup & Warm Up (20 menit)
+> 1. Quick Setup & Warm Up (18 menit)
 > Disini kita coba untuk melakukan instalasi, konfigurasi termasuk gateway, model, dan SOUL.md. Lalu kita coba untuk membuat hal sederhana dengan agent ini.
 > 
-> 2. Dari Single Agent ke Multi-Agent (25 menit)
+> 2. Dari Single Agent ke Multi-Agent (8 menit)
 > Disini kita akan membahas kapan kita butuh multi-agent dan kenapa kita harus menggunakan multi-agent
 > 
-> 3. Membangun Autonomous Workflow dengan Kanban Board (40 menit)
+> 3. Membangun Autonomous Workflow dengan Kanban Board (42 menit)
 > Nah Di sesi ketiga ini kita coba konfigurasi multi agent dan autonomous workflow, kita coba juga bikin sesuatu dengan multi agent ini.
 > 
-> 4. Giving Your Agent a Memory (25 menit)
+> 4. Giving Your Agent a Memory (22 menit)
 > Yang ke 4 kita akan coba cek memory yang ada di hermes agent. Dan apakah kamu benar-benar butuh memory tambahan?
 > 
 > Kalo misalkan ada pertanyaan bisa langsung drop aja di kolom komentar yaa, nanti aku coba untuk jawab, jadi tidak perlu nunggu sesi QnA. Atau kita bisa coba juga drop pertanyaan ke si hermesnya, menarik tuh sepertinya
 
 ## Outline
 
-1. Quick Setup & Warm Up (20 menit)
-2. Dari Single Agent ke Multi-Agent (25 menit)
-3. Membangun Autonomous Workflow dengan Kanban Board (40 menit)
-4. Giving Your Agent a Memory (25 menit)
-5. Buffer & Q&A (5 menit)
+1. Quick Setup & Warm Up (18 menit)
+2. Dari Single Agent ke Multi-Agent (8 menit)
+3. Membangun Autonomous Workflow dengan Kanban Board (42 menit)
+4. Giving Your Agent a Memory (22 menit)
+5. Buffer & Q&A (25 menit)
 
 > Total 120 menit (termasuk Opening 5 menit di atas).
 
-## 1. Quick Setup & Warm Up (20 menit)
+## 1. Quick Setup & Warm Up (18 menit)
 
 - Membahas Instalasi
 	- Jalur cepat resmi: installer one-liner (`curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash` di Linux/macOS/WSL2/Termux, atau `iex (irm https://hermes-agent.nousresearch.com/install.ps1)` di Windows) sudah otomatis clone repo + install semua dependency, lanjut `hermes setup --portal` buat login, set provider Nous, dan aktifin Tool Gateway dalam satu command - skip opsi-opsi manual biar hemat waktu
@@ -58,7 +58,7 @@ https://docs.google.com/presentation/d/1WaeWjdozPwtraZaBk8fX6X9nWOIRFghKQWDt-L_9
 
 Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, gateway dan lain sebagainya. Lalu coba untuk membuat kalkulator sederhana.
 
-## 2. Dari Single Agent ke Multi-Agent, full teori (25 menit)
+## 2. Dari Single Agent ke Multi-Agent, full teori (8 menit)
 
 - raise issue/kenapa single agent tidak cukup? dan membutuhkan multi agent?
 	- Kasus kalkulator tadi sangat sederhana, bisa saja dikerjakan sama satu agent aja. Tapi sekarang coba bayangkan jika kita disuruh untuk bikin software yang jauh lebih kompleks misalkan aplikasi booking dokter seperti halodoc. Kita perlu PRD/requirement, desain database, bikin API, UI, test sama deployment. Banyak kan yang harus dikerjakan. 
@@ -72,7 +72,7 @@ Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, g
 - Yaitu Karena setiap tugas itu membutuhkan peran berbeda agar terhindar dari bias tadi. selain itu jika kita gunakan satu agent bisa saja berhalusinasi, fitur A aman dari sisi security karena sudah ada testnya, tapi ternyata ketika direview oleh agent lain ada celah yang bisa digunakan untuk eksploitasi, nah ini yang bahaya. Kita sebagai manusia juga ada bias, menurut kita fitur A itu udah selesai dan aman, tapi menurut orang lain ketika dibaca ada cara lain yang lebih optimal atau lebih aman. Itu contohnya.
 - Tapi, harus diingat bahwa penggunaan multi agent ini boros token. Jadi kalau mau implementasi multi agent coba tanya dulu ke diri sendiri, butuh dan cocok ga untuk studi kasus saya?
 
-## 3. Membangun Autonomous Workflow dengan Kanban Board (40 menit)
+## 3. Membangun Autonomous Workflow dengan Kanban Board (42 menit)
 
 - Membuat profile: orchestrator, backend engineer, frontend engineer, qa engineer
 	- Untuk Membuat multi agent workflow kita bisa memanfaatkan fitur kanban board yang ada di hermes agent. Fungsi dari kanban ini nantinya akan jadi sumber tugas dari masing-masing agent.
@@ -98,7 +98,7 @@ Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, g
 - Coba membuat kalkulator sederhana tapi dengan multi agent workflow
 - Lihat kanban board
 
-## 4. Giving Your Agent a Memory (25 menit)
+## 4. Giving Your Agent a Memory (22 menit)
 
 Nah tadi kita sudah membuat project kalkulator sederhana, tapi coba bayangin kalo besok kita minta hermes nambahin fitur baru ke kalkulator itu - apakah backend engineer masih inget arsitektur yang kemarin dipakai? Apakah reviewer masih inget standar yang kemarin ditetapkan? Defaultnya enggak, karena tiap sesi baru itu mulai dari nol. Makanya kita butuh memory.
 
@@ -249,7 +249,7 @@ https://github.com/offendingcommit/openconcho/releases/tag/v0.16.1
 8. Lalu kita coba untuk chat ke hermes di new session, minimal 2 turn dia akan menyimpan ke honcho. Untuk summary sendiri dia tidak realtime, dia akan melakukan proses queue agar session tadi bisa diproses di background ketika sudah tidak digunakan. Selain itu, honcho juga punya threshold agar bisa dijadikan summary (1000 token): https://honcho.dev/docs/v3/documentation/core-concepts/reasoning#how-it-works
 9. session yang diproses di background tadi dinamakan sebagai dream atau dreaming di mana honcho akan memanfaatkan LLM yang sudah dikonfigurasi tadi untuk melakukan berbagai hal seperti: menggabungkan informasi, mengambil kesimpulan, deductive reasoning, Summary optimization: https://plasticlabs.ai/blog/posts/Honcho-3
 
-## Buffer & Q&A (5 menit)
+## Buffer & Q&A (25 menit)
 
 - Slot cadangan kalau ada section yang molor (paling rawan: section 3)
 - Recap singkat + tanya jawab
