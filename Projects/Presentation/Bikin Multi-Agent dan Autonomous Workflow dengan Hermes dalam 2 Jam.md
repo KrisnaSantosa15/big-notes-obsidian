@@ -86,15 +86,14 @@ Lakukan instalasi dari awal secara singkat, kemudian coba konfigurasi SOUL.md, g
 	- Berikut adalah contoh profile dari konfigurasi hermes agent yang aku lakukan
 	- ![[hermes-profiles.png]]
 ### Hands-on
-``
-	- Oke mari kita mulai konfigurasinya dari awal untuk membuat beberapa agent tadi: orchestrator, backend-engineer, frontend-engineer dan qa-engineer
-	- keitk `hermes dashbord` di terminal, lalu ke profiles->build->masukkan data-datanya. Nanti tinggal customize skill dan tools apa saja yang mau ditambahkan.
-	- Ada opsi yang cepat jika teman-teman tidak mau melakukan konfigurasi secara manual, aku sudah siapkan profile yang bisa diinstal dengan command berikut `hermes profile install https://github.com/KrisnaSantosa15/hermes-orchestrator --alias` ini lebih gampang, jadi agent teman-teman disini sama dengan apa yang aku punya nanti kalau aku melakukan update terhadap profile ini dapat dengan mudah menjalankan command ini: `hermes profile update`
-	- Agent repos:
-		- https://github.com/KrisnaSantosa15/hermes-qa-engineer
-		- https://github.com/KrisnaSantosa15/hermes-orchestrator
-		- https://github.com/KrisnaSantosa15/hermes-frontend-engineer
-		- https://github.com/KrisnaSantosa15/hermes-backend-engineer
+- Oke mari kita mulai konfigurasinya dari awal untuk membuat beberapa agent tadi: orchestrator, backend-engineer, frontend-engineer dan qa-engineer
+- keitk `hermes dashbord` di terminal, lalu ke profiles->build->masukkan data-datanya. Nanti tinggal customize skill dan tools apa saja yang mau ditambahkan.
+- Ada opsi yang cepat jika teman-teman tidak mau melakukan konfigurasi secara manual, aku sudah siapkan profile yang bisa diinstal dengan command berikut `hermes profile install https://github.com/KrisnaSantosa15/hermes-orchestrator --alias` ini lebih gampang, jadi agent teman-teman disini sama dengan apa yang aku punya nanti kalau aku melakukan update terhadap profile ini dapat dengan mudah menjalankan command ini: `hermes profile update`
+- Agent repos:
+	- https://github.com/KrisnaSantosa15/hermes-qa-engineer
+	- https://github.com/KrisnaSantosa15/hermes-orchestrator
+	- https://github.com/KrisnaSantosa15/hermes-frontend-engineer
+	- https://github.com/KrisnaSantosa15/hermes-backend-engineer
 - Konfigurasi setiap profile (model, description, SOUL.md, available tools[context 7])
 - Coba membuat kalkulator sederhana tapi dengan multi agent workflow
 - Lihat kanban board
@@ -171,7 +170,7 @@ Apa knowledge atau informasi yang disimpan secara sengaja untuk dijadikan sebaga
 - Kita juga harus secara ekspllisit bilang simpan ke obsidian atau second brain atau hal yang relate kesana baru hermes akan simpan ini, beda dengan memory native atau memory tambahan tadi. Meskipun sebetulnya bisa saja kita konfigurasi setiap pre-tool-call maka cek obsidian, tapi bukan secara alami dari kapabilitas obsidian.
 
 ### Hands-on
-### Honcho Local Setup
+#### Honcho Local Setup
 
 1. Clone the repository
 ```
@@ -250,7 +249,7 @@ https://github.com/offendingcommit/openconcho/releases/tag/v0.16.1
 8. Lalu kita coba untuk chat ke hermes di new session, minimal 2 turn dia akan menyimpan ke honcho. Untuk summary sendiri dia tidak realtime, dia akan melakukan proses queue agar session tadi bisa diproses di background ketika sudah tidak digunakan. Selain itu, honcho juga punya threshold agar bisa dijadikan summary (1000 token): https://honcho.dev/docs/v3/documentation/core-concepts/reasoning#how-it-works
 9. session yang diproses di background tadi dinamakan sebagai dream atau dreaming di mana honcho akan memanfaatkan LLM yang sudah dikonfigurasi tadi untuk melakukan berbagai hal seperti: menggabungkan informasi, mengambil kesimpulan, deductive reasoning, Summary optimization: https://plasticlabs.ai/blog/posts/Honcho-3
 
-### Profile Configurations
+#### Profile Configurations
 
 1. Orchestrator
 	- Description
