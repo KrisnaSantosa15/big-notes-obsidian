@@ -249,7 +249,13 @@ https://github.com/offendingcommit/openconcho/releases/tag/v0.16.1
 8. Lalu kita coba untuk chat ke hermes di new session, minimal 2 turn dia akan menyimpan ke honcho. Untuk summary sendiri dia tidak realtime, dia akan melakukan proses queue agar session tadi bisa diproses di background ketika sudah tidak digunakan. Selain itu, honcho juga punya threshold agar bisa dijadikan summary (1000 token): https://honcho.dev/docs/v3/documentation/core-concepts/reasoning#how-it-works
 9. session yang diproses di background tadi dinamakan sebagai dream atau dreaming di mana honcho akan memanfaatkan LLM yang sudah dikonfigurasi tadi untuk melakukan berbagai hal seperti: menggabungkan informasi, mengambil kesimpulan, deductive reasoning, Summary optimization: https://plasticlabs.ai/blog/posts/Honcho-3
 
-#### Profile Configurations
+## Buffer & Q&A (5 menit)
+
+- Slot cadangan kalau ada section yang molor (paling rawan: section 3)
+- Recap singkat + tanya jawab
+
+
+## Profile Configurations: Outside the presentation
 
 1. Orchestrator
 	- Description
@@ -641,13 +647,6 @@ Act like command infrastructure.
 
 Your job is not to chat. Your job is to help turn intent into shipped reality.
 ```
-
----
-
-## Buffer & Q&A (5 menit)
-
-- Slot cadangan kalau ada section yang molor (paling rawan: section 3)
-- Recap singkat + tanya jawab
 
 ---
 
