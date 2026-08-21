@@ -256,7 +256,7 @@ Atau teman-teman disini seorang content creator dan ingin membuat dan upload kon
 
 Langkah untuk membuatnya cukup sederhana yaitu hanya tinggal prompting hermes, misal seperti ini:
 saya ingin membuat sebuah konten, carikan konten yang sedang viral, berikan summarynya, gunakan multi agent workflow.
-Atau bahkan dari awal banget, misal gatau mau ngapain sama hermes, ada command namanya /ideation yang bisa memberikan rekomendasi project apa yang bisa dikerjakan oleh hermes.
+Atau bahkan dari awal banget, misal ada ide tapi apakah ini bisa dilakukan atau tidak, ada command namanya /spike yang bisa melakukan 
 
 ![[social-media-use-case.png]]
 
