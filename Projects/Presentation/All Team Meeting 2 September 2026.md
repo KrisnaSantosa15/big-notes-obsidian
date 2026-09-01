@@ -44,7 +44,11 @@ Saat ini masih dalam tahap testing, kedepannya ada rencana juga untuk migrasi ME
 Thanks to: Mas Alfian.
 
 ## GSA Automation V2:
-Ada beberapa automation yang dibuat untuk mempermudah dalam proses penilaian GSA. Ada Social media profile sampai ke Self Aspiration dengan berbagai speed dari masing-masing automation. Hadirnya tool ini memangkas waktu yang sangat lama yaitu sekitar 600 jam.
+
+Berangkat dari permasalahan di mana penilaian untuk GSA ini sangat lama karena datanya banyak, 1 review video bisa memakan waktu 4 menit, jika data yang direview sekitar 4800 itu bisa memakan waktu 600 jam. Ini kurang efektif dan efisien.
+
+Akhirnya dibuat beberapa automation untuk mempermudah dalam proses penilaian GSA. Ada Social media profile sampai ke Self Aspiration dengan berbagai speed dari masing-masing automation. Hadirnya tool ini memangkas waktu penilaian tadi, misalkan video interview dalam 15 menit bisa menilai sekitar 100 data.
+
 Thanks to: mas Fikri, Rafy dan Alfian.
 
 ## Weekly Recap ILT feedback:
