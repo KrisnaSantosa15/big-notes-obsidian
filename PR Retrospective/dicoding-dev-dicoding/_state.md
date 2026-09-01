@@ -1,6 +1,6 @@
 ---
-last_synced: 2026-07-14
-last_pr_seen: 5344
+last_synced: 2026-08-24
+last_pr_seen: 5621
 repo: dicoding-dev/dicoding
 ---
 
@@ -20,3 +20,10 @@ no new comments past the prior sync (already logged). New evidence added to
 You Build]], [[07 Modern PHP Idioms]], [[01 Actions Must Stay Thin]],
 [[06 Test Discipline]], and a new theme [[12 Aggregate Design]] created for
 #5335. #5340/#5344 are open with no reviewer feedback yet.
+
+**2026-08-24 full rescan**: processed all 33 PRs (#5017-#5621). 
+Added new evidence to [[12 Aggregate Design]] (now recurring: #5335, #5593, #5592),
+[[08 Naming and File Organization]] (bumped to 10 PRs), [[07 Modern PHP Idioms]] (added #5588),
+[[03 Reuse Before You Build]] (added #5593, #5282).
+No new themes created. Reviewer batch: dimasmds (naming/layering), AlexzPurewoko (aggregate/reuse).
+All feedback consolidated without duplication — pre-2026-07-14 evidence preserved.

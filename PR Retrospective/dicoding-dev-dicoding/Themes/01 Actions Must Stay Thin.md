@@ -1,6 +1,14 @@
 ---
-tags: [pr-retro, theme/architecture, severity/high]
-prs: ["#5104", "#5078", "#5033", "#5324"]
+tags:
+  - pr-retro
+  - theme/architecture
+  - severity/high
+prs:
+  - "#5104"
+  - "#5078"
+  - "#5033"
+  - "#5324"
+  - "#5626"
 status: recurring
 ---
 
@@ -53,3 +61,43 @@ Deciding the shape of Action → UseCase wiring *while* writing the Action, inst
 
 ## Related
 [[00 Index]] · [[05 Self-Documenting Code]] · [[10 PR and Team Process Hygiene]]
+
+
+### 2026-09-01 — PR #5626 (Token Issuance — create infra + web/UI)
+
+Same root instinct — "which layer owns this decision" — but for a Domain-VO vs Infrastructure-Gateway boundary instead of Web-Action vs UseCases-Specification.
+
+AlexzPurewoko:
+> "Btw menurutku mending mapping disini, karena ValueObject itukan domain object, yang relatenya ke hal yang berkaitan dengan domain."
+
+**Salah** (Gateway leans on the domain VO's `toArray()` to shape the DB row):
+```php
+$this->db->table(self::DAILY_ADD_ON_TOKENS_TABLE)->insert(array_map(
+    static fn (NewDailyAddOnToken $token) => array_merge($token->toArray(), [
+        'created_at' => $now,
+        'updated_at' => $now,
+    ]),
+    $tokens,
+));
+```
+
+**Benar** (Gateway builds the row explicitly via getters):
+```php
+$this->db->table(self::DAILY_ADD_ON_TOKENS_TABLE)->insert(array_map(
+    static fn (NewDailyAddOnToken $token) => [
+        'token' => $token->getToken(),
+        'add_on_type' => $token->getAddOnType()->value,
+        'days' => $token->getDays(),
+        'description' => $token->getDescription(),
+        'owner_id' => $token->getOwnerId(),
+        'expired_date' => $token->getExpiredDate()->format('Y-m-d H:i:s'),
+        'created_at' => $now,
+        'updated_at' => $now,
+    ],
+    $tokens,
+));
+```
+
+Confirmed against two sibling gateways: `SubscriptionTokenGateway::createTokens()` (older) still does the `toArray()`-then-merge shortcut; `MultiCourseTokensGateway::createTokens()` (newer — the same aggregate family this domain's naming convention was aligned to, see [[12 Aggregate Design]]) already builds the row fully explicit via getters. So this fix moves toward the newer convention, not away from an established one.
+
+`toArray()` itself can't be deleted from the VO — `Dicoding\Domain\Common\ValueObject` declares it `abstract`. It turns out to have a real (different) consumer: `Dicoding\Web\Transformers\Traits\NormalizePayloadStructureTrait::convertObjectToSnakeCaseArray()` duck-types on `method_exists($value, 'toArray')` to serialize domain objects into API/response payloads. That's the actual reason every VO must implement it — output serialization, not DB row-shaping. The two needs happen to both produce "an array," which is what made the Gateway's shortcut look reasonable, but they're unrelated concerns.

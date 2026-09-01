@@ -44,3 +44,32 @@ Note the concentration: `agissept` still leads overall (drove nearly all of #522
 
 ## Related
 [[00 Index]]
+
+
+## 2026-08-24 Update
+
+Full rescan added 11 new PRs with reviewer feedback:
+
+| [#5621](https://github.com/dicoding-dev/dicoding/pull/5621) | [Bugfix][Daily Add-Ons] Remove em dashes from sabak checkout labels | MERGED | — (no comments) | — |
+| [#5620](https://github.com/dicoding-dev/dicoding/pull/5620) | [Bugfix][Daily Add-Ons] Send activation email for promo bundle grants | MERGED | AlexzPurewoko | feature scope |
+| [#5612](https://github.com/dicoding-dev/dicoding/pull/5612) | [Feature][Subscriptions] Add SABAKPLUS30 promo bundle code | MERGED | dimasmds | [[10 PR and Team Process Hygiene]] |
+| [#5596](https://github.com/dicoding-dev/dicoding/pull/5596) | [Improvements][Sabak] Update plan copy | MERGED | dimasmds | [[08 Naming and File Organization]] |
+| [#5593](https://github.com/dicoding-dev/dicoding/pull/5593) | [Feature][Daily Add-Ons] Token issuance — create domain layer | OPEN | AlexzPurewoko | [[12 Aggregate Design]], [[03 Reuse Before You Build]], [[08 Naming and File Organization]] |
+| [#5592](https://github.com/dicoding-dev/dicoding/pull/5592) | [Improvements][Daily Add-Ons] Keep grant() event raising inside the aggregate | MERGED | dimasmds | [[12 Aggregate Design]] |
+| [#5588](https://github.com/dicoding-dev/dicoding/pull/5588) | [Feature][Daily Add-Ons] Bundle add-on entitlement via promo code | MERGED | dimasmds | [[07 Modern PHP Idioms]] |
+
+Plus 4 PRs with no substantive comments (#5621, #5598, #5582, #5539) — added for completeness.
+
+Updated frontmatter for themes: [[12 Aggregate Design]] (new: #5593, #5592), [[08 Naming and File Organization]] (new: #5596, #5593), [[07 Modern PHP Idioms]] (new: #5588), [[03 Reuse Before You Build]] (new: #5593, #5282).
+
+
+---
+
+## 2026-09-01 Update
+
+| PR | Title | State | Reviewers who commented | Themes touched |
+|----|-------|-------|--------------------------|-----------------|
+| [#5630](https://github.com/dicoding-dev/dicoding/pull/5630) | [Feature][Daily Add-Ons] Token issuance — edit, domain layer | OPEN | — (self-directed refactor, no new external comments this round) | [[12 Aggregate Design]] |
+| [#5626](https://github.com/dicoding-dev/dicoding/pull/5626) | [Feature][Daily Add-Ons] Token issuance — create, infra + web/UI | OPEN | AlexzPurewoko | [[07 Modern PHP Idioms]], [[01 Actions Must Stay Thin]] |
+
+Updated frontmatter for themes: [[07 Modern PHP Idioms]] (new: #5626), [[01 Actions Must Stay Thin]] (new: #5626), [[12 Aggregate Design]] (new: #5630).

@@ -1,6 +1,6 @@
 ---
 tags: [pr-retro, theme/naming, severity/medium]
-prs: ["#5017", "#5061", "#5078", "#5219", "#5033", "#5286", "#5316", "#5324"]
+prs: ["#5017", "#5061", "#5078", "#5219", "#5033", "#5286", "#5316", "#5324", "#5596", "#5593"]
 status: recurring
 ---
 
@@ -36,3 +36,34 @@ Before opening a PR, a 2-minute self-check pass:
 
 ## Related
 [[00 Index]] · [[01 Actions Must Stay Thin]] · [[03 Reuse Before You Build]]
+
+
+## 2026-08-24 Evidence (continued)
+
+### PR #5596 (Update plan copy) — UI Copy Naming
+
+dimasmds on em dashes in product copy:
+
+> "em dash ini indentik dengan AI sekali, better jangan pakai em dash. Alternatif rewrite jadi `- Coba Dulu 1 Hari` / `- 1 Hari: Coba Dulu`"
+
+This continues the [[08 Naming and File Organization]] pattern but applies it to user-visible copy, not code. Even in templates, consistency in punctuation and naming patterns across UI surfaces matters for product coherence. Em dashes risk confusion with AI-generated content when the feature is not AI-related.
+
+### PR #5593 (Token Issuance — create domain layer) — Domain Term Consolidation
+
+AlexzPurewoko on aggregate naming and term consistency:
+
+> "Yang closer dengan term domain aja bang... betul misal new daily add on token atau existing"
+
+> "Btw ini kalau pake object-mu yang ada sekarang gimana kah? Atau menurutku buat object baru sih dan satukan dengan input yang ada di L40 saja, karena merupakan input dari user"
+
+Reinforces the theme: pick domain terms first, then consistently apply them to parameters, class names, and value objects. Don't invent separate names for the same concept.
+
+### PR #5286 (Add mkdocs documentation site) — Documentation Asset Placement
+
+AlexzPurewoko on file organization in the docs tree:
+
+> "Btw ini buat assets di mkdocs-nya ya? Better buat folder baru aja bang, kurang cocok karena ini bukan docs..."
+
+> "Oh iya baru ngeh dia ngambil patokan relativenya adalah main 'docs'. Kalau gitu, mending masukin ke `docs/mkdocs-customization/ai-assistant.{ts,js}`"
+
+Same root issue as #5033's Transformer placement: assets that aren't docs get misplaced in the docs folder. The fix is the same too — establish a folder hierarchy that groups by *type* (Transformers, AI customizations) not by *proximity to where they're used*.

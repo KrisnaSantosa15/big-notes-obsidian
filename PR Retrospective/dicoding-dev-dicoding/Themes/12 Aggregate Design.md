@@ -1,7 +1,14 @@
 ---
-tags: [pr-retro, theme/domain-modeling, severity/medium]
-prs: ["#5335"]
-status: new
+tags:
+  - pr-retro
+  - theme/domain-modeling
+  - severity/medium
+prs:
+  - "#5335"
+  - "#5593"
+  - "#5592"
+  - "#5630"
+status: recurring
 ---
 
 # Aggregate Design — Behavior Methods Over Constructor Parameters
@@ -32,3 +39,97 @@ Designing the aggregate's constructor/getters around "what data does this class 
 
 ## Related
 [[00 Index]] · [[07 Modern PHP Idioms]] · [[06 Test Discipline]]
+
+
+## Evidence (continued)
+
+### 2026-08-24 — PR #5593 (Token Issuance — create domain layer)
+
+AlexzPurewoko flagged aggregate design decisions where parameters or naming should be consolidated:
+
+> "Yang closer dengan term domain aja bang... betul misal new daily add on token atau existing. Atau bisa aja pake pola yang satu object term misalkan daily add on token, tapi id nya dibuat nullable dan bisa dicek di aggregate nya"
+
+> "Seperti pada komentar di PR, ini bisa dijadikan satu value object saja bang" — combining what would otherwise be separate parameters into a single domain concept.
+
+> "tokenOwner ini bisa user atau gimana kah?" — clarifying a domain role/entity before settling on the aggregate's public interface.
+
+> "Btw memang ada kebutuhan untuk cek over quantity ya?" — questioning whether a business rule belongs in the aggregate at all.
+
+### 2026-08-24 — PR #5592 (Keep grant() event raising inside the aggregate)
+
+dimasmds on event sourcing within aggregates:
+
+> "Aggregate tetap raise domain. Yang perlu di-adjust mungkin si aggregate-nya harus bisa mengetahui grant access ini comes-up dari mana, payment atau voucher. Nanti handle event-nya berdasarkan nilai tersebut."
+
+Reinforces [[12 Aggregate Design]]'s core: the aggregate owns the decision-making, including which events to raise and *under what conditions*. When an external input (payment vs voucher) changes how the aggregate behaves, the aggregate should own that context-awareness, not require the caller to route differently.
+
+
+### 2026-09-01 — PR #5630 (Token Issuance — edit, domain layer)
+
+Two related design decisions while rebasing/refactoring a token-editing aggregate — not from an external reviewer comment this time, but a self-directed refactor decision grounded in the `DailyAddOnTokenCreator` → `DailyAddOnTokensCreation` rename from #5593's review (same root pattern this theme already tracks).
+
+**(a) Aggregate names must be process/outcome nouns, not actor nouns.**
+
+**Salah:**
+```php
+class DailyAddOnTokenEditor extends Aggregate
+class DailyAddOnTokenCreator extends Aggregate
+```
+
+**Benar:**
+```php
+class DailyAddOnTokenUpdate extends Aggregate
+class DailyAddOnTokensCreation extends Aggregate
+```
+
+Precedent already established elsewhere in the codebase: `MultiCourseTokensCreation`, `MultiCourseTokenDropout`, `MultiCourseTokenDeadlineExtension`, `MultiCourseTokenRedemptionDateUpdate` — all process nouns (`-ion`/`-out`/`-sion`), never `-or`/`-er`. `SubscriptionTokenEditor` even carries its own docblock — `@review should renamed more clearly because aggregate is not actor` — flagging this exact smell years earlier and never fixed. Treat this as a standing rule for any new aggregate, not just this one.
+
+**(b) Constructor must not validate or authorize — only the action method does, through one combined validation step.**
+
+**Salah:**
+```php
+public function __construct(?ExistingDailyAddOnToken $existingToken)
+{
+    if ($existingToken === null) {
+        throw new InvariantException('DAILY_ADD_ON.TOKEN.EDIT.EMPTY_EXISTING_TOKEN');
+    }
+    if ($existingToken->isAlreadyUsed()) {
+        throw new InvariantException('DAILY_ADD_ON.TOKEN.EDIT.ALREADY_USED');
+    }
+    $this->existingToken = $existingToken;
+}
+```
+
+**Benar:**
+```php
+public function __construct(
+    private readonly ?ExistingDailyAddOnToken $existingToken,
+) {
+}
+
+/** @throws InvariantException */
+public function updateToken(Carbon $newExpiredDate, string $newDescription): void
+{
+    $this->validateEditTokenRules($newExpiredDate);
+    $this->updatedToken = $this->existingToken->withNewSelf($newExpiredDate, $newDescription);
+}
+
+/**
+ * @psalm-assert !null $this->existingToken
+ * @throws InvariantException
+ */
+private function validateEditTokenRules(Carbon $newExpiredDate): void
+{
+    if ($this->existingToken === null) {
+        throw new InvariantException('DAILY_ADD_ON.TOKEN.EDIT.EMPTY_EXISTING_TOKEN');
+    }
+    if ($this->existingToken->isAlreadyUsed()) {
+        throw new InvariantException('DAILY_ADD_ON.TOKEN.EDIT.ALREADY_USED');
+    }
+    if ($newExpiredDate->lessThan(Asr::toCarbon(Asr::getNowDateTimeImmutable()))) {
+        throw new InvariantException('DAILY_ADD_ON.TOKEN.EDIT.INVALID_EXPIRED_DATE');
+    }
+}
+```
+
+All checks grouped into **one** `validateEditTokenRules()` method rather than split across several small ones — matches `MultiCourseTokenDropout::preValidation()`'s style of grouping every pre-check together. Direct consequence for tests: since the constructor no longer throws, a test must construct the aggregate first (`$update = new DailyAddOnTokenUpdate(null);`) and only then call the action method to trigger the exception — not assert on the constructor call itself.

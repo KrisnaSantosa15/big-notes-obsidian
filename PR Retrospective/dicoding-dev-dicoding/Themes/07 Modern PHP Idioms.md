@@ -1,6 +1,17 @@
 ---
-tags: [pr-retro, theme/php-idioms, severity/low]
-prs: ["#5017", "#5033", "#5132", "#5224", "#5286", "#5324"]
+tags:
+  - pr-retro
+  - theme/php-idioms
+  - severity/low
+prs:
+  - "#5017"
+  - "#5033"
+  - "#5132"
+  - "#5224"
+  - "#5286"
+  - "#5324"
+  - "#5588"
+  - "#5626"
 status: recurring
 ---
 
@@ -45,3 +56,31 @@ Writing defensively out of habit rather than checking the actual declared type o
 
 ## Related
 [[00 Index]] · [[03 Reuse Before You Build]]
+
+
+### 2026-08-24 — PR #5588 (Bundle add-on entitlement via promo code)
+
+dimasmds on DateTime idioms in the codebase:
+
+> "sebetulnya penggunaan Carbon lebih enak dibaca. Tapi tetangganya sudah banyak pakai new DateTime ya. Kalo aku pribadi akan mulai coba pakai carbon."
+
+Signals that the codebase is ready to migrate toward Carbon (Laravel's DateTime wrapper) from raw `new DateTime()`. This is pragmatic — today's neighbors use `new DateTime`, but with a critical mass of Carbon usage building, it becomes the idiomatic choice.
+
+
+### 2026-09-01 — PR #5626 (Token Issuance — create infra + web/UI)
+
+AlexzPurewoko on a redundant type rule stacked before an `enum` rule:
+
+> "Kalau sudah ada |enum tidak perlu lagi pake |string bang"
+
+**Salah:**
+```php
+'add_on_type' => 'required|string|enum:' . DailyAddOnType::class,
+```
+
+**Benar:**
+```php
+'add_on_type' => 'required|enum:' . DailyAddOnType::class,
+```
+
+`Dicoding\Infrastructure\CustomValidations\CustomValidation::validateEnum()` already calls `$parameters[0]::tryFrom($value)` for a `BackedEnum`, which safely fails (returns `null`) for any value of the wrong type — no separate type guard needed before it. Same root cause as this theme's other entries, just on a validation-rule string instead of a PHP-level cast/guard.

@@ -1,7 +1,9 @@
 ---
-tags: [pr-retro, moc]
+tags:
+  - pr-retro
+  - moc
 created: 2026-07-02
-updated: 2026-07-14
+updated: '"2026-09-01"'
 scope: "24 PRs authored by krisnasantosa15 in dicoding-dev/dicoding, #5017-#5344"
 ---
 
@@ -63,3 +65,36 @@ See [[PR Log]] for the full PR-by-PR source table, reviewer frequency, and metho
 ## Suggested vault hygiene
 - New PR feedback worth remembering → add it to the matching theme note under a new `## Evidence` bullet (with PR link + quote), don't create a new note unless it's a genuinely new pattern.
 - Revisit [[Action Plan]] monthly and prune checklist items that have stopped triggering — that's a sign the habit stuck.
+
+
+---
+
+## 2026-08-24 Update: Full Rescan
+
+Completed full rescan of all 33 PRs authored by @KrisnaSantosa15. Added evidence to 4 existing themes with new PR data:
+
+| Theme | New PRs | Update |
+|-------|---------|--------|
+| [[12 Aggregate Design]] | #5593, #5592 | Now recurring (was new). Reinforced core: aggregates own decisions & event-raising; parameters should be fixed today, not speculative. |
+| [[08 Naming and File Organization]] | #5596, #5593, #5286 | Bumped to 10 total PRs (was 8). Added UI copy consistency + domain term consolidation patterns. |
+| [[07 Modern PHP Idioms]] | #5588 | Now 7 PRs. Added Carbon DateTime preference signal. |
+| [[03 Reuse Before You Build]] | #5593, #5282 | Now 6 PRs. Reinforced consolidation of domain concepts into VOs + documentation reuse. |
+
+**Reviewers in 2026-08-24 batch:** dimasmds (4 comments across 4 PRs) and AlexzPurewoko (5 comments across 2 PRs). dimasmds continues to signal on naming/layering; AlexzPurewoko on aggregate/reuse decisions.
+
+**No new themes created** — all feedback fit existing patterns. Severity levels unchanged.
+
+
+---
+
+## 2026-09-01 Update: PR #5626 rebase + review, #5630 aggregate refactor
+
+`token-issuance-domain` (#5593) merged; rebasing the stacked branches on top surfaced 3 more review points, plus a self-directed aggregate-naming fix:
+
+| Theme | New PR | Update |
+|-------|--------|--------|
+| [[07 Modern PHP Idioms]] | #5626 | Redundant `\|string` before `\|enum:X::class` in validation rules — enum rule already type-checks via `tryFrom()`. |
+| [[01 Actions Must Stay Thin]] | #5626 | Domain-VO vs Infra-Gateway boundary: Gateway should map to a DB row via getters, not `$vo->toArray()` — `toArray()`'s real consumer is `NormalizePayloadStructureTrait` (API output), not persistence. |
+| [[12 Aggregate Design]] | #5630 | Aggregate actor-noun naming (`Editor`→`Update`, matching `MultiCourseTokens*` process-noun convention) + constructor-must-not-validate, consolidated into one `validate*Rules()` method. |
+
+**No new themes created** — all 3 points fit existing patterns.

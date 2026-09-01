@@ -1,6 +1,6 @@
 ---
 tags: [pr-retro, theme/reuse, severity/medium]
-prs: ["#5017", "#5033", "#5286", "#5316"]
+prs: ["#5017", "#5033", "#5286", "#5316", "#5593", "#5282"]
 status: recurring
 ---
 
@@ -46,3 +46,32 @@ Writing the test/aggregate top-down from "what do I need to prove" instead of fi
 
 ## Related
 [[00 Index]] · [[06 Test Discipline]] · [[07 Modern PHP Idioms]]
+
+
+## 2026-08-24 Evidence (continued)
+
+### PR #5593 (Token Issuance — create domain layer)
+
+AlexzPurewoko on consolidating domain concepts:
+
+> "Seperti pada komentar di PR, ini bisa dijadikan satu value object saja bang"
+
+The pattern continues: when multiple parameters represent a single domain concept, bundle them into a VO and reuse it across the domain, rather than passing primitives separately.
+
+### PR #5286 (Add mkdocs documentation site)
+
+AlexzPurewoko on documentation reuse:
+
+> "Btw sepertinya command cheat sheet ini tidak perlu di dokumentasi mengingat dia hanya copy of `deck help` menurutku. Better dari engineer langsung akses `deck help` instead dari dokumentasi"
+
+> "Ini bisa disingkat aja langsung merefer ke deck skill..."
+
+The reuse instinct applies to documentation too — if a tool already ships with help output or a skill already documents a command, reference it instead of duplicating. Every copy is a future sync debt.
+
+### PR #5282 (Replace isDeveloper() checks with beforeFilter)
+
+dimasmds on constant extraction:
+
+> "DRY~ Bisa dibuat constant dan jadikan single source."
+
+Straightforward [[03 Reuse Before You Build]] on error message strings: extract duplicated literals to a const, keeping one source of truth instead of multiple scattered copies.
