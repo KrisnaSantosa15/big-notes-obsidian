@@ -49,25 +49,26 @@ Thanks to: mas Fikri, Rafy dan Alfian.
 
 ## Weekly Recap ILT feedback:
 
+Para instruktur tidak perlu lagi menunggu email rangkuman mingguan, karenaweekly feedback telah sepenuhnya terintegrasi ke dalam APD (Academic Program Dashboard) dan sekarang secara otomatis sync dengan feedback dari student dan fasil.
+
+Thanks to: mas Ikhlas.
+
 ## Infrastructure:
 
 ### (1):
 
-#### Self-Hosting Chatwoot
-- Permintaan dari pak HR karena chatwoot cloud kemahalan untuk 2 agen saja.
-- Sudah dideploy ke nomad, ke chatwoot.dicoding.net
-- Stack postgres, redis, s3, rails, sidekiq (queue manager / mirip laravel horizon)
-- Sayangnya beberapa fitur masih dikunci, butuh berbayar dan harganya dihitung per agen juga
-
-#### Snapshotting Dynomite/Redis
-- Baru saja selesai! Mengimplementasikan baked snapshot sehingga lebih cepat saat butuh node tambahan (scale up)
-- Integrasi dengan consul untuk update peers node. Begitu ada node dynomite baru, dynomite lain akan dikabari dan masuk ke cluster
-
-#### Dicoding DB SQL Chat
 - Development menggunakan VannaAI + RAG diubah menjadi Hono + AI SDK + JSONLD via Tool Calling dengan pendekatan Backend Service.
-- Untuk UI pengguna kita akan
+- Untuk UI pengguna kita akan menggunakan browser extension sehingga bisa dengan mudah digunakan bersamaan dengan metabase
+
+Saat ini ketika menggunakan metabase kita harus tau SQL/query untuk mendapatkan data tapi tidak semua orang bisa untuk menuliskan query. alhasil dibuat extension untuk memudahkan kita dalam proses mencari data yang relevan hanya dengan prompt, misalkan cari nama user krisna, maka dia akan translate prompt tersebut menjadi SQL misalkan `select * from users where username=krisna`
+
+Thanks to: mas Abdul.
 
 ### (2):
+
+Ini sangat menarik, jika teman-teman ngeuh, kemarin tanggal 1 september jam **06.14 - 08.07** dicoding itu down.  Ternyata setelah diinvestigasi, ubuntu melakukan auto update terhadap library/package yang digunakan oleh mariadb/database. semua database di dicoding itu direstart dan alhasil dicoding down, padahal restart database itu tidak boleh direstart semua sekaligus, harus satu satu dan harus hati-hati apalagi jika ada lonjakan request. 
+
+Selain itu ketika proses update database juga gagal karena timout, lama melakukan restartnya. Solusi yang sudah dilakukan tim infra adalah dengan menerapkan proteksi auto update & restart pada komponen mariadb, security update tetap berjalan. selain itu tim infra sedang evaluasi alternatif untuk manajemen incident supaya lebih baik lagi.
 
 #### Root Cause
 - Server database mati secara bersamaan akibat update sistem otomatis ubuntu yang berjalan di pagi hari. Kemudian, database di-restart secara bersamaan oleh sistem. Sementara, database kita itu harus di-restart satu-satu dengan hati-hati.
@@ -83,3 +84,5 @@ Thanks to: mas Fikri, Rafy dan Alfian.
 2. Data yang tersimpan pada buffer, cukup untuk menangani toleransi kegagalan sistem dengan durasi yang lebih lama.
 3. Apabila kita menurunkan buffer ini, artinya waktu toleransi kegagalan semakin sempit dan dapat berakibat full copy(>5 menit).
 - Response sangat-sangat telat karena terdistraksi dengan notif lainnya yang ada di google chat. Saat ini, tim Infra sedang mengevaluasi beberapa alternatif incident on call platform, seperti grafana oncall, [incident.io](http://incident.io), [incidentrelay.io](http://incidentrelay.io), [xurrent.com](http://xurrent.com), dan spike.sh
+
+Thanks to: mas Habibi, Abdul, mba Farida.
