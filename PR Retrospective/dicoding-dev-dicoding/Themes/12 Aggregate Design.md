@@ -114,10 +114,7 @@ public function updateToken(Carbon $newExpiredDate, string $newDescription): voi
     $this->updatedToken = $this->existingToken->withNewSelf($newExpiredDate, $newDescription);
 }
 
-/**
- * @psalm-assert !null $this->existingToken
- * @throws InvariantException
- */
+/** @throws InvariantException */
 private function validateEditTokenRules(Carbon $newExpiredDate): void
 {
     if ($this->existingToken === null) {
@@ -133,3 +130,5 @@ private function validateEditTokenRules(Carbon $newExpiredDate): void
 ```
 
 All checks grouped into **one** `validateEditTokenRules()` method rather than split across several small ones — matches `MultiCourseTokenDropout::preValidation()`'s style of grouping every pre-check together. Direct consequence for tests: since the constructor no longer throws, a test must construct the aggregate first (`$update = new DailyAddOnTokenUpdate(null);`) and only then call the action method to trigger the exception — not assert on the constructor call itself.
+
+**Correction (2026-09-01, same day):** an earlier draft of this note added `@psalm-assert !null $this->existingToken` on `validateEditTokenRules()`, assuming psalm would otherwise flag `$this->existingToken->withNewSelf(...)` in `updateToken()` as possibly-null. Verified empirically with `deck psalm` (full project scan, "No errors found!") that this annotation changes nothing — this project's `psalm.xml` sets `errorLevel="4"`, and `PossiblyNullPropertyFetch`-family issues default to Psalm severity level 5, above that threshold, so they're never enforced here regardless of the annotation. Don't add `@psalm-assert` for this reason in this codebase — it's a no-op under the current config. (No sibling aggregate in this codebase uses `@psalm-assert` at all — the closest comparable case, `RecipientsConfigStateUpdate`, instead validates in the constructor and re-fetches the now-guaranteed value in the action method behind a plain comment, `// Guaranteed non-null by the constructor guard.` — still the older, constructor-validates pattern, not proof either way for psalm's behavior under the newer no-constructor-validation style.)
