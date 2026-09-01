@@ -11,4 +11,4 @@ Yang pertama datang dari Classroom. Disini, classroom student telah melalui bebe
 
 Masih tetap di classroom,  Ada 2 fitur lainnya yaitu:
 1. Text to Speech. kini user dapat belajar tidak hanya melalui teks, tapi juga bisa mendengarkan penjelasan dari modul tersebut. Saat ini baru dirilis di kelas Belajar Dasar AI dan kedepannya akan diperluas ke kelas lainnya.
-2. Learning Time Tracker. Selain itu, kini user juga bisa melakukan tracking waktu berapa lama modul itu dikerjakan. Ini akan membantu siswa ataupun tim academy dalam me
+2. Learning Time Tracker. Selain itu, kini user juga bisa melakukan tracking waktu berapa lama modul itu dikerjakan. Ini akan membantu siswa ataupun evaluasi bagi tim academy dalam memprediksikan berapa lama seharusnya suatu modul/kelas itu dapat diselesaikan.
