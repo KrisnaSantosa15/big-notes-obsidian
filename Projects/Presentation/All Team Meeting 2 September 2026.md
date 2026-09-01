@@ -14,7 +14,7 @@ Yang pertama datang dari Classroom. Disini, classroom student telah melalui bebe
 3. Ketiga ada Add Ons. Nah kedua fitur yang disebutkan tadi adalah fitur berbayar yang student bisa beli dengan mekanisme Add On melalui uang atau dicoding points. Thanks ke para reviewer: mas Alex, Agis, Dimas.
 
 Masih tetap di classroom, Ada 2 fitur lainnya yaitu:
-1. Text to Speech. kini user dapat belajar tidak hanya melalui teks, tapi juga bisa mendengarkan penjelasan dari modul tersebut. Saat ini baru dirilis di kelas Belajar Dasar AI dan kedepannya akan diperluas ke kelas lainnya. Selain itu helpful rate dari pengguna tts adalah 98.6% (**758 helpful vs 11 not helpful**)
+1. Text to Speech. kini user dapat belajar tidak hanya melalui teks, tapi juga bisa mendengarkan penjelasan dari modul tersebut. Saat ini baru dirilis di kelas Belajar Dasar AI dan kedepannya akan diperluas ke kelas lainnya. Selain itu helpful rate dari pengguna tts adalah 98.6% (**758 helpful vs 11 not helpful**). 3.914 non unique plays across 24 modules
 	Thanks to: mba Farida, mas Alfian, Rafy dan tim terkait.
 2. Learning Time Tracker. Selain itu, kini user juga bisa melakukan tracking waktu berapa lama modul itu dikerjakan. Ini akan membantu siswa ataupun evaluasi bagi tim academy dalam memprediksikan berapa lama seharusnya suatu modul/kelas itu dapat diselesaikan. Thanks to: mas Ikhlas
 
