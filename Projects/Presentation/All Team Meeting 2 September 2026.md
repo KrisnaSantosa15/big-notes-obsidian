@@ -37,7 +37,10 @@ Announcement dan briefing lebih khusus ada di hari Jum’at. Terkait development
 Thanks to: mas Alex dan tim ops.
 
 ## Certificate Generator:
-Untuk memudahkan dalam proses pembuatan sertifikat.
+Sertifikat generator sudah hampir selesai untuk diintegrasikan dengan dicoding, sekarang internal dicoding sudah bisa membuat sertifikat baru, untuk membuatnya bisa cek di link berikut **[https://certificate.dicoding-ai.dev/](https://certificate.dicoding-ai.dev/)** 
+
+Saat ini masih dalam tahap testing, kedepannya ada rencana juga untuk migrasi METC dan coding camp alumni yang terbaru.
+
 Thanks to: Mas Alfian.
 
 ## GSA Automation V2:
