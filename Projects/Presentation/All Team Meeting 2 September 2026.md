@@ -14,7 +14,8 @@ Yang pertama datang dari Classroom. Disini, classroom student telah melalui bebe
 3. Ketiga ada Add Ons. Nah kedua fitur yang disebutkan tadi adalah fitur berbayar yang student bisa beli dengan mekanisme Add On melalui uang atau dicoding points. Thanks ke para reviewer: mas Alex, Agis, Dimas.
 
 Masih tetap di classroom, Ada 2 fitur lainnya yaitu:
-1. Text to Speech. kini user dapat belajar tidak hanya melalui teks, tapi juga bisa mendengarkan penjelasan dari modul tersebut. Saat ini baru dirilis di kelas Belajar Dasar AI dan kedepannya akan diperluas ke kelas lainnya. Thanks to: mba Farida, mas Alfian, Rafy dan tim terkait.
+1. Text to Speech. kini user dapat belajar tidak hanya melalui teks, tapi juga bisa mendengarkan penjelasan dari modul tersebut. Saat ini baru dirilis di kelas Belajar Dasar AI dan kedepannya akan diperluas ke kelas lainnya. Selain itu helpful rate dari pengguna tts adalah 98.6% (**758 helpful vs 11 not helpful**)
+	Thanks to: mba Farida, mas Alfian, Rafy dan tim terkait.
 2. Learning Time Tracker. Selain itu, kini user juga bisa melakukan tracking waktu berapa lama modul itu dikerjakan. Ini akan membantu siswa ataupun evaluasi bagi tim academy dalam memprediksikan berapa lama seharusnya suatu modul/kelas itu dapat diselesaikan. Thanks to: mas Ikhlas
 
 ## Bitt:
@@ -37,9 +38,23 @@ Announcement dan briefing lebih khusus ada di hari Jum’at. Terkait development
 Thanks to: mas Alex dan tim ops.
 
 ## Certificate Generator:
-Sertifikat generator sudah hampir selesai untuk diintegrasikan dengan dicoding, sekarang internal dicoding sudah bisa membuat sertifikat baru, untuk membuatnya bisa cek di link berikut **[https://certificate.dicoding-ai.dev/](https://certificate.dicoding-ai.dev/)** 
 
-Saat ini masih dalam tahap testing, kedepannya ada rencana juga untuk migrasi METC dan coding camp alumni yang terbaru.
+Background
+
+Saat ini jika ada kebutuhan certificate, tim terkait akan melakukan generate dan menyimpan hasilnya di google drive. Dengan disimpannya di google drive, jika ada user yang lupa link dan bertanya perihal link certificate, internal tim harus mencarinya di drive secara manual. Selain itu, menyimpan certificate di google drive ini akan memakan penggunaan storage di mana untuk campaign dengan jumlah siswa yang banyak, jumlah certificate yang akan digenerate pun akan banyak dan akan memakan banyak storage di google drive. Dengan integrasi ini diharapkan bisa mengurangi penggunaan google drive untuk menyimpan certificate dengan segala kekurangannya.
+
+  
+
+Updates
+
+  
+
+1. Setelah sebelumnya aplikasi generate certificate sudah digunakan oleh beberapa orang, proses integrasi dengan Dicoding dimulai dan saat ini sudah dalam tahap pengujian mulai dari alur pembuatan template dan import penerima sertifikat yang terhubung langsung dengan user Dicoding.
+    
+2. Kita akan menutup akses certificate gen app sebelumnya dan akan dipindahkan ke [https://certificate.dicoding-ai.dev/](https://certificate.dicoding-ai.dev/). Penutupan akses akan dilakukan di akhir September. Jika membutuhkan bantuan untuk migrasi, silakan hubungi engineer terkait.
+    
+3. tim engineer menargetkan bisa melakukan migrasi sertifikat METC dan Coding Camp saat sudah ready on production. Stay tune untuk pic program karena akan di kontak tim engineer untuk persiapan migrasi ini.
+    
 
 Thanks to: Mas Alfian.
 
