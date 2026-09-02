@@ -156,8 +156,8 @@ public function getById(int $id): ?object
 ```
 
 ## 10. Domain Service vs Service biasa: bedanya cuma raise event atau nggak
-- **Domain Service**: dipakai kalau butuh insert data yang sejenis dari banyak Specification berbeda, dan hasil aksinya perlu raise domain event. Extends `Dicoding\Domain\Common\DomainService` (yang cuma `use EventRaisableObject`).
-- **Service biasa**: dipakai kalau butuh query hal yang sama dari banyak tempat, tanpa raise event. Plain class biasa.
+- **Domain Service**: dipakai kalau butuh query dengan data yang sejenis dari banyak Specification berbeda, dan hasil aksinya perlu raise domain event. Extends `Dicoding\Domain\Common\DomainService` (yang cuma `use EventRaisableObject`).
+- **Service biasa**: dipakai kalau butuh query dengan data yang sejenis dari banyak Specification, tanpa raise event. Plain class biasa.
 
 Contoh Domain Service, dari `Dicoding/DomainServices/ContributionPoint/UserContributionPointService.php`:
 ```php
