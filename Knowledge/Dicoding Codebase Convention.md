@@ -63,3 +63,18 @@ $this->db->table($table)->insert(array_map(
     $tokens,
 ));
 ```
+
+## 5. Gunakan data yang sudah ada di database testing
+
+```php
+// Salah
+$admin = $this->createDicodingUser(['user_role' => MembershipRole::ADMIN()->getValue()]);
+$owner = $this->createDicodingUser();
+$expiredDateInput = Carbon::now()->addDays(30)->format('d-m-Y H:i');
+$expectedExpiredDate = Carbon::createFromFormat('d-m-Y H:i', $expiredDateInput)->format('Y-m-d H:i:s');
+$this->be(DicodingUser::find($admin->id));
+
+// Benar
+$this->be(DicodingUser::find(DicodingUser::ADMINID)); atau be(DicodingUser::find(2))
+
+```

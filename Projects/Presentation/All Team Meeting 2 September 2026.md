@@ -46,6 +46,8 @@ Thanks to: mas Fikri, Rafy dan Alfian.
 
 ## Weekly Recap ILT feedback:
 
+Instructors no longer need to wait for the weekly recap email, as weekly feedback has been fully integrated into the APD Dashboard and now syncs automatically with Student and Facilitator feedback in real time
+
 ## Infrastructure:
 
 ### (1):
