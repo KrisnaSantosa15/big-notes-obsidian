@@ -107,3 +107,40 @@ public function updateToken(string $newExpiredDate, string $newDescription): voi
 public function updateToken(Carbon $newExpiredDate, string $newDescription): void
 ```
 `Asr::getNowDateTimeStringInDefaultTimeZone()` tetap dipakai untuk "now" dalam bentuk string di titik persistensi/logging (lihat CLAUDE.md) — bungkus jadi `Carbon`/`Carbon::parse(...)` kalau nilainya perlu dipakai sebagai domain concept. Di test, pakai `Carbon` instance tetap (atau `Carbon::setTestNow()`) daripada string timestamp.
+
+8. throw null itu bisa ada di aggreagete bisa juga di repository
+
+
+
+kalo 404 itu error akses ke resource nya
+
+kalo 400 itu error untuk hal hal support dari resource yang mau diakses, misalnya mau akses kelas disana ada data reviewer sedangkan data reviewer nya tidak ada maka return 400
+
+
+gateway itu harusnya return data raw aja bukan terikat ke suatu vo/domain komponen
+
+```php
+// salah
+ public function getById(int $id): ?ExistingDailyAddOnToken
+```
+
+
+
+domain service itu sama dengan service cuman bedanya adalah kalo domain service raise event.
+
+
+
+anonymous aggregate:  `new class extends Aggregate {}`
+domain service: butuh insert data di banyak specification, tapi insert datanya yang sejenis.
+
+
+
+kalo misalkan butuh insert aja dan kalo misalkan bikin repo dan vo itu ribet bisa pake anonymous aggregate.
+
+
+setiap perubahan data wajib bikin aggregate, tapi cek dulu apakah agregatenya butuh testable berati bikin agregate seperti biasa tapi kalo tidak perlu ditest bikin anon aggregate aja.
+
+
+factory itu sekarang sudah jarang digunakan. dan factory itu sama seperti repository.
+
+service itu digunakan kalo butuh query satu hal di banyak tempat bisa pake service atau domain service tergantung butuh raise event atau ngga.
