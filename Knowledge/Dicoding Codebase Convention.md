@@ -20,7 +20,7 @@ public function updateToken(Carbon $newExpiredDate, string $newDescription): voi
 ```
 
 ## 2. Ada `enum` rule? Jangan tambah `string`/`integer` lagi
-`enum:` sudah type-check sendiri lewat `tryFrom()` — aman untuk tipe apapun.
+`enum:` sudah type-check sendiri lewat `tryFrom()`, aman untuk tipe apapun.
 
 ```php
 // Salah
@@ -80,7 +80,7 @@ $this->be(DicodingUser::find(DicodingUser::ADMINID)); atau be(DicodingUser::find
 ```
 
 ## 6. Jangan cast/default ulang kalau tipe sudah pasti
-Kalau `$rules` (atau satu-satunya caller) sudah menjamin tipe/keberadaan sebuah field, getter/constructor tidak perlu cast atau `?? default` lagi — itu cuma bikin reviewer harus cek dua kali apakah cast-nya beneran ngapa-ngapain. Berlaku di layer manapun (VO getter, constructor, UseCase), bukan cuma Domain.
+Kalau `$rules` (atau satu-satunya caller) sudah menjamin tipe/keberadaan sebuah field, getter/constructor tidak perlu cast atau `?? default` lagi. Itu cuma bikin reviewer harus cek dua kali apakah cast-nya beneran ngapa-ngapain. Berlaku di layer manapun (VO getter, constructor, UseCase), bukan cuma Domain.
 
 ```php
 // Salah
@@ -97,7 +97,7 @@ public function getDiscussionId(): int {
 Cek dulu: apakah rule validasi atau caller (grep `new <VOName>(`) sudah menjamin tipe/kehadirannya? Kalau ya, hapus cast/default-nya. Cast/default baru dipertahankan kalau jaminannya memang belum ada (field `sometimes`, banyak caller dengan jaminan beda-beda, atau tipe yang legitimately berubah setelah validasi).
 
 ## 7. Gunakan `Carbon`, bukan string mentah/`DateTime`, untuk tanggal
-Domain/UseCase yang melakukan date math (expiry, issuance, redemption window, dll) pakai `Carbon` supaya gampang di-test (freeze/travel time, fluent comparison) — bukan string atau `DateTime` biasa.
+Domain/UseCase yang melakukan date math (expiry, issuance, redemption window, dll) pakai `Carbon` supaya gampang di-test (freeze/travel time, fluent comparison), bukan string atau `DateTime` biasa.
 
 ```php
 // Salah
@@ -106,41 +106,120 @@ public function updateToken(string $newExpiredDate, string $newDescription): voi
 // Benar
 public function updateToken(Carbon $newExpiredDate, string $newDescription): void
 ```
-`Asr::getNowDateTimeStringInDefaultTimeZone()` tetap dipakai untuk "now" dalam bentuk string di titik persistensi/logging (lihat CLAUDE.md) — bungkus jadi `Carbon`/`Carbon::parse(...)` kalau nilainya perlu dipakai sebagai domain concept. Di test, pakai `Carbon` instance tetap (atau `Carbon::setTestNow()`) daripada string timestamp.
+`Asr::getNowDateTimeStringInDefaultTimeZone()` tetap dipakai untuk "now" dalam bentuk string di titik persistensi/logging (lihat CLAUDE.md), bungkus jadi `Carbon`/`Carbon::parse(...)` kalau nilainya perlu dipakai sebagai domain concept. Di test, pakai `Carbon` instance tetap (atau `Carbon::setTestNow()`) daripada string timestamp.
 
-8. throw null itu bisa ada di aggreagete bisa juga di repository
+## 8. Null-check: bisa di constructor aggregate, bisa juga di repository, dua-duanya valid
+- **404-style**: resource utama yang diakses langsung tidak ada. Repository/factory yang throw `ObjectNotFoundException`, sebelum aggregate-nya dibentuk.
+- **400-style**: resource utamanya ada, tapi business rule dari action-nya sendiri masih bisa gagal. Aggregate yang throw `InvariantException`.
 
-
-
-kalo 404 itu error akses ke resource nya
-
-kalo 400 itu error untuk hal hal support dari resource yang mau diakses, misalnya mau akses kelas disana ada data reviewer sedangkan data reviewer nya tidak ada maka return 400
-
-
-gateway itu harusnya return data raw aja bukan terikat ke suatu vo/domain komponen
-
+Cara 1 (return 400-style), throw langsung di constructor aggregate, dari `Dicoding/Domain/Subscriptions/Tokens/Aggregates/SubscriptionTokenEditor.php`:
 ```php
-// salah
- public function getById(int $id): ?ExistingDailyAddOnToken
+public function __construct(?SubscriptionToken $existingToken = null)
+{
+    if ($existingToken === null) {
+        throw new InvariantException('SUBSCRIPTION.TOKEN.EDIT.EMPTY_EXISTING_TOKEN');
+    }
+
+    if ($existingToken->isAlreadyUsed()) {
+        throw new InvariantException('SUBSCRIPTION.TOKEN.EDIT.ALREADY_USED');
+    }
+
+    $this->existingToken = $existingToken;
+}
 ```
 
+Cara 2 (return 404-style), throw di repository sebelum aggregate dibentuk, dari `Dicoding/Domain/DailyAddOns/Repositories/DailyAddOnTokenUpdateRepository.php`:
+```php
+public function createAggregate(int $tokenId): DailyAddOnTokenUpdate
+{
+    $row = $this->gateway->getById($tokenId);
 
+    if ($row === null) {
+        throw ObjectNotFoundException::create('Daily Add-On Token', $tokenId, __METHOD__);
+    }
 
-domain service itu sama dengan service cuman bedanya adalah kalo domain service raise event.
+    return new DailyAddOnTokenUpdate(new ExistingDailyAddOnToken(array_merge((array) $row, [
+        'add_on_type' => DailyAddOnType::from($row->add_on_type),
+    ])));
+}
+```
 
+## 9. Gateway return data mentah, jangan terikat ke VO/domain object
+Assembly ke VO adalah kerjaan repository/factory yang manggil gateway ini, bukan gateway itu sendiri.
 
+```php
+// Salah
+public function getById(int $id): ?ExistingDailyAddOnToken
 
-anonymous aggregate:  `new class extends Aggregate {}`
-domain service: butuh insert data di banyak specification, tapi insert datanya yang sejenis.
+// Benar
+public function getById(int $id): ?object
+```
 
+## 10. Domain Service vs Service biasa: bedanya cuma raise event atau nggak
+- **Domain Service**: dipakai kalau butuh insert data yang sejenis dari banyak Specification berbeda, dan hasil aksinya perlu raise domain event. Extends `Dicoding\Domain\Common\DomainService` (yang cuma `use EventRaisableObject`).
+- **Service biasa**: dipakai kalau butuh query hal yang sama dari banyak tempat, tanpa raise event. Plain class biasa.
 
+Contoh Domain Service, dari `Dicoding/DomainServices/ContributionPoint/UserContributionPointService.php`:
+```php
+class UserContributionPointService extends DomainService
+{
+    public function increase(ContributionPoint $contributionPoint): void
+    {
+        $newContributionPoint = $this->getCurrentContributionPoint($contributionPoint->getUserId())
+            + $contributionPoint->getValue();
+        $this->save($contributionPoint, $newContributionPoint);
 
-kalo misalkan butuh insert aja dan kalo misalkan bikin repo dan vo itu ribet bisa pake anonymous aggregate.
+        $this->raise(new ContributionPointWasIncreased($contributionPoint));
+    }
+    // ...
+}
+```
 
+Contoh Service biasa (query dipakai berulang di banyak tempat, tanpa raise event), dari `Dicoding/DomainServices/CourseManagerPermission/CourseManagerPermissionService.php`:
+```php
+class CourseManagerPermissionService
+{
+    public function canManageCourse(UserRoleHelper $userRoleHelper, int $courseId): bool
+    {
+        if (!$userRoleHelper->isAuthed()) {
+            return false;
+        }
+        if ($userRoleHelper->isInstructorForCourse($courseId)) {
+            return true;
+        }
+        // ...
+    }
+}
+```
 
-setiap perubahan data wajib bikin aggregate, tapi cek dulu apakah agregatenya butuh testable berati bikin agregate seperti biasa tapi kalo tidak perlu ditest bikin anon aggregate aja.
+## 11. Anonymous aggregate untuk perubahan data simpel yang gak perlu unit test tersendiri
+Tiap perubahan data tetap wajib lewat aggregate. Tapi kalau cuma butuh insert simpel dan bikin Repository+VO kerasa berlebihan, dan aggregate-nya gak butuh di-test sendiri, pakai anonymous class.
 
+Contoh nyata, dari `Dicoding/UseCases/ContactUs/SupportFormSpecification.php`:
+```php
+$aggregate = new class extends Aggregate {};
+$aggregate->raise(new MessageFromContactUsWasSent(
+    $actorId,
+    $email,
+    $subject,
+));
 
-factory itu sekarang sudah jarang digunakan. dan factory itu sama seperti repository.
+return $this->payloadFactory->withSuccessfulDomainPayload($aggregate, message: '...');
+```
+Kalau business rule-nya cukup kompleks sampai butuh unit test sendiri, tetap bikin class aggregate biasa (seperti `DailyAddOnTokenUpdate`), jangan anonymous.
 
-service itu digunakan kalo butuh query satu hal di banyak tempat bisa pake service atau domain service tergantung butuh raise event atau ngga.
+## 12. Factory sekarang jarang dipakai, perannya udah ke-cover Repository
+Factory dan Repository punya peran yang sama (assembly domain object dari data mentah). Precedent lama masih ada, misalnya `SubscriptionTokenFactory::createById()`:
+```php
+public function createById(int $tokenId): SubscriptionToken
+{
+    $subscriptionTokenData = $this->subscriptionTokenGateway->getById($tokenId);
+
+    if (empty($subscriptionTokenData)) {
+        throw ObjectNotFoundException::create('Subscription Token', $tokenId, __METHOD__);
+    }
+
+    return $this->createSubscriptionToken($subscriptionTokenData);
+}
+```
+Tapi untuk kode baru, logic assembly-nya cukup ditaruh langsung di Repository, contoh `DailyAddOnTokenUpdateRepository::createAggregate()` di poin 8 di atas. Gak perlu bikin class Factory terpisah kecuali sudah ada 2+ pemakai nyata yang butuh reuse.
