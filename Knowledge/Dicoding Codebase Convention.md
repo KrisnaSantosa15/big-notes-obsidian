@@ -78,3 +78,32 @@ $this->be(DicodingUser::find($admin->id));
 $this->be(DicodingUser::find(DicodingUser::ADMINID)); atau be(DicodingUser::find(2))
 
 ```
+
+## 6. Jangan cast/default ulang kalau tipe sudah pasti
+Kalau `$rules` (atau satu-satunya caller) sudah menjamin tipe/keberadaan sebuah field, getter/constructor tidak perlu cast atau `?? default` lagi — itu cuma bikin reviewer harus cek dua kali apakah cast-nya beneran ngapa-ngapain. Berlaku di layer manapun (VO getter, constructor, UseCase), bukan cuma Domain.
+
+```php
+// Salah
+// rule: 'discussion_id' => 'required|integer'
+public function getDiscussionId(): int {
+    return (int) $this->data['discussion_id'];
+}
+
+// Benar
+public function getDiscussionId(): int {
+    return $this->data['discussion_id'];
+}
+```
+Cek dulu: apakah rule validasi atau caller (grep `new <VOName>(`) sudah menjamin tipe/kehadirannya? Kalau ya, hapus cast/default-nya. Cast/default baru dipertahankan kalau jaminannya memang belum ada (field `sometimes`, banyak caller dengan jaminan beda-beda, atau tipe yang legitimately berubah setelah validasi).
+
+## 7. Gunakan `Carbon`, bukan string mentah/`DateTime`, untuk tanggal
+Domain/UseCase yang melakukan date math (expiry, issuance, redemption window, dll) pakai `Carbon` supaya gampang di-test (freeze/travel time, fluent comparison) — bukan string atau `DateTime` biasa.
+
+```php
+// Salah
+public function updateToken(string $newExpiredDate, string $newDescription): void
+
+// Benar
+public function updateToken(Carbon $newExpiredDate, string $newDescription): void
+```
+`Asr::getNowDateTimeStringInDefaultTimeZone()` tetap dipakai untuk "now" dalam bentuk string di titik persistensi/logging (lihat CLAUDE.md) — bungkus jadi `Carbon`/`Carbon::parse(...)` kalau nilainya perlu dipakai sebagai domain concept. Di test, pakai `Carbon` instance tetap (atau `Carbon::setTestNow()`) daripada string timestamp.
