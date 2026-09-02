@@ -14,7 +14,8 @@ Yang pertama datang dari Classroom. Disini, classroom student telah melalui bebe
 3. Ketiga ada Add Ons. Nah kedua fitur yang disebutkan tadi adalah fitur berbayar yang student bisa beli dengan mekanisme Add On melalui uang atau dicoding points. Thanks ke para reviewer: mas Alex, Agis, Dimas.
 
 Masih tetap di classroom, Ada 2 fitur lainnya yaitu:
-1. Text to Speech. kini user dapat belajar tidak hanya melalui teks, tapi juga bisa mendengarkan penjelasan dari modul tersebut. Saat ini baru dirilis di kelas Belajar Dasar AI dan kedepannya akan diperluas ke kelas lainnya. Thanks to: mba Farida, mas Alfian, Rafy dan tim terkait.
+1. Text to Speech. kini user dapat belajar tidak hanya melalui teks, tapi juga bisa mendengarkan penjelasan dari modul tersebut. Saat ini baru dirilis di kelas Belajar Dasar AI dan kedepannya akan diperluas ke kelas lainnya. Selain itu helpful rate dari pengguna tts adalah 98.6% (**758 helpful vs 11 not helpful**). 3.914 non unique plays across 24 modules
+	Thanks to: mba Farida, mas Alfian, Rafy dan tim terkait.
 2. Learning Time Tracker. Selain itu, kini user juga bisa melakukan tracking waktu berapa lama modul itu dikerjakan. Ini akan membantu siswa ataupun evaluasi bagi tim academy dalam memprediksikan berapa lama seharusnya suatu modul/kelas itu dapat diselesaikan. Thanks to: mas Ikhlas
 
 ## Bitt:
@@ -37,36 +38,60 @@ Announcement dan briefing lebih khusus ada di hari Jum’at. Terkait development
 Thanks to: mas Alex dan tim ops.
 
 ## Certificate Generator:
-Untuk memudahkan dalam proses pembuatan sertifikat.
+
+Background
+
+Saat ini jika ada kebutuhan certificate, tim terkait akan melakukan generate dan menyimpan hasilnya di google drive. Dengan disimpannya di google drive, jika ada user yang lupa link dan bertanya perihal link certificate, internal tim harus mencarinya di drive secara manual. Selain itu, menyimpan certificate di google drive ini akan memakan penggunaan storage di mana untuk campaign dengan jumlah siswa yang banyak, jumlah certificate yang akan digenerate pun akan banyak dan akan memakan banyak storage di google drive. Dengan integrasi ini diharapkan bisa mengurangi penggunaan google drive untuk menyimpan certificate dengan segala kekurangannya.
+
+  
+
+Updates
+
+  
+
+1. Setelah sebelumnya aplikasi generate certificate sudah digunakan oleh beberapa orang, proses integrasi dengan Dicoding dimulai dan saat ini sudah dalam tahap pengujian mulai dari alur pembuatan template dan import penerima sertifikat yang terhubung langsung dengan user Dicoding.
+    
+2. Kita akan menutup akses certificate gen app sebelumnya dan akan dipindahkan ke [https://certificate.dicoding-ai.dev/](https://certificate.dicoding-ai.dev/). Penutupan akses akan dilakukan di akhir September. Jika membutuhkan bantuan untuk migrasi, silakan hubungi engineer terkait.
+    
+3. tim engineer menargetkan bisa melakukan migrasi sertifikat METC dan Coding Camp saat sudah ready on production. Stay tune untuk pic program karena akan di kontak tim engineer untuk persiapan migrasi ini.
+    
+
 Thanks to: Mas Alfian.
 
 ## GSA Automation V2:
-Ada beberapa automation yang dibuat untuk mempermudah dalam proses penilaian GSA. Ada Social media profile sampai ke Self Aspiration dengan berbagai speed dari masing-masing automation. Hadirnya tool ini memangkas waktu yang sangat lama yaitu sekitar 600 jam.
+
+Berangkat dari permasalahan di mana penilaian untuk GSA ini sangat lama karena datanya banyak, 1 review video bisa memakan waktu 4 menit, jika data yang direview sekitar 4800 itu bisa memakan waktu 600 jam. Ini kurang efektif dan efisien.
+
+Akhirnya dibuat beberapa automation untuk mempermudah dalam proses penilaian GSA. Ada Social media profile sampai ke Self Aspiration dengan berbagai speed dari masing-masing automation. Hadirnya tool ini memangkas waktu penilaian tadi, misalkan video interview dalam 15 menit bisa menilai sekitar 100 data.
+
 Thanks to: mas Fikri, Rafy dan Alfian.
 
 ## Weekly Recap ILT feedback:
 
+<<<<<<< HEAD
 Instructors no longer need to wait for the weekly recap email, as weekly feedback has been fully integrated into the APD Dashboard and now syncs automatically with Student and Facilitator feedback in real time
+=======
+Para instruktur tidak perlu lagi menunggu email rangkuman mingguan, karenaweekly feedback telah sepenuhnya terintegrasi ke dalam APD (Academic Program Dashboard) dan sekarang secara otomatis sync dengan feedback dari student dan fasil.
+
+Thanks to: mas Ikhlas.
+>>>>>>> origin/main
 
 ## Infrastructure:
 
 ### (1):
 
-#### Self-Hosting Chatwoot
-- Permintaan dari pak HR karena chatwoot cloud kemahalan untuk 2 agen saja.
-- Sudah dideploy ke nomad, ke chatwoot.dicoding.net
-- Stack postgres, redis, s3, rails, sidekiq (queue manager / mirip laravel horizon)
-- Sayangnya beberapa fitur masih dikunci, butuh berbayar dan harganya dihitung per agen juga
-
-#### Snapshotting Dynomite/Redis
-- Baru saja selesai! Mengimplementasikan baked snapshot sehingga lebih cepat saat butuh node tambahan (scale up)
-- Integrasi dengan consul untuk update peers node. Begitu ada node dynomite baru, dynomite lain akan dikabari dan masuk ke cluster
-
-#### Dicoding DB SQL Chat
 - Development menggunakan VannaAI + RAG diubah menjadi Hono + AI SDK + JSONLD via Tool Calling dengan pendekatan Backend Service.
-- Untuk UI pengguna kita akan
+- Untuk UI pengguna kita akan menggunakan browser extension sehingga bisa dengan mudah digunakan bersamaan dengan metabase
+
+Saat ini ketika menggunakan metabase kita harus tau SQL/query untuk mendapatkan data tapi tidak semua orang bisa untuk menuliskan query. alhasil dibuat extension untuk memudahkan kita dalam proses mencari data yang relevan hanya dengan prompt, misalkan cari nama user krisna, maka dia akan translate prompt tersebut menjadi SQL misalkan `select * from users where username=krisna`
+
+Thanks to: mas Abdul.
 
 ### (2):
+
+Ini sangat menarik, jika teman-teman ngeuh, kemarin tanggal 1 september jam **06.14 - 08.07** dicoding itu down.  Ternyata setelah diinvestigasi, ubuntu melakukan auto update terhadap library/package yang digunakan oleh mariadb/database. semua database di dicoding itu direstart dan alhasil dicoding down, padahal restart database itu tidak boleh direstart semua sekaligus, harus satu satu dan harus hati-hati apalagi jika ada lonjakan request. 
+
+Selain itu ketika proses update database juga gagal karena timout, lama melakukan restartnya. Solusi yang sudah dilakukan tim infra adalah dengan menerapkan proteksi auto update & restart pada komponen mariadb, security update tetap berjalan. selain itu tim infra sedang evaluasi alternatif untuk manajemen incident supaya lebih baik lagi.
 
 #### Root Cause
 - Server database mati secara bersamaan akibat update sistem otomatis ubuntu yang berjalan di pagi hari. Kemudian, database di-restart secara bersamaan oleh sistem. Sementara, database kita itu harus di-restart satu-satu dengan hati-hati.
@@ -82,3 +107,5 @@ Instructors no longer need to wait for the weekly recap email, as weekly feedbac
 2. Data yang tersimpan pada buffer, cukup untuk menangani toleransi kegagalan sistem dengan durasi yang lebih lama.
 3. Apabila kita menurunkan buffer ini, artinya waktu toleransi kegagalan semakin sempit dan dapat berakibat full copy(>5 menit).
 - Response sangat-sangat telat karena terdistraksi dengan notif lainnya yang ada di google chat. Saat ini, tim Infra sedang mengevaluasi beberapa alternatif incident on call platform, seperti grafana oncall, [incident.io](http://incident.io), [incidentrelay.io](http://incidentrelay.io), [xurrent.com](http://xurrent.com), dan spike.sh
+
+Thanks to: mas Habibi, Abdul, mba Farida.
