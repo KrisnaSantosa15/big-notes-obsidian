@@ -130,7 +130,7 @@ public function __construct(?SubscriptionToken $existingToken = null)
 
 Cara 2 (return 404-style), throw di repository sebelum aggregate dibentuk, dari `Dicoding/Domain/DailyAddOns/Repositories/DailyAddOnTokenUpdateRepository.php`:
 ```php
-public function createAggregate(int $tokenId): DailyAddOnTokenUpdate
+public function createAggregate(int $actorId, int $tokenId): DailyAddOnTokenUpdate
 {
     $row = $this->gateway->getById($tokenId);
 
@@ -138,9 +138,12 @@ public function createAggregate(int $tokenId): DailyAddOnTokenUpdate
         throw ObjectNotFoundException::create('Daily Add-On Token', $tokenId, __METHOD__);
     }
 
-    return new DailyAddOnTokenUpdate(new ExistingDailyAddOnToken(array_merge((array) $row, [
-        'add_on_type' => DailyAddOnType::from($row->add_on_type),
-    ])));
+    return new DailyAddOnTokenUpdate(
+        $this->actorFactory->getById($actorId),
+        new ExistingDailyAddOnToken(array_merge((array) $row, [
+            'add_on_type' => DailyAddOnType::from($row->add_on_type),
+        ])),
+    );
 }
 ```
 
@@ -223,3 +226,19 @@ public function createById(int $tokenId): SubscriptionToken
 }
 ```
 Tapi untuk kode baru, logic assembly-nya cukup ditaruh langsung di Repository, contoh `DailyAddOnTokenUpdateRepository::createAggregate()` di poin 8 di atas. Gak perlu bikin class Factory terpisah kecuali sudah ada 2+ pemakai nyata yang butuh reuse.
+
+## 13. Ada rule `integer`? Selalu tambahkan `min:`
+`integer` doang gak nolak angka negatif atau nol. Untuk ID/quantity/kuantitas yang harus positif, selalu pasangkan dengan `min:` (biasanya `min:1`).
+
+```php
+// Salah, dari CreateDailyAddOnTokensSpecification (belum diperbaiki)
+'actor_id' => 'required|integer',
+'owner_id' => 'required|integer',
+'days' => 'required|integer',
+'quantity' => 'required|integer',
+
+// Benar, dari MultiCourseTokensStoreSpecification
+'actor_id' => 'required|integer|min:1',
+'owner_id' => 'required|integer|min:1',
+```
+Precedent yang sudah konsisten: `MultiCourseTokensStoreSpecification`, `MultiCourseTokenDropoutSpecification`, `MultiCourseTokensRedemptionDateUpdateSpecification`, dan `EditDailyAddOnTokensSpecification` (`token_id`, `actor_id`) semuanya pakai `min:1`.
