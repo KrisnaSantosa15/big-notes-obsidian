@@ -422,3 +422,17 @@ public function markAsUsed(int $userId, int $tokenId): void
     // TODO: mark the token row as used by this redeemer
 }
 ```
+
+## 22. Di Blade, jangan panggil `purify()` langsung, pakai `HtmlDecode`
+
+`purify()` (helper global, `Dicoding/Web/DicodingHtml.php`) cuma langsung strip HTML berbahaya dari string mentah. `DicodingUtils\ViewHelpers\HtmlDecode` (`DicodingUtils/ViewHelpers/HtmlDecode.php`) tetap purify di baliknya, tapi nge-decode HTML entity dulu (`html_entity_decode`) sebelum purify, jadi konten yang sudah ke-encode (misal dari rich-text editor) gak keluar sebagai entity mentah (`&amp;`, `&quot;`, dst) di halaman.
+
+```php
+// Salah, dari app/views/ui/v3/dashboards/widgets/campaign-promotion-banner.blade.php (sebelum diperbaiki)
+{{ purify($promotion['description']) }}
+
+// Benar
+{{ \DicodingUtils\ViewHelpers\HtmlDecode::renderSafely($promotion['description']) }}
+```
+
+Pakai varian lain di class yang sama sesuai kebutuhan: `renderCodeSafelyForEditing()` khusus buat isi widget rich-editor (Froala), `renderCodeSafelyForViewing()` kalau butuh allowed data attribute tertentu.
