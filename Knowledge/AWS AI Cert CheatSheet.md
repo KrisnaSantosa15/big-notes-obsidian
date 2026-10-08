@@ -69,7 +69,7 @@ AWS Services:
 - AWS Trusted Advisor: provides best practice recommendations for cost, performance, and security
 - AWS Secrets Manager: service for securely storing and managing credentials and other secrets
 - Amazon Inspector: vulnerability management service that scans for software vulnerabilities and network exposures
-- AWS Config: continuous resource compliance checks
+- AWS Config: continuous resource compliance checks. continuously monitoring and recording AWS resource configurations
 - AWS Artifact: on-demand access to AWS compliance reports
 - AWS CloudTrail: logs every API call for auditing.  not for capturing the detailed content (input/output data) of the invocation payload
 - Trusted Advisor: best-practice recommendations. service for logging and monitoring API calls across AWS services, including Amazon Bedrock

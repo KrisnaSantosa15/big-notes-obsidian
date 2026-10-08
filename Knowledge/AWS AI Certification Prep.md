@@ -1958,3 +1958,656 @@ Contextual grounding is a primary strategy to prevent model hallucinations. This
 **Correct answer:** B. Conduct stakeholder interviews to refine use cases and set measurable goals.
 
 The most effective approach for any AI implementation, including generative AI, is to begin by clearly defining the business problem and objectives. Conducting stakeholder interviews is a critical first step to refine abstract goals like "improve marketing" into specific, actionable use cases (e.g., generating personalized email copy, creating ad variants). This process ensures the project is aligned with business needs and establishes key performance indicators (KPIs) and measurable goals (e.g., increase conversion rates by 15%) that directly tie back to the primary objective of increasing revenue. This foundational work prevents wasted resources on solutions that do not address the core business challenge. Why Incorrect Options are Wrong: A. Immediately starting to train a custom model is a technology-first approach that skips the crucial problem-framing phase, leading to high costs and potential project failure. C. Implementing a prebuilt solution without prior analysis is premature. Furthermore, it focuses on customer satisfaction, which is a secondary metric, not the primary goal of increasing revenue. D. Replicating competitor features ignores the company's unique context, data, and customer base, which may lead to an ineffective or irrelevant solution.
+
+### TAKE 4
+### Question review
+
+✔ CorrectDomain 5
+
+1. A company stores its AI datasets in Amazon S3 buckets. The company wants to share the S3 buckets with its business partners. The company needs to avoid accidentally sharing sensitive data. Which AWS service should the company use to discover sensitive data in the dataset?
+
+**Your answer:** B. Amazon Macie
+
+**Correct answer:** B. Amazon Macie
+
+Amazon Macie is a fully managed data security and data privacy service that uses machine learning (ML) and pattern matching to discover and protect sensitive data in Amazon S3. It is specifically designed to help customers identify and classify sensitive data, such as personally identifiable information (PII), financial information, and credentials. By running Macie discovery jobs on their S3 buckets, the company can identify which objects contain sensitive data before sharing them with partners, directly addressing the need to prevent accidental data exposure. Why Incorrect Options are Wrong: A. Amazon Kendra is an intelligent enterprise search service. Its purpose is to index and search content, not to discover and classify sensitive data for security purposes. C. Amazon Textract is a service that automatically extracts text, handwriting, and data from scanned documents. It does not classify the sensitivity of the data it extracts. D. AWS Data Exchange is a service that makes it easy to find, subscribe to, and use third-party data. It is a data marketplace, not a data discovery tool for internal assets.
+
+✔ CorrectDomain 5
+
+2. A financial institution is using Amazon Bedrock to develop an AI application. The application is hosted in a VPC. To meet regulatory compliance standards, the VPC is not allowed access to any internet traffic. Which AWS service or feature will meet these requirements?
+
+**Your answer:** A. AWS PrivateLink
+
+**Correct answer:** A. AWS PrivateLink
+
+The core requirement is to allow an application within a VPC to communicate with Amazon Bedrock without any traffic traversing the public internet. AWS PrivateLink is designed for this exact purpose. It enables private connectivity to AWS services by creating an interface VPC endpoint within your VPC. This endpoint serves as a private entry point to Amazon Bedrock, ensuring that all network traffic between your VPC and the service remains on the secure, private Amazon global network. This architecture is essential for meeting strict regulatory and compliance standards that prohibit internet exposure for sensitive applications. Why Incorrect Options are Wrong: B. Amazon Macie: This is a data security service for discovering and protecting sensitive data; it does not provide network connectivity between a VPC and other AWS services. C. Amazon CloudFront: This is a content delivery network (CDN) used to distribute content publicly over the internet, which is the opposite of the required private connection. D. Internet gateway: This component enables internet access for a VPC. Using it would directly violate the requirement that the VPC is not allowed any internet traffic.
+
+✔ CorrectDomain 2
+
+3. A company wants to use foundation models (FMs) to develop and deploy an AI model. Which AWS service or resource will meet these requirements with the LEAST development effort?
+
+**Your answer:** A. Amazon Bedrock
+
+**Correct answer:** A. Amazon Bedrock
+
+Amazon Bedrock is a fully managed AWS service designed to provide the easiest way to build and scale generative AI applications using foundation models (FMs). It offers a single API to access a wide choice of high-performing FMs from leading AI companies like Amazon, Anthropic, and Meta. This API-driven approach abstracts away the underlying infrastructure management, allowing companies to develop and deploy AI models with minimal development effort compared to setting up and managing models on a more comprehensive platform like Amazon SageMaker. Why Incorrect Options are Wrong: B. Amazon SageMaker AI: Amazon SageMaker is a broad platform for the entire machine learning lifecycle. While it can be used to deploy FMs, it typically involves more development and operational effort than the simplified, managed API access provided by Amazon Bedrock. C. Amazon Bedrock PartyRock: PartyRock is an educational, hands-on generative AI app-building playground powered by Amazon Bedrock. It is intended for experimentation and learning, not for the development and deployment of production-grade enterprise applications. D. Amazon Q Developer: Amazon Q Developer is an AI-powered assistant that helps developers write, debug, and test code. It is a tool for developers, not a service for a company to build and deploy its own applications using FMs.
+
+✔ CorrectDomain 2🚩 flagged
+
+4. A financial company has offices in different countries worldwide. The company requires that all API calls between generative AI applications and foundation models (FM) must not travel across the public internet. Which AWS service should the company use?
+
+**Your answer:** A. AWS PrivateLink
+
+**Correct answer:** A. AWS PrivateLink
+
+AWS PrivateLink is designed to provide secure, private connectivity between Virtual Private Clouds (VPCs), AWS services, and on-premises networks without exposing traffic to the public internet. By creating an interface VPC endpoint for an AWS service (such as Amazon Bedrock, which hosts foundation models), the financial company can ensure that all API calls from its applications to the FMs are routed through the AWS private network. This directly fulfills the requirement that traffic must not travel across the public internet, which is a critical security and compliance measure for a financial institution. Why Incorrect Options are Wrong: B. Amazon Q: This is a generative AI-powered assistant for business use, not a networking service that provides private connectivity. C. Amazon CloudFront: This is a Content Delivery Network (CDN) that accelerates the delivery of content over the public internet, which is the opposite of the stated requirement. D. AWS CloudTrail: This service records API calls for auditing and governance purposes; it does not provide the private network path for those calls to travel on.
+
+✔ CorrectDomain 3
+
+5. A company needs a generative AI (GenAI) application to explain its reasoning steps before giving final answers. Which prompt engineering technique will meet this requirement?
+
+**Your answer:** B. Chain-of-thought prompting
+
+**Correct answer:** B. Chain-of-thought prompting
+
+Chain-of-thought (CoT) prompting is a technique specifically developed to encourage large language models (LLMs) to break down a multi-step problem into intermediate reasoning steps. By including phrases like "Let's think step by step" in the prompt, the model is guided to output its reasoning process before concluding with a final answer. This directly fulfills the requirement for the application to explain its reasoning. Why Incorrect Options are Wrong: A. Few-shot prompting provides a few examples of inputs and desired outputs to guide the model, but it does not inherently force it to explain its reasoning process. C. Prompt templating is the practice of creating a standardized structure for prompts, often with placeholders. It is a general method, not a specific technique for eliciting reasoning. D. Zero-shot prompting asks the model to respond to a task without any prior examples, relying solely on its pre-trained knowledge. It does not guide the model to show its work.
+
+✔ CorrectDomain 3
+
+6. A bank has fine-tuned a large language model (LLM) to expedite the loan approval process. During an external audit of the model, the company discovered that the model was approving loans at a faster pace for a specific demographic than for other demographics. How should the bank fix this issue MOST cost-effectively?
+
+**Your answer:** A. Include more diverse training data. Fine-tune the model again by using the new data.
+
+**Correct answer:** A. Include more diverse training data. Fine-tune the model again by using the new data.
+
+The most cost-effective and direct method to address bias in a fine-tuned model is to improve the dataset used for that fine-tuning. The bias described likely originates from an unrepresentative or skewed dataset used during the fine-tuning stage. By augmenting the dataset with more diverse and balanced examples covering all demographics and then re-running the fine-tuning process, the bank can directly teach the model to make fairer decisions. This approach is significantly less expensive than pre-training a new model from scratch and is more targeted at fixing decision-making bias than using Retrieval Augmented Generation (RAG). Why Incorrect Options are Wrong: B. Use Retrieval Augmented Generation (RAG) with the fine-tuned model. RAG is designed to augment a model's knowledge with external data, reducing hallucinations and providing up-to-date information. It does not fundamentally alter the model's biased decision-making logic. C. Use AWS Trusted Advisor checks to eliminate bias. AWS Trusted Advisor is a service for optimizing AWS infrastructure regarding cost, performance, and security. It has no capability to analyze or mitigate bias in machine learning models. D. Pre-train a new LLM with more diverse training data. Pre-training a large language model from scratch is an extremely resource-intensive and expensive process, requiring massive datasets and computational power. It is not a cost-effective solution for this scenario.
+
+✔ CorrectDomain 1
+
+7. A company wants to extract key insights from large policy documents to increase employee efficiency.
+
+**Your answer:** C. Summarization
+
+**Correct answer:** C. Summarization
+
+The company's goal is to extract key insights from large text documents to improve efficiency. This task is best addressed by Summarization, a Natural Language Processing (NLP) technique. Summarization models are designed to create a concise and coherent summary of a longer text, capturing the most important information. By providing employees with a condensed version of policy documents, the company enables them to grasp the essential points quickly without reading the entire text, directly leading to increased efficiency. Why Incorrect Options are Wrong: A. Regression: This technique is used to predict a continuous numerical value (e.g., price, temperature) and is not suitable for processing or condensing text. B. Clustering: This is an unsupervised learning method used to group similar data points together. It could group similar documents but would not create a summary of their content. D. Classification: This technique assigns a predefined label or category to an input (e.g., categorizing an email as spam). It organizes documents but does not extract key insights by summarizing them.
+
+✔ CorrectDomain 2
+
+8. A company wants to use language models to create an application for inference on edge devices. The inference must have the lowest latency possible. Which solution will meet these requirements?
+
+**Your answer:** A. Deploy optimized small language models (SLMs) on edge devices.
+
+**Correct answer:** A. Deploy optimized small language models (SLMs) on edge devices.
+
+To achieve the lowest possible latency for inference, the processing must occur locally on the edge device itself. This eliminates the network round-trip time required to communicate with a centralized cloud-based API. Small language models (SLMs) are specifically designed to be computationally efficient and have a smaller memory footprint compared to large language models (LLMs). Deploying an optimized SLM directly on the edge device is the most effective strategy to meet the strict low-latency requirement within the typical resource constraints of such hardware. Why Incorrect Options are Wrong: B. Deploy optimized large language models (LLMs) on edge devices. Large language models are generally too large and computationally demanding for low-latency performance on resource-constrained edge devices, even when optimized. C. Incorporate a centralized small language model (SLM) API for asynchronous communication with edge devices. Using a centralized API introduces network latency for every inference request, which is fundamentally slower than on-device processing and fails the "lowest latency" requirement. D. Incorporate a centralized large language model (LLM) API for asynchronous communication with edge devices. This option has the highest potential latency, as it combines the network delay of a centralized API with the typically longer processing time of an LLM.
+
+✔ CorrectDomain 1
+
+9. A company is building an application that needs to generate synthetic data that is based on existing data. Which type of model can the company use to meet this requirement?
+
+**Your answer:** A. Generative adversarial network (GAN)
+
+**Correct answer:** A. Generative adversarial network (GAN)
+
+A Generative Adversarial Network (GAN) is a class of machine learning frameworks designed specifically for generative modeling. It consists of two neural networks, a Generator and a Discriminator, that compete with each other. The Generator's role is to create new, synthetic data instances that mimic the training data. The Discriminator's role is to evaluate these instances for authenticity. Through this adversarial process, the Generator becomes progressively better at producing realistic, synthetic data that captures the patterns and variations of the original dataset, directly fulfilling the company's requirement. Why Incorrect Options are Wrong: B. XGBoost: This is a supervised learning algorithm used for classification and regression tasks. It predicts an outcome based on input features, but it does not generate new data samples. C. Residual neural network: This (ResNet) is a specific deep neural network architecture, primarily used for discriminative tasks like image classification. It is not a model type for generating synthetic data. D. WaveNet: This is a deep generative model, but it is highly specialized for generating raw audio waveforms. A GAN is a more general and widely applicable framework for various types of synthetic data.
+
+✔ CorrectDomain 3
+
+10. What is continued pre-training?
+
+**Your answer:** B. The process of providing unlabeled data to a pre-trained language model to improve the model's domain knowledge
+
+**Correct answer:** B. The process of providing unlabeled data to a pre-trained language model to improve the model's domain knowledge
+
+Continued pre-training is the process of taking a general-purpose, pre-trained foundation model and further training it on a large corpus of unlabeled, domain-specific data. The goal is not to teach the model a new task, but to adapt its existing knowledge to the specific vocabulary, nuances, and context of a particular domain, such as finance, law, or medicine. This domain adaptation improves the model's performance on subsequent fine-tuning for tasks within that specific domain. It uses the same self-supervised learning objectives as the initial pre-training phase. Why Incorrect Options are Wrong: A: This describes supervised fine-tuning, which uses labeled data to adapt a model for a specific downstream task, not to improve general domain knowledge. C: This describes training a model from scratch, which is the opposite of leveraging a pre-trained model as a starting point. D: This describes the model evaluation or inference phase, which measures performance but does not involve any training or adaptation of the model.
+
+✔ CorrectDomain 2
+
+11. A hospital wants to use a generative AI solution with speech-to-text functionality to help improve employee skills in dictating clinical notes.
+
+**Your answer:** D. AWS HealthScribe
+
+**Correct answer:** D. AWS HealthScribe
+
+AWS HealthScribe is a HIPAA-eligible service specifically designed for the healthcare industry. It uses speech recognition and generative AI to automatically create preliminary clinical documentation from conversations between clinicians and patients. The service transcribes the dialogue, extracts medical terms, and generates summarized notes, directly addressing the hospital's requirement for a generative AI solution with speech-to-text functionality to improve the dictation of clinical notes. Why Incorrect Options are Wrong: A. Amazon Q Developer is a generative AI-powered assistant for software developers to help with coding and application development, not for clinical documentation. B. Amazon Polly is a text-to-speech (TTS) service that converts written text into lifelike speech, which is the opposite of the required speech-to-text functionality. C. Amazon Rekognition is a computer vision service for analyzing images and videos; it does not process audio or generate text-based clinical notes.
+
+✔ CorrectDomain 3
+
+12. A company is building an AI application to summarize books of varying lengths. During testing, the application fails to summarize some books. Why does the application fail to summarize some books?
+
+**Your answer:** D. The input tokens exceed the model's context size.
+
+**Correct answer:** D. The input tokens exceed the model's context size.
+
+Large Language Models (LLMs) have a finite "context window" or "context size," which is the maximum number of tokens (input plus output) they can process in a single request. Books can vary significantly in length, and a long book can easily be converted into a number of tokens that exceeds this limit. When the input text is too large for the model's context window, the model cannot process the request and will typically return an error, causing the application to fail. This explains why the application succeeds with shorter books but fails with some longer ones. Why Incorrect Options are Wrong: A. The temperature is set too high. Temperature is a parameter that controls the randomness of the output. A high value would produce a creative or nonsensical summary, not cause the application to fail to process the input. B. The selected model does not support fine-tuning. Fine-tuning is a process for adapting a model to a specific task. Whether a model supports it is irrelevant to its ability to perform inference on an input during testing. C. The Top P value is too high. Similar to temperature, Top P (nucleus sampling) controls output randomness. It affects the quality and diversity of the summary but does not cause a processing failure based on input length.
+
+✔ CorrectDomain 5
+
+13. A company needs to automate recurring compliance assessments for its AI workloads. The assessments must include documented evidence mapped to regulatory frameworks. Which AWS service meets these requirements?
+
+**Your answer:** A. AWS Audit Manager
+
+**Correct answer:** A. AWS Audit Manager
+
+AWS Audit Manager is designed to simplify how users assess risk and compliance with regulations and industry standards. It automates the collection of evidence from AWS services to help prepare for audits. The service provides prebuilt frameworks for common regulations (like GDPR, PCI DSS) and allows for custom frameworks. It continuously collects and organizes evidence, mapping it to the controls within a chosen framework, which directly meets the requirement for automated, recurring assessments with documented evidence. Why Incorrect Options are Wrong: B. AWS Trusted Advisor provides best practice recommendations for cost, performance, and security, but it does not perform compliance assessments against regulatory frameworks. C. AWS Secrets Manager is a service for securely storing and managing credentials and other secrets. It is not related to compliance auditing. D. Amazon Inspector is a vulnerability management service that scans for software vulnerabilities and network exposures, not for broad compliance assessments.
+
+✔ CorrectDomain 1
+
+14. A company is working on a large language model (LLM) and noticed that the LLM's outputs are not as diverse as expected. Which parameter should the company adjust?
+
+**Your answer:** A. Temperature
+
+**Correct answer:** A. Temperature
+
+Temperature is an inference hyperparameter that controls the randomness of a large language model's (LLM) output. It adjusts the probability distribution of the potential next words (tokens) the model can choose. A higher temperature value (e.g., 0.7) makes the distribution flatter, increasing the chance of selecting less likely words and thus producing more diverse, creative, and novel text. A lower temperature (e.g., 0.3) makes the model more confident and deterministic, favoring the most probable words. To increase output diversity, the company should increase the temperature. Why Incorrect Options are Wrong: B. Batch size: This is a training hyperparameter defining the number of samples used in one iteration to update the model's weights; it does not control output diversity during inference. C. Learning rate: This is a training hyperparameter that controls the step size of weight updates during the optimization process; it has no role in generating output post-training. D. Optimizer type: This refers to the algorithm (e.g., Adam, SGD) used to minimize the loss function during model training, not a parameter for controlling text generation at inference time.
+
+✔ CorrectDomain 1
+
+15. A company wants to use AI to protect its application from threats. The AI solution needs to check if an IP address is from a suspicious source.
+
+**Your answer:** C. Develop an anomaly detection system
+
+**Correct answer:** C. Develop an anomaly detection system
+
+The core task is to identify an IP address from a "suspicious source." This requires establishing a baseline of normal, expected network traffic and then flagging any IP address that deviates from this baseline. This process is the definition of anomaly detection. An anomaly detection system can analyze patterns in IP requests (e.g., request frequency, geolocation, time of day) and identify outliers that represent potential threats, such as botnet activity or denial-of-service attacks. Why Incorrect Options are Wrong: A. Speech recognition systems are designed to convert spoken language into text and are not applicable to analyzing network IP addresses. B. Natural language processing (NLP) is used for understanding and processing human language; it is irrelevant for analyzing numerical IP address data. D. A fraud forecasting system predicts future trends or volumes of fraud, rather than identifying a specific, currently active suspicious IP address in real-time.
+
+✔ CorrectDomain 1
+
+16. AWS AI/ML Services and Tools A company wants to create an application to summarize meetings by using meeting audio recordings. Select and order the correct steps from the following list to create the application. Each step should be selected one time or not at all. (Select and order THREE.)
+
+**Your answer:** Step 1 → Store meeting audio recordings in an Amazon S3 bucket. | Step 2 → Convert meeting audio recordings to meeting text files by using Amazon Transcribe. | Step 3 → Summarize meeting text files by using Amazon Bedrock.
+
+**Correct answer:** Step 1 → Store meeting audio recordings in an Amazon S3 bucket. | Step 2 → Convert meeting audio recordings to meeting text files by using Amazon Transcribe. | Step 3 → Summarize meeting text files by using Amazon Bedrock.
+
+To build an application that summarizes audio recordings using AWS services, the architectural flow must move from storage to transcription, and finally to summarization.First, the audio files must be uploaded to object storage. Amazon Transcribe processes batch transcription jobs by reading audio data directly from an Amazon S3 bucket, making S3 the required storage solution rather than Amazon EBS, which is block storage for EC2 instances. Second, Amazon Transcribe is an automatic speech recognition (ASR) service specifically designed to convert audio and video into text. Amazon Polly is incorrect here as it performs the reverse operation (Text-to-Speech). Finally, Amazon Bedrock provides access to generative AI foundation models (FMs) that are perfectly suited for natural language processing tasks like text summarization. Amazon Lex is incorrect because it is designed for building conversational interfaces (chatbots), not for batch text summarization.
+
+✔ CorrectDomain 3
+
+17. An AI practitioner needs to improve the accuracy of a natural language generation model. The model uses rapidly changing inventory data. Which technique will improve the model's accuracy?
+
+**Your answer:** C. Retrieval Augmented Generation (RAG)
+
+**Correct answer:** C. Retrieval Augmented Generation (RAG)
+
+Retrieval Augmented Generation (RAG) is a technique designed to improve the accuracy of large language models (LLMs) by grounding them in external, up-to-date sources of information. For a model that relies on rapidly changing inventory data, RAG is the ideal solution. At inference time, the system first retrieves the most current inventory information relevant to the user's query from a knowledge base. This retrieved data is then passed to the LLM as context along with the original prompt, enabling the model to generate a response that is accurate and reflects the latest data without requiring constant retraining. Why Incorrect Options are Wrong: A. Transfer learning is a training-time technique for adapting a pre-trained model to a new task; it is not designed for incorporating real-time data at inference. B. Federated learning is a decentralized training approach that preserves data privacy; it is not relevant to augmenting a model with a dynamic external knowledge source. D. One-shot prompting is a technique that provides a single example within the prompt to guide the model's output, but it does not solve the core problem of accessing external, changing data.
+
+✔ CorrectDomain 4
+
+18. A company is deploying AI/ML models by using AWS services. The company wants to offer transparency into the models' decision-making processes and provide explanations for the model outputs.
+
+**Your answer:** A. Amazon SageMaker Model Cards
+
+**Correct answer:** A. Amazon SageMaker Model Cards
+
+Amazon SageMaker Model Cards are specifically designed to provide a centralized and standardized way to document the critical details of a machine learning model. They serve as a single source of truth for model information, capturing details about a model's intended uses, performance metrics, training data, and fairness or bias assessments. This directly addresses the company's requirement to offer transparency into the model's decision-making processes and provide explanations for its outputs, which is a core principle of responsible AI and model governance. Why Incorrect Options are Wrong: B. Amazon Rekognition: This is a managed service for image and video analysis. It does not provide tools for explaining the decision-making processes of custom ML models. C. Amazon Comprehend: This is a managed Natural Language Processing (NLP) service. It is used for text analysis, not for providing transparency into model governance. D. Amazon Lex: This is a service for building conversational interfaces (chatbots). It is an application-level service, not a tool for model explainability or transparency.
+
+✔ CorrectDomain 2
+
+19. A company has created a custom model by fine-tuning an existing large language model (LLM) from Amazon Bedrock. The company wants to deploy the model to production and use the model to handle a steady rate of requests each minute. Which solution meets these requirements MOST cost-effectively?
+
+**Your answer:** D. Purchase Provisioned Throughput for the model on Amazon Bedrock.
+
+**Correct answer:** D. Purchase Provisioned Throughput for the model on Amazon Bedrock.
+
+The question requires the most cost-effective solution for a custom Amazon Bedrock model with a steady, predictable request rate. Amazon Bedrock's Provisioned Throughput is specifically designed for this scenario. It allows customers to purchase a dedicated amount of processing capacity for a specific model for a set term (e.g., one or six months). For consistent workloads, this model provides a significant discount compared to the on-demand, pay-per-use pricing, ensuring both guaranteed performance and the lowest cost for a steady traffic pattern. Why Incorrect Options are Wrong: A. Deploying on EC2 removes the model from the fully managed Bedrock environment, increasing operational overhead and complexity, which is unlikely to be more cost-effective. B. The on-demand throughput model is priced per token and is best suited for intermittent or unpredictable workloads. For a steady rate, it is more expensive than Provisioned Throughput. C. Hosting a large language model (LLM) on AWS Lambda is generally not feasible due to limitations on deployment package size, memory, and execution duration.
+
+✔ CorrectDomain 2
+
+20. A company uses a foundation model (FM) on Amazon Bedrock to generate meeting summaries and insights from discussion transcripts. However, productivity has not improved. Which solution will help determine if the FM meets company business objectives?
+
+**Your answer:** A. Compare pre-deployment and post-deployment metrics such as time saved in documentation, number of actionable tasks created, and employee adoption rates.
+
+**Correct answer:** A. Compare pre-deployment and post-deployment metrics such as time saved in documentation, number of actionable tasks created, and employee adoption rates.
+
+To determine if a foundation model (FM) meets business objectives, it is essential to measure its impact on key business metrics. The problem states that productivity has not improved, which is a business outcome. Therefore, comparing pre-deployment and post-deployment business-level metrics such as time saved on tasks, the number of actionable items generated, and user adoption rates provides a direct, quantitative assessment of the FM's value and its alignment with the company's productivity goals. This approach moves beyond technical performance to measure real-world business impact. Why Incorrect Options are Wrong: B. Technical quality metrics like BLEU scores measure the linguistic quality of the summary but do not directly correlate with business value or productivity improvements. C. Implementing a Retrieval Augmented Generation (RAG) layer is a potential solution to improve the model, not a method to evaluate its current business impact. D. Employee satisfaction surveys provide subjective feedback. While useful, they are less precise for determining if specific, measurable business objectives are being met compared to hard metrics.
+
+✔ CorrectDomain 3
+
+21. A company is using supervised learning to train an AI model on a small labeled dataset that is specific to a target task. Which step of the foundation model (FM) lifecycle does this describe?
+
+**Your answer:** A. Fine-tuning
+
+**Correct answer:** A. Fine-tuning
+
+The scenario describes fine-tuning, a critical step in the foundation model (FM) lifecycle. Fine-tuning involves taking a pre-trained foundation model and adapting it for a specific, downstream task. This is achieved by continuing the training process using a smaller, labeled dataset that is highly relevant to the target application. This supervised learning approach specializes the model's general capabilities, acquired during pre-training, to improve its performance on the specific task. Why Incorrect Options are Wrong: B. Data selection: This is a preparatory activity for training or fine-tuning, involving the curation of datasets, not the training step itself. C. Pre-training: This is the initial, computationally intensive phase where an FM is trained on a massive, broad, and often unlabeled dataset to learn general patterns. D. Evaluation: This step occurs after training or fine-tuning to measure the model's performance against specific metrics and benchmarks, not the training process itself.
+
+✔ CorrectDomain 3
+
+22. A company is using a pre-trained large language model (LLM). The LLM must perform multiple tasks that require specific domain knowledge. The LLM does not have information about several technical topics in the domain. The company has unlabeled data that the company can use to fine-tune the model. Which fine-tuning method will meet these requirements?
+
+**Your answer:** C. Continued pre-training
+
+**Correct answer:** C. Continued pre-training
+
+Continued pre-training, also known as domain-adaptive pre-training, is the appropriate method for this scenario. This technique involves taking a general-purpose, pre-trained LLM and continuing the pre-training process using a large corpus of unlabeled, domain-specific data. The goal is to adapt the model's internal knowledge and representations to the new domain's vocabulary, nuances, and concepts. Since the company has unlabeled technical data and needs the model to learn this new domain knowledge for multiple tasks, continued pre-training is the ideal approach. Why Incorrect Options are Wrong: A. Full training: This involves training a model from scratch, which is computationally prohibitive and unnecessary when a capable pre-trained model is already available. B. Supervised fine-tuning: This method requires a labeled dataset of high-quality examples (e.g., instruction-response pairs). The company only has unlabeled data, making this option unsuitable. D. Retrieval Augmented Generation (RAG): RAG is an architectural pattern, not a fine-tuning method. It enhances an LLM by retrieving external information at inference time but does not update the model's internal weights or knowledge.
+
+✔ CorrectDomain 1
+
+23. A company uses Amazon Bedrock to implement a generative AI assistant on a website. The AI assistant helps customers with product recommendations and purchasing decisions. The company wants to measure the direct impact of the AI assistant on sales performance.
+
+**Your answer:** A. The conversion rate of customers who purchase products after AI assistant interactions
+
+**Correct answer:** A. The conversion rate of customers who purchase products after AI assistant interactions
+
+The primary goal is to measure the AI assistant's direct impact on sales performance. The conversion rate specifically calculates the percentage of customers who complete a purchase after interacting with the AI assistant. This metric directly links the assistant's activity to a tangible sales outcome (revenue), providing the most accurate measure of its effectiveness in driving sales. Other options measure user engagement, satisfaction, or technical accuracy, which are indirect indicators and do not quantify the final business impact on sales. Why Incorrect Options are Wrong: B. The number of customer interactions with the AI assistant measures usage or engagement, not the financial outcome of those interactions. C. Sentiment analysis scores from customer feedback measure user satisfaction, which is a valuable user experience metric but not a direct measure of sales. D. Natural language understanding accuracy rates are a technical performance metric for the AI model, not a business metric reflecting sales impact.
+
+✔ CorrectDomain 4
+
+24. Responsible AI and Governance Which THREE of the following principles of responsible AI are most critical to this scenario? (Choose 3)
+
+**Your answer:** Encrypt the application data, and isolate the application on a private network → Privacy and security | Evaluate how different population groups will be impacted → Fairness | Test the application with unexpected data to ensure the application will work in unique situations → Robustness
+
+**Correct answer:** Encrypt the application data, and isolate the application on a private network → Privacy and security | Evaluate how different population groups will be impacted → Fairness | Test the application with unexpected data to ensure the application will work in unique situations → Robustness
+
+Data encryption and network isolation are standard cryptographic and architectural controls used to protect sensitive data from unauthorized access, aligning directly with the privacy and security dimension of responsible AI. Assessing impacts across various population groups is the primary mechanism for detecting and mitigating demographic bias, fulfilling the fairness principle. Finally, subjecting an AI model to unexpected, out-of-distribution, or edge-case data ensures it continues to function reliably under novel conditions, which satisfies the definition of robustness.
+
+✔ CorrectDomain 4
+
+25. A retail company wants to build an ML model to recommend products to customers. The company wants to build the model based on responsible practices. Which practice should the company apply when collecting data to decrease model bias?
+
+**Your answer:** C. Ensure that the data is balanced and collected from a diverse group.
+
+**Correct answer:** C. Ensure that the data is balanced and collected from a diverse group.
+
+To build a responsible and fair Machine Learning (ML) model, it is crucial to address bias at the source, which is often the training data. Collecting data from a diverse and balanced group of customers ensures that the model is trained on a representative sample of the entire potential user population. This practice minimizes the risk of the model developing biases that would cause it to perform poorly or unfairly for underrepresented groups, which is a core principle of responsible AI development. Why Incorrect Options are Wrong: A. Using data only from the current customer base can reinforce existing demographic skews and create sampling bias, where the model fails to generalize to new or different customer groups. B. Collecting data only from customers with a purchase history introduces selection bias by ignoring new customers or those who browse but haven't purchased, leading to a narrow model. D. Using a publicly available dataset does not guarantee it is free from bias. The quality and representativeness of the data are what matter, not its public or private origin.
+
+✔ CorrectDomain 1🚩 flagged
+
+26. A company has developed an ML model for image classification. The company wants to deploy the model to production so that a web application can use the model. The company needs to implement a solution to host the model and serve predictions without managing any of the underlying infrastructure. Which solution will meet these requirements?
+
+**Your answer:** A. Use Amazon SageMaker Serverless Inference to deploy the model.
+
+**Correct answer:** A. Use Amazon SageMaker Serverless Inference to deploy the model.
+
+Amazon SageMaker Serverless Inference is a purpose-built solution designed to deploy machine learning models without managing any underlying infrastructure. It automatically provisions, scales, and manages the required compute resources based on the volume of inference requests. This fully managed experience directly addresses the company's need to host the model and serve predictions for its web application while abstracting away server management. It is ideal for workloads with intermittent or unpredictable traffic patterns, which is common for web applications. Why Incorrect Options are Wrong: B. Use Amazon CloudFront to deploy the model. Amazon CloudFront is a content delivery network (CDN) used to cache and deliver web content with low latency, not to host and execute ML model inference logic. C. Use Amazon API Gateway to host the model and serve predictions. Amazon API Gateway is a service for creating and managing APIs. While it can act as a front-end for a model, it does not host or run the model's compute logic itself. D. Use AWS Batch to host the model and serve predictions. AWS Batch is designed for running large-scale, asynchronous batch computing jobs, not for serving real-time, low-latency predictions required by an interactive web application.
+
+✔ CorrectDomain 3
+
+27. A company is using Amazon Bedrock to develop an AI assistant. The AI assistant will respond to customer questions about the company's products. The company conducts initial tests of the AI assistant. The company finds that the AI assistant's responses do not represent the company well and might damage customer perception. The company needs a prompt engineering technique to improve the AI assistant's responses so that the responses better represent the company. Which solution will meet this requirement?
+
+**Your answer:** D. Provide a persona and tone in the prompt.
+
+**Correct answer:** D. Provide a persona and tone in the prompt.
+
+Prompt engineering is the process of structuring text that is interpreted and understood by a generative AI model. To ensure an AI assistant's responses align with a company's brand, a direct and effective technique is to explicitly define a persona and tone within the prompt itself. For example, including instructions like "You are a helpful and professional customer service assistant for Company X. Respond in a friendly and clear tone" guides the model to generate outputs that match the desired representation, directly addressing the issue of poor company perception. Why Incorrect Options are Wrong: A. Zero-shot prompting simply asks the model to perform a task without examples. It does not provide any guidance on the style, tone, or persona of the response. B. Chain-of-thought (CoT) prompting is a technique to improve a model's reasoning on complex, multi-step problems. It does not control the persona or tone of the final answer. C. Retrieval Augmented Generation (RAG) enhances a model's responses with factual information from an external knowledge base but does not inherently control the stylistic delivery of that information.
+
+✘ IncorrectDomain 2
+
+28. A bank is fine-tuning a large language model (LLM) on Amazon Bedrock to assist customers with questions about their loans. The bank wants to ensure that the model does not reveal any private customer data. Which solution meets these requirements?
+
+**Your answer:** A. Use Amazon Bedrock Guardrails.
+
+**Correct answer:** B. Remove personally identifiable information (PII) from the customer data before fine-tuning the LLM.
+
+The most fundamental and effective method to prevent a model from learning and subsequently revealing private data is to remove that data from the training set before the fine-tuning process begins. By redacting or anonymizing all personally identifiable information (PII), the bank ensures the Large Language Model (LLM) is never exposed to sensitive customer details. This approach addresses the root cause of potential data leakage, as the model cannot memorize or infer information it has never seen. This is a standard best practice in machine learning for maintaining data privacy. Why Incorrect Options are Wrong: A. Use Amazon Bedrock Guardrails. Guardrails are applied at inference time to filter user inputs and model responses. They do not prevent the model from learning sensitive data during the fine-tuning phase itself. C. Increase the Top-K parameter of the LLM. Top-K is an inference parameter that controls the randomness of the model's output by limiting the pool of potential next words. It does not relate to data privacy or training data content. D. Store customer data in Amazon S3. Encrypt the data before fine-tuning the LLM. Encryption protects data at rest in Amazon S3. However, the data must be decrypted for the fine-tuning job to process it, at which point the model would be exposed to the PII. ---
+
+✔ CorrectDomain 5
+
+29. A financial company uses AWS to host its generative AI models. The company must generate reports to show adherence to international regulations for handling sensitive customer data.
+
+**Your answer:** B. AWS Artifact
+
+**Correct answer:** B. AWS Artifact
+
+AWS Artifact is a service that provides on-demand access to AWS's security and compliance reports and select online agreements. A financial company can use AWS Artifact to download third-party audit reports, such as ISO certifications, Payment Card Industry (PCI), and Service Organization Control (SOC) reports. These documents are essential for demonstrating to auditors and regulators that the underlying AWS infrastructure meets the stringent security and compliance standards required for handling sensitive customer data, thereby proving adherence to international regulations. Why Incorrect Options are Wrong: A. Amazon Macie is a data security service that uses machine learning to discover, classify, and protect sensitive data stored in Amazon S3. It does not generate compliance reports. C. AWS Secrets Manager is a service for securely storing and managing secrets like API keys and database credentials. It is not a compliance reporting tool. D. AWS Config is a service that assesses, audits, and evaluates the configurations of AWS resources. It helps with operational auditing but does not provide the formal compliance attestations that AWS Artifact does.
+
+✔ CorrectDomain 3
+
+30. A company wants to improve a large language model (LLM) for content moderation within 3 months. The company wants the model to moderate content according to the company's values and ethics. The LLM must also be able to handle emerging trends and new types of problematic content. Which solution will meet these requirements?
+
+**Your answer:** D. Conduct reinforcement learning from human feedback (RLHF) by using real-time input from skilled moderators.
+
+**Correct answer:** D. Conduct reinforcement learning from human feedback (RLHF) by using real-time input from skilled moderators.
+
+Reinforcement Learning from Human Feedback (RLHF) is a technique used to align a language model's behavior with human preferences and values. By using real-time input from skilled moderators, the company can directly teach the model its specific moderation policies. This interactive process is highly effective for adapting to emerging trends and nuanced ethical considerations, making it the most suitable solution to meet the company's requirements for a value-aligned and adaptive content moderation model within a tight timeframe. Why Incorrect Options are Wrong: A. Continuous pre-training is extremely resource-intensive and time-consuming, focusing on general knowledge rather than specific, nuanced alignment tasks. It would likely exceed the 3-month timeline. B. A historical dataset is useful for fine-tuning but is static. It cannot help the model adapt to new or emerging types of problematic content not present in the past. C. Fine-tuning on general ethical guidelines is not specific enough. The requirement is to align the model with the company's unique values, which may differ from general principles.
+
+✔ CorrectDomain 2
+
+31. Which strategy will prevent model hallucinations?
+
+**Your answer:** C. Use contextual grounding.
+
+**Correct answer:** C. Use contextual grounding.
+
+Contextual grounding is a primary strategy to prevent model hallucinations. This technique involves providing a large language model (LLM) with a specific, verified set of information (the "context" or "ground truth") and instructing it to generate responses based solely on that provided data. This process, often implemented through a Retrieval-Augmented Generation (RAG) architecture, anchors the model's output to a factual knowledge base, significantly reducing the likelihood of it inventing or fabricating information. By constraining the model to a trusted source, it is prevented from generating responses based on potentially incorrect or irrelevant information from its original training data. Why Incorrect Options are Wrong: A. Fact-checking the output of the large language model (LLM). This is a reactive measure to detect hallucinations after they have already occurred, not a strategy to prevent them during generation. B. Compare the output of the large language model (LLM) to the results of an internet search. This is a form of post-generation verification, similar to fact-checking. It helps identify errors but does not prevent the model from making them initially. D. Use relevance grounding. "Relevance grounding" is not a standard industry term. The correct and more comprehensive term is "contextual grounding," which ensures the model's output is both relevant and factually based on the provided source.
+
+✔ CorrectDomain 3
+
+32. Which scenario describes a potential risk and limitation of prompt engineering In the context of a generative AI model?
+
+**Your answer:** B. Prompt engineering could expose the model to vulnerabilities such as prompt injection attacks.
+
+**Correct answer:** B. Prompt engineering could expose the model to vulnerabilities such as prompt injection attacks.
+
+Prompt engineering, while powerful for guiding generative AI models, introduces a significant security vulnerability known as prompt injection. An attacker can craft a malicious prompt that overrides the system's original instructions. This can trick the model into performing unintended actions, such as bypassing content filters, revealing sensitive information, or executing harmful commands. This represents a direct risk and a fundamental limitation in controlling model behavior solely through natural language prompts, as the model may not distinguish between a developer's instructions and a malicious user's input within the same prompt. Why Incorrect Options are Wrong: A. This statement is logically incorrect. The fact that prompt engineering does not ensure deterministic outputs increases the need for robust validation and testing, it does not eliminate it. C. Data poisoning is an attack on the model's training data, which occurs before the model is deployed. Prompt engineering is an inference-time technique used after the model is already trained. D. This describes a general limitation of the underlying AI model (lack of consistent reliability), which prompt engineering aims to mitigate. Prompt injection (B) is a specific security risk introduced by the prompt-based interface.
+
+✔ CorrectDomain 1
+
+33. Which task represents a practical use case to apply a regression model?
+
+**Your answer:** C. Use historical data to predict future temperatures in a specific city.
+
+**Correct answer:** C. Use historical data to predict future temperatures in a specific city.
+
+Regression is a type of supervised machine learning used to predict a continuous numerical value. The task of predicting future temperatures requires forecasting a specific, continuous quantity (e.g., 25.5C, -10.2F). This aligns perfectly with the definition of a regression problem, where historical data (past temperatures, time of year, etc.) is used as input to predict a future numerical output. Why Incorrect Options are Wrong: A. This is a classification task. The model predicts a discrete category (a specific genre) from a finite list, not a continuous numerical value. B. This is a clustering task. It is an unsupervised learning method used to group similar items (movies) together based on their features without predefined labels. D. This is a generative AI task. The goal is to create new, synthetic data (an image) rather than to predict a numerical outcome based on input data.
+
+✔ CorrectDomain 3
+
+34. A company wants to use a large language model (LLM) on Amazon Bedrock for sentiment analysis. The company wants to classify the sentiment of text passages as positive or negative. Which prompt engineering strategy meets these requirements?
+
+**Your answer:** A. Provide examples of text passages with corresponding positive or negative labels in the prompt followed by the new text passage to be classified.
+
+**Correct answer:** A. Provide examples of text passages with corresponding positive or negative labels in the prompt followed by the new text passage to be classified.
+
+This strategy is known as few-shot prompting. By providing the large language model (LLM) with a few examples (shots) of text passages and their corresponding sentiment labels, the prompt sets a clear context and demonstrates the desired task and output format. This technique, also called in-context learning, allows the model to recognize the pattern for sentiment classification without requiring fine-tuning. It is a highly effective and standard prompt engineering method for improving the accuracy and reliability of classification tasks in services like Amazon Bedrock. Why Incorrect Options are Wrong: B: Providing a theoretical explanation is less effective than concrete examples for guiding a model to perform a specific, practical task like classification. C: This is zero-shot prompting. While potentially functional, it is generally less accurate and consistent than few-shot prompting for specific classification tasks. D: Including examples of unrelated tasks introduces irrelevant context that will confuse the model and degrade its performance on the sentiment analysis task.
+
+✔ CorrectDomain 4
+
+35. A financial company is developing a generative AI application for loan approval decisions. The company needs the application output to be responsible and fair. Which solution meets these requirements?
+
+**Your answer:** A. Review the training data to check for biases. Include data from all demographics in the training data.
+
+**Correct answer:** A. Review the training data to check for biases. Include data from all demographics in the training data.
+
+Building a responsible and fair AI application, especially for critical decisions like loan approvals, begins with the data used to train the model. Historical data can contain societal biases, which the model will learn and perpetuate if not addressed. By reviewing the training data for biases and ensuring it is representative of all demographic groups, the company directly mitigates a primary source of unfairness. This foundational step is crucial for developing a model that makes equitable decisions, aligning with the principles of responsible AI. Why Incorrect Options are Wrong: B: A deep learning model's complexity (number of layers) is related to its capacity to learn patterns, not its inherent fairness. Complex models can even make it harder to detect and explain biases. C: Secrecy is contrary to the principle of transparency in responsible AI. To ensure fairness and accountability, the model's decision-making process should be explainable, not hidden. D: Monitoring on a static test dataset is insufficient. It does not account for real-world data drift and standard performance metrics (like accuracy) do not measure fairness across different groups.
+
+✔ CorrectDomain 1
+
+36. An animation company wants to provide subtitles for its content. Which AWS service meets this requirement?
+
+**Your answer:** C. Amazon Transcribe
+
+**Correct answer:** C. Amazon Transcribe
+
+The core requirement is to create subtitles from the audio in animation content. This process is known as speech-to-text transcription. Amazon Transcribe is an automatic speech recognition (ASR) service specifically designed to convert speech into text. It can process audio and video files to produce accurate, time-stamped transcripts, which are the essential components for creating subtitles and closed captions. The service's ability to handle media files and generate timed text output directly addresses the company's need. Why Incorrect Options are Wrong: A. Amazon Comprehend is a natural language processing (NLP) service that analyzes existing text to extract insights; it does not generate text from audio. B. Amazon Polly is a text-to-speech (TTS) service that converts written text into spoken audio, which is the opposite of the required function. D. Amazon Translate is used to translate text from a source language to a target language; it requires a text input, which must first be created via transcription.
+
+✔ CorrectDomain 2
+
+37. A company wants to use AWS services to build an AI assistant for internal company use. The AI assistant's responses must reference internal documentation. The company stores internal documentation as PDF, CSV, and image files. Which solution will meet these requirements with the LEAST operational overhead?
+
+**Your answer:** B. Use Amazon Bedrock Knowledge Bases to create a knowledge base.
+
+**Correct answer:** B. Use Amazon Bedrock Knowledge Bases to create a knowledge base.
+
+Amazon Bedrock Knowledge Bases is a fully managed capability designed specifically for Retrieval-Augmented Generation (RAG). It automates the entire process of ingesting data from various sources (including PDF and CSV files), converting it into vector embeddings, and storing it for retrieval. This allows a foundation model to access and reference the company's private, internal documentation to generate contextually relevant responses. This approach directly meets all requirements with the least operational overhead, as it abstracts away the complexity of building and managing a RAG pipeline. Why Incorrect Options are Wrong: A. Use Amazon SageMaker AI to fine-tune a model. Fine-tuning is operationally intensive, requiring data preparation, training jobs, and model management. It also creates a static model that needs retraining when documents change. C. Configure a guardrail in Amazon Bedrock Guardrails. Guardrails are used to enforce safety policies and content filters on model responses, not to provide the model with new knowledge from internal documents. D. Select a pre-trained model from Amazon SageMaker JumpStart. A pre-trained model, by itself, has no knowledge of the company's private internal documentation. This option is an incomplete solution to the problem.
+
+✘ IncorrectDomain 5🚩 flagged
+
+38. A global financial company has developed an ML application to analyze stock market data and provide stock market trends. The company wants to continuously monitor the application development phases and ensure that company policies and industry regulations are followed. Which AWS services will help the company assess compliance with these requirements? (Select TWO.)
+
+**Your answer:** A. AWS Audit Manager | D. Amazon CloudWatch
+
+**Correct answer:** A. AWS Audit Manager | B. AWS Config
+
+The company requires continuous monitoring and assessment of its AWS environment to ensure compliance with internal policies and industry regulations. AWS Audit Manager is designed specifically for this purpose. It continuously audits AWS usage to simplify risk assessment and compliance with regulations and standards by automating evidence collection. AWS Config complements this by continuously monitoring and recording AWS resource configurations. It allows the company to assess, audit, and evaluate these configurations against rules representing company policies, ensuring that the environment remains compliant with desired settings. Together, these services provide a comprehensive solution for compliance assessment. Why Incorrect Options are Wrong: C. Amazon Inspector: This service focuses on vulnerability management and security scanning for workloads like EC2 instances, not on assessing compliance with broader company policies or industry regulations. D. Amazon CloudWatch: This is a monitoring and observability service for application performance, resource utilization, and operational health, not for auditing resource configurations against compliance rules. E. AWS CloudTrail: This service provides a log of API calls (an audit trail) within an AWS account. While this data is essential for audits, CloudTrail itself does not assess compliance; it only records the actions taken.
+
+✔ CorrectDomain 5
+
+39. A company wants to use Amazon Q Business for its data. The company needs to ensure the security and privacy of the data. Which combination of steps will meet these requirements? (Select TWO.)
+
+**Your answer:** A. Enable AWS Key Management Service (AWS KMS) keys for the Amazon Q Business enterprise index. | E. Configure AWS Identity and Access Management (IAM) for authentication.
+
+**Correct answer:** A. Enable AWS Key Management Service (AWS KMS) keys for the Amazon Q Business enterprise index. | E. Configure AWS Identity and Access Management (IAM) for authentication.
+
+To ensure the security and privacy of data within Amazon Q Business, a multi-layered approach is required, focusing on both access control and data protection. AWS Identity and Access Management (IAM) is the fundamental service for controlling who can access the Amazon Q application and its associated resources. By configuring IAM roles and policies, the company can enforce the principle of least privilege, ensuring only authenticated and authorized entities can interact with the data. Furthermore, protecting the data at rest is critical. Amazon Q Business integrates with AWS Key Management Service (AWS KMS) to encrypt the data stored in its index. Enabling a customer-managed KMS key provides an additional layer of security and control over the encryption and decryption process, meeting stringent privacy and compliance requirements. Why Incorrect Options are Wrong: B. Set up cross-account access to the Amazon Q index. This is for sharing resources between AWS accounts, not a primary method for securing data within a single account. It can increase security risks if not configured properly. C. Configure Amazon Inspector for authentication. Amazon Inspector is a vulnerability management service that scans for software vulnerabilities and network exposures; it does not handle authentication. D. Allow public access to the Amazon Q index. This action directly contradicts the goal of ensuring data security and privacy by exposing the company's proprietary data to the public.
+
+✔ CorrectDomain 1
+
+40. A company has built a solution by using generative AI. The solution uses large language models (LLMs) to translate training manuals from English into other languages. The company wants to evaluate the accuracy of the solution by examining the text generated for the manuals. Which model evaluation strategy meets these requirements?
+
+**Your answer:** A. Bilingual Evaluation Understudy (BLEU)
+
+**Correct answer:** A. Bilingual Evaluation Understudy (BLEU)
+
+Bilingual Evaluation Understudy (BLEU) is a standard and widely used metric for evaluating the quality of text generated by machine translation systems. It works by comparing the machine-generated translation to one or more high-quality human reference translations. The core idea is to measure the correspondence between the machine's output and the human's by calculating the precision of n-grams (contiguous sequences of words). A higher BLEU score indicates a closer match to the reference translations, signifying better accuracy and fluency. This directly addresses the company's need to evaluate the accuracy of its translated manuals. Why Incorrect Options are Wrong: B. Root mean squared error (RMSE): This metric is used for regression tasks to measure the difference between predicted and actual numerical values, not for evaluating the quality of generated text. C. Recall-Oriented Understudy for Gisting Evaluation (ROUGE): While related to BLEU, ROUGE is primarily designed for evaluating automatic text summarization by focusing on recall (n-gram overlap from the reference in the summary). D. F1 score: This metric is used for classification tasks. It calculates the harmonic mean of precision and recall to evaluate a model's accuracy in categorizing data, not for assessing generated text quality.
+
+✔ CorrectDomain 5
+
+41. A company needs to monitor the performance of its ML systems by using a highly scalable AWS service. Which AWS service meets these requirements?
+
+**Your answer:** A. Amazon CloudWatch
+
+**Correct answer:** A. Amazon CloudWatch
+
+Amazon CloudWatch is the primary AWS service for monitoring and observability. It is designed to collect and track metrics, collect and monitor log files, and set alarms for AWS resources, applications, and services running on AWS and on-premises. For Machine Learning (ML) systems, such as those built with Amazon SageMaker, CloudWatch automatically collects performance metrics like model latency, invocation counts, and resource utilization (CPU/GPU/Memory). Its highly scalable architecture allows it to handle vast amounts of log, metric, and event data, making it the appropriate choice for monitoring the performance of ML systems. Why Incorrect Options are Wrong: B. AWS CloudTrail: This service records AWS API calls for your account and delivers log files, which is used for auditing, governance, and compliance, not for real-time performance monitoring. C. AWS Trusted Advisor: This is an advisory tool that inspects your AWS environment and makes recommendations for saving money, improving system performance and reliability, and closing security gaps, rather than a direct monitoring service. D. AWS Config: This service is used to assess, audit, and evaluate the configurations of your AWS resources. It tracks configuration changes but does not monitor real-time performance metrics.
+
+✔ CorrectDomain 5
+
+42. A hospital is developing an AI system to assist doctors in diagnosing diseases based on patient records and medical images. To comply with regulations, the sensitive patient data must not leave the country the data is located in. Which data governance strategy will ensure compliance and protect patient privacy?
+
+**Your answer:** A. Data residency
+
+**Correct answer:** A. Data residency
+
+Data residency is the practice of storing data in a specific geographic location to comply with legal, regulatory, or organizational requirements. The hospital's need to ensure sensitive patient data does not leave the country is a classic data residency requirement, often driven by data sovereignty laws like GDPR or HIPAA. By implementing a data residency strategy, such as selecting an AWS Region within the required country, the hospital can ensure it meets its compliance obligations and protects patient data by controlling its physical location. This directly addresses the core constraint of the problem. Why Incorrect Options are Wrong: B. Data quality: This concerns the accuracy, completeness, and reliability of data, not its geographical location or compliance with residency laws. C. Data discoverability: This focuses on making data easy to find and understand through catalogs and metadata, which is unrelated to storage location. D. Data enrichment: This involves enhancing raw data with additional context or information; it does not address data location mandates.
+
+✔ CorrectDomain 4
+
+43. A company has an ML model. The company wants to know how the model makes predictions. Which term refers to understanding model predictions?
+
+**Your answer:** A. Model interpretability
+
+**Correct answer:** A. Model interpretability
+
+Model interpretability, often used interchangeably with explainability, is the concept of understanding and explaining how a machine learning model arrives at its predictions. It addresses the "why" behind a model's decision-making process. This is crucial for building trust, debugging models, ensuring fairness, and meeting regulatory requirements. Services like Amazon SageMaker Clarify are specifically designed to provide tools for model explainability, helping users understand feature importance and how the model behaves for individual or groups of predictions. Why Incorrect Options are Wrong: B. Model training: This is the process of building a model by feeding it data, not the process of understanding its subsequent predictions. C. Model interoperability: This refers to the ability of different systems or software to exchange and make use of information, not the internal logic of a model. D. Model performance: This measures a model's effectiveness using metrics like accuracy or precision, but it does not explain the reasoning behind its predictions.
+
+✔ CorrectDomain 1
+
+44. A manufacturing company wants to create product descriptions in multiple languages. Which AWS service will automate this task?
+
+**Your answer:** A. Amazon Translate
+
+**Correct answer:** A. Amazon Translate
+
+Amazon Translate is a neural machine translation service that provides fast, high-quality, and customizable language translation. Its core function is to translate text from a source language to one or more target languages. This service directly addresses the company's need to automate the creation of product descriptions in multiple languages by programmatically translating the original text. It is designed for tasks such as localizing websites, applications, and documents, making it the ideal solution for this scenario. Why Incorrect Options are Wrong: B. Amazon Transcribe is a service that converts speech to text. The company's requirement is to translate existing text, not to transcribe audio content. C. Amazon Kendra is an intelligent enterprise search service. It is used for indexing and searching documents, not for performing language translation. D. Amazon Polly is a text-to-speech service that turns text into lifelike speech. The goal is to generate translated text, not to create audio versions of the descriptions.
+
+✔ CorrectDomain 3
+
+45. A company plans to use a generative AI model to provide real-time service quotes to users. Which criteria should the company use to select the correct model for this use case?
+
+**Your answer:** D. Model latency and optimized inference speed
+
+**Correct answer:** D. Model latency and optimized inference speed
+
+The core requirement of the use case is providing "real-time" service quotes. In this context, "real-time" implies that the system must respond to a user's request with minimal delay to ensure a positive user experience. Therefore, the most critical criteria for selecting a model are its performance characteristics. Model latency, which is the time taken from request to response, and optimized inference speed, the rate at which the model can generate predictions, are the primary metrics that determine if a model is suitable for a real-time application. A model with low latency and high inference speed can deliver quotes quickly, meeting the business requirement. Why Incorrect Options are Wrong: A. Model size is a contributing factor to latency and cost, but it is not the direct selection criterion. The resulting performance (latency) is the critical metric, not the size itself. B. Training data quality is a fundamental requirement for the accuracy of any AI model, not a specific selection criterion for a real-time use case over other types of applications. C. A specialized model is often more efficient than a general-purpose one for a specific task. GPU availability is an infrastructure consideration, not a primary model selection criterion.
+
+✔ CorrectDomain 3
+
+46. A company uses a foundation model (FM) from Amazon Bedrock for an AI search tool. The company wants to fine-tune the model to be more accurate by using the company's data. Which strategy will successfully fine-tune the model?
+
+**Your answer:** A. Provide labeled data with the prompt field and the completion field.
+
+**Correct answer:** A. Provide labeled data with the prompt field and the completion field.
+
+Supervised fine-tuning in Amazon Bedrock requires a curated dataset of labeled examples to teach the model a specific task or style. This dataset must be structured with input-output pairs. The standard format for this is a JSON Lines (.jsonl) file where each line is a JSON object containing a prompt field (the input) and a completion field (the desired output). This structure allows the model to learn the relationship between the company's specific prompts and the correct, desired completions, thereby improving its accuracy for the company's use case. Why Incorrect Options are Wrong: B. The required data format for Amazon Bedrock fine-tuning is JSON Lines (.jsonl), not a .txt file containing lines in .csv format. C. Provisioned Throughput is a pricing model for purchasing guaranteed inference throughput for a model. It is used after a model is trained or fine-tuned, not as a strategy to perform the fine-tuning itself. D. This is too generic. While the original foundation model was trained on vast datasets like journals, fine-tuning requires a specific, curated dataset of labeled examples relevant to the company's domain, as described in option A.
+
+✔ CorrectDomain 4
+
+47. A company created an AI voice model that is based on a popular presenter. The company is using the model to create advertisements. However, the presenter did not consent to the use of his voice for the model. The presenter demands that the company stop the advertisements. Which challenge of working with generative AI does this scenario demonstrate?
+
+**Your answer:** A. Intellectual property (IP) infringement
+
+**Correct answer:** A. Intellectual property (IP) infringement
+
+The scenario describes the unauthorized use of a presenter's voice to train a generative AI model for commercial advertisements. This action directly relates to the infringement of the presenter's intellectual property (IP) rights, specifically the "right of publicity." This legal right protects an individual's persona, including their name, likeness, and voice, from being commercially exploited without permission. The company created a derivative work (the AI voice model) from the presenter's unique vocal identity and used it for commercial gain, which is a classic example of an IP-related challenge posed by generative AI. Why Incorrect Options are Wrong: B. Lack of transparency: The primary issue is the unauthorized use of the voice, not the inability to understand or explain how the AI model works. C. Lack of fairness: This refers to algorithmic bias that produces inequitable outcomes for different groups, which is not the issue described in the scenario. D. Privacy infringement: The problem is the commercial misappropriation of a public attribute (the presenter's voice), not the breach of confidential or private information.
+
+✔ CorrectDomain 3
+
+48. A company has fine-tuned an Amazon Bedrock foundation model (FM) to produce short document summaries. The company wants an automated metric that compares each model-generated summary with its human-written reference summary. Which metric will meet these requirements?
+
+**Your answer:** B. Recall-Oriented Understudy for Gisting Evaluation (ROUGE)
+
+**Correct answer:** B. Recall-Oriented Understudy for Gisting Evaluation (ROUGE)
+
+The Recall-Oriented Understudy for Gisting Evaluation (ROUGE) is a set of metrics specifically designed to automatically evaluate text summarization and machine translation. It works by comparing a model-generated summary to one or more human-created reference summaries. ROUGE metrics, such as ROUGE-N (n-gram overlap) and ROUGE-L (longest common subsequence), quantify the quality of the summary based on lexical overlap, making it the ideal automated metric for this scenario. Why Incorrect Options are Wrong: A. The F1 score is a standard metric for classification tasks, measuring a model's accuracy by combining precision and recall. It is not used for text summarization. C. Perplexity measures how well a language model predicts a sequence of text. While it evaluates model fluency, it does not directly compare a generated summary to a reference summary. D. Frechet Inception Distance (FID) is a metric used to evaluate the quality of images generated by models like GANs, not text.
+
+✔ CorrectDomain 4
+
+49. A financial company uses a generative AI model to assign credit limits to new customers. The company wants to make the decision-making process of the model more transparent to its customers.
+
+**Your answer:** B. Apply explainable AI techniques to show customers which factors influenced the model's decision.
+
+**Correct answer:** B. Apply explainable AI techniques to show customers which factors influenced the model's decision.
+
+The core requirement is to make a generative AI model's decision-making process transparent. Explainable AI (XAI) techniques are specifically designed for this purpose. By applying XAI methods, such as SHAP (SHapley Additive exPlanations), the company can generate explanations for each individual prediction. These explanations highlight which input features (e.g., income, credit history, debt-to-income ratio) had the most significant positive or negative influence on the assigned credit limit. This provides the necessary transparency for customers and helps the company meet regulatory and ethical standards for fairness and accountability in finance. Amazon SageMaker Clarify is an AWS service that directly provides these XAI capabilities. Why Incorrect Options are Wrong: A. Replacing the AI model with a rule-based system is a different architectural choice; it does not make the existing generative AI model transparent as requested. C. A user interface and general technical documentation explain what the system does, but not why it made a specific decision for an individual customer. D. Increasing model accuracy does not inherently increase transparency. A highly accurate model can still be a "black box," and its decision-making logic remains opaque.
+
+✘ IncorrectDomain 3🚩 flagged
+
+50. A company wants to ensure that its Retrieval Augmented Generation (RAG) system retrieves all relevant documents for user queries without missing important information. Which metric should the company track?
+
+**Your answer:** C. Mean reciprocal rank
+
+**Correct answer:** B. Recall
+
+Recall is the metric that measures the ability of a model to find all the relevant instances within a dataset. In the context of a Retrieval Augmented Generation (RAG) system, recall for the retrieval component specifically measures the fraction of all relevant documents that were successfully retrieved. A high recall score indicates that the system is effective at not missing important, relevant information for a given query, which directly addresses the company's goal. Why Incorrect Options are Wrong: A. Faithfulness: This measures if the generated answer is factually supported by the retrieved context, which evaluates the generation step, not the retrieval of all relevant documents. C. Mean reciprocal rank: This metric evaluates how highly the first relevant document is ranked in the search results, not whether all relevant documents were retrieved. D. Precision: This measures the proportion of retrieved documents that are relevant. A system can have high precision by returning only one relevant document, while missing many others.
+
+✔ CorrectDomain 2
+
+51. A company is building a generative Al application and is reviewing foundation models (FMs). The company needs to consider multiple FM characteristics. Select the correct FM characteristic from the following list for each definition. Each FM characteristic should be selected one time. (Select THREE.) Concurrency Context windows Latency
+
+**Your answer:** Amount of information that can fit in a single prompt → Context windows | Length of time it takes for a model to generate an output → Latency | Multiple users invoking an application endpoint simultaneously → Concurrency
+
+**Correct answer:** Amount of information that can fit in a single prompt → Context windows | Length of time it takes for a model to generate an output → Latency | Multiple users invoking an application endpoint simultaneously → Concurrency
+
+Context windows: This term defines the maximum limit of tokens (text or data) a model can accept and process in a single interaction. It dictates the "amount of information" (such as long documents or extensive instructions) effectively held in the model's short-term memory for that specific prompt. Latency: In the context of generative AI, latency refers to the time delay between a user issuing a request (prompt) and the model completing the generation of the response. It is the primary metric for the "speed" of the model's output generation. Concurrency: This refers to the ability of the hosting infrastructure or application endpoint to handle multiple simultaneous requests (invocations) from different users. High concurrency ensures the system remains responsive under load from many users at once.
+
+✔ CorrectDomain 2
+
+52. Which feature of Amazon OpenSearch Service gives companies the ability to build vector database applications?
+
+**Your answer:** C. Scalable index management and nearest neighbor search capability
+
+**Correct answer:** C. Scalable index management and nearest neighbor search capability
+
+Amazon OpenSearch Service functions as a vector database through its k-Nearest Neighbor (k-NN) search capability. This feature allows users to index millions or billions of vector embeddings and perform highly efficient and scalable similarity searches. The service uses algorithms like Faiss and NMSLIB to find the "nearest neighbors" to a query vector in a high-dimensional space. This is the fundamental operation required for building applications like semantic search, recommendation engines, and image retrieval systems, which are common use cases for vector databases. Why Incorrect Options are Wrong: A. Integration with Amazon S3 for object storage: This is a data ingestion and storage feature. While useful for loading data, it does not provide the core vector search and indexing functionality. B. Support for geospatial indexing and queries: This feature is for location-based data (e.g., maps, coordinates) and is distinct from the high-dimensional vector search used for AI/ML embeddings. D. Ability to perform real-time analysis on streaming data: This capability is primarily for log analytics and time-series data monitoring. It does not inherently include the specialized algorithms for vector similarity search. ---
+
+✔ CorrectDomain 2
+
+53. What is tokenization used for in natural language processing (NLP)?
+
+**Your answer:** C. To break text into smaller units for processing
+
+**Correct answer:** C. To break text into smaller units for processing
+
+Tokenization is a fundamental preprocessing step in Natural Language Processing (NLP). Its primary purpose is to segment a sequence of text into smaller, manageable, and meaningful units called tokens. These tokens can be words, sub-words, or even characters. This process is essential because machine learning models cannot process raw text directly; they require structured, numerical input. Tokenization is the initial step in converting unstructured text into a format that can be analyzed and used for tasks like sentiment analysis, text classification, or machine translation. Why Incorrect Options are Wrong: A. To encrypt text data: Encryption is a security process for encoding data to prevent unauthorized access, which is distinct from the linguistic preprocessing task of tokenization. B. To compress text files: Compression aims to reduce the storage size of data. Tokenization is a text processing step and is not designed for file size reduction. D. To translate text between languages: Machine translation is a complex NLP application that uses tokenization as a preliminary step, but tokenization itself is not the act of translation.
+
+✔ CorrectDomain 2🚩 flagged
+
+54. An ecommerce company wants to evaluate several foundation models (FMs) for a customer survey summarization task. The company has created an LLM-as-a-judge evaluation job in Amazon Bedrock. Which built-in evaluation metric can the company use for this task?
+
+**Your answer:** C. Faithfulness
+
+**Correct answer:** C. Faithfulness
+
+For a summarization task, faithfulness is a crucial metric that evaluates whether the generated summary is factually consistent with the original source text. When using Amazon Bedrock's LLM-as-a-judge evaluation, "Faithfulness" is a built-in, automated metric specifically designed for tasks like summarization. It helps ensure the model does not hallucinate or generate information that contradicts the input customer surveys, which is a primary concern for this use case. Why Incorrect Options are Wrong: A. Context relevance: This metric is used for Retrieval Augmented Generation (RAG) to evaluate if the retrieved context is relevant to the user's query, not for summarization. B. Context coverage: This is also a RAG-specific metric that assesses if the retrieved context contains enough information to answer the query, which is not applicable to summarization. D. Root mean square error (RMSE): This is a regression metric used to measure the difference between predicted and actual numerical values, not for evaluating generated text.
+
+✔ CorrectDomain 4
+
+55. A company is building a generative AI (GenAI) application. The company wants to implement mechanisms to monitor and direct AI system behavior. Which responsible AI dimension is the company applying?
+
+**Your answer:** C. Controllability
+
+**Correct answer:** C. Controllability
+
+Controllability is the responsible AI dimension that focuses on implementing mechanisms to govern, influence, and correct the behavior of an AI system. The company's goal to "monitor and direct AI system behavior" aligns directly with this principle. Controllability ensures that the AI application operates within desired parameters and that there are ways to intervene or guide its outputs, such as using guardrails, moderation APIs, or specific prompting techniques to steer the model's responses and prevent undesirable outcomes. Why Incorrect Options are Wrong: A. Fairness focuses on mitigating bias and ensuring equitable outcomes across different user groups, which is a different aspect of responsible AI. B. Explainability is concerned with understanding and interpreting how a model arrives at its outputs, not with actively directing its behavior. D. Safety is about preventing AI systems from causing harm. While controllability is a tool to ensure safety, the direct act of monitoring and directing is defined as controllability.
+
+✔ CorrectDomain 3🚩 flagged
+
+56. Which prompting technique can protect against prompt injection attacks?
+
+**Your answer:** A. Adversarial prompting
+
+**Correct answer:** A. Adversarial prompting
+
+Adversarial prompting is a technique used to identify and address vulnerabilities in Large Language Models (LLMs). It is a form of "red teaming" where users intentionally craft prompts designed to bypass safety features or subvert the model's original instructions-the very nature of a prompt injection attack. By systematically testing the model with these adversarial inputs, developers can understand its failure modes and implement safeguards, such as improved input filtering, instruction tuning, or guardrails. This process makes the model more robust and resilient, thereby protecting it against real-world prompt injection attacks. Why Incorrect Options are Wrong: B. Zero-shot prompting: This is a basic method of asking a model to perform a task without providing any examples; it is not a security technique. C. Least-to-most prompting: This technique breaks complex problems into simpler, sequential steps to improve reasoning, not to provide security against malicious inputs. D. Chain-of-thought prompting: This method encourages the model to detail its reasoning process to improve accuracy on complex tasks, but it does not inherently prevent prompt injection.
+
+✔ CorrectDomain 2
+
+57. A company wants to implement a generative AI solution to improve its marketing operations. The company wants to increase its revenue in the next 6 months. Which approach will meet these requirements?
+
+**Your answer:** B. Conduct stakeholder interviews to refine use cases and set measurable goals.
+
+**Correct answer:** B. Conduct stakeholder interviews to refine use cases and set measurable goals.
+
+The most effective approach for any AI implementation, including generative AI, is to begin by clearly defining the business problem and objectives. Conducting stakeholder interviews is a critical first step to refine abstract goals like "improve marketing" into specific, actionable use cases (e.g., generating personalized email copy, creating ad variants). This process ensures the project is aligned with business needs and establishes key performance indicators (KPIs) and measurable goals (e.g., increase conversion rates by 15%) that directly tie back to the primary objective of increasing revenue. This foundational work prevents wasted resources on solutions that do not address the core business challenge. Why Incorrect Options are Wrong: A. Immediately starting to train a custom model is a technology-first approach that skips the crucial problem-framing phase, leading to high costs and potential project failure. C. Implementing a prebuilt solution without prior analysis is premature. Furthermore, it focuses on customer satisfaction, which is a secondary metric, not the primary goal of increasing revenue. D. Replicating competitor features ignores the company's unique context, data, and customer base, which may lead to an ineffective or irrelevant solution.
+
+✔ CorrectDomain 1
+
+58. A company has a large amount of unlabeled data. The company wants to group the data based on feature similarities. Which algorithm will meet this requirement?
+
+**Your answer:** B. K-means
+
+**Correct answer:** B. K-means
+
+The scenario requires grouping a large amount of unlabeled data based on feature similarities. This is a classic definition of a clustering problem, which falls under unsupervised machine learning. The K-means algorithm is a fundamental and widely used unsupervised clustering algorithm. It partitions a dataset into 'K' distinct, non-overlapping clusters by iteratively assigning each data point to the nearest cluster centroid and then recalculating the centroids. This process effectively groups data points based on their similarity in the feature space, directly addressing the company's requirement without needing pre-existing labels. Why Incorrect Options are Wrong: A. XGBoost is a supervised learning algorithm used for classification and regression; it requires labeled data to train a predictive model. C. DeepAR forecasting is a supervised learning algorithm specifically designed for time-series forecasting, not for grouping static data points. D. Linear learner is a supervised learning algorithm used for classification and regression tasks, which necessitates labeled training data.
+
+✔ CorrectDomain 4
+
+59. A company is developing a mobile ML app that uses a phone's camera to diagnose and treat insect bites. The company wants to train an image classification model by using a diverse dataset of insect bite photos from different genders, ethnicities, and geographic locations around the world. Which principle of responsible Al does the company demonstrate in this scenario?
+
+**Your answer:** A. Fairness
+
+**Correct answer:** A. Fairness
+
+The company is deliberately creating a training dataset that includes a wide variety of human characteristics (gender, ethnicity) and environmental factors (geographic locations). This action directly addresses the principle of Fairness in responsible AI. Fairness aims to ensure that a machine learning model does not perpetuate or amplify existing societal biases, and that its outcomes are equitable across different demographic groups. By using a diverse dataset, the company mitigates the risk that the model will be less accurate for underrepresented populations, thus preventing biased performance. Why Incorrect Options are Wrong: B. Explainability: This principle focuses on understanding and interpreting a model's predictions, which is not what the data collection strategy addresses. C. Governance: This is a broader framework of policies and processes for managing AI systems; the specific action of diversifying data is a component of achieving fairness within that framework. D. Transparency: This involves being open about an AI system's capabilities, limitations, and data usage, which is different from the internal process of building a fair dataset.
+
+✔ CorrectDomain 2
+
+60. A company has developed a generative text summarization application by using Amazon Bedrock. The company will use Amazon Bedrock automatic model evaluation capabilities. Which metric should the company use to evaluate the accuracy of the model?
+
+**Your answer:** C. BERT Score
+
+**Correct answer:** C. BERT Score
+
+Amazon Bedrock's automatic model evaluation feature for text summarization tasks is designed to assess the quality of the generated output against a reference summary. To evaluate accuracy, it employs metrics that measure semantic similarity and content overlap. BERTScore is a supported metric that leverages contextual embeddings from BERT models to compare the semantic similarity between the generated summary and the reference text. This makes it highly effective for evaluating the nuanced meaning and accuracy of generative summarization models, going beyond simple word-matching. Why Incorrect Options are Wrong: A. Area Under the ROC Curve (AUC) score: This metric is used to evaluate the performance of binary classification models, not for assessing the quality of generated text in a summarization task. B. F1 score: While used in NLP, the F1 score is typically for classification or information extraction tasks. It measures the harmonic mean of precision and recall based on token overlap, not semantic meaning. D. Real World Knowledge (RWK) score: This is not a standard, selectable metric within the Amazon Bedrock automatic model evaluation framework for summarization. Accuracy is measured by metrics like BERTScore, ROUGE, and METEOR.
+
+✔ CorrectDomain 5
+
+61. An AI company periodically evaluates its systems and processes with the help of independent software vendors (ISVs). The company needs to receive email notifications when an ISV's compliance reports become available. Which AWS service can the company use to meet this requirement?
+
+**Your answer:** B. AWS Artifact
+
+**Correct answer:** B. AWS Artifact
+
+AWS Artifact is the central resource for accessing AWS's security and compliance reports. A key feature of AWS Artifact is "Third-party reports" (formerly AWS Artifact Reports), which provides compliance reports from Independent Software Vendors (ISVs) whose products are available in AWS Marketplace. Users can subscribe to notifications for specific reports. When a new version of a report is published by an ISV, AWS Artifact can send an email notification via Amazon Simple Notification Service (SNS), fulfilling the company's requirement. Why Incorrect Options are Wrong: A. AWS Audit Manager is used to audit a customer's own AWS environment, not to access compliance reports from AWS or ISVs. C. AWS Trusted Advisor offers optimization recommendations for an AWS account; it does not provide access to compliance documentation. D. AWS Data Exchange is a marketplace for subscribing to third-party data sets, not for accessing compliance reports.
+
+✔ CorrectDomain 1
+
+62. Which type of AI model makes numeric predictions?
+
+**Your answer:** B. Regression
+
+**Correct answer:** B. Regression
+
+Regression is a fundamental type of supervised machine learning model whose primary purpose is to predict a continuous, numerical value. It analyzes the relationship between independent input variables and a dependent output variable to forecast outcomes. Common use cases include predicting house prices, forecasting sales revenue, or estimating a patient's length of stay in a hospital. The output of a regression model is always a quantity, which directly aligns with the requirement of making "numeric predictions." Why Incorrect Options are Wrong: A. Diffusion models are generative models used to create new data, such as images or audio, by learning to reverse a noise-adding process. They do not primarily make numeric predictions. C. A Transformer is a deep learning architecture, not a prediction type. It excels at processing sequential data for tasks like language translation and text summarization, not direct numeric forecasting. D. Multi-modal describes models that process and relate information from multiple data types (e.g., text, images, audio). This defines the model's input, not the nature of its predictive output.
+
+✔ CorrectDomain 3
+
+63. A company wants to create a chatbot that answers questions about human resources policies. The company is using a large language model (LLM) and has a large digital documentation base. Which technique should the company use to optimize the generated responses?
+
+**Your answer:** A. Use Retrieval Augmented Generation (RAG).
+
+**Correct answer:** A. Use Retrieval Augmented Generation (RAG).
+
+Retrieval Augmented Generation (RAG) is the ideal technique for this scenario. RAG enhances a large language model's (LLM) responses by first retrieving relevant information from an external, authoritative knowledge base-in this case, the company's human resources documentation. This retrieved context is then provided to the LLM along with the user's original query. This process grounds the model's answer in the company's specific, up-to-date policies, significantly improving accuracy and reducing the risk of generating incorrect or "hallucinated" information. It directly addresses the need to use a large digital documentation base to answer specific questions. Why Incorrect Options are Wrong: B. Use few-shot prompting: This technique provides a few examples in the prompt to guide the model's response format, but it cannot incorporate a large, external knowledge base like an entire HR documentation library. C. Set the temperature to 1: Temperature controls response creativity. A value of 1 increases randomness, which is undesirable for factual, policy-based answers. A lower temperature (closer to 0) is needed for deterministic, factual responses. D. Decrease the token size: This refers to limiting the length of the input or output. Decreasing it would not help the model access the necessary information and might truncate important context or the final answer. ---
+
+✔ CorrectDomain 2🚩 flagged
+
+64. A social media company wants to use a large language model (LLM) to summarize messages. The company has chosen a few LLMs that are available on Amazon SageMaker JumpStart. The company wants to compare the generated output toxicity of these models. Which strategy gives the company the ability to evaluate the LLMs with the LEAST operational overhead?
+
+**Your answer:** B. Automatic model evaluation
+
+**Correct answer:** B. Automatic model evaluation
+
+Automatic model evaluation uses algorithms and predefined metrics to assess the performance of a model on a given dataset. For evaluating toxicity, this involves using tools that can automatically score the generated text for harmful or inappropriate content. This approach is highly scalable and can be fully automated, requiring minimal human intervention once configured. Therefore, it represents the strategy with the least operational overhead, directly addressing the company's primary constraint. Amazon SageMaker provides built-in capabilities for automatic model evaluation, including metrics for toxicity. Why Incorrect Options are Wrong: A. Crowd-sourced evaluation: This requires managing a large, external group of people, which involves significant operational overhead for task creation, quality control, and payment processing. C. Model evaluation with human workers: Similar to crowd-sourcing, this involves high operational costs related to recruiting, training, and managing a team of human evaluators, making it time-consuming and expensive. D. Reinforcement learning from human feedback (RLHF): RLHF is a complex and resource-intensive technique for fine-tuning a model, not for evaluating existing models. Its purpose is to improve a model's alignment, not to serve as a simple comparison tool.
+
+✔ CorrectDomain 3
+
+65. An AI practitioner wants to generate more diverse and more creative outputs from a large language model (LLM). How should the AI practitioner adjust the inference parameter?
+
+**Your answer:** A. Increase the temperature value.
+
+**Correct answer:** A. Increase the temperature value.
+
+The temperature inference parameter directly controls the randomness of the output from a large language model (LLM). When the temperature value is increased, it flattens the probability distribution of potential next tokens. This makes the model more likely to select less probable, more unexpected words, leading to outputs that are more diverse, creative, and novel. Conversely, a lower temperature makes the model's output more deterministic and focused on the most likely words. Why Incorrect Options are Wrong: B. Decreasing the Top K value restricts the model's choices to a smaller set of the most probable next words, which reduces diversity and creativity. C. Increasing the response length only makes the output longer; it does not inherently change the creativity or diversity of the token selection process itself. D. Decreasing the prompt length provides less context to the model, which can lead to less relevant or focused output, but it is not a direct control for creativity.
