@@ -139,6 +139,7 @@ Business Metrics:
 
 
 Gen AI Terms:
+- Adversarial prompting: identify and address vulnerabilities in Large Language Models (LLMs)
 - Tokens: chunk of text a model process, roughly a word/word-piece
 - Chunking: A technique to split long documents to smaller pieces
 - Embedding: Vector Representation
