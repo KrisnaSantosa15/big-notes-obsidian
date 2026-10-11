@@ -1,6 +1,6 @@
 # AWS Certified AI Practitioner (AIF-C01) — Practice Question Bank (393 Questions)
 
-> Sumber: [pintardengan.ai/pelatihanAI](https://pintardengan.ai/pelatihanAI/) — Mode Latihan Lengkap (393 Soal, Kunci Jawaban & Pembahasan)
+> Sumber: [pintardengan.ai/pelatihanAI](https://pintardengan.ai/pelatihanAI/) — Mode Latihan Lengkap (393 Soal, Kunci Jawaban & Pembahasannya)
 
 ### Question review
 
