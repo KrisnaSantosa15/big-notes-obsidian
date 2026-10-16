@@ -34,6 +34,7 @@ AWS Services:
 - Amazon Lex: Conversational Chatbots
 - Amazon Poly: Text to Speech (TTS)
 
+
 - Amazon Bedrock: Access to Foundation models + Knowledge bases, agents, guardrails, prompt management
 - Amazon Bedrock AgentCore: managed runtime for securely deploying and scaling AI agent in production
 - Amazon Bedrock Prompt Management: Lets teams version, track, and deploy prompts like code artifacts.
@@ -56,6 +57,10 @@ AWS Services:
 - AWS Glue: fully managed, serverless data integration service designed for extract, transform, and load (ETL) tasks
 - AWS Data Exchange: facilitate the exchange of data between data providers (like ISVs) and data subscribers (like the AI company)
 - Amazon Nova Canvas: generate images
+- Amazon Nova Micro: text-only, context only 128K
+- Amazon Nova Lite: multimudal, context 300k
+- Amazon Nova Pro: multimodal, context 300K
+- Amazon Nova Premier: multimodal, context 1M
 - Amazon CloudFront: content delivery network (CDN) that securely delivers content with low latency and high transfer speeds over the public internet.
 - Amazon Bedrock PartyRock: free, web-based, hands-on generative AI application-building playground. It is specifically designed to allow users to learn about and experiment with generative AI and prompt engineering in an intuitive, code-free environment
 - Amazon Rekognition: managed service for image and video analysis
