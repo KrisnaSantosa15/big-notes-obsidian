@@ -7,7 +7,7 @@ Main Resources:
 Source: https://magazine.sebastianraschka.com/p/understanding-and-coding-self-attention
 # Inference Optimization
 
-![[Pasted image 20261016100346.png]]
+![[LLM-Inference-Optimization-Diagram.png]]
 ## KV Cache
 
 KV Cache merupakan sebuah mekanisme untuk menyimpan Key dan Value hasil kalkulasi representasi ketika melakukan inference supaya ketika token generation berikutnya bisa menggunakan token yang sama, sehingga prosesnya tidak berat dan memakan biaya kalkulasi lagi.
