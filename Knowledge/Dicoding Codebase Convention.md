@@ -436,3 +436,23 @@ public function markAsUsed(int $userId, int $tokenId): void
 ```
 
 Pakai varian lain di class yang sama sesuai kebutuhan: `renderCodeSafelyForEditing()` khusus buat isi widget rich-editor (Froala), `renderCodeSafelyForViewing()` kalau butuh allowed data attribute tertentu.
+
+## 23. Tulis exception message (translation key) lengkap, jangan disambung dari konstanta prefix
+
+Tulis key `DOMAIN.FEATURE.ERROR_NAME` utuh di setiap `throw` dan di assertion test. Jangan bikin konstanta prefix lalu disambung (`self::ERROR . 'NO_ROWS'`). Alasannya: kalau key-nya utuh, nyari key dari `lang/*/exception.php` di IDE langsung ketemu tempat throw dan test-nya. Kalau disambung, pencarian itu gak nemu apa-apa.
+
+```php
+// Salah, dari Dicoding/Domain/AcademicProgramDashboard/Aggregates/SupervisedStudentCreation.php
+private const string ERROR = 'ACADEMIC_PROGRAM_DASHBOARD.SUPERVISED_STUDENT_CREATION.';
+
+throw new InvariantException(self::ERROR . 'NO_STUDENTS');
+
+// Benar, dari Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantImport.php
+throw new InvariantException('ACADEMIC_PROGRAM_DASHBOARD.PARTICIPANT_IMPORT.NO_ROWS');
+```
+
+Di unit test juga sama, `expectExceptionMessage()` dan `reason` baris gagal ditulis utuh:
+```php
+// Benar, dari app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/ParticipantImportTest.php
+$this->expectExceptionMessage('ACADEMIC_PROGRAM_DASHBOARD.PARTICIPANT_IMPORT.NOT_ADMIN');
+```
