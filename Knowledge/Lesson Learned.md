@@ -28,3 +28,9 @@ deck composer full-acceptance (opsional, untuk memastikan error yang terjadi di 
    Setelah itu recreate container web (`docker compose up -d --force-recreate web`, tidak perlu rebuild image), dan chown balik file-file yang kadung kepunya `www-data` (`docker exec -u root dicoding-web-1 sh -c "find /var/www/DICODING_ENV /var/www/DICODING_LOGS -user www-data -exec chown deck:www-data {} \;"`).
    Bonus temuan: exception permission ini bisa nge-trigger bug lain — `DomainEventLogWriter::writeLog()` (`Dicoding/Infrastructure/Logging/Writer/DomainEventLogWriter.php`) push handler baru ke Logger sebelum nulis, dan pop lagi sesudahnya, TANPA try/finally. Kalau proses nulis log-nya throw (misal karena masalah permission di atas), `popHandler()` ke-skip dan handler stack Logger korup buat sisa proses/request itu — di test, ini nongol sebagai `Call to undefined method Monolog\Handler\RotatingFileHandler::getRecords()` di assertion test yang harusnya baca `TestHandler` mock. Bug ini pre-existing (bukan disebabkan migrasi), belum diperbaiki, dan sebaiknya jadi issue terpisah kalau mau dibenerin di kode.
    Catatan tambahan: setelah rebuild image lewat `deck build web`/`deck install`, jalankan `deck composer dump-autoload -o` kalau ada test gagal dengan error "Target class [...] does not exist" — tanda classmap Composer basi.
+
+5. Kalau muncul error setelah `git pull` master atau setelah `/sync` dengan Claude plugins, coba jalankan ini dulu sebelum debugging lebih jauh (biasanya penyebabnya autoload, vendor, atau cache view/config yang basi):
+   ```
+   deck composer dump-autoload && deck composer install && deck art cache:clear && deck art view:clear && deck fp
+   ```
+   Kalau tidak ada error, tidak perlu dijalankan.

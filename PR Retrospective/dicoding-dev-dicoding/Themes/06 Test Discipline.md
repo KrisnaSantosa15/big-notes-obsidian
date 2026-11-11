@@ -1,6 +1,16 @@
 ---
-tags: [pr-retro, theme/testing, severity/high]
-prs: ["#5078", "#5033", "#5104", "#5132", "#5268", "#5335"]
+tags:
+  - pr-retro
+  - theme/testing
+  - severity/high
+prs:
+  - "#5078"
+  - "#5033"
+  - "#5104"
+  - "#5132"
+  - "#5268"
+  - "#5335"
+  - "#6359"
 status: recurring
 ---
 
@@ -39,6 +49,14 @@ Multiple distinct sub-issues, all under "what should this test actually cover, a
 ### 7. Hard-to-mock time source
 **PR #5335** — agissept: "Coba di ganti ke Carbon semua supaya bisa di-mock" — native `DateTime`/timestamp calls mixed into domain code that should consistently use `Carbon`, so tests can freeze or mock the current time instead of depending on the wall clock.
 
+
+### 8. Action hidden in `beforeEach` (break AAA structure)
+**PR #6359** (`frontend/src/pages/campaigns/pijak/institution-field.test.ts`) — dimasmds:
+> "Aku sempat bingung tadi baca test ini. Sempat mengira test ini gak valid karena di scenario testingnya gak terlihat kode production yang dijalankan, eh ternyata ada di sini. Kalo bisa next strukturkan action di test dengan jelas. Testing yang baik itu strukturnya AAA."
+> "action dari test ini yang aku pahami ada di `setupInstitutionField()` jadi kalo bisa pemanggilan itu ditulis aja di body testingnya jangan di beforeEach (gak kelihatan dan biasanya digunakan untuk prep)."
+
+AAA = **Arrange** (siapkan data/DOM pendukung skenario) → **Act** (jalankan kode production yang ditest) → **Assert** (validasi efeknya). `beforeEach` hanya untuk Arrange bersama; pemanggilan kode yang ditest harus terlihat di body tiap test. Ref: https://semaphore.io/blog/aaa-pattern-test-automation
+
 ## Why it matters
 Sub-issues 1–2 waste CI time and reviewer attention on cases the test pyramid already handles elsewhere (unit tests for logic branches, one shared `OAuthFilterIntegrationTest` for auth rejection). Sub-issue 3 is a false sense of coverage — asserting fields one at a time silently lets a new, untested field slip through. Sub-issue 4 adds noise that makes reviewers ask "why does this exist" instead of reviewing the actual behavior under test. Sub-issue 6 is a real, named team norm — resolving it wrong repeatedly erodes trust that concerns were actually addressed. Note also [[02 Explicit Failure Over Silent Fallbacks]]: the #5268 bug (logged-out user path never tested) is this same "what should the test actually cover" question, just with a bigger blast radius.
 
@@ -50,6 +68,8 @@ Sub-issues 1–2 waste CI time and reviewer attention on cases the test pyramid 
 - On resolving a review conversation you didn't start: reply once, then let the starter resolve it — or explicitly say "resolved, ping if you still have concerns" so it surfaces without relying on the (non-notifying) resolve button.
 - **Explicit checklist item for logged-out / anonymous flows**: whenever a feature touches something conditionally available to authenticated users, add a test case for the unauthenticated path before shipping — this is the direct lesson from #5268.
 - Any domain code that reads the current time: use `Carbon` consistently (not native `DateTime`/`time()`), so tests can freeze or mock it — see #5335.
+
+- Structure every test as AAA: `beforeEach`/`setUp` is for shared **Arrange** only; the **Act** call (the production function under test, e.g. `setupInstitutionField()`) goes in the test body so a reader sees what is exercised without scrolling up — see #6359.
 
 ## Related
 [[00 Index]] · [[02 Explicit Failure Over Silent Fallbacks]] · [[03 Reuse Before You Build]] · [[10 PR and Team Process Hygiene]]

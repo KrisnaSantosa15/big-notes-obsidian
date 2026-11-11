@@ -26,6 +26,8 @@ A self-review pass to run **before** opening a PR, ordered by how much a miss he
 - [ ] Naming self-check: temporal state (`old`/`new`), boolean predicates (no `get` prefix), file placement matches sibling types, and — if naming a new domain/enum concept — does product/UI copy already use a different term for the same thing? [[08 Naming and File Organization]]
 - [ ] Test self-check: no re-testing of framework-guaranteed behavior (OAuth filter rejection), `assertEqual`/`assertObjectHasPropertyStructure` over field-by-field asserts, no unexplained mocks, negative cases first, no unused imports. [[06 Test Discipline]]
 
+- [ ] AAA check: every test body visibly calls the production code under test (Act); `beforeEach`/`setUp` holds only shared Arrange. [[06 Test Discipline]]
+
 ## During review
 - [ ] If a reviewer's concern is addressed, reply and let them resolve the thread — or explicitly say "resolved, ping if you still have concerns" instead of silently clicking resolve (it doesn't notify them). [[06 Test Discipline]]
 - [ ] If merging two similar-looking features/entities to avoid duplication, state in the PR description what would trigger splitting them later — don't let "they overlap right now" go undocumented. [[11 Entity Boundaries Case Study]]
