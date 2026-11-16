@@ -1,0 +1,9 @@
+# LangFuse correlation is derived from discussion_id, not stored
+
+There is no `request_id`, `trace_id`, or any other correlation column on `forum_ai_assist_answers`. Given a row, the LangFuse trace id is recomputed on demand from the `discussion_id` alone: `substr(hash('sha256', "forum:{$discussionId}"), 0, 32)`.
+
+Storing the `request_id` returned by the `202` was the obvious move and would have bought nothing. That id never comes back — `send_callback()` posts only the Success/Error schema, and `CallbackRequestPayload` exists in `schemas.py` but is never used as an outbound body. More importantly it is not what LangFuse is keyed on. The AI service derives its trace id deterministically (`app/eval/tracing.py::forum_trace_id`, seed `forum:{discussion_id}`) and pins it via `trace_scope`, precisely so that the feedback path can re-derive the same id later without any stored mapping. `Langfuse.create_trace_id(seed)` is the first 16 bytes of the seed's SHA-256 in hex — pure hash, no network — so PHP reproduces it in one line. Verified identical across `langfuse`, Python `hashlib`, and PHP `hash()` for `forum:12345` → `ad78994f16f43191559c16b0694eb141`.
+
+Two consequences. The seed format is now a cross-repo contract: the answer path and the feedback/score path on the AI service both depend on `forum_seed()`, so changing it silently breaks correlation for every historical trace — treat it like a schema migration. And because the seed contains only `discussion_id`, a re-dispatched answer for the same discussion lands on the same trace; that is correct rather than accidental, since the contract allows at most one answer per discussion.
+
+`request_id` is still worth writing to the application log when the `202` comes back — it identifies one delivery attempt, which is occasionally useful when reading the AI service's own logs. It is just not a database column.
