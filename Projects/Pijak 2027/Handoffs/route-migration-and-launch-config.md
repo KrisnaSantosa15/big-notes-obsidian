@@ -1,3 +1,12 @@
+---
+date: 2026-11-11
+updated: 2026-11-11
+type: handoff
+tags: [handoff, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Handoff Pijak 2027: migrasi route `pijak2027` ke `pijak` dan config production launch
 
 Ditulis 2026-11-05. Pendaftaran Pijak 2027 dibuka **2026-11-12 00:00** (`registration_opened_at`). Backlog lengkap ada di

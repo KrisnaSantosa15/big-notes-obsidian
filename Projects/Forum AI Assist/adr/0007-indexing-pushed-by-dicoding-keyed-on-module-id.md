@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "dicoding.com pushes index deltas; the AI service keys them on module_id"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # dicoding.com pushes index deltas; the AI service keys them on module_id
 
 Course material and solved discussion Q&A reach the AI service because dicoding.com POSTs a ZIP on `CourseTutorialWasSetAsPublished` and on a discussion being marked solved. The AI service never pulls. Each push carries only what changed — one module, one discussion — and the AI service upserts it, keyed on `module_id` (courses) or `discussion_id` (discussions), with matching DELETE endpoints for removal.

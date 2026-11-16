@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "Whether to widen a shared event or look its data up is decided by raiser count"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Whether to widen a shared event or look its data up is decided by raiser count
 
 Two existing events needed a `course_id` they do not carry, and we resolved them in opposite directions. `CourseTutorialWasSetAsReady` gains a `courseId` constructor argument plus getters. `AcademyDiscussionWasUpdated` is left alone and the listener queries for `course_id` instead.

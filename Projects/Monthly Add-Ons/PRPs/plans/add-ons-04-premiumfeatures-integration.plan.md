@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: plan
+tags: [plan, prp, dicoding, monthly-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Plan: Add-Ons — Phase 4: PremiumFeatures Integration — Enroll on Purchase
 
 ## Summary

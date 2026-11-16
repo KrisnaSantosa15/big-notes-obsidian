@@ -1,3 +1,12 @@
+---
+date: 2026-10-20
+updated: 2026-10-20
+type: prd
+tags: [prd, brief, dicoding, apd]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 ## **Ringkasan**
 
 Academic Program Dashboard (APD) akan dipindahkan dari Google Sheets, Apps Script, dan Firebase ke *codebase* Dicoding dengan MariaDB sebagai basis datanya. *Campaign* pertama yang menggunakan sistem baru adalah AI Camp pada Januari 2027\.

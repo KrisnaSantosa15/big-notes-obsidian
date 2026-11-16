@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: guide
+tags: [guide, learning, dicoding, dicoding-platform]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Academy & Challenge Discussion Guide
 
 Dokumen ini menjelaskan fitur discussion (akademi dan challenge) di Dicoding secara end-to-end, dimulai dari behavior user, route, alur eksekusi kode, sampai cara mereplikasi pola implementasinya untuk fitur baru.

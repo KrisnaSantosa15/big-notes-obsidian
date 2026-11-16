@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: spec
+tags: [spec, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Pijak 2027 — Perbaikan UAT Form Registrasi
 
 Rencana perbaikan untuk 12 temuan UAT (2026-09-28) atas form registrasi Pijak 2027

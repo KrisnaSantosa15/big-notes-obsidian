@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "Forum AI Assist is its own bounded context with its own answer table"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Forum AI Assist is its own bounded context with its own answer table
 
 The AI answer lives in a dedicated `forum_ai_assist_answers` table under a top-level `Dicoding/Domain/ForumAiAssist/` namespace — not as a row in `course_discussion_comments_new`, and not nested under `Dicoding/Domain/DeveloperJourney/`.

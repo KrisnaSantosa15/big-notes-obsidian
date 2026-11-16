@@ -1,3 +1,12 @@
+---
+date: 2026-11-05
+updated: 2026-11-05
+type: spec
+tags: [spec, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Pijak 2027 - Perbaikan UAT 2
 
 Rencana dan status perbaikan temuan UAT 2 (2026-11-02). Sumber feedback:

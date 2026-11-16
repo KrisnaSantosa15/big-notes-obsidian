@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: spec
+tags: [spec, dicoding, daily-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Daily Add-On Token Redemption — Implementation Plan
 claude --resume 1424b7de-b933-44b4-a815-0fd7ec78e96f
 

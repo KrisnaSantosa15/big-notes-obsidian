@@ -1,3 +1,12 @@
+---
+date: 2026-10-26
+updated: 2026-10-26
+type: meeting
+tags: [meeting, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 ## Nabila Putri Ananda Sari
 - [Want to confirm] Logo terlihat tidak sejajar dengan sapaan salam. Apakah bisa dibuat lebih sejajar dengan kata atasnya?
 - [Want to confirm] Apakah possible ketika checklist setuju belum unchecked, maka button “kirim formulir” disable, tujuannya supaya aware dari awal meskipun secara behaviour langsung diarahkan menuju error state ketika ada field yang belum terisi

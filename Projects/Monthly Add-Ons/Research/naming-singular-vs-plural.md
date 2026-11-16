@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: research
+tags: [research, dicoding, monthly-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Naming brainstorm: singular vs plural for "Add-On(s)"
 
 Personal learning notes — not part of the committed domain docs. Captures the reasoning behind why `MonthlyAddOns` (plural bounded context) contains singular entities like `MonthlyAddOnPurchase`, and an open question about `EventListener` naming that came out of checking real precedent in this codebase instead of just theorizing.

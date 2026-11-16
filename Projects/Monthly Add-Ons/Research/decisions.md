@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: research
+tags: [research, dicoding, monthly-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Add-Ons — Decision Log
 
 Running log of decisions and open questions from the Add-Ons grilling session. Not a spec — captures *what was decided/parked and why*, in the order it came up.

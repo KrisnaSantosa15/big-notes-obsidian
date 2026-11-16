@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: plan
+tags: [plan, backlog, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Pijak 2027 — Gathering Implementasi
 
 > Dokumen ini merangkum hasil analisis perbandingan antara brief **"Pijak 2027 - Brief Landing Page & Registration"** dengan implementasi **PijakFlash** (yang aktif sekarang) dan pola-pola yang sudah ada di domain scholarship lain (Asah, Bangkit, CodingCamp, legacy IBM SkillsBuild). Fokus dokumen ini adalah **brief**, bukan notes diskusi rapat — item dari notes diskusi ditaruh terpisah di bagian akhir sebagai catatan yang ditunda.

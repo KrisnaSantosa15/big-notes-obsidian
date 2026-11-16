@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: report
+tags: [report, prp, dicoding, monthly-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Implementation Report: Add-Ons — Phase 1: Domain Layer
 
 ## Summary

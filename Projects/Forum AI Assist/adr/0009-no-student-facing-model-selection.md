@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "Forum AI Assist sends no provider, model, persona or reasoning hint"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Forum AI Assist sends no provider, model, persona or reasoning hint
 
 Every outbound request to `POST /api/v1/forum-ai/answers` omits `provider`, `model_name`, `persona` and `reasoning_effort`, letting the AI service fall back to its own `DEFAULT_PROVIDER` / `DEFAULT_MODEL`. There is no model picker, no `SelectModelAction`, no config key for a default model on the PHP side.

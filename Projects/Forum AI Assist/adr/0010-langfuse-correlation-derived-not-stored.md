@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "LangFuse correlation is derived from discussion_id, not stored"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # LangFuse correlation is derived from discussion_id, not stored
 
 There is no `request_id`, `trace_id`, or any other correlation column on `forum_ai_assist_answers`. Given a row, the LangFuse trace id is recomputed on demand from the `discussion_id` alone: `substr(hash('sha256', "forum:{$discussionId}"), 0, 32)`.

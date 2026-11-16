@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "Quota uses the PremiumFeature system under ACADEMY_SUBSCRIPTION, measured in requests"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Quota uses the PremiumFeature system under ACADEMY_SUBSCRIPTION, measured in requests
 
 Forum AI Assist registers in `app/config/premium_feature_configs.php` as `forum-ai-assist`, with `feature_subscribed_to: [SubscriptionType::ACADEMY_SUBSCRIPTION]` and `unit_measurement: REQUEST` at a flat rate of 1 per successful answer. No bespoke usage table, no new `SubscriptionType` case, no `DailyAddOnType` mapping.

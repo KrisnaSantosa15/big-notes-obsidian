@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: handoff
+tags: [handoff, dicoding, daily-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Handoff — Daily Add-On Token Issuance/Redemption: PR #0–#3 done, #4–#8 remaining
 
 **Date:** 2026-08-24

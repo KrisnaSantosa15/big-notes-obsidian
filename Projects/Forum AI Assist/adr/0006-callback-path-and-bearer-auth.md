@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "The callback lives at /api/v1/forum-ai/callback and authenticates by shared bearer"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # The callback lives at /api/v1/forum-ai/callback and authenticates by shared bearer
 
 dicoding.com exposes `POST /api/v1/forum-ai/callback`, with no `auth` or `csrf` filter; the Action validates `Authorization: Bearer` against `config('forum_ai_assist.callback_auth_bearer')`.

@@ -1,3 +1,12 @@
+---
+date: 2026-11-05
+updated: 2026-11-05
+type: handoff
+tags: [handoff, dicoding, apd]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Handoff: APD card [4] mapping Lecturer ke Student
 
 Terakhir diperbarui 2026-11-05. Rujukan utama: [implementation-backlog.md](../../domains/academic-program-dashboard/implementation-backlog.md)

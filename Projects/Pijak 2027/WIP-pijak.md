@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: plan
+tags: [plan, backlog, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # WIP PIJAK 2027
 
 1. Narasi dan gambar bagikan ke linkedin perlu diperbarui

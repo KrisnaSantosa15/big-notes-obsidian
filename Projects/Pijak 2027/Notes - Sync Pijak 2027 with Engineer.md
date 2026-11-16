@@ -1,3 +1,12 @@
+---
+date: 2026-10-19
+updated: 2026-10-19
+type: meeting
+tags: [meeting, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 ## Oct 14, 2026 | [Sync Pijak 2027 with Engineer](https://www.google.com/calendar/event?eid=N2pzcGo0ZW9lOGJwamYwaDZlN2E4NGgyaHAgd2ludGFyaUBkaWNvZGluZy5jb20)
 
 Attendees: [Dimas Saputra](mailto:dimas@dicoding.com) [Krisna Santosa](mailto:krisna@dicoding.com) [Wintari Yasmin](mailto:wintari@dicoding.com)

@@ -1,3 +1,12 @@
+---
+date: 2026-11-04
+updated: 2026-11-04
+type: handoff
+tags: [handoff, dicoding, apd]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Handoff: APD participants (card [3] dan sisa card [6])
 
 Terakhir diperbarui 2026-11-04 (status PR). Catatan desain sesi 2026-10-29 di bawah tetap berlaku (K23 sampai K27). Rujukan utama: [implementation-backlog.md](../../domains/academic-program-dashboard/implementation-backlog.md)

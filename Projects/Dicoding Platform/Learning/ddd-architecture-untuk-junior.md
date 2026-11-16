@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: guide
+tags: [guide, learning, dicoding, dicoding-platform]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Belajar DDD Architecture dari Codebase Dicoding (Panduan Junior)
 
 Dokumen ini menjelaskan **konsep DDD (Domain-Driven Design)** sampai **contoh implementasi nyata** berdasarkan codebase ini.

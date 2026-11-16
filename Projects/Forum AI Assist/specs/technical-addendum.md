@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: spec
+tags: [spec, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # PRD — Forum AI Assist: Technical Addendum
 
 **Melengkapi:** [prd.md](../prd.md)

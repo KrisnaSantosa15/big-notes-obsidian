@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: research
+tags: [research, dicoding, monthly-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Add-Ons — Context
 
 Domain language for the Add-Ons exploration: purchasable entitlements (Sabak, Learning with AI) that a user can buy independently of a subscription. This is a research/exploration doc — nothing here is final until the feature is implemented; treat it as a running decision log for the grilling session, not a spec.

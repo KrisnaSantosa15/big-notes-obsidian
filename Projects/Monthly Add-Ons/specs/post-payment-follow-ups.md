@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: spec
+tags: [spec, dicoding, monthly-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Add-Ons — Post-Payment Follow-Ups (Email, Redirect, History)
 
 Implementation plan for three gaps raised in code review of the `feature/monthly-add-ons/upgrade-modal-ui`

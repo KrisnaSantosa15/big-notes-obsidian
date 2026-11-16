@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "Indexing success is verified by bounded polling, with not_indexed as the backstop"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Indexing success is verified by bounded polling, with not_indexed as the backstop
 
 After `POST /index/...` returns a `job_id`, the queued Specification polls `GET /api/v1/index/{type}/status/{job_id}` with backoff (2s → 4s → 8s → 16s, ~30s total). `done` logs the chunk count; `error` is reported as a real failure; still `queued`/`processing` at the end of the budget is logged as *unverified* and is explicitly not an alarm.

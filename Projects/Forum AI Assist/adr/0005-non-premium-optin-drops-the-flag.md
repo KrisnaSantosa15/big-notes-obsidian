@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "A rejected opt-in drops the flag; it never rejects the discussion"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # A rejected opt-in drops the flag; it never rejects the discussion
 
 When a non-Premium student, or a Premium student whose quota is exhausted, submits a discussion with `ai_assist_enabled=true`, the discussion is created normally with `ai_assist_enabled` persisted as false. No `forum_ai_assist_answers` row, no queue job, no error.

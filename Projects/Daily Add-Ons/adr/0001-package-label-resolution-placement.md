@@ -1,3 +1,14 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "Where Should Daily Add-On Package Label Lookup Live?"
+status: proposed
+tags: [adr, decision, dicoding, daily-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # ADR-0001: Where Should Daily Add-On Package Label Lookup Live?
 
 - **Status:** Proposed

@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "Quota is validated at the Web layer and consumed on the callback, never inside a queued Specification"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Quota is validated at the Web layer and consumed on the callback, never inside a queued Specification
 
 `PremiumFeature::isEnabled()` / `isLimitExhausted()` are called from `AcademyDiscussionStoreAction` while the student's session is live. `PremiumFeature::consume()` is called from the webhook callback Action, on the success path only, with the `student_id` read from the `forum_ai_assist_answers` row.

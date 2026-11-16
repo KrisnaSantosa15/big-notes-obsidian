@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: spec
+tags: [spec, dicoding, daily-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Daily Add-On Token Admin — v3 UI Migration Plan
 
 Migrate the daily-add-on token admin pages (`index`/`create`/`edit`) from the

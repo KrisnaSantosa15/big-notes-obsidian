@@ -1,3 +1,12 @@
+---
+date: 2026-11-11
+updated: 2026-11-11
+type: plan
+tags: [plan, backlog, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Pijak 2027: Backlog Implementasi dan Bahan Cross Check
 
 Dibuat 2026-10-01 dari pembacaan enam dokumen sumber dan pengecekan langsung ke kode. Dokumen ini snapshot: verifikasi ulang

@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "Aggregate-raised domain events are never auto-dispatched outside a UseCase Command Bus flow"
+tags: [adr, decision, dicoding, monthly-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Aggregate-raised domain events are never auto-dispatched outside a UseCase Command Bus flow
 
 `DailyAddOnEntitlement::grant(int $days)` (`Dicoding/Domain/DailyAddOns/Aggregates/DailyAddOnEntitlement.php:22`) raises `DailyAddOnPurchaseWasCompletelyPaid` via `$this->raise(...)`. `raise()` (from `Laracasts\Commander\Events\EventGenerator`, used through `Dicoding\Domain\Common\EventRaisableObject`) only buffers the event into the aggregate's internal `pendingEvents()` array — it never touches Laravel's event dispatcher. The event only reaches listeners (`DailyAddOnEventMailer`, `DailyAddOnEventListener`) once something explicitly does:

@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: research
+tags: [research, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Forum AI Assist — Decision Log
 
 > **Superseded — historical record only.** These decisions have been promoted to `docs/domains/forum-ai-assist/adr/`, where several were revised after the implementation plan was verified against the codebase. Where the two disagree, the ADRs win. Notably: the trigger event is `AcademyDiscussionWasCreated`, not a discussion-created-with-opt-in event (ADR-0002); the callback path is `/api/v1/forum-ai-assist/callback` (ADR-0006); and the table is `forum_ai_assist_answers` (ADR-0001).

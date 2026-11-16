@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: meeting
+tags: [meeting, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 ## Sep 7, 2026 | [Diskusi terkait registration flow Pijak X AI Camp](https://www.google.com/calendar/event?eid=N3NvNDl1NnFpYzhlbWtwczc2cHJ2M3U5OWggd2ludGFyaUBkaWNvZGluZy5jb20)
 
 Attendees: [Dimas Catur Wibowo](mailto:catur@dicoding.com) [Dimas Saputra](mailto:dimas@dicoding.com) [Feni Astuti](mailto:feni@dicoding.com) [Wintari Yasmin](mailto:wintari@dicoding.com)

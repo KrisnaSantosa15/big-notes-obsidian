@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: research
+tags: [research, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Forum AI Assist — Context
 
 Domain language for the Forum AI Assist exploration: an opt-in, async AI-generated first response on class forum discussions, built by a separate AI Service and integrated into dicoding.com's forum feature. This is a research/exploration doc — nothing here is final until the feature is implemented; treat it as a running decision log for the grilling session, not a spec. **Superseded** by `docs/domains/forum-ai-assist/context.md`, which carries this vocabulary forward in full; keep this file only as a record of the exploration. PRD: `docs/domains/forum-ai-assist/prd.md`.

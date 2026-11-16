@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: reference
+tags: [reference, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Forum AI Assist — Context
 
 Domain language for the Forum AI Assist feature ([prd.md](./prd.md) + [specs/technical-addendum.md](./specs/technical-addendum.md)). This is a bounded context within the Dicoding platform; terms here may differ from the broader Dicoding domain.

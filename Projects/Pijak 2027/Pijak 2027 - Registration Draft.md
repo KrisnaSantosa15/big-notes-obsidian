@@ -1,3 +1,12 @@
+---
+date: 2026-10-21
+updated: 2026-10-21
+type: prd
+tags: [prd, brief, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 **Tab ini digunakan untuk Pijak 2027 \- Wave 1**  
 **Silakan akses draft sesuai dengan subtab yang dibutuhkan** 
 

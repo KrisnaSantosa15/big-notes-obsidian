@@ -1,3 +1,12 @@
+---
+date: 2026-11-05
+updated: 2026-11-05
+type: plan
+tags: [plan, backlog, dicoding, apd]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Revamp APD: Backlog Implementasi Krisna
 
 Dibuat 2026-10-23 dari brainstorming card APD milik Krisna, terakhir diperbarui 2026-10-29. Dokumen ini snapshot:

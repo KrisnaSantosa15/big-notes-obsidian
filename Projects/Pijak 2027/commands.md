@@ -1,3 +1,12 @@
+---
+date: 2026-11-11
+updated: 2026-11-11
+type: reference
+tags: [reference, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Pijak 2027: Daftar Command
 
 Diperbarui 2026-11-11. Semua command dijalankan lewat `deck art <command>` di local. Di production, jalankan `php artisan <command>`

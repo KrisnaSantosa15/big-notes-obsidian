@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: spec
+tags: [spec, dicoding, daily-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Sabak Checkout Card Restyle — Implementation Plan
 
 Restyle Sabak's package picker on `daily-add-ons-checkout.blade.php` from a plain

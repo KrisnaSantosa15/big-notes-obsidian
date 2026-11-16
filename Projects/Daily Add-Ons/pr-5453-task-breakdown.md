@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: plan
+tags: [plan, backlog, dicoding, daily-add-ons]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # PR #5453 (`feature/monthly-add-ons/upgrade-modal-ui`) — Breakdown Task
 
 Review [PR #5453](https://github.com/dicoding-dev/dicoding/pull/5453) menghasilkan 12 thread review.

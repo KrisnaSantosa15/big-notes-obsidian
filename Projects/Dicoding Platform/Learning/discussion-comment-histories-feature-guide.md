@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: guide
+tags: [guide, learning, dicoding, dicoding-platform]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Implementasi Lengkap SSR Histori Komentar Diskusi (User + Admin)
 
 Dokumen ini berisi **implementasi penuh** (bukan skeleton), dengan format:

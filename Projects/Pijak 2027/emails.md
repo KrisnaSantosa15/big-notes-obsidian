@@ -1,3 +1,12 @@
+---
+date: 2026-10-27
+updated: 2026-10-27
+type: reference
+tags: [reference, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # **Draft Auto Reply by Engineer Team**
 
 ### **Kondisi setelah isi Registration Form**

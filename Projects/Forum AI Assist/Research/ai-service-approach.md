@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: research
+tags: [research, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Forum AI Assist — Eksplorasi Pendekatan AI Service
 
 **Berdasarkan:** Card Basecamp "[10][P2][KPI-10][FAA][LX35] Eksplorasi pendekatan AI Service untuk Forum AI Assist" (Krisna Santosa)

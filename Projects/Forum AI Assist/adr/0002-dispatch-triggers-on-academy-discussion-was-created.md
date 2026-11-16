@@ -1,3 +1,13 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: adr
+decision: "Dispatch listens to AcademyDiscussionWasCreated, not NewCourseDiscussionWasCreated"
+tags: [adr, decision, dicoding, forum-ai-assist]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
 # Dispatch listens to AcademyDiscussionWasCreated, not NewCourseDiscussionWasCreated
 
 The listener that queues an AI request reacts to `AcademyDiscussionWasCreated`, raised by `NewDiscussionRepository::saveNewDiscussion()` after the insert returns an id. It carries only `discussion_id`, so the listener looks the discussion row up to get everything else.

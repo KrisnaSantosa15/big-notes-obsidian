@@ -1,3 +1,12 @@
+---
+date: 2026-10-13
+updated: 2026-10-13
+type: reference
+tags: [reference, template, dicoding, pijak2027]
+related-projects: ["[[Projects/Dicoding Platform]]"]
+related-people: ["[[People/Krisna]]"]
+ai-first: true
+---
   
 **Surat Komitmen Peserta**  
 **Program Pijak 2027 in collaboration with IBM SkillsBuild**
