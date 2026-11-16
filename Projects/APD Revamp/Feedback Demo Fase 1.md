@@ -20,12 +20,27 @@ Demo 13 Nov 2026, hanya item milik Krisna. Sumber: [Demo APD (Google Doc)](https
 
 **Tanpa card**
 
-- [ ] Ganti narasi "import mapping" → [#6319](https://github.com/dicoding-dev/dicoding/pull/6319)
+- [x] Ganti narasi "import mapping" jadi "Import supervised students" → [#6319](https://github.com/dicoding-dev/dicoding/pull/6319)
 - [x] Link [APD Import Template](https://docs.google.com/spreadsheets/d/1fdLxbSePC0NVPFcL-03uwleyKDoj0nIKNKuQc1PRPNU/edit?usp=sharing) di dialog import
-- [ ] Bulk assign/unassign lecturer → scope card [4], PR baru di atas #6319
+- [x] Bulk assign/unassign lecturer → bulk assign lewat dialog Add students, bulk remove di [#6301](https://github.com/dicoding-dev/dicoding/pull/6301)
 - [ ] CSV student terima kolom group → sepakati dulu dengan Alfian
-- [ ] Diskusi UI/UX flow sync peserta dan mapping lecturer
+- [x] Diskusi UI/UX flow sync peserta dan mapping lecturer
 - [x] Program tanpa APD ikut tersync? Tidak: enrollment gagal `CAMPAIGN_NOT_FOUND` kalau program belum punya campaign
+
+## Hasil diskusi UI/UX
+
+**Narasi**
+
+- [ ] Students: "Import CSV" → "Import students"
+- [x] Lecturers: "Import mappings" → "Import supervised students" ([#6319](https://github.com/dicoding-dev/dicoding/pull/6319))
+- [x] Manage students lecturer: "Unmap from lecturer" → "Remove" ([#6301](https://github.com/dicoding-dev/dicoding/pull/6301))
+- [ ] Modal remove student: tombol "Remove" jadi outline (putih), "Cancel" jadi "Keep" (hitam) ([#6301](https://github.com/dicoding-dev/dicoding/pull/6301)) → ditunda, modal APD lain belum ada yang dibalik (Cancel outline, konfirmasi solid)
+
+**Layout header (Students, Lecturers, Manage students)**: ditunda, layout tombol tetap seperti sekarang
+
+- [ ] Baris heading hanya berisi judul
+- [ ] Baris kedua: search pendek (ikon kaca pembesar di dalam input), lalu dropdown category dan jumlah row
+- [ ] Di baris yang sama, rata kanan: total ("50 students"), Sync students, Import students, Add student
 
 ## Keputusan desain
 
@@ -40,7 +55,7 @@ Demo 13 Nov 2026, hanya item milik Krisna. Sumber: [Demo APD (Google Doc)](https
 
 ## Urutan kerja
 
-1. Narasi di #6319
+1. Narasi "Remove" (#6301), lalu narasi di #6319
 2. Bulk assign/unassign lecturer
 3. Card Email autocomplete
 4. Card Ops edits participant + bulk remove access
