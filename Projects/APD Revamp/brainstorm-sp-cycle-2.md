@@ -23,34 +23,82 @@ Hasil brainstorm estimasi SP untuk card Revamp APD milik Krisna yang masih di Pl
 | Card | SP | Status brainstorm |
 | --- | --- | --- |
 | [Email autocomplete in the add-participant form](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720) | 1 | Selesai |
-| [Ops edits a campaign participant](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711) | 3-4 (draft) | B6 terjawab (2026-11-17): Withdraw dan Terminated sama-sama `accessible_until = now()` dan token MCT di-*ended*. Sisa keputusan: lihat bagian 2, "Pembaruan 2026-11-17" |
+| [Ops edits a campaign participant](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711) | 4 | Selesai. Edit kategori, periode akses, Program User ID, dan learning path. Keluarkan peserta = `exit_reason` + `accessible_until` + dropout MCT. Daftar field final (P2) diputuskan bersama tim. Bergantung ke card Course progress (tabel learning path) |
 | [Map Facilitators to the groups they accompany](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894512) | 2 | Selesai |
-| [Ops manages Students' progress status](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257815) | 2 (draft) | Ops sudah menjawab: status dihitung otomatis, tidak pernah manual. Usulan input manual (D1-D9) diganti kalkulasi otomatis. Menunggu keputusan Q1-Q4 di bagian 4 |
-| [Course progress is calculated automatically from Dicoding learning data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784) | 3 (draft) | Opsi A ditambah kolom `target_week` (dipakai juga card status), plus filter periode program dan NEED RENEW dari Hasbi. Menunggu keputusan Q2 dan Q5 |
-| [Facilitator see the progress of their supervised Students](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257765) | 2 (draft) | Draft brainstorm di bagian 8. Menunggu card tampilan Student dan attendance yang belum ada assignee |
+| [Ops manages Students' progress status](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257815) | 2 | Selesai. Kalkulasi otomatis. Kolom status dan course "x/y lulus" di daftar peserta admin. AC card perlu ditulis ulang |
+| [Course progress is calculated automatically from Dicoding learning data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784) | 5 (ditetapkan Krisna) | Selesai. Setup learning path dan course, `learning_path_id` peserta, pemetaan auto-enroll termasuk TODO kategori [6], NEED RENEW, dan freeze. Estimasi Claude 5,5 (lihat bagian 5). Dikerjakan paling awal |
+| [Facilitator see the progress of their supervised Students](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257765) | 2 (draft) | Di-hold sampai semua dependensi selesai (P16-P19). SP belum diisi di judul card |
 | [Admin manages important links](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257862) | 4 | Selesai |
-| [Students see important links](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257869) | 2 | Sepakat. Terblokir kerangka halaman Student (card Hasbi) dan TODO kategori card [6]. Sisa konfirmasi G8 (saklar fitur) |
-| TODO kategori card [6] (belum ada card) | ~1 (draft) | Harus diselesaikan (G7). Bentuk pekerjaan belum ditentukan |
+| [Students see important links](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257869) | 2 | Selesai. Terblokir kerangka halaman Student (card Hasbi) dan TODO kategori (masuk card Course progress) |
+| **Total** | **22** | Termasuk card Fasilitator (draft) |
+
+SP di judul card Basecamp sudah disamakan dengan tabel ini (2026-11-18), kecuali card Fasilitator yang belum diisi.
 
 ### Perubahan assignee (2026-11-17)
 
 - Krisna sempat mengambil card progress status dan melepas [Facilitator see the progress of their supervised Students](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257765). Belakangan card Fasilitator **kembali ke Krisna**, jadi Krisna memegang keduanya (8 card aktif Cycle-2, ditambah Map Lecturers In Review).
-- Kolom per 2026-11-17 (dicek ulang sore): semua card Cycle-2 Krisna di Exploring, kecuali card Fasilitator yang masih di Planning. Map Lecturers di In Review.
+- Kolom per 2026-11-18: semua card Cycle-2 Krisna di Exploring, kecuali card Fasilitator yang masih di Planning. Map Lecturers di In Review.
 - Ketergantungan card Fasilitator yang masih terbuka: [Students see their learning progress in APD](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257746) dan [Ops manages Students' attendance data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257792), keduanya belum ada assignee. Detail Student di view Fasilitator memakai komponen tampilan Student, jadi card tampilan Student sebaiknya dipegang Krisna juga atau dikerjakan lebih dulu.
 - Sumber data card Fasilitator sebagian besar milik Krisna sendiri: course progress (bagian 5), status (bagian 4), dan mapping Fasilitator (C4, C8).
 
-### Keputusan yang menunggu jawaban (2026-11-17)
+### Keputusan yang menunggu jawaban
 
-Dirangkum dari bagian 2, 4, dan 5. Akan dijawab bersama.
+Diperbarui 2026-11-18.
 
-| # | Pertanyaan | Bagian |
-| --- | --- | --- |
-| Q1 | Definisi LB: `target(N-1) ≤ lulus < target(N)`? Cocokkan dengan link "Referensi perhitungan status progres" dari Ops (link belum ter-paste) | 4 |
-| Q2 | Kelas yang dihitung lulus: hanya course di daftar learning path dan yang selesai dalam periode program? | 4, 5 |
-| Q3 | Status sebelum minggu ke-1 dan setelah `close_at`: dibekukan di minggu terakhir atau tidak ditampilkan? | 4 |
-| Q4 | Peserta withdraw/terminated di daftar admin dan Fasilitator: label "Inactive" (dari `accessible_until` < `close_at`) atau disembunyikan? | 2, 4, 8 |
-| Q5 | Filter periode program dan NEED RENEW di Course progress: masuk card ini atau ditunda? | 5 |
-| Q6 | Mengakhiri token MCT saat withdraw/terminated: sudah ada use case-nya atau perlu dibuat? Menentukan SP card Ops edits (3 atau 4) | 2 |
+| # | Pertanyaan | Bagian | Status |
+| --- | --- | --- | --- |
+| Q1 | Definisi LB | 4 | ✅ Rumus Ops cukup |
+| Q2 | Kelas yang dihitung lulus | 4, 5 | ✅ Course learning path program yang selesai atau di-renew dalam periode |
+| Q3 | Status di luar periode | 4 | ✅ Dibekukan setelah `close_at`. Progress sebelum program hanya terhitung kalau < 100% |
+| Q4 | Peserta yang dikeluarkan di daftar admin dan Fasilitator | 2, 4, 8 | ✅ Tetap tampil, label "Inactive" |
+| Q5 | Filter periode dan NEED RENEW | 5 | ✅ Masuk card Course progress |
+| Q6 | Pengakhiran token MCT | 2 | ✅ Dropout penuh. "ENDED saja" tidak mencabut akses kelas |
+| Q7 | Pecah card Course progress? | 5 | ✅ Tidak dipecah, SP 5 |
+| Q8 | Membedakan Withdraw dan Terminated | 2 | ✅ Kolom `exit_reason`, tanpa fitur pulihkan |
+| P2 | Field registrasi free text | 2 | ✅ Tafsiran B. **Daftar field final diputuskan bersama tim** |
+| P3 | Program User ID di CSV import | 2 | ✅ Boleh menimpa |
+| P4 | `close_at` diedit tidak mengubah `accessible_until` | 2 | Ditunda, di luar card |
+| G7 | TODO kategori card [6] | 7 | ✅ Ikut card Course progress |
+| G8 | Saklar fitur important links | 7 | ✅ Cukup `importantLinks` |
+| P16-P19 | Pertanyaan card Fasilitator | 8 | Ditunda |
+
+**Untuk diskusi tim dan koordinasi:**
+- P2: field yang bisa diedit di card Ops edits.
+- P4: ke Ops.
+- K20 gugur: infokan ke Hasbi.
+- Minggu acuan dihitung otomatis dari `open_at`: infokan ke Ops.
+- Konfirmasi ke Ops bahwa token "ended" saat withdraw/terminated = halaman dropout MCT.
+- Apakah ada kasus Student pindah learning path di tengah program (komentar Krisna di card Ops edits)?
+
+**AC card yang belum sesuai keputusan:** Progress status, Course progress, Ops edits, Students see important links (G8), dan Map Facilitators (C4 dipindah ke card Fasilitator).
+
+Keputusan lain 2026-11-18: K20 gugur. Learning path disimpan di tabel baru per campaign, dan `learning_path_id` disimpan di access list. Setup course memakai combobox tanpa kolom `order`. Detail di bagian 2 dan 5.
+
+
+### Peta dependensi (2026-11-18)
+
+Pembaruan assignee: [Students see their learning progress in APD](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257746) dan [Ops manages Students' attendance data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257792) sekarang dipegang **Hasbi** (sebelumnya tanpa assignee). Keduanya masih di Planning.
+
+| Card Krisna | Bergantung ke | Pemilik | Status | Sifat |
+| --- | --- | --- | --- | --- |
+| Email autocomplete (1) | - | - | - | Mandiri. Form tambah peserta (card [3]) sudah Done |
+| Map Facilitators (2) | - | - | - | Mandiri. `ContributorCreation` sudah ada di master, jadi Fasilitator sudah bisa ditambahkan ke campaign walaupun card Alfian (10411894097) masih In progress. Kabari Alfian karena filter role di kode grup miliknya diubah. Koordinasi C3 dengan schedule Ikhlas |
+| Course progress (5) | - | - | - | Mandiri. Card [6] (auto-register) dan kategori campaign sudah Done. Card ini jadi blocker card lain |
+| Admin manages important links (4) | - | - | - | Mandiri. Pengaturan campaign dan kategori sudah Done |
+| Ops edits participant (4) | Course progress | Krisna | Exploring | Blocker milik sendiri (pilihan learning path) |
+| Progress status (2) | Course progress | Krisna | Exploring | Blocker milik sendiri (tabel learning path, `target_week`, query kelulusan) |
+| Students see important links (2) | [User can Access APD based on their Role](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894672) | Hasbi | Planning | Blocker (kerangka halaman Student/Fasilitator) |
+| | Admin manages important links | Krisna | Exploring | Blocker milik sendiri |
+| | Course progress (TODO kategori [6]) | Krisna | Exploring | Blocker untuk Student auto-register |
+| | Pembaca saklar fitur campaign | Belum jelas (kemungkinan Hasbi) | Belum ada | Koordinasi |
+| Facilitator see progress (2, hold) | User can Access APD based on their Role (10411894672) | Hasbi | Planning | Blocker |
+| | Students see their learning progress in APD (10493257746) | Hasbi | Planning | Blocker (komponen detail) |
+| | Map Facilitators, Course progress, Progress status | Krisna | Exploring | Blocker milik sendiri |
+| | [Ops manages Students' attendance data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257792) | Hasbi | Planning | Isi detail |
+| | [Ops manages Students' assignment data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257805) | Alfian | Exploring | Isi detail |
+| | [Ops manages point histories from the campaign admin](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257825) | Alfian | Exploring | Isi detail |
+
+Urutan kerja: (1) card mandiri: Course progress, Email autocomplete, Map Facilitators, Admin important links. (2) Ops edits dan Progress status setelah Course progress. (3) Students see important links setelah kerangka Hasbi ada. (4) Card Fasilitator paling akhir.
 
 ## 1. Email autocomplete in the add-participant form (1 SP)
 
@@ -78,7 +126,7 @@ Dirangkum dari bagian 2, 4, dan 5. Akan dijawab bersama.
 - Integration test query (K34): hasil cocok dari awal email, akun terdaftar ditandai, limit dipatuhi.
 - Vitest dialog: debounce, opsi terdaftar disabled, memilih opsi mengisi email.
 
-## 2. Ops edits a campaign participant (3-4 SP, draft)
+## 2. Ops edits a campaign participant (4 SP, draft)
 
 ### Kondisi kode saat ini
 
@@ -137,6 +185,116 @@ Dirangkum dari bagian 2, 4, dan 5. Akan dijawab bersama.
   - Q4: tampilan peserta yang sudah dikeluarkan di daftar admin dan Fasilitator (label "Inactive" atau disembunyikan).
   - Q6: use case pengakhiran token MCT.
   - P2 (field registrasi free text) masih terbuka.
+
+
+### Q6: pengakhiran token MCT (dicek 2026-11-18)
+
+Fitur **dropout MCT sudah ada** dan dipakai admin:
+- `MultiCourseTokenDropoutAction` dan `MultiCourseTokenDropoutIndexAction`, halaman `dashboards/academies/multicoursetokens/dropout`.
+- `MultiCourseTokenDropoutSpecification`, aggregate `MultiCourseTokenDropout` (menerima daftar kode token), dan job `DropoutMultiCourseTokenBatchHandler`.
+- `MultiCourseTokensGateway::dropoutRedeemedToken`:
+  - Mengubah token menjadi ENDED dan memperpendek `deadline_at`.
+  - Untuk setiap course, **men-drop enrollment** kalau tidak ada token aktif lain yang mencakup course itu. Kalau ada, deadline enrollment disesuaikan.
+  - Wajib dipanggil di dalam transaksi.
+- Ada juga `setTokenStatusAsEnded` yang hanya mengubah status, tanpa menyentuh enrollment.
+
+Usulan: card ini mencari token MCT Student untuk program campaign tersebut, lalu memanggil spesifikasi dropout yang sudah ada. SP 3, atau 3,5 kalau pencarian token per program perlu query baru.
+
+**Perlu konfirmasi:** withdraw/terminated ikut men-drop enrollment course (dropout penuh, Student kehilangan akses kelas), atau cukup status ENDED tanpa menyentuh enrollment (`setTokenStatusAsEnded`)?
+
+
+### Keputusan 2026-11-18
+
+| # | Keputusan |
+| --- | --- |
+| Q6 | **Dropout penuh** (Krisna). Panggil `MultiCourseTokenDropoutSpecification` yang sudah ada: token ENDED, dan enrollment course di-drop kalau tidak ada token aktif lain |
+| Q4 | Peserta yang dikeluarkan **tetap tampil dengan label "Inactive"** di daftar admin dan Fasilitator (Krisna) |
+| P3 | **Boleh menimpa Program User ID di CSV import juga**, karena AC menyebut mengubah Program User ID (Krisna). Aturan CSV disamakan dengan edit per baris (K27), +0,5 SP |
+| P4 | Ditunda, di luar card (Krisna) |
+| Baru | **Learning path peserta bisa diedit** dari form edit (Krisna), menyusul K20 gugur. Pilihan diambil dari learning path campaign (bagian 5) |
+
+### Terjawab (Q8): membedakan Withdraw dan Terminated (2026-11-18)
+
+Kalau hanya memakai `accessible_until = now()`, sistem tidak bisa membedakan Withdraw dan Terminated, dan juga tidak bisa membedakan peserta yang dikeluarkan dari peserta yang aksesnya habis karena program selesai.
+
+Usulan Claude: kolom baru di access list.
+- `exit_reason`: string(16) nullable, enum `WITHDRAWN` atau `TERMINATED`.
+- Label "Inactive (Withdrawn)" atau "Inactive (Terminated)" diambil dari `exit_reason`, bukan dari perbandingan tanggal.
+- Akses tetap dicabut lewat `accessible_until`, jadi 8 pembaca access list di APD lama tidak perlu filter tambahan. Kolom ini hanya informasi.
+- Dialog "Keluarkan peserta": pilih alasan (Withdraw atau Terminated), lalu konfirmasi bahwa token MCT akan di-dropout.
+- Audit cukup memakai `updated_by` dan `updated_at` access list kalau sudah ada. Kalau belum, perlu dicek.
+
+Alternatif yang ditolak: tabel riwayat terpisah (`participant_exits`). Riwayat lebih lengkap, tapi YAGNI untuk sekarang.
+
+Pertanyaan turunan: perlu fitur **memulihkan** peserta yang sudah dikeluarkan? Dropout MCT tidak bisa dibatalkan (enrollment sudah di-drop), jadi pemulihan berarti Ops harus memberi token baru. Usulan: tidak ada tombol pulihkan di card ini.
+
+### Terjawab sebagian (P2): field registrasi free text (2026-11-18)
+
+Temuan:
+- Data registrasi program ada di `scholarship_participants`. Kolom tetapnya `category`, `knows_from`, `disabilities`, dan `scholarship_package_id`.
+- Field teks bebas (institusi, jurusan, NIM, dan sejenisnya) disimpan sebagai JSON di `education_info` dan `other_requirements`.
+- Bentuk JSON tersebut **berbeda per program**: CodingCamp, IBM, Elevate, Pijak, dan Mastercard masing-masing punya ViewModel registrasi sendiri.
+
+Dua tafsiran komentar Hasbi:
+- **A.** Ops bisa mengedit data registrasi free text (institusi, jurusan, dan sejenisnya) dari APD. Konsekuensinya: form per program mengikuti bentuk JSON masing-masing, menyentuh data milik fitur registrasi, dan menambah sekitar 2 SP atau lebih. APD revamp juga belum menampilkan data ini.
+- **B.** Di antara field APD, fokus ke field yang dulu diisi sebagai teks bebas sehingga rawan salah ketik, terutama Program User ID. Kategori dan learning path dipilih dari daftar, tapi tetap bisa diedit sesuai AC.
+
+Usulan Claude: B, lalu konfirmasi ke Hasbi.
+
+
+### Keputusan lanjutan 2026-11-18
+
+- **Q8: kolom `exit_reason`** (nullable, `WITHDRAWN` atau `TERMINATED`) di access list. **Tanpa fitur pulihkan** (Krisna).
+- **P2: tafsiran B** (fokus ke field APD yang rawan salah ketik, terutama Program User ID). Daftar field final **diputuskan bersama tim** (Krisna). Bawa ke diskusi tim, termasuk konfirmasi ke Hasbi.
+
+**Rincian SP (draft): 4 SP**
+
+| Bagian | SP |
+| --- | --- |
+| Edit kategori, periode akses, Program User ID, learning path | 1,5 |
+| Keluarkan peserta (`exit_reason` + `accessible_until` + dropout MCT) | 1 |
+| CSV import boleh menimpa Program User ID (P3) | 0,5 |
+| Test | 1 |
+| **Total** | **4** |
+
+
+### Pengecekan MCT, APD lama, dan sheet (2026-11-18)
+
+**Mencari token MCT milik campaign: langsung, tanpa risiko.**
+- `multi_course_tokens` punya `program_id` (FK `partner_programs`) dan `student_id`. Campaign punya `partner_program_id`.
+- Query: `program_id = campaign.partner_program_id AND student_id = user_id`. Token yang sudah habis (misalnya token tes seleksi) otomatis ditandai tidak eligible oleh `MultiCourseTokenDropout::classifyToken` ("Masa belajar sudah berakhir"), jadi aman ikut terkirim.
+
+**"Token jadi ENDED" ada dua cara, efeknya berbeda:**
+
+| Cara | Dipakai oleh | Efek ke akses kelas |
+| --- | --- | --- |
+| `setTokenStatusAsEnded` (status saja) | Hanya cron `NotifyMultiCourseTokenStudyDeadline`, saat deadline token **sudah lewat secara alami** | Tidak mencabut apa pun. `course_enrollments.deadline_at` tetap, jadi kalau dipanggil di tengah program, Student **masih bisa belajar** |
+| Dropout (`dropoutRedeemedToken`) | Halaman admin `multicoursetokens/dropout` (dibuat 2026-02-14) | Token ENDED, `deadline_at` diperpendek, enrollment menjadi DROPOUT (atau deadline disesuaikan kalau ada token aktif lain). Akses kelas benar-benar berhenti |
+
+Kesimpulan: "token jadi ENDED" di tengah program yang dimaksud Krisna dan Ops **secara efektif adalah dropout**. Status ENDED yang terlihat di admin sama ("Masa Belajar Berakhir"). Keputusan Q6 (dropout penuh) tetap.
+
+**APD lama:**
+- Tidak ada logika MCT sama sekali.
+- Withdraw hanya nilai `progressStatus` dari sheet (`cohort-data-importer/data/firestore.ts:86`). Efeknya: badge progress di sidebar Student disembunyikan (`StudentSidebar.vue:95`), muncul di filter Chooser, dan Student ditandai tidak aktif di pembentukan grup Capstone (`CapstoneManualGroup.spec.ts:156`).
+- Terminated tidak dikenal di APD lama.
+- Akses dicabut lewat `accessible_until` di access list Dicoding (komentar Hasbi).
+
+**Sheet Token Data Sheet:** kolom `Withdraw ?` dan `Terminated ?` berupa penanda 0/1 yang terpisah. Di 400 baris pertama ada sekitar 2 Withdraw dan sekitar 19 Terminated. Tidak ada jejak token yang diakhiri di sheet.
+
+**Dampak:**
+- Alur "keluarkan peserta" = `exit_reason` + `accessible_until = now()` + dropout token MCT program itu, dalam satu transaksi. Konsisten dengan sheet (dua penanda terpisah) dan APD lama (akses lewat tanggal).
+- **Catatan untuk Epic Capstone:** APD lama mengecualikan Withdraw dari pembentukan grup Capstone. Di sistem baru, gunakan `exit_reason` (WITHDRAWN atau TERMINATED).
+- **SP tetap 4.** Pencarian token cukup satu query, dan spesifikasi dropout tinggal dipakai ulang.
+
+
+### Komentar Krisna di card (2026-11-18)
+
+- 04:31: perlu diputuskan field apa saja yang bisa diedit.
+- 04:48: karena harus ada learning path, card ini **bergantung ke card Course progress** (tabel learning path campaign). Apakah ada kasus Student pindah learning path? Pernah terdengar, tapi belum jelas apakah ditangani tim Ops.
+- 06:07: harapan field yang bisa diubah: Kategori, Program User ID, Status Peserta (Withdraw/Terminated), Learning Path(?), field free text.
+- 07:10: SP bisa 2-4 tergantung dependensinya, khususnya learning path. Judul card diisi 4.
+
+Ketergantungan baru: **Course progress (bagian 5) harus selesai lebih dulu**, karena pilihan learning path di form edit membaca tabel learning path campaign.
 
 ## 3. Map Facilitators to the groups they accompany (2 SP)
 
@@ -197,6 +355,16 @@ Dirangkum dari bagian 2, 4, dan 5. Akan dijawab bersama.
 - **Ikhlas:** schedule sudah membaca Fasilitator dari `group_members` (`getFacilitatorIdsByGroupIds`, `getFacilitatorOptionsByProgramCodeAndCampaignId`). Pastikan aturan C3 (satu Fasilitator per grup) sejalan dengan form schedule, yang saat ini mendukung lebih dari satu Fasilitator per grup.
 - Query yang memakai `group_members` untuk Student (misalnya `getGroupStudentsByCampaignIdAndGroupIds`) sudah memfilter `role = STUDENT`, jadi tidak terpengaruh. Query tanpa filter role (`getGroupMembers`) perlu ditinjau.
 
+
+### Konfirmasi 2026-11-18
+
+- **Tetap sebagai anggota grup** (C1) dan **tetap ditambahkan lewat "Tambah peserta" di halaman detail grup** (C2), kata Krisna. Usulan combobox Fasilitator per grup yang terpisah **ditolak**.
+- Akibatnya CSV tetap memakai CSV anggota grup (C5), dan ganti Fasilitator tetap lewat lepas lalu tambah (C6).
+- Ringkasan pekerjaan card (Krisna): UI kandidat Fasilitator di dialog Tambah peserta, guard (role FACILITATOR dan satu Fasilitator per grup), dan **kolom nama Fasilitator di tabel daftar grup**. Kolom ini tambahan ke "Rencana perubahan" bagian UI.
+- **Pengecekan master (2026-11-18):** `ContributorCreation` (Store dan Index Action, serta test) sudah ada di `origin/master`, jadi Fasilitator sudah bisa ditambahkan ke campaign. Card Alfian [Add Facilitators, Lecturers, and Instructors to a campaign](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894097) masih In progress, tapi **bukan blocker** card ini.
+- Jalur grup di master masih STUDENT-only (`AcademicProgramDashboardCampaignGroupMemberGateway::campaignStudents()`, filter `access_lists.role = STUDENT`). UI grup (`features/group-list`, `features/group-members`) belum menyebut Fasilitator. Ini yang diubah card ini.
+- SP tetap **2**.
+
 ## 4. Ops manages Students' progress status (2 SP, draft, kalkulasi otomatis)
 
 ### Kondisi saat ini
@@ -233,8 +401,8 @@ Arah scope: card ini input manual (mengganti jalur sinkronisasi sheet ke APD). P
 
 ### Pertanyaan terbuka internal
 
-- P7. D1 tabel terpisah vs kolom di access list.
-- P8. Ops perlu bisa mengosongkan status (kembali ke "-")? Usulan: hanya lewat dialog set satu per satu.
+- ~~P7. D1 tabel terpisah vs kolom di access list.~~ Gugur 2026-11-18: status dihitung otomatis, tidak disimpan.
+- ~~P8. Ops perlu bisa mengosongkan status (kembali ke "-")?~~ Gugur 2026-11-18: tidak ada input manual.
 
 ### Rincian SP lama (usang, asumsi input manual)
 
@@ -316,7 +484,22 @@ Konfigurasi `target_week` dihitung di card Course progress.
 - **Q3. Status di luar periode.** Sebelum minggu ke-1 dan setelah `close_at`: dibekukan di minggu terakhir, atau tidak ditampilkan?
 - **Q4. Peserta withdraw/terminated di daftar admin dan Fasilitator.** Label "Inactive" (dihitung dari `accessible_until` < `close_at`) atau disembunyikan?
 
-## 5. Course progress is calculated automatically from Dicoding learning data (3 SP, draft)
+
+### Keputusan 2026-11-18
+
+- **Q1. Rumus: cukup (Krisna).** "Tertinggal X minggu" = minggu berjalan dikurangi minggu terakhir yang targetnya tercapai. Karena target kumulatif selalu naik, ini setara dengan tabel AS/IS/LB/NSA di atas. Contoh: target minggu 1-4 = 2, 4, 4, 6. Di minggu 4, lulus 4 = LB dan lulus 3 = NSA.
+- **Detail teknis (ditetapkan Claude, belum ada keberatan):**
+  - Minggu ke-1 dihitung sejak `open_at`, per blok 7 hari (bukan Senin kalender). Di minggu ke-1, status paling buruk LB karena target(0) = 0.
+  - Di sheet, "minggu acuan" diperbarui manual oleh Ops (jawaban Ops no. 2). Di sistem, minggu acuan dihitung otomatis. Perlu diinformasikan ke Ops.
+- **Q2 dan Q3:** lihat bagian 5, "Keputusan 2026-11-18". Kelas lulus = completion atau renew FINISHED dalam periode. Status dibekukan setelah `close_at`.
+- `target_week` ada di `academic_program_dashboard_learning_path_courses` (bagian 5). Card ini bergantung ke card setup learning path (kalau jadi dipecah, Q7).
+
+
+### Komentar Krisna di card (2026-11-18 05:56)
+
+"Kalau memang progress status ini intinya membandingkan progress saat ini dan target mingguan, expected condition di card ini sudah tidak relevan." AC card (input manual satu per satu, CSV, audit) perlu ditulis ulang sesuai desain kalkulasi otomatis.
+
+## 5. Course progress is calculated automatically from Dicoding learning data (5 SP)
 
 ### Kondisi saat ini
 
@@ -422,6 +605,100 @@ Alasan usulan A1: setup jarang (sekali per campaign, sekitar 10 course per learn
 **Yang perlu diputuskan:**
 - **Q2.** Kelas yang dihitung lulus hanya course di daftar learning path dan yang selesai dalam periode program? (sama dengan Q2 bagian 4)
 - **Q5.** Filter periode program dan NEED RENEW masuk card ini atau ditunda? Kalau ditunda, SP turun ke 2,5.
+
+
+### Keputusan 2026-11-18 (learning path, course, renew, freeze)
+
+**Kelas yang dihitung (Q2, Krisna):** course dari learning path program yang selesai selama program. Kalau course sudah 100% atau sertifikatnya sudah dicetak sebelum program, Student perlu **renew certificate**. Fitur renew sudah ada di Dicoding.
+
+**Mekanisme renew di Dicoding (dicek 2026-11-18):**
+- Renew dicatat di `course_certificate_renewals` (`student_id`, `course_id`, `status`, `finished_at`). Selesai = status FINISHED. Lihat `CourseCertificateRenewalGateway::setAsRenewed`.
+- Renew **tidak menambah baris** di `developer_journey_completions`. `MultiCourseTokensGateway` membaca `completions.updated_at` sebagai `renewed_at`.
+
+**Aturan progress per course (Q3 dan Q5, Krisna):**
+
+| Kondisi course di learning path | Progress | Dihitung lulus untuk status? |
+| --- | --- | --- |
+| Completion di antara `open_at` dan `close_at` | 100% | Ya |
+| Completion sebelum `open_at`, lalu renew FINISHED dalam periode | 100% | Ya |
+| Completion sebelum `open_at`, belum renew | **NEED RENEW** (merah) | Tidak |
+| Belum selesai | % modul dari penghitung yang sudah ada. Modul yang dikerjakan sebelum program tetap terhitung | Tidak |
+
+- Filter tanggal per modul **tidak perlu**. Cukup cek tanggal di completion dan renewal.
+- **Freeze (Krisna: ya):** setelah `close_at`, progress dan status dibekukan di kondisi `close_at`. Kelulusan sesudahnya tidak mengubah apa pun. `open_at` dan `close_at` diambil dari tabel `academic_program_dashboard_campaigns`.
+- Q5: filter periode dan NEED RENEW **masuk card ini**.
+
+**Setup course (Krisna):** dilakukan di setup campaign dengan input manual. Per learning path, Ops memilih course lewat **combobox** dan mengisi `target_week`. Tidak ada CSV dan tidak ada drag and drop.
+
+**Kolom `order`: tidak dipakai (Krisna).** E1 lama (yang menyertakan `order`) diganti. Urutan tampil = `target_week`, lalu nama course. Perhitungan status hanya butuh `target_week`, karena yang dihitung adalah jumlah kelas lulus.
+
+**Learning path disimpan di tabel baru per campaign (Krisna). K20 gugur:**
+- K20 (2026-10-28) melarang learning path disimpan di access list, karena nama learning path berganti per campaign dan diambil dari config.
+- Dengan tabel per campaign, alasan itu tidak berlaku lagi.
+
+Desain usulan:
+
+`academic_program_dashboard_campaign_learning_paths`
+
+| Kolom | Keterangan |
+| --- | --- |
+| `id` | increments |
+| `campaign_id` | FK ke campaigns, cascade |
+| `name` | Nama learning path di campaign ini, diisi Ops |
+| `scholarship_package_id` | nullable. Pemetaan ke pilihan learning path di form registrasi, khusus peserta auto-register. Kosong untuk campaign tanpa registrasi Dicoding |
+| `created_by`, `updated_by` | FK users |
+| timestamps | |
+
+`academic_program_dashboard_learning_path_courses`
+
+| Kolom | Keterangan |
+| --- | --- |
+| `id` | increments |
+| `learning_path_id` | FK ke campaign learning paths |
+| `course_id` | FK ke course Dicoding |
+| `target_week` | unsignedTinyInteger, minggu ke-N sejak `open_at` |
+| `created_by`, `updated_by` | FK users |
+| timestamps | |
+| unique `(learning_path_id, course_id)` | |
+
+Access list: tambah `learning_path_id` (nullable FK).
+- Peserta manual dan CSV: Ops memilih learning path. Karena itu learning path harus dibuat dulu sebelum menambah peserta (menjawab P10).
+- Auto-register (card [6]): dipetakan dari `scholarship_participants.scholarship_package_id` ke `campaign_learning_paths.scholarship_package_id`. Menjawab P11, karena tidak perlu lookup config lagi.
+
+**Alasan `scholarship_package_id` tetap ada:** pendaftar memilih learning path di form registrasi program, dan pilihannya tersimpan sebagai `scholarship_package_id`. Tanpa pemetaan ini, peserta auto-register masuk tanpa learning path, dan Ops harus mengisinya manual untuk ratusan peserta. Mencocokkan nama ke `lp_name` config dianggap rapuh.
+
+**Keterkaitan dengan G7:** pemetaan registrasi ke campaign ini polanya sama dengan TODO kategori card [6] (kategori pendaftaran ke kategori campaign). Keduanya bisa dikerjakan bersama di listener auto-enroll.
+
+**Rincian SP (draft, sebelum pecah):**
+
+| Bagian | SP |
+| --- | --- |
+| CRUD learning path per campaign + pemetaan `scholarship_package_id` | 1 |
+| Course per learning path (combobox + `target_week`) | 1,5 |
+| `learning_path_id` di access list + pilihan di form tambah peserta/CSV + auto-enroll | 1 |
+| Kalkulasi progress + NEED RENEW + freeze | 1 |
+| **Total** | **4,5** |
+
+**Belum diputuskan (Q7):** dipecah menjadi card baru "Ops sets up learning paths and their courses per campaign" (3,5 SP, mungkin plus TODO kategori [6]) dan card Course progress (1 SP, hanya kalkulasi dan tampilan)?
+
+
+### SP final (2026-11-18): 5 SP, ditetapkan Krisna (sempat 4)
+
+Estimasi Claude 5,5 SP:
+
+| Bagian | SP |
+| --- | --- |
+| CRUD learning path + pemetaan `scholarship_package_id` | 1 |
+| Course per learning path (combobox + `target_week`) | 1,5 |
+| `learning_path_id` peserta (form tambah, CSV, auto-enroll) | 1 |
+| Kalkulasi progress + NEED RENEW + freeze | 1 |
+| TODO kategori [6] (G7), termasuk isian "Kategori registrasi" di form kategori campaign | 1 |
+
+- Kolom course "x/y lulus" di daftar peserta admin dikerjakan di card Progress status, bersama kolom status.
+- Krisna menetapkan **4 SP**. Selisih dengan estimasi Claude (sekitar 1,5 SP) menjadi risiko card ini. Kalau melebar, kandidat yang dikeluarkan adalah G7 (card sendiri, sekitar 1 SP).
+
+
+- **Pembaruan:** Krisna mengubah judul card menjadi [5] (2026-11-18 07:11). Obsidian disamakan menjadi **5 SP**. Selisih dengan estimasi Claude tinggal sekitar 0,5 SP.
 
 ## 6. Admin manages important links (4 SP)
 
@@ -585,6 +862,12 @@ Urutan: Admin important links, lalu TODO kategori [6], lalu tunggu kerangka Hasb
 | Buffer | 0,5 |
 | **Total** | **2** (disepakati Krisna 2026-11-17). Tidak termasuk kerangka halaman (card Hasbi) dan TODO kategori [6] |
 
+
+### Keputusan 2026-11-18
+
+- **G7:** TODO kategori card [6] (`ParticipantEnrollmentSpecification` mendaftarkan Student dengan `categoryId: null`) **ikut dikerjakan di card Course progress**, bersamaan dengan pemetaan learning path saat auto-enroll (Krisna). Polanya sama: data registrasi dipetakan ke data campaign. Card Course progress menjadi 5,5 SP.
+- **G8:** cukup cek fitur `importantLinks` (Krisna).
+
 ## 8. Facilitator see the progress of their supervised Students (2 SP, draft)
 
 Card: [Facilitator see the progress of their supervised Students](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257765) (Planning)
@@ -598,6 +881,8 @@ Card: [Facilitator see the progress of their supervised Students](https://app.ba
 ### Komentar card
 - **Hasbi (2026-11-16):** "perlu ada tabel yang menyimpan informasi profil dosen". Sisa dari versi Lecturer, **tidak relevan** untuk Fasilitator.
 - **Krisna (2026-11-17):** depend ke Map Facilitators (grup sebagai mapping), Course progress, Progress status, serta card Attendance, Assignment, dan Point histories.
+
+- **Krisna (2026-11-18 04:40):** card ini di-hold sampai semua dependensinya selesai dikerjakan. SP belum diisi di judul card.
 
 ### Kondisi APD lama
 `Chooser.vue` adalah pemilih Student, bukan tabel ringkasan:
@@ -643,3 +928,9 @@ Pembaruan 2026-11-17: status di kolom ringkasan sekarang dihitung otomatis (bagi
 - **P18.** Pilih banyak Student sekaligus seperti Chooser APD lama, atau cukup satu Student per halaman detail (usulan, sesuai AC)?
 - **P19.** Card "Students see their learning progress" sebaiknya diambil Krisna juga?
 - **Q4** (Ringkasan): peserta withdraw/terminated di daftar Fasilitator diberi label "Inactive" atau disembunyikan?
+
+**Ditunda (Krisna, 2026-11-18):** P16-P19 dibahas nanti. Usulan Claude yang sudah disampaikan:
+- P16: kolom nama, grup, status (atau "Inactive"), dan course "x/y lulus". Kehadiran dan tugas menyusul.
+- P17: detail dimulai dari data milik Krisna (course + NEED RENEW + status). Bagian lain menyusul setelah card tampilan Student jadi.
+- P18: satu Student per halaman detail.
+- P19: card "Students see their learning progress" sebaiknya diambil Krisna, karena isi utamanya data course dan status.
