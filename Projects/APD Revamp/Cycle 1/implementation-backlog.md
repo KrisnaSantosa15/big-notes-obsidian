@@ -10,7 +10,7 @@ ai-first: true
 # Revamp APD: Backlog Implementasi Krisna
 
 Dibuat 2026-10-23 dari brainstorming card APD milik Krisna, terakhir diperbarui 2026-10-29. Dokumen ini snapshot:
-verifikasi ulang terhadap kode, PRD ([PRD Revamp APD.md](PRD%20Revamp%20APD.md)), dan card Basecamp sebelum mengerjakan
+verifikasi ulang terhadap kode, PRD ([PRD Revamp APD.md](../PRD%20Revamp%20APD.md)), dan card Basecamp sebelum mengerjakan
 tiap item.
 
 Sumber rujukan:
@@ -241,7 +241,7 @@ Lecturer hanya melihat Student di mapping-nya.
 
 ## Catatan lintas card (2026-11-17)
 
-- K20 (learning path tidak disimpan di access list) dipakai card Cycle-2 [Course progress is calculated automatically from Dicoding learning data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784): konfigurasi course dikaitkan ke `scholarship_package_id`, learning path Student dibaca lewat join `scholarship_participants`. Detail di [Cycle 2/05-course-progress.md](Cycle%202/05-course-progress.md) (E1, P9 sampai P11).
+- K20 (learning path tidak disimpan di access list) dipakai card Cycle-2 [Course progress is calculated automatically from Dicoding learning data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784): konfigurasi course dikaitkan ke `scholarship_package_id`, learning path Student dibaca lewat join `scholarship_participants`. Detail di [Cycle 2/05-course-progress.md](../Cycle%202/05-course-progress.md) (E1, P9 sampai P11).
 - Kategori dan learning path adalah dua hal berbeda: kategori = jenis Student (SMK, umum, guru SMK), learning path = jalur belajar (AI Engineer, Data Scientist). Konfigurasi course mengikuti learning path.
 
 ### K20 gugur (2026-11-18)
@@ -249,4 +249,4 @@ Lecturer hanya melihat Student di mapping-nya.
 - Learning path sekarang disimpan per campaign di tabel baru `academic_program_dashboard_campaign_learning_paths` (`campaign_id`, `name`, `scholarship_package_id` nullable, audit). Access list mendapat kolom `learning_path_id` (nullable FK).
 - Alasan K20 dulu (nama learning path berganti per campaign dan diambil dari config) tidak berlaku lagi dengan tabel per campaign. Disetujui Krisna 2026-11-18.
 - Auto-register memetakan `scholarship_participants.scholarship_package_id` ke `campaign_learning_paths.scholarship_package_id`. Peserta manual dan CSV memilih learning path di form.
-- Detail di [Cycle 2/05-course-progress.md](Cycle%202/05-course-progress.md), "Keputusan 2026-11-18".
+- Detail di [Cycle 2/05-course-progress.md](../Cycle%202/05-course-progress.md), "Keputusan 2026-11-18".

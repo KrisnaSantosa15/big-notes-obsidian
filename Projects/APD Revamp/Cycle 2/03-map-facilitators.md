@@ -2,18 +2,24 @@
 date: 2026-11-17
 updated: 2026-11-18
 type: plan
-tags: [plan, brainstorm, estimation, dicoding, apd]
+tags:
+  - plan
+  - brainstorm
+  - estimation
+  - dicoding
+  - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894512
 sp: "2"
-status: "Brainstorm selesai, belum dikerjakan"
+status: Brainstorm selesai, belum dikerjakan
 pr: []
 depends-on: []
-index: "[[brainstorm-sp-cycle-2]]"
-related-people: ["[[People/Krisna]]"]
+index: "[[Projects/APD Revamp/Cycle 2/index]]"
+related-people:
+  - "[[People/Krisna]]"
 ---
 # Map Facilitators to the groups they accompany (2 SP)
 
-[Index Cycle 2](../brainstorm-sp-cycle-2.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894512)
+[Index Cycle 2](index.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894512)
 
 ## Kondisi kode saat ini
 

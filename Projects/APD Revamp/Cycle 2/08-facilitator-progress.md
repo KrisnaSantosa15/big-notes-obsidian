@@ -2,18 +2,27 @@
 date: 2026-11-17
 updated: 2026-11-18
 type: plan
-tags: [plan, brainstorm, estimation, dicoding, apd]
+tags:
+  - plan
+  - brainstorm
+  - estimation
+  - dicoding
+  - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257765
-sp: "2 (draft)"
-status: "Di-hold sampai dependensi selesai (P16-P19)"
+sp: 2 (draft)
+status: Di-hold sampai dependensi selesai (P16-P19)
 pr: []
-depends-on: [03-map-facilitators, 04-progress-status, 05-course-progress]
-index: "[[brainstorm-sp-cycle-2]]"
-related-people: ["[[People/Krisna]]"]
+depends-on:
+  - 03-map-facilitators
+  - 04-progress-status
+  - 05-course-progress
+index: "[[Projects/APD Revamp/Cycle 2/index]]"
+related-people:
+  - "[[People/Krisna]]"
 ---
 # Facilitator see the progress of their supervised Students (2 SP, draft)
 
-[Index Cycle 2](../brainstorm-sp-cycle-2.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257765)
+[Index Cycle 2](index.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257765)
 
 Card: [Facilitator see the progress of their supervised Students](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257765) (Planning)
 

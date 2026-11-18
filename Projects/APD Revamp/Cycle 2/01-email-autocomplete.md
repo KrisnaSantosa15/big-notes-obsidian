@@ -2,18 +2,25 @@
 date: 2026-11-17
 updated: 2026-11-18
 type: plan
-tags: [plan, brainstorm, estimation, dicoding, apd]
+tags:
+  - plan
+  - brainstorm
+  - estimation
+  - dicoding
+  - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720
 sp: "1"
 status: "Diimplementasikan, PR #6450 open"
-pr: [6450]
+pr:
+  - 6450
 depends-on: []
-index: "[[brainstorm-sp-cycle-2]]"
-related-people: ["[[People/Krisna]]"]
+index: "[[Projects/APD Revamp/Cycle 2/index]]"
+related-people:
+  - "[[People/Krisna]]"
 ---
 # Email autocomplete in the add-participant form (1 SP)
 
-[Index Cycle 2](../brainstorm-sp-cycle-2.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720)
+[Index Cycle 2](index.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720)
 
 ## Kondisi kode saat ini
 

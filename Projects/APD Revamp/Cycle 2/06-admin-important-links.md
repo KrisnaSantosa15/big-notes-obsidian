@@ -2,18 +2,24 @@
 date: 2026-11-17
 updated: 2026-11-18
 type: plan
-tags: [plan, brainstorm, estimation, dicoding, apd]
+tags:
+  - plan
+  - brainstorm
+  - estimation
+  - dicoding
+  - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257862
 sp: "4"
-status: "Brainstorm selesai, belum dikerjakan"
+status: Brainstorm selesai, belum dikerjakan
 pr: []
 depends-on: []
-index: "[[brainstorm-sp-cycle-2]]"
-related-people: ["[[People/Krisna]]"]
+index: "[[Projects/APD Revamp/Cycle 2/index]]"
+related-people:
+  - "[[People/Krisna]]"
 ---
 # Admin manages important links (4 SP)
 
-[Index Cycle 2](../brainstorm-sp-cycle-2.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257862)
+[Index Cycle 2](index.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257862)
 
 "Grup" di card ini adalah **grup link** (judul bagian di halaman Student Portal/Capstone), bukan grup peserta.
 

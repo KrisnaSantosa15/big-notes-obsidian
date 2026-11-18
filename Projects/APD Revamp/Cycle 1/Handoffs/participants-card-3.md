@@ -9,7 +9,7 @@ ai-first: true
 ---
 # Handoff: APD participants (card [3] dan sisa card [6])
 
-Terakhir diperbarui 2026-11-04 (status PR). Catatan desain sesi 2026-10-29 di bawah tetap berlaku (K23 sampai K27). Rujukan utama: [implementation-backlog.md](../../domains/academic-program-dashboard/implementation-backlog.md)
+Terakhir diperbarui 2026-11-04 (status PR). Catatan desain sesi 2026-10-29 di bawah tetap berlaku (K23 sampai K27). Rujukan utama: [implementation-backlog.md](../implementation-backlog.md)
 (keputusan K1 sampai K27, pertanyaan terbuka, rencana PR card [3] di bagian 5). Verifikasi ulang status PR dengan `gh pr view` sebelum lanjut.
 
 **Status 2026-11-04:** card [6] selesai (#6190, #6207, #6218, #6230 merged) dan #6248 merged. Card [3] tinggal tiga PR open

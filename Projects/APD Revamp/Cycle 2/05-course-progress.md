@@ -2,18 +2,24 @@
 date: 2026-11-17
 updated: 2026-11-18
 type: plan
-tags: [plan, brainstorm, estimation, dicoding, apd]
+tags:
+  - plan
+  - brainstorm
+  - estimation
+  - dicoding
+  - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784
 sp: "5"
-status: "Brainstorm selesai, belum dikerjakan"
+status: Brainstorm selesai, belum dikerjakan
 pr: []
 depends-on: []
-index: "[[brainstorm-sp-cycle-2]]"
-related-people: ["[[People/Krisna]]"]
+index: "[[Projects/APD Revamp/Cycle 2/index]]"
+related-people:
+  - "[[People/Krisna]]"
 ---
 # Course progress is calculated automatically from Dicoding learning data (5 SP)
 
-[Index Cycle 2](../brainstorm-sp-cycle-2.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784)
+[Index Cycle 2](index.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784)
 
 ## Kondisi saat ini
 
@@ -38,7 +44,7 @@ Koreksi 2026-11-17 (Krisna): **kategori dan learning path berbeda.** Kategori = 
 
 ## Pertanyaan terbuka
 
-> Keputusan learning path sudah ada di [implementation-backlog.md](implementation-backlog.md): K3 dan K4 (kolom `learning_path` dan snapshot `lp_name`, dibatalkan) diganti K20 (2026-10-28): learning path dibaca saat dibutuhkan lewat `scholarship_participants.scholarship_package_id` dan lookup config. Card ini mengikuti K20.
+> Keputusan learning path sudah ada di [implementation-backlog.md](../Cycle%201/implementation-backlog.md): K3 dan K4 (kolom `learning_path` dan snapshot `lp_name`, dibatalkan) diganti K20 (2026-10-28): learning path dibaca saat dibutuhkan lewat `scholarship_participants.scholarship_package_id` dan lookup config. Card ini mengikuti K20.
 
 
 - ~~P9. Sumber learning path peserta.~~ Terjawab 2026-11-17 dari komentar card [6] (Revamp APD Done):

@@ -9,7 +9,7 @@ ai-first: true
 ---
 # Handoff: APD card [4] mapping Lecturer ke Student
 
-Terakhir diperbarui 2026-11-05. Rujukan utama: [implementation-backlog.md](../../domains/academic-program-dashboard/implementation-backlog.md)
+Terakhir diperbarui 2026-11-05. Rujukan utama: [implementation-backlog.md](../implementation-backlog.md)
 (K28 sampai K40). Verifikasi ulang status PR dengan `gh pr view` sebelum lanjut.
 
 ## Status stack di remote (2026-11-04)
