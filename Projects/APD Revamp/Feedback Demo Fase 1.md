@@ -15,7 +15,7 @@ Demo 13 Nov 2026, hanya item milik Krisna. Sumber: [Demo APD (Google Doc)](https
 
 **Sudah ada card**
 
-- [ ] Email pakai select2 → [Email autocomplete in the add-participant form](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720)
+- [x] Email pakai select2 → [Email autocomplete in the add-participant form](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720) ([#6450](https://github.com/dicoding-dev/dicoding/pull/6450))
 - [ ] Bulk remove student, >100 withdraw/terminated → [Ops edits a campaign participant](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711) (card baru single remove, perluas ke bulk)
 
 **Tanpa card**
@@ -31,7 +31,7 @@ Demo 13 Nov 2026, hanya item milik Krisna. Sumber: [Demo APD (Google Doc)](https
 
 **Narasi**
 
-- [ ] Students: "Import CSV" → "Import students"
+- [x] Students: "Import CSV" → "Import students" ([#6450](https://github.com/dicoding-dev/dicoding/pull/6450))
 - [x] Lecturers: "Import mappings" → "Import supervised students" ([#6319](https://github.com/dicoding-dev/dicoding/pull/6319))
 - [x] Manage students lecturer: "Unmap from lecturer" → "Remove" ([#6301](https://github.com/dicoding-dev/dicoding/pull/6301))
 - [ ] Modal remove student: tombol "Remove" jadi outline (putih), "Cancel" jadi "Keep" (hitam) ([#6301](https://github.com/dicoding-dev/dicoding/pull/6301)) → ditunda, modal APD lain belum ada yang dibalik (Cancel outline, konfirmasi solid)
