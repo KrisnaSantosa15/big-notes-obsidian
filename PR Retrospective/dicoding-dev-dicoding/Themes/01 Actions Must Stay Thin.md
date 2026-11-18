@@ -9,6 +9,10 @@ prs:
   - "#5033"
   - "#5324"
   - "#5626"
+  - "#5630"
+  - "#6023"
+  - "#6230"
+  - "#6256"
 status: recurring
 ---
 
@@ -43,6 +47,21 @@ Business rules kept leaking into `Web/Api/*Action` classes instead of living in 
 > dimasmds: "Karena berkas `BootcampAsahPromotionEligibilityChecker` bukan usecase dan seharusnya memang bukan usecase. Usecase itu ada kontrak dengan `UseCaseSpecification` dan behavior-nya ngaruh ke transaction db yang ter-locking."
 
 Fixed in the immediate follow-up PR #5325 ("Move promotion eligibility checkers to Infrastructure Services").
+
+
+### 2026-11-18 — PR #5630, #6023, #6230, #6256 (incremental sync)
+
+Layer placement still comes up, now in both directions (logic leaking *up* into Blade/Action, and object construction leaking *down* into the Gateway).
+
+**Gateway returns raw data; domain objects are built by the repository/factory.** PR [#5630](https://github.com/dicoding-dev/dicoding/pull/5630) (`DailyAddOnTokenGateway`) — AlexzPurewoko:
+> "Menurutku yang membuatkan object ini better di tingkat domain objects aja, misal di repository aggregate yang memang menggunakan ini atau di tingkat factory repository... Dari gateway cukup menyediakan fasilitas untuk load data pure (array/object) dari record table saja..."
+
+**Validation doesn't belong in the Action.** PR [#6256](https://github.com/dicoding-dev/dicoding/pull/6256) (`AcademicProgramDashboardParticipantImportAction`) — agissept: "Kenapa ada validasi di sini?"
+
+**View conditions belong in the ViewModel.** PR [#6023](https://github.com/dicoding-dev/dicoding/pull/6023) (`layouts/default.blade.php`) — alfianyusufabdullah: "kondisi ini gak sekalian dimasukkin langsung ke VM aja bang?"
+
+**The opposite check: does this need its own Specification?** PR [#6230](https://github.com/dicoding-dev/dicoding/pull/6230) (`ParticipantSyncSpecification`) — AlexzPurewoko:
+> "Btw adakah alasan tertentu sehingga ini harus dibuat sebagai specification baru instead of menggunakannya di level action ?"
 
 ## Why it matters
 Two failure directions, same root cause — **not stopping to ask "which layer owns this decision?" before writing code**:

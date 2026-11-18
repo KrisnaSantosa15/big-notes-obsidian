@@ -73,3 +73,60 @@ Updated frontmatter for themes: [[12 Aggregate Design]] (new: #5593, #5592), [[0
 | [#5626](https://github.com/dicoding-dev/dicoding/pull/5626) | [Feature][Daily Add-Ons] Token issuance — create, infra + web/UI | OPEN | AlexzPurewoko | [[07 Modern PHP Idioms]], [[01 Actions Must Stay Thin]] |
 
 Updated frontmatter for themes: [[07 Modern PHP Idioms]] (new: #5626), [[01 Actions Must Stay Thin]] (new: #5626), [[12 Aggregate Design]] (new: #5630).
+
+
+---
+
+## 2026-11-18 Update (incremental, 109 PRs updated since 2026-08-24)
+
+Only PRs with substantive human feedback are listed. The rest (approval-only "lgtm"/"GGWP", conflict pings, or no comments) were scanned but touched no theme.
+
+| PR | Title | State | Reviewers | Themes touched |
+|----|-------|-------|-----------|----------------|
+| [#6402](https://github.com/dicoding-dev/dicoding/pull/6402) | Record failed registration confirmation emails in failed_jobs | MERGED | dimasmds | [[02 Explicit Failure Over Silent Fallbacks]] |
+| [#6385](https://github.com/dicoding-dev/dicoding/pull/6385) | Keep Indonesian citizens living abroad eligible | MERGED | dimasmds | [[10 PR and Team Process Hygiene]] |
+| [#6356](https://github.com/dicoding-dev/dicoding/pull/6356) | Update the registration email copy | MERGED | mochammadkevin | [[08 Naming and File Organization]] |
+| [#6326](https://github.com/dicoding-dev/dicoding/pull/6326) | Send offerings from the React admin page again | MERGED | Najibsaurus | [[06 Test Discipline]] |
+| [#6318](https://github.com/dicoding-dev/dicoding/pull/6318) | Add the domain for importing lecturer mappings from CSV | MERGED | Najibsaurus | [[08 Naming and File Organization]] |
+| [#6312](https://github.com/dicoding-dev/dicoding/pull/6312) | Forbid users without privileges from searching users | MERGED | Najibsaurus | [[06 Test Discipline]], [[02 Explicit Failure Over Silent Fallbacks]] |
+| [#6301](https://github.com/dicoding-dev/dicoding/pull/6301) | Let admins remove students from a lecturer | MERGED | agissept | [[02 Explicit Failure Over Silent Fallbacks]], [[04 Query Efficiency]], [[06 Test Discipline]] |
+| [#6300](https://github.com/dicoding-dev/dicoding/pull/6300) | Add the domain for unmapping a student from a lecturer | MERGED | agissept | [[12 Aggregate Design]], [[04 Query Efficiency]], [[02 Explicit Failure Over Silent Fallbacks]] |
+| [#6286](https://github.com/dicoding-dev/dicoding/pull/6286) | Add IT background and last education questions | MERGED | Najibsaurus, mochammadkevin | [[13 Enforce Business Rules on the Server]], [[10 PR and Team Process Hygiene]] |
+| [#6256](https://github.com/dicoding-dev/dicoding/pull/6256) | Import participants from a CSV with a preview | MERGED | agissept | [[10 PR and Team Process Hygiene]], [[12 Aggregate Design]], [[04 Query Efficiency]], [[07 Modern PHP Idioms]], [[01 Actions Must Stay Thin]] |
+| [#6254](https://github.com/dicoding-dev/dicoding/pull/6254) | Add the domain for importing students from a CSV | MERGED | AlexzPurewoko | [[08 Naming and File Organization]], [[12 Aggregate Design]], [[04 Query Efficiency]], [[05 Self-Documenting Code]] |
+| [#6249](https://github.com/dicoding-dev/dicoding/pull/6249) | Let admins add a student to a campaign by email | MERGED | AlexzPurewoko, hasbi-ashshidiq23 | [[02 Explicit Failure Over Silent Fallbacks]], [[07 Modern PHP Idioms]], [[03 Reuse Before You Build]] |
+| [#6248](https://github.com/dicoding-dev/dicoding/pull/6248) | Add the domain for adding a student to a campaign | MERGED | AlexzPurewoko | [[08 Naming and File Organization]], [[03 Reuse Before You Build]] |
+| [#6241](https://github.com/dicoding-dev/dicoding/pull/6241) | Shorten announcement copy and localize welcome image | MERGED | Najibsaurus, dimasmds, mochammadkevin | [[03 Reuse Before You Build]] (CDN) |
+| [#6230](https://github.com/dicoding-dev/dicoding/pull/6230) | Sync cohort students missing from the campaign | MERGED | AlexzPurewoko, hasbi-ashshidiq23 | [[01 Actions Must Stay Thin]], [[08 Naming and File Organization]], [[03 Reuse Before You Build]], [[10 PR and Team Process Hygiene]] |
+| [#6218](https://github.com/dicoding-dev/dicoding/pull/6218) | Add the participants page to the program dashboard | MERGED | dimasmds | [[05 Self-Documenting Code]] |
+| [#6207](https://github.com/dicoding-dev/dicoding/pull/6207) | Enroll students into the APD campaign after the cohort form | MERGED | Najibsaurus, hasbi-ashshidiq23, alfianyusufabdullah | [[02 Explicit Failure Over Silent Fallbacks]] |
+| [#6190](https://github.com/dicoding-dev/dicoding/pull/6190) | Add the participant enrollment domain | MERGED | hasbi-ashshidiq23 | clarification only |
+| [#6170](https://github.com/dicoding-dev/dicoding/pull/6170) | Guard Pijak 2027 routes with pijak2027 flag | MERGED | agissept | [[03 Reuse Before You Build]] |
+| [#6169](https://github.com/dicoding-dev/dicoding/pull/6169) | Announce not selected participants via command | MERGED | dimasmds | [[13 Enforce Business Rules on the Server]] |
+| [#6141](https://github.com/dicoding-dev/dicoding/pull/6141) | Assign registrants to a facilitator WhatsApp group | MERGED | Najibsaurus | [[06 Test Discipline]], [[04 Query Efficiency]], [[10 PR and Team Process Hygiene]] |
+| [#6126](https://github.com/dicoding-dev/dicoding/pull/6126) | Show when registration opens before it opens | MERGED | Najibsaurus | [[13 Enforce Business Rules on the Server]] |
+| [#6031](https://github.com/dicoding-dev/dicoding/pull/6031) | Re-offer request domain rules | MERGED | agissept | [[12 Aggregate Design]] |
+| [#6030](https://github.com/dicoding-dev/dicoding/pull/6030) | Reject IBM account emails that were used before | MERGED | dimasmds | [[08 Naming and File Organization]], [[06 Test Discipline]], [[10 PR and Team Process Hygiene]] |
+| [#6023](https://github.com/dicoding-dev/dicoding/pull/6023) | Fix unauthenticated registration page layout parity | MERGED | alfianyusufabdullah | [[01 Actions Must Stay Thin]] |
+| [#6021](https://github.com/dicoding-dev/dicoding/pull/6021) | Announce progressive participants per batch | MERGED | AlexzPurewoko | [[13 Enforce Business Rules on the Server]], [[06 Test Discipline]] |
+| [#5966](https://github.com/dicoding-dev/dicoding/pull/5966) | Timezone input, birth date warning, and source label | MERGED | dimasmds | [[13 Enforce Business Rules on the Server]] |
+| [#5963](https://github.com/dicoding-dev/dicoding/pull/5963) | Conditional institution field by participant status | MERGED | dimasmds | [[07 Modern PHP Idioms]] (JS) |
+| [#5947](https://github.com/dicoding-dev/dicoding/pull/5947) | Submit administration requirements in stages | MERGED | agissept | [[06 Test Discipline]] |
+| [#5941](https://github.com/dicoding-dev/dicoding/pull/5941) | Restyle administration step as checklist cards | MERGED | AlexzPurewoko | [[07 Modern PHP Idioms]] (`@class`) |
+| [#5937](https://github.com/dicoding-dev/dicoding/pull/5937) | Registration form quick fixes | MERGED | dimasmds | [[07 Modern PHP Idioms]] (JS) |
+| [#5851](https://github.com/dicoding-dev/dicoding/pull/5851) | Redesign announcement emails to match approved draft | MERGED | AlexzPurewoko | [[03 Reuse Before You Build]] (cdnPath), email inline-style caution |
+| [#5793](https://github.com/dicoding-dev/dicoding/pull/5793) | (Pijak registration) | MERGED | dimasmds | [[08 Naming and File Organization]], [[05 Self-Documenting Code]] |
+| [#5790](https://github.com/dicoding-dev/dicoding/pull/5790) | (Pijak administrative requirement) | MERGED | dimasmds | [[12 Aggregate Design]] |
+| [#5780](https://github.com/dicoding-dev/dicoding/pull/5780) | (Pijak form validator) | MERGED | dimasmds | [[05 Self-Documenting Code]], [[07 Modern PHP Idioms]] |
+| [#5779](https://github.com/dicoding-dev/dicoding/pull/5779) / [#5769](https://github.com/dicoding-dev/dicoding/pull/5769) | (Pijak registration domain) | MERGED | dimasmds, AlexzPurewoko | [[10 PR and Team Process Hygiene]], [[06 Test Discipline]] |
+| [#5671](https://github.com/dicoding-dev/dicoding/pull/5671) | (Daily Add-Ons token redemption) | MERGED | AlexzPurewoko | [[12 Aggregate Design]], [[03 Reuse Before You Build]], [[07 Modern PHP Idioms]] |
+| [#5666](https://github.com/dicoding-dev/dicoding/pull/5666) | (Daily Add-Ons token redemption domain) | MERGED | AlexzPurewoko, dimasmds, hasbi-ashshidiq23 | [[12 Aggregate Design]], [[05 Self-Documenting Code]] |
+| [#5638](https://github.com/dicoding-dev/dicoding/pull/5638) | (Daily Add-Ons token index) | MERGED | AlexzPurewoko | [[04 Query Efficiency]], [[07 Modern PHP Idioms]] |
+| [#5635](https://github.com/dicoding-dev/dicoding/pull/5635) | (Daily Add-Ons token edit web) | MERGED | AlexzPurewoko | [[08 Naming and File Organization]], [[06 Test Discipline]], [[03 Reuse Before You Build]] |
+| [#5630](https://github.com/dicoding-dev/dicoding/pull/5630) | Token issuance, edit domain | MERGED | AlexzPurewoko | [[12 Aggregate Design]], [[01 Actions Must Stay Thin]] |
+| [#5626](https://github.com/dicoding-dev/dicoding/pull/5626) | Token issuance, create infra + web | MERGED | AlexzPurewoko, dimasmds | [[03 Reuse Before You Build]], [[07 Modern PHP Idioms]] (rest logged 2026-09-01) |
+
+## Reviewer frequency, 2026-11-18 batch (human comments, bot excluded)
+- AlexzPurewoko 74, dimasmds 63, Najibsaurus 34, agissept 21, hasbi-ashshidiq23 17, mochammadkevin 7, alfianyusufabdullah 3, ikhlas-dicoding 2, furqoncreative 1.
+
+dimasmds became the second most frequent reviewer (mostly Pijak work), and Najibsaurus is new this period with a distinct focus: business-rule edge cases and server-side guards (drove most of [[13 Enforce Business Rules on the Server]]).

@@ -12,6 +12,14 @@ prs:
   - "#5324"
   - "#5588"
   - "#5626"
+  - "#5638"
+  - "#5671"
+  - "#5780"
+  - "#5937"
+  - "#5941"
+  - "#5963"
+  - "#6249"
+  - "#6256"
 status: recurring
 ---
 
@@ -42,6 +50,19 @@ Two related habits: (a) not using PHP 8 constructor property promotion where it 
 > hasbi-ashshidiq23: "ini perlu kah? di import tapi tidak digunakan" (unused import)
 > hasbi-ashshidiq23: "kenapa ini cek 2 port yg sama?" (the same condition checked twice)
 > AlexzPurewoko: "Property ini sudah tidak digunakan lagi" (unused property left after a refactor)
+
+
+### 2026-11-18 — PR #5626, #5638, #5671, #5937, #5941, #6249, #6256 (incremental sync)
+
+Low severity but frequent. These are idiom nits, and each one is cheap to self-check.
+
+- **Pass Carbon, not formatted strings.** PR [#5626](https://github.com/dicoding-dev/dicoding/pull/5626) — AlexzPurewoko: "Btw kenapa ngga langsung aja pass object Carbon disini daripada harus formatting lagi ke string hehe"
+- **Collection methods over `foreach` + accumulator.** PR [#6256](https://github.com/dicoding-dev/dicoding/pull/6256) — agissept: "Coba lebih manfaatin method yang ada di collection instead of pake foreach." (suggested `->get()->mapWithKeys(...)`)
+- **Early return.** PR [#5671](https://github.com/dicoding-dev/dicoding/pull/5671) — AlexzPurewoko: "Iya lebih readable seperti itu bang... Itu namanya early return pattern"
+- **`empty()` for a request string.** PR [#6249](https://github.com/dicoding-dev/dicoding/pull/6249) — AlexzPurewoko: "Bisa pake empty(programUserId) sekalian bang"
+- **Double quotes over escaping.** PR [#5638](https://github.com/dicoding-dev/dicoding/pull/5638) — AlexzPurewoko: "pake double quotes aja bang daripada harus nge escape dengan '\\' didalemnya..."
+- **Blade `@class`.** PR [#5941](https://github.com/dicoding-dev/dicoding/pull/5941) — AlexzPurewoko: "Penulisan class seperti ini lebih baik jika pake directive @class dari blade bang"
+- **JS idioms.** PR [#5937](https://github.com/dicoding-dev/dicoding/pull/5937) — dimasmds: "Menggunakan array function bisa lebih singkat." PR #5780: "BTW kenapa gak pakai TypeScript?" PR #5963: "Kenapa perlu diubah dari forEach ke for of?"
 
 ## Why it matters
 Every instance here is dead code that exists purely because the author didn't trust (or didn't check) a guarantee the type system already enforces. It's harmless individually, but it compounds into noise: a reader has to verify "is this cast/check actually doing something" every time they hit one, which is wasted cognitive load multiplied across the whole diff.

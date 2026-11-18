@@ -1,6 +1,6 @@
 ---
-last_synced: 2026-08-24
-last_pr_seen: 5621
+last_synced: 2026-11-18
+last_pr_seen: 6430
 repo: dicoding-dev/dicoding
 ---
 
@@ -27,3 +27,5 @@ Added new evidence to [[12 Aggregate Design]] (now recurring: #5335, #5593, #559
 [[03 Reuse Before You Build]] (added #5593, #5282).
 No new themes created. Reviewer batch: dimasmds (naming/layering), AlexzPurewoko (aggregate/reuse).
 All feedback consolidated without duplication — pre-2026-07-14 evidence preserved.
+
+**2026-11-18 incremental sync**: processed 109 PRs updated since 2026-08-24 (#5592-#6430), 222 human comments. Already-logged items from #5592/#5593/#5626/#5630 were not duplicated. Evidence added to [[02 Explicit Failure Over Silent Fallbacks]] (#6301 review: uncaught InvariantException + empty-array delete without WHERE), [[12 Aggregate Design]], [[08 Naming and File Organization]], [[03 Reuse Before You Build]], [[06 Test Discipline]], [[04 Query Efficiency]], [[07 Modern PHP Idioms]], [[10 PR and Team Process Hygiene]], [[01 Actions Must Stay Thin]], [[05 Self-Documenting Code]]. New theme [[13 Enforce Business Rules on the Server]].

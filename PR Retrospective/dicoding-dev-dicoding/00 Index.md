@@ -98,3 +98,26 @@ Completed full rescan of all 33 PRs authored by @KrisnaSantosa15. Added evidence
 | [[12 Aggregate Design]] | #5630 | Aggregate actor-noun naming (`Editor`→`Update`, matching `MultiCourseTokens*` process-noun convention) + constructor-must-not-validate, consolidated into one `validate*Rules()` method. |
 
 **No new themes created** — all 3 points fit existing patterns.
+
+
+---
+
+## 2026-11-18 Update: Incremental sync (109 PRs updated since 2026-08-24, #5592-#6430)
+
+222 human review comments read (github-actions QA checklists and sandbox comments excluded). Reviewers this round: AlexzPurewoko 74, dimasmds 63, Najibsaurus 34, agissept 21, hasbi-ashshidiq23 17, mochammadkevin 7, alfianyusufabdullah 3, ikhlas-dicoding 2, furqoncreative 1.
+
+| Theme | New PRs | Update |
+|---|---|---|
+| [[02 Explicit Failure Over Silent Fallbacks]] | #6301, #6300, #6402, #6249, #6312, #6207 | **3rd+ occurrence.** #6301: uncaught `InvariantException` → generic error; `where(closure)`+`foreach` delete becomes `DELETE` with no WHERE on `[]`. |
+| [[12 Aggregate Design]] | #5630, #5666, #5671, #5790, #6031, #6254, #6256, #6300 | Most active theme. Non-null inputs, repository create+save only, aggregate owns output, no aggregate for simple logic. |
+| [[08 Naming and File Organization]] | #5635, #5793, #6030, #6230, #6248, #6254, #6318, #6356 | Now 18 PRs. Names that don't match return type/behavior. |
+| [[03 Reuse Before You Build]] | #5626, #5635, #5671, #5851, #6170, #6230, #6241, #6248, #6249 | Seeded test users flagged 3x in a row; CDN helpers; existing components. |
+| [[06 Test Discipline]] | #5635, #5769, #5947, #6021, #6030, #6141, #6301, #6312, #6326 | Assert exact messages, prove PR claims, negative inputs. |
+| [[04 Query Efficiency]] | #5638, #6141, #6254, #6256, #6300, #6301 | Bulk insert, single-query validation, leading-`%` LIKE. |
+| [[07 Modern PHP Idioms]] | #5626, #5638, #5671, #5937, #5941, #6249, #6256 | Carbon, collections, early return, `@class`. |
+| [[10 PR and Team Process Hygiene]] | #5769, #5779, #6030, #6141, #6230, #6256, #6385 | 1 spec per PR, frequent conflicts, stakeholder confirmation. |
+| [[01 Actions Must Stay Thin]] | #5630, #6023, #6230, #6256 | Gateway returns raw data; no validation in Action; VM for view logic. |
+| [[05 Self-Documenting Code]] | #5666, #5780, #5793, #6218, #6254 | Full exception keys for searchability, TODO on stubs. |
+| [[13 Enforce Business Rules on the Server]] | #5966, #6021, #6126, #6169, #6286 | **New theme (Medium).** Feature toggles as business state, FE-only date/age/option checks. |
+
+**Severity:** [[13 Enforce Business Rules on the Server]] added as 🟡 Medium. [[12 Aggregate Design]] is now the most-hit architecture theme; consider promoting it to High if it recurs on the next APD domain PR.

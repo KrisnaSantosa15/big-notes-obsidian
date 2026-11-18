@@ -1,6 +1,22 @@
 ---
-tags: [pr-retro, theme/process, severity/medium]
-prs: ["#5077", "#5224", "#5033", "#5132"]
+tags:
+  - pr-retro
+  - theme/process
+  - severity/medium
+prs:
+  - "#5077"
+  - "#5224"
+  - "#5033"
+  - "#5132"
+  - "#5769"
+  - "#5779"
+  - "#6030"
+  - "#6141"
+  - "#6230"
+  - "#6256"
+  - "#6286"
+  - "#6299"
+  - "#6385"
 status: recurring
 ---
 
@@ -23,6 +39,21 @@ The same doc also had internal inconsistencies caught in review (`/bank-accounts
 **Stale branch / not rebasing before requesting merge:**
 - **PR #5077**: "minta tolong di rebase dulu ya"
 - **PR #5132**: "Coba di rebase dulu"
+
+
+### 2026-11-18 — PR #5769, #5779, #6030, #6141, #6230, #6256, #6385 + conflict pings (incremental sync)
+
+**Recurring.** Three sub-patterns:
+
+**1. One Specification per PR; draft until ready.** PR [#6256](https://github.com/dicoding-dev/dicoding/pull/6256) — agissept:
+> "Ini kalo aku liat ada 3 specification dalam 1 PR, yang mana harusnya 1 PR hanya ada 1 specification. Tolong diperbaiki dulu ya." / "kalo belum ready bisa di draft dulu"
+
+**2. Stale branches and build churn.** Reviewers had to ask for a rebase or conflict fix on #5671, #5851, #6190, #6230, #6249 (twice), #6256 (twice), #6299 (twice), #6326. PR [#6230](https://github.com/dicoding-dev/dicoding/pull/6230) — AlexzPurewoko: "Karena file buildnya wow, bisakah rebase dulu sekali lagi buat di merge terlebih dahulu bang?" Habit: rebase and rebuild right before requesting review.
+
+**3. Confirm with stakeholders, fill the QA checklist, discuss naming before the PR.**
+- QA checklist: PR [#5769](https://github.com/dicoding-dev/dicoding/pull/5769) / [#5779](https://github.com/dicoding-dev/dicoding/pull/5779) — dimasmds: "jangan lupa next untuk PR QA checklist diisi, walau implementasi di gateway saat ini baru stub."
+- Discuss first: PR [#6030](https://github.com/dicoding-dev/dicoding/pull/6030) — dimasmds: "Menurutku bisa raise diskusi dulu sebelum PR sih bang. Campaign ada kebutuhan aaaa, masalahnya bbbb, propose-ku cccc, alasannya dddd."
+- Stakeholder confirmation: PR [#6385](https://github.com/dicoding-dev/dicoding/pull/6385) — dimasmds: "timezone fallback ke WIB ini perlu dikonfirmasi ke stakeholder, biar terinfo." PR [#6141](https://github.com/dicoding-dev/dicoding/pull/6141) — Najibsaurus: "need confirm: 1000 itu batas anggota grup WA-nya, atau batas berapa orang yang sanggup didampingi satu fasil?" PR #6286 — "Mungkin bisa ditanyakan ke stakeholder contoh kayak aku yang lulusan Madrasah Aliyah pilihnya apa?~"
 
 ## Why it matters
 None of these are hard to fix — they're all about a final pre-submit pass most PRs here were missing. Scope creep forces reviewers to context-switch onto something the PR title didn't prepare them for, and makes `git blame`/PR history misleading later (a rename PR that quietly changes conventions makes both harder to find). A convention doc merged without team consensus creates a false "this is policy" signal for anyone who reads it later, exactly what tripped up the reviewer here (`akupun baru tahu`).

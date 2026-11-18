@@ -1,6 +1,18 @@
 ---
-tags: [pr-retro, theme/performance, severity/medium]
-prs: ["#5061", "#5224", "#5200"]
+tags:
+  - pr-retro
+  - theme/performance
+  - severity/medium
+prs:
+  - "#5061"
+  - "#5224"
+  - "#5200"
+  - "#5638"
+  - "#6141"
+  - "#6254"
+  - "#6256"
+  - "#6300"
+  - "#6301"
 status: recurring
 ---
 
@@ -23,6 +35,30 @@ Looping a per-row DB call instead of one batched query, calling a gateway functi
 
 **PR #5200** — caching consideration flagged proactively by the reviewer, not by Krisna:
 > "Fungsi ini ada banyak query, termasuk query yang di looping. Kira-kira akan seberapa sering di akses? kalo sering maka hasil dari logic ini bisa dicache aja"
+
+
+### 2026-11-18 — PR #5638, #6141, #6254, #6256, #6300, #6301 (incremental sync)
+
+Recurring again (previously #5061, #5224, #5200). New sub-patterns: per-row inserts, extra validation queries, leading-wildcard LIKE.
+
+**PR [#5638](https://github.com/dicoding-dev/dicoding/pull/5638)** (`DailyAddOnTokenGateway`) — AlexzPurewoko:
+> "Hati hati bang memberikan operasi query LIKE disini... dia akan membaca row satu per satu buat compare apakah token string itu posisinya di tengah, awal atau di akhir... Better untuk pake options query % sehingga operasi pencocokannya bisa minimal..."
+
+**PR [#6254](https://github.com/dicoding-dev/dicoding/pull/6254)** (`ParticipantBulkCreationRepository`) — AlexzPurewoko:
+> "Daripada satu satu per participant, ini bisa bulk insert btw"
+
+**PR [#6256](https://github.com/dicoding-dev/dicoding/pull/6256)** (`ParticipantBulkCreationRepository`) — agissept:
+> "Kenapa perlu 2 query di sini?"
+
+**PR [#6300](https://github.com/dicoding-dev/dicoding/pull/6300)** (`SupervisedStudentRemovalRepository`) — agissept:
+> "Kayanya parameter `$programCode` bisa masuk ke method `findSupervisedStudent`, jadi untuk validasi cukup 1 query aja."
+
+**PR [#6141](https://github.com/dicoding-dev/dicoding/pull/6141)** (`PijakGateway`) — Najibsaurus:
+> "Query ini sering di-hit gak bwang? kalo emang sering di-cache aja~"
+
+(Resolved: not cached because the count must stay fresh; follow-up was about quota semantics, see [[10 PR and Team Process Hygiene]].)
+
+**PR [#6301](https://github.com/dicoding-dev/dicoding/pull/6301)** — the `orWhere`-per-pair delete was also replaced by `where('lecturer_id')->whereIn('student_id')`: simpler SQL and safe on empty input. Main write-up in [[02 Explicit Failure Over Silent Fallbacks]].
 
 ## Why it matters
 None of these are exotic — they're the standard "read the query plan before writing the loop" discipline. The #5224 thread in particular shows a pattern: writing the query that answers "get me data shaped like X" without first checking whether a **sibling gateway method in the same class already computes the input you need**, or whether the codebase has a **named convention for this exact join** (`developer_journey_status_hash`) that should be reused rather than re-derived.

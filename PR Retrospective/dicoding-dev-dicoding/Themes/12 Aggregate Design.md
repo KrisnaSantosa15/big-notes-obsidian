@@ -8,6 +8,13 @@ prs:
   - "#5593"
   - "#5592"
   - "#5630"
+  - "#5666"
+  - "#5671"
+  - "#5790"
+  - "#6031"
+  - "#6254"
+  - "#6256"
+  - "#6300"
 status: recurring
 ---
 
@@ -132,3 +139,32 @@ private function validateEditTokenRules(Carbon $newExpiredDate): void
 All checks grouped into **one** `validateEditTokenRules()` method rather than split across several small ones — matches `MultiCourseTokenDropout::preValidation()`'s style of grouping every pre-check together. Direct consequence for tests: since the constructor no longer throws, a test must construct the aggregate first (`$update = new DailyAddOnTokenUpdate(null);`) and only then call the action method to trigger the exception — not assert on the constructor call itself.
 
 **Correction (2026-09-01, same day):** an earlier draft of this note added `@psalm-assert !null $this->existingToken` on `validateEditTokenRules()`, assuming psalm would otherwise flag `$this->existingToken->withNewSelf(...)` in `updateToken()` as possibly-null. Verified empirically with `deck psalm` (full project scan, "No errors found!") that this annotation changes nothing — this project's `psalm.xml` sets `errorLevel="4"`, and `PossiblyNullPropertyFetch`-family issues default to Psalm severity level 5, above that threshold, so they're never enforced here regardless of the annotation. Don't add `@psalm-assert` for this reason in this codebase — it's a no-op under the current config. (No sibling aggregate in this codebase uses `@psalm-assert` at all — the closest comparable case, `RecipientsConfigStateUpdate`, instead validates in the constructor and re-fetches the now-guaranteed value in the action method behind a plain comment, `// Guaranteed non-null by the constructor guard.` — still the older, constructor-validates pattern, not proof either way for psalm's behavior under the newer no-constructor-validation style.)
+### 2026-11-18 — PR #5630, #5666, #5671, #5790, #6031, #6254, #6256, #6300 (incremental sync)
+
+Now the **most active theme** across APD and Daily Add-Ons work (previously #5335, #5592, #5593, #5630). Recurring sub-patterns:
+
+**Inputs must already be valid objects; "not found" is the provider's job.** PR [#5630](https://github.com/dicoding-dev/dicoding/pull/5630) — AlexzPurewoko:
+> "Harusnya objek (existin daily token) yang masuk ke aggregate ini tidak null bang. Kalau misal memang tidak ada object-nya, raise di repository atau factory selaku provider dari object ini hehe..."
+
+**Repository creates and saves only its own aggregate.** PR [#5671](https://github.com/dicoding-dev/dicoding/pull/5671) — AlexzPurewoko:
+> "Better ini call di specification si redemption ini aja bang biar repository ini fokus pada redemption aggregate-nya aja (create and save)"
+
+**Don't use an aggregate's static helpers from outside the domain.** PR [#6254](https://github.com/dicoding-dev/dicoding/pull/6254) — AlexzPurewoko:
+> "Seharuse tidak ada static method dari aggregate disini yang digunakan untuk proses tertentu bang. Ini kan digunakan untuk internal domain dari bulk creation, menurutku bisa ditaruh kesitu juga..."
+
+**The aggregate owns its output.** PR [#6256](https://github.com/dicoding-dev/dicoding/pull/6256) — agissept:
+> "Kenapa proses ouput ini ga disimpan di aggregate saja? jadi di spec ini nanti tinggal `$aggregate->getOutput()`?"
+
+and on the same PR: "Kenapa `programCode` dan `categoryNamesById` ini ga jadi properti di object `Campaign` aja?"
+
+**Use the data the VO already carries instead of extra params.** PR [#6300](https://github.com/dicoding-dev/dicoding/pull/6300) — agissept:
+> "Di `$supervisedStudent` udah ada `student id` dan `lecturer id`, kenapa engga memanfaatkan property yang ada di object aja?"
+
+**Question every nullable.** PR [#6031](https://github.com/dicoding-dev/dicoding/pull/6031) — agissept: "Kenapa ini 2 value nullable?"
+
+**Authorization belongs in the aggregate.** PR [#5630](https://github.com/dicoding-dev/dicoding/pull/5630) — AlexzPurewoko: "Berarti perlu ada pengecekan role disini pack... Bisa pake CommonActor. nanti check apakah admin atau bukan"
+
+**Not every write needs an aggregate (YAGNI).** PR [#5790](https://github.com/dicoding-dev/dicoding/pull/5790) — dimasmds:
+> "Simple logic, sebetulnya gak perlu dibuatkan aggregate untuk menyederhanakan layer." / "Bisa spec langsung gateway." / "Kalo memang butuh raise event, bisa manfaatkan anonymous aggregate"
+
+**Constructor input-check vs process validation.** PR [#5666](https://github.com/dicoding-dev/dicoding/pull/5666) — AlexzPurewoko: "required untuk check profile completion ini bisa di constructor aggregate mengingat adalah input checking dari sistem..." (refines the #5593 "no validation in constructor" rule: OK when all needed data is already in the params).

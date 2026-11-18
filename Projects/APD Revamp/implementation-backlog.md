@@ -237,3 +237,9 @@ Lecturer hanya melihat Student di mapping-nya.
 - Unique key access list: `(program_user_id, user_id, program_code)`.
 - Data APD lama (DBS 2026 B1): student ID seperti `CFCC123D4Y5678`, prefix-nya sama dengan prefix grup (`CFC-12`). Mentor `FACIL-...`,
   Lecturer `SPV...`, Instructor `SC12-...`.
+
+
+## Catatan lintas card (2026-11-17)
+
+- K20 (learning path tidak disimpan di access list) dipakai card Cycle-2 [Course progress is calculated automatically from Dicoding learning data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784): konfigurasi course dikaitkan ke `scholarship_package_id`, learning path Student dibaca lewat join `scholarship_participants`. Detail di [brainstorm-sp-cycle-2.md](brainstorm-sp-cycle-2.md) bagian 5 (E1, P9 sampai P11).
+- Kategori dan learning path adalah dua hal berbeda: kategori = jenis Student (SMK, umum, guru SMK), learning path = jalur belajar (AI Engineer, Data Scientist). Konfigurasi course mengikuti learning path.

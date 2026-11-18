@@ -1,6 +1,24 @@
 ---
-tags: [pr-retro, theme/reuse, severity/medium]
-prs: ["#5017", "#5033", "#5286", "#5316", "#5593", "#5282"]
+tags:
+  - pr-retro
+  - theme/reuse
+  - severity/medium
+prs:
+  - "#5017"
+  - "#5033"
+  - "#5286"
+  - "#5316"
+  - "#5593"
+  - "#5282"
+  - "#5626"
+  - "#5635"
+  - "#5671"
+  - "#5851"
+  - "#6170"
+  - "#6230"
+  - "#6241"
+  - "#6248"
+  - "#6249"
 status: recurring
 ---
 
@@ -75,3 +93,17 @@ dimasmds on constant extraction:
 > "DRY~ Bisa dibuat constant dan jadikan single source."
 
 Straightforward [[03 Reuse Before You Build]] on error message strings: extract duplicated literals to a const, keeping one source of truth instead of multiple scattered copies.
+
+### 2026-11-18 — PR #5626, #5635, #5671, #5851, #6170, #6230, #6241, #6248, #6249 (incremental sync)
+
+**Recurring (now 9+ PRs).** Same root behavior: building or hard-coding something the codebase or test DB already provides.
+
+**Seeded test users instead of `createDicodingUser()`. Flagged three times in a row.** PR [#5626](https://github.com/dicoding-dev/dicoding/pull/5626) — AlexzPurewoko: "Sorry untuk Admin id bisa pake existing di dicoding_test `be(DicodingUser::find(DicodingUser::ADMINID));`"; dimasmds: "Tidak perlu membuat Dicoding User baru, sudah ada ada di DB testing untuk user admin dan developer juga." PR [#5635](https://github.com/dicoding-dev/dicoding/pull/5635): "Bisa pake user developer dari dicoding_test dengan id 5 atau 6 bang ini..." PR [#5671](https://github.com/dicoding-dev/dicoding/pull/5671): "Btw ini better pake user yang udah ada di dicoding_test"
+
+**Existing test helper.** PR [#6170](https://github.com/dicoding-dev/dicoding/pull/6170) — agissept: "Untuk toggle biasanya pake `$this->enableFeatureToggle()`"
+
+**CDN helpers over local or explicit asset paths.** PR [#5851](https://github.com/dicoding-dev/dicoding/pull/5851) — AlexzPurewoko: "Btw ini bisa pake `ImageRoutePath::cdnPath` bang... untuk asset spt ini hindari menggunakan path eksplisit spt ini". PR [#6241](https://github.com/dicoding-dev/dicoding/pull/6241) — Najibsaurus: "Ada reasoning-nya abangku kenapa tidak simpan di cdn?" (the code had switched *from* `cdnPath` to a local asset).
+
+**Existing objects and lookups.** PR [#6248](https://github.com/dicoding-dev/dicoding/pull/6248) — AlexzPurewoko: "Kenapa ini ngga langsung findCampaignByProgramCode aja? toh campaign object itu udah ada id-nya kan?" and "aku saranin retrieve object kaya CommonActor disini jg deh, selain juga bisa verify user-nya found atau tidak, dia juga bisa verify verification status"
+
+**Frontend components.** PR [#6230](https://github.com/dicoding-dev/dicoding/pull/6230) — hasbi-ashshidiq23: "kayanya enak kalau buat reusable component datatable untuk ini biar bisa dipake di halaman2 lainnya". PR [#6249](https://github.com/dicoding-dev/dicoding/pull/6249): "next pr bisa pake component yg dibuat ikhlas setelah pr dia udah merge"

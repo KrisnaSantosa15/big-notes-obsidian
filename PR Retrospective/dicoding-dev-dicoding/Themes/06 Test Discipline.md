@@ -11,6 +11,15 @@ prs:
   - "#5268"
   - "#5335"
   - "#6359"
+  - "#5635"
+  - "#5769"
+  - "#5947"
+  - "#6021"
+  - "#6030"
+  - "#6141"
+  - "#6301"
+  - "#6312"
+  - "#6326"
 status: recurring
 ---
 
@@ -56,6 +65,24 @@ Multiple distinct sub-issues, all under "what should this test actually cover, a
 > "action dari test ini yang aku pahami ada di `setupInstitutionField()` jadi kalo bisa pemanggilan itu ditulis aja di body testingnya jangan di beforeEach (gak kelihatan dan biasanya digunakan untuk prep)."
 
 AAA = **Arrange** (siapkan data/DOM pendukung skenario) → **Act** (jalankan kode production yang ditest) → **Assert** (validasi efeknya). `beforeEach` hanya untuk Arrange bersama; pemanggilan kode yang ditest harus terlihat di body tiap test. Ref: https://semaphore.io/blog/aaa-pattern-test-automation
+
+
+### 9. Evidence 2026-11-18 — PR #5635, #5769, #5947, #6021, #6030, #6141, #6301, #6312, #6326 (incremental sync)
+
+**Recurring.** Main gaps: tests that don't prove the claim, unneeded setup, and missing negative cases.
+
+**Assert the exact message, not just that an error exists.** PR [#6301](https://github.com/dicoding-dev/dicoding/pull/6301): `assertSessionHasErrors('supervised_student')` passed even while the user saw the generic "Maaf, kami mengalami kegagalan..." text, because the `InvariantException` wasn't caught (see [[02 Explicit Failure Over Silent Fallbacks]]). Asserting the translated text exposed it.
+
+**Prove the claim the PR description makes.** PR [#6312](https://github.com/dicoding-dev/dicoding/pull/6312) — Najibsaurus:
+> "Pada deskripsi PR ini aku membaca kalimat \"Other search errors keep their previous 200 response, so the existing pages behave the same.\" Tapi apakah testnya perlu ada juga di sini utk membuktikan klaim tersebut?"
+
+**Cover the negative inputs.** PR [#6326](https://github.com/dicoding-dev/dicoding/pull/6326) — Najibsaurus: "Apakah perlu ada test untuk kasus null atau kode tidak terdaftar, dan kode valid?" PR [#6141](https://github.com/dicoding-dev/dicoding/pull/6141): "Another case: apakah mentee dari program lain bisa mengambil qouta fasilitator? ... kalo engga bisa karena rule-nya seperti itu bisa dibuat testnya~"
+
+**No unneeded setup.** PR [#5635](https://github.com/dicoding-dev/dicoding/pull/5635) — AlexzPurewoko: "Untuk test case dibawah ini karena tidak berfokus pada testing filter, maka ini tidak diperlukan bang" (`Route::enableFilters()`). PR [#6030](https://github.com/dicoding-dev/dicoding/pull/6030) — dimasmds: "Kenapa dibuat beda dengan konfigurasi production saat ini? Kalo memang belum muncul skenario multiple keys exclusion, menurutku belum perlu ditambahkan dulu." / "case ini juga jadi gak perlu kalo memang belum dibutuhkan."
+
+**Test file hygiene.** PR [#6021](https://github.com/dicoding-dev/dicoding/pull/6021) — AlexzPurewoko: "Better pake prefix test_* atau tambahin attribute `#[Test]`". PR [#5769](https://github.com/dicoding-dev/dicoding/pull/5769) — dimasmds: "Fungsi helper-helper gini bisa disimpan di bawah biar bisa langsung baca skenario testing"
+
+**Run the full suite after a rebase.** PR [#5947](https://github.com/dicoding-dev/dicoding/pull/5947) — agissept: "rebase terus jalanin semua unit test dan integration test dulu coba". (Seen again on #6301: a master middleware change turned a "no campaign" test into a 404 after the rebase.)
 
 ## Why it matters
 Sub-issues 1–2 waste CI time and reviewer attention on cases the test pyramid already handles elsewhere (unit tests for logic branches, one shared `OAuthFilterIntegrationTest` for auth rejection). Sub-issue 3 is a false sense of coverage — asserting fields one at a time silently lets a new, untested field slip through. Sub-issue 4 adds noise that makes reviewers ask "why does this exist" instead of reviewing the actual behavior under test. Sub-issue 6 is a real, named team norm — resolving it wrong repeatedly erodes trust that concerns were actually addressed. Note also [[02 Explicit Failure Over Silent Fallbacks]]: the #5268 bug (logged-out user path never tested) is this same "what should the test actually cover" question, just with a bigger blast radius.

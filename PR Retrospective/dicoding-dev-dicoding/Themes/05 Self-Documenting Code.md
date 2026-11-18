@@ -1,6 +1,16 @@
 ---
-tags: [pr-retro, theme/readability, severity/medium]
-prs: ["#5224", "#5078"]
+tags:
+  - pr-retro
+  - theme/readability
+  - severity/medium
+prs:
+  - "#5224"
+  - "#5078"
+  - "#5666"
+  - "#5780"
+  - "#5793"
+  - "#6218"
+  - "#6254"
 status: recurring
 ---
 
@@ -23,6 +33,21 @@ Writing response-building code where a reader has to open two or three nested fu
 
 And a concrete extract-method suggestion on a trait doing multiple unrelated conversions inline:
 > "Ini bisa diextract ke beberapa function, misal `convertToScalar`, `convertToDate`, dll"
+
+
+### 2026-11-18 — PR #5666, #5780, #5793, #6218, #6254 (incremental sync)
+
+Recurring (previously #5224, #5078). This round it was about searchability and intent, not response shapes.
+
+**Full exception keys, no prefix constant (findable by IDE search).** PR [#6254](https://github.com/dicoding-dev/dicoding/pull/6254) (`ParticipantBulkCreation`) — AlexzPurewoko:
+> "Sebenarnya, full exception message itu dibuat untuk kemudahan dalam pencarian error menggunakan search everywhere, sehingga bisa detectable dari manapun dengan IDE"
+
+**Name the intent with a function.** PR [#5780](https://github.com/dicoding-dev/dicoding/pull/5780) (`form-validator.js`) — dimasmds:
+> "Berpotensi untuk jadikan fungsi terpisah dan bikin nama yang menjelaskan \"ngapain sih ini?\". Atau gabung aja weh sekalian logikanya dengan `getDefaultValue`?"
+
+**Mark intentional stubs with a TODO.** PR [#5666](https://github.com/dicoding-dev/dicoding/pull/5666) — hasbi-ashshidiq23: "inituh masih stub ya. boleh di tandain aja pake //TODO biar jelas bahwa ini memang sengaja placeholder". PR [#5793](https://github.com/dicoding-dev/dicoding/pull/5793) — dimasmds: "Lebih baik ditambahkan to-do aja kalo gitu biar gak lupa"
+
+**Formatting.** PR [#6218](https://github.com/dicoding-dev/dicoding/pull/6218) — dimasmds: "formatting-nya bisa lebih dirapikan biar enak dibaca."
 
 ## Why it matters
 This is a different axis from correctness — the code worked, but the *shape of the response* wasn't discoverable without executing it mentally across multiple files. In an API layer specifically, the Action/Transformer is the contract other developers (and frontend engineers) read to understand what they're consuming — if that contract requires tracing three private methods across two classes, it stops functioning as documentation.

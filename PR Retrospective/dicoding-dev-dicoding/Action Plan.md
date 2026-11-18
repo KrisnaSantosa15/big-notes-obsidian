@@ -19,6 +19,14 @@ A self-review pass to run **before** opening a PR, ordered by how much a miss he
 - [ ] Any endpoint touching auth: does it declare the *narrowest* OAuth scope it needs, and is that scope already registered in `oauth_server_scopes.php`? [[09 OAuth Scopes Mental Model]]
 - [ ] Any feature conditionally available to logged-in users: added a test for the **logged-out** path? [[06 Test Discipline]] · [[02 Explicit Failure Over Silent Fallbacks]]
 
+
+*Added 2026-11-18 sync:*
+- [ ] **Destructive query + empty input:** for every `delete()`/`update()`, what SQL does it produce with `[]`? Never let all WHERE conditions come from a loop; keep a fixed `where(...)` outside it and prefer `whereIn` (empty becomes `0 = 1`). → [[02 Explicit Failure Over Silent Fallbacks]] (#6301)
+- [ ] **One catch per exception the aggregate throws:** `InvariantException` → `withInvariantExceptionPayload`, otherwise the user gets the generic "Maaf..." text. → [[02 Explicit Failure Over Silent Fallbacks]] (#6301)
+- [ ] **Rules on the server:** no feature toggle as business state; every UI date gate, age limit, or option list has a server check. → [[13 Enforce Business Rules on the Server]] (#6021, #6169, #6126)
+- [ ] **Aggregate inputs non-null; repository = create + save only; aggregate owns its output.** → [[12 Aggregate Design]] (#5630, #5671, #6256)
+- [ ] **Bulk insert, one query for validation, no leading `%` LIKE.** → [[04 Query Efficiency]] (#6254, #6256, #5638)
+
 ## Before opening the PR
 - [ ] Diffed changed files against the PR title — does every file trace back to what the title says? Split out anything that doesn't. [[10 PR and Team Process Hygiene]]
 - [ ] Rebased against `master`.
@@ -27,6 +35,13 @@ A self-review pass to run **before** opening a PR, ordered by how much a miss he
 - [ ] Test self-check: no re-testing of framework-guaranteed behavior (OAuth filter rejection), `assertEqual`/`assertObjectHasPropertyStructure` over field-by-field asserts, no unexplained mocks, negative cases first, no unused imports. [[06 Test Discipline]]
 
 - [ ] AAA check: every test body visibly calls the production code under test (Act); `beforeEach`/`setUp` holds only shared Arrange. [[06 Test Discipline]]
+
+
+*Added 2026-11-18 sync:*
+- [ ] **One Specification per PR**; open it as a draft if it isn't ready. → [[10 PR and Team Process Hygiene]] (#6256)
+- [ ] **Rebase + rebuild + run the full suite** right before requesting review (10+ conflict pings this period). → [[10 PR and Team Process Hygiene]], [[06 Test Discipline]] (#5947)
+- [ ] **Assert exact error text**, and add a test for every claim in the PR description. → [[06 Test Discipline]] (#6301, #6312)
+- [ ] **Seeded test users** (ADMINID=2, developer 5/6), not `createDicodingUser()`. → [[03 Reuse Before You Build]] (#5626, #5635, #5671)
 
 ## During review
 - [ ] If a reviewer's concern is addressed, reply and let them resolve the thread — or explicitly say "resolved, ping if you still have concerns" instead of silently clicking resolve (it doesn't notify them). [[06 Test Discipline]]

@@ -1,6 +1,27 @@
 ---
-tags: [pr-retro, theme/naming, severity/medium]
-prs: ["#5017", "#5061", "#5078", "#5219", "#5033", "#5286", "#5316", "#5324", "#5596", "#5593"]
+tags:
+  - pr-retro
+  - theme/naming
+  - severity/medium
+prs:
+  - "#5017"
+  - "#5061"
+  - "#5078"
+  - "#5219"
+  - "#5033"
+  - "#5286"
+  - "#5316"
+  - "#5324"
+  - "#5596"
+  - "#5593"
+  - "#5635"
+  - "#5793"
+  - "#6030"
+  - "#6230"
+  - "#6248"
+  - "#6254"
+  - "#6318"
+  - "#6356"
 status: recurring
 ---
 
@@ -67,3 +88,16 @@ AlexzPurewoko on file organization in the docs tree:
 > "Oh iya baru ngeh dia ngambil patokan relativenya adalah main 'docs'. Kalau gitu, mending masukin ke `docs/mkdocs-customization/ai-assistant.{ts,js}`"
 
 Same root issue as #5033's Transformer placement: assets that aren't docs get misplaced in the docs folder. The fix is the same too — establish a folder hierarchy that groups by *type* (Transformers, AI customizations) not by *proximity to where they're used*.
+
+### 2026-11-18 — PR #5635, #5793, #6030, #6230, #6248, #6254, #6318, #6356 (incremental sync)
+
+**Still the most frequent theme (now 18 PRs).** Same root behavior: the name doesn't say what the thing returns or does.
+
+- **Name says bool, returns string.** PR [#6318](https://github.com/dicoding-dev/dicoding/pull/6318) (`SupervisedStudentImportRow`) — Najibsaurus: "ini kan return-nya string. tpi kenapa namanya mirip bool?~"
+- **Name the return value.** PR [#5793](https://github.com/dicoding-dev/dicoding/pull/5793) — dimasmds: "Propose `getCommitmentLetterLink` karena menggambarkan nilai yang dikembalikan dalam bentuk link."
+- **Ambiguous id params.** PR [#6248](https://github.com/dicoding-dev/dicoding/pull/6248) — AlexzPurewoko: "yang param 3 $userId ini better lebih spesifik lagi bang, karena tadi sekilas aku mengira si userId ini juga sejajar dengan actorId... Misal : participantUserId"
+- **Aggregate name must match what it does.** PR [#6254](https://github.com/dicoding-dev/dicoding/pull/6254) — AlexzPurewoko: "aggregate ini tidak hanya create participant saja, tapi juga meng-updatenya... Sepertinya lebih kearah 'Sync' or Import maybe?" and "Bukankah kalau BulkCreation ini udah konteksnya create many ya? create(array) saja sudah cukup"
+- **Route naming convention.** PR [#5635](https://github.com/dicoding-dev/dicoding/pull/5635) — AlexzPurewoko: "Karena ini page, tambahin alias *.index atau *.show bang." / "Nitip juga ama nama action-nya juga yak"
+- **Table and variable names.** PR [#6030](https://github.com/dicoding-dev/dicoding/pull/6030) — dimasmds: "Yakin mau pakai nama ini? Kira-kira orang bakal tahu gak ini tuh fungsi tabelnya apa?" (`excluded_emails`) and "Mungkin bisa diubah aja namanya jadi `pijakConfig`."
+- **Frontend file and casing.** PR [#6230](https://github.com/dicoding-dev/dicoding/pull/6230) — hasbi-ashshidiq23: "namanya bisa lebih specific, student-list misal", "normalizers dipindah ke file baru aja", "kenapa ga sekalian disini camelCase aja biar di component reactnya udah sesuai"
+- **Rename everywhere.** PR [#6356](https://github.com/dicoding-dev/dicoding/pull/6356) — mochammadkevin: "naming di config ini harus diganti juga gasii"

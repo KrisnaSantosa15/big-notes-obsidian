@@ -21,12 +21,16 @@ habit observed so far — it shipped a real production bug in one repo
 question is "should this even be reachable?"
 → full evidence: [[dicoding-dev-dicoding/Themes/02 Explicit Failure Over Silent Fallbacks]]
 
+- 2026-11-18: recurred in dicoding-dev/dicoding (#6301), this time as an *empty-input* edge case: a delete whose only WHERE conditions came from a loop became `DELETE` with no WHERE on `[]`, plus an uncaught exception type that showed users a generic error. Ask "what does this do with empty input?" for every destructive query. See [[dicoding-dev-dicoding/Themes/02 Explicit Failure Over Silent Fallbacks]]
+
 ## Search before you build
 New Value Objects, test helpers, and assertions were repeatedly hand-rolled
 when an equivalent already existed in the codebase, just not searched for
 first. Cheap habit to fix: grep the domain/shared-helper layer for the
 concept name before writing a new implementation of it.
 → full evidence: [[dicoding-dev-dicoding/Themes/03 Reuse Before You Build]]
+
+- 2026-11-18: recurred in dicoding-dev/dicoding (9 PRs): seeded test users, existing test helpers, CDN helpers, and existing frontend components. See [[dicoding-dev-dicoding/Themes/03 Reuse Before You Build]]
 
 ## Trust the type system, delete the redundant guard
 Casts and `is_array`/`is_string` checks added out of habit where a
