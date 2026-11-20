@@ -68,13 +68,15 @@ Index `(user_id, created_at)`.
 
 ### Kebijakan hari terlewat
 
-`StreakGapPolicy` diperluas:
+Domain service baru `Dicoding/Domain/DailyStreak/Services/MissedDayPolicy`:
 
 ```
-missedDays(Carbon $lastCheckInDay, Carbon $today, array $protectedDates): array<Carbon>
+missedDays(Carbon $lastCheckInDay, Carbon $today, array $protectedDays): array<Carbon>
 ```
 
-Hasil: hari setelah `lastCheckInDay` sampai **kemarin**, dikurangi `EXEMPT_DATES` dan `protectedDates`. `isBridgedGap()` menjadi `missedDays(...) === []`.
+Hasil: hari setelah `lastCheckInDay` sampai **kemarin**, dikurangi `protectedDays`.
+
+Diputuskan 2026-11-20: **tidak** memperluas `StreakGapPolicy` dan tidak memakai `EXEMPT_DATES`. `EXEMPT_DATES` adalah perbaikan insiden 2026-10-21 (streak hilang saat patch PHP), bukan bagian fitur recovery. Saat fitur rilis, jarak yang mencakup tanggal itu pasti melebihi kuota (Expired), jadi pengecualian tidak berpengaruh. `StreakGapPolicy` dibiarkan seperti di master, dan ikut tidak terpakai saat listener lama diganti `DailyStreakCheckIn` (PR4).
 
 Status (ADR-003), enum `DailyStreakStatus`:
 
@@ -144,7 +146,7 @@ Aturan: **satu PR, satu aggregate** (keputusan 2026-11-20, agar mudah direview).
 
 | PR | Aggregate | Layer | Isi |
 |---|---|---|---|
-| 1 | `DailyStreakRecovery` | Domain | `StreakGapPolicy::missedDays()`, enum `DailyStreakStatus`, aggregate (recover/reset), unit test, repository + gateway kosong |
+| 1 | `DailyStreakRecovery` | Domain | `MissedDayPolicy::missedDays()`, enum `DailyStreakStatus`, aggregate (recover/reset), unit test, repository + gateway kosong |
 | 2 | `DailyStreakRecovery` | Infra + Web | Migration (`recovery_quota`, `daily_streak_protected_days`, `daily_streak_recovery_transactions`), gateway, `ChooseDailyStreakRecoverySpecification`, `POST /api/v1/daily-streak/recovery`, integration test, flag `daily_streak_recovery` |
 | 3 | `DailyStreakCheckIn` | Domain | Aggregate (penjaga Pending, Expired jadi 1, Normal +1), unit test, repository |
 | 4 | `DailyStreakCheckIn` | Infra | `CheckInDailyStreakSpecification`, ganti 3 listener, integration test |
