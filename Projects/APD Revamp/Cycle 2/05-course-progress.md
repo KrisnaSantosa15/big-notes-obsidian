@@ -219,3 +219,10 @@ Estimasi Claude 5,5 SP:
 
 
 - **Pembaruan:** Krisna mengubah judul card menjadi [5] (2026-11-18 07:11). Obsidian disamakan menjadi **5 SP**. Selisih dengan estimasi Claude tinggal sekitar 0,5 SP.
+
+
+## Keputusan 2026-11-19 (sebelum implementasi)
+
+- **Nama kolom tetap `scholarship_package_id`** di `academic_program_dashboard_campaign_learning_paths` (Krisna). Isinya key `token_packages` program (atau nilai tetap config untuk program satu paket seperti mastercard, `config/scholarships.php:862`), dan kolom ini di-join ke `scholarship_participants.scholarship_package_id` saat auto-enroll.
+- **Kalkulasi progres tetap di card ini, ditambah tampilan kecil** (Krisna), supaya service-nya langsung terpakai. Kolom "x/y lulus" dan status tetap di card Progress status.
+- **Freeze persentase modul bisa dilakukan:** `developer_journey_trackings.completed_at` (nullable, sejak migration 2021-06-17, diisi di `AcademyProgressGateway.php:589`). Persentase saat freeze = modul published dengan `completed_at <= close_at` (null dianggap selesai sebelumnya). Butuh query baru dengan batas tanggal, karena `CodingCampProgressiveCourseProgressChecker::getPercentages()` tidak memfilter tanggal.
