@@ -68,13 +68,13 @@ Index `(user_id, created_at)`.
 
 ### Kebijakan hari terlewat
 
-Domain service baru `Dicoding/Domain/DailyStreak/Services/MissedDayPolicy`:
+Domain service baru `Dicoding/Domain/DailyStreak/Services/MissedDayService`:
 
 ```
 missedDays(Carbon $lastCheckInDay, Carbon $today, array $protectedDays): array<Carbon>
 ```
 
-Hasil: hari setelah `lastCheckInDay` sampai **kemarin**, dikurangi `protectedDays`.
+Hasil: hari setelah `lastCheckInDay` sampai **kemarin**, dikurangi `protectedDays`. Hari yang dilindungi maupun yang terlewat dibungkus VO `StreakDays` (`contains()`, `count()`, `getDateStrings()`, `fromDateStrings()`), jadi konversi Carbon dan string hanya ada di VO itu.
 
 Diputuskan 2026-11-20: **tidak** memperluas `StreakGapPolicy` dan tidak memakai `EXEMPT_DATES`. `EXEMPT_DATES` adalah perbaikan insiden 2026-10-21 (streak hilang saat patch PHP), bukan bagian fitur recovery. Saat fitur rilis, jarak yang mencakup tanggal itu pasti melebihi kuota (Expired), jadi pengecualian tidak berpengaruh. `StreakGapPolicy` dibiarkan seperti di master, dan ikut tidak terpakai saat listener lama diganti `DailyStreakCheckIn` (PR4).
 
@@ -99,7 +99,7 @@ Mengikuti pola DailyAddOns. Semua di `Dicoding/Domain/DailyStreak/`.
 | `StreakRecoveryXpEarning` | `earn(int $xp)` | Kuota 3: tidak melakukan apa-apa. Di bawah 3: tambah `recovery_xp`, setiap kelipatan 500 jadi +1 kuota dan sisa dibawa. Saat kuota mencapai 3, `recovery_xp` jadi 0 dan sisa dibuang (ADR-004) | `StreakRecoveryWasEarned` (jika kuota bertambah) |
 | `StreakRecoveryQuotaCorrection` | `correct(int $delta, string $reason)` | Hasil 0 sampai 3, admin wajib | `StreakRecoveryQuotaWasCorrected` |
 
-- Error key: `DAILY_STREAK.RECOVERY.NOT_PENDING`, `DAILY_STREAK.RECOVERY.NOT_EXPIRED`, `DAILY_STREAK.RECOVERY.QUOTA_OUT_OF_RANGE`.
+- Error key: `DAILY_STREAK.RECOVERY.NOT_PENDING`, `DAILY_STREAK.RECOVERY.NOT_RECOVERED_YET`, `DAILY_STREAK.RECOVERY.NOT_EXPIRED`, `DAILY_STREAK.RECOVERY.QUOTA_OUT_OF_RANGE`.
 - Konstanta `StreakRecoveryXpEarning::XP_PER_RECOVERY = 500` dan `MAX_QUOTA = 3` (ADR-001).
 - Tanggal sebagai `Carbon` (WIB, ADR-002).
 
@@ -146,7 +146,7 @@ Aturan: **satu PR, satu aggregate** (keputusan 2026-11-20, agar mudah direview).
 
 | PR | Aggregate | Layer | Isi |
 |---|---|---|---|
-| 1 | `DailyStreakRecovery` | Domain | `MissedDayPolicy::missedDays()`, enum `DailyStreakStatus`, aggregate (recover/reset), unit test, repository + gateway kosong |
+| 1 | `DailyStreakRecovery` | Domain | `MissedDayService::missedDays()`, enum `DailyStreakStatus`, aggregate (recover/reset), unit test, repository + gateway kosong |
 | 2 | `DailyStreakRecovery` | Infra + Web | Migration (`recovery_quota`, `daily_streak_protected_days`, `daily_streak_recovery_transactions`), gateway, `ChooseDailyStreakRecoverySpecification`, `POST /api/v1/daily-streak/recovery`, integration test, flag `daily_streak_recovery` |
 | 3 | `DailyStreakCheckIn` | Domain | Aggregate (penjaga Pending, Expired jadi 1, Normal +1), unit test, repository |
 | 4 | `DailyStreakCheckIn` | Infra | `CheckInDailyStreakSpecification`, ganti 3 listener, integration test |

@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-18
+updated: 2026-11-23
 type: plan
 tags: [plan, brainstorm, estimation, dicoding, apd]
 related-projects: ["[[Projects/Dicoding Platform]]"]
@@ -27,7 +27,7 @@ Dokumen ini index. Detail tiap card ada di folder ini, satu file per card. Cycle
 | Card | SP | Status brainstorm | Detail |
 | --- | --- | --- | --- |
 | [Email autocomplete in the add-participant form](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720) | 1 | Selesai. Diimplementasikan di PR [#6450](https://github.com/dicoding-dev/dicoding/pull/6450) | [01-email-autocomplete](01-email-autocomplete.md) |
-| [Ops edits a campaign participant](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711) | 4 | Selesai. Edit kategori, periode akses, Program User ID, dan learning path. Keluarkan peserta = `exit_reason` + `accessible_until` + dropout MCT. Daftar field final (P2) diputuskan bersama tim. Bergantung ke card Course progress (tabel learning path) | [02-ops-edits-participant](02-ops-edits-participant.md) |
+| [Ops edits a campaign participant](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711) | 4 | Selesai. Edit kategori, periode akses, dan field registrasi free text (Jurusan, NIM, institusi, prodi). Program User ID dan learning path tidak diedit (2026-11-19). Keluarkan peserta = `exit_reason` + `accessible_until` + dropout MCT. Tidak bergantung ke card lain. SP perlu dihitung ulang | [02-ops-edits-participant](02-ops-edits-participant.md) |
 | [Map Facilitators to the groups they accompany](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894512) | 2 | Selesai | [03-map-facilitators](03-map-facilitators.md) |
 | [Ops manages Students' progress status](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257815) | 2 | Selesai. Kalkulasi otomatis. Kolom status dan course "x/y lulus" di daftar peserta admin. AC card perlu ditulis ulang | [04-progress-status](04-progress-status.md) |
 | [Course progress is calculated automatically from Dicoding learning data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784) | 5 (ditetapkan Krisna) | Selesai. Setup learning path dan course, `learning_path_id` peserta, pemetaan auto-enroll termasuk TODO kategori [6], NEED RENEW, dan freeze. Estimasi Claude 5,5 (lihat [bagian 5](05-course-progress.md)). Dikerjakan paling awal | [05-course-progress](05-course-progress.md) |
@@ -89,7 +89,7 @@ Pembaruan assignee: [Students see their learning progress in APD](https://app.ba
 | Map Facilitators (2) | - | - | - | Mandiri. `ContributorCreation` sudah ada di master, jadi Fasilitator sudah bisa ditambahkan ke campaign walaupun card Alfian (10411894097) masih In progress. Kabari Alfian karena filter role di kode grup miliknya diubah. Koordinasi C3 dengan schedule Ikhlas |
 | Course progress (5) | - | - | - | Mandiri. Card [6] (auto-register) dan kategori campaign sudah Done. Card ini jadi blocker card lain |
 | Admin manages important links (4) | - | - | - | Mandiri. Pengaturan campaign dan kategori sudah Done |
-| Ops edits participant (4) | Course progress | Krisna | Exploring | Blocker milik sendiri (pilihan learning path) |
+| Ops edits participant (4) | - | - | - | Mandiri sejak 2026-11-19: learning path tidak diedit, jadi tidak bergantung ke Course progress |
 | Progress status (2) | Course progress | Krisna | Exploring | Blocker milik sendiri (tabel learning path, `target_week`, query kelulusan) |
 | Students see important links (2) | [User can Access APD based on their Role](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894672) | Hasbi | Planning | Blocker (kerangka halaman Student/Fasilitator) |
 | | Admin manages important links | Krisna | Exploring | Blocker milik sendiri |
@@ -102,4 +102,15 @@ Pembaruan assignee: [Students see their learning progress in APD](https://app.ba
 | | [Ops manages Students' assignment data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257805) | Alfian | Exploring | Isi detail |
 | | [Ops manages point histories from the campaign admin](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257825) | Alfian | Exploring | Isi detail |
 
-Urutan kerja: (1) card mandiri: Course progress, Email autocomplete, Map Facilitators, Admin important links. (2) Ops edits dan Progress status setelah Course progress. (3) Students see important links setelah kerangka Hasbi ada. (4) Card Fasilitator paling akhir.
+Urutan kerja: (1) card mandiri: Course progress, Email autocomplete, Map Facilitators, Admin important links, Ops edits. (2) Progress status setelah Course progress. (3) Students see important links setelah kerangka Hasbi ada. (4) Card Fasilitator paling akhir.
+
+## Pembaruan dari komentar card (dibaca ulang 2026-11-23)
+
+Komentar terakhir di semua card adalah 2026-11-19. Yang mengubah catatan:
+
+| Card | Perubahan | Detail |
+| --- | --- | --- |
+| Ops edits participant | Learning path tidak diedit, jadi **tidak bergantung ke Course progress**. Program User ID tidak boleh diubah (meeting dengan Ops), jadi P3 batal. Field free text registrasi (Jurusan, NIM, institusi, prodi) ikut diedit. SP perlu dihitung ulang | [02](02-ops-edits-participant.md#keputusan-2026-11-19-komentar-card-dan-meeting-ops) |
+| Course progress, Progress status | Course per learning path diambil dari MCT berdasarkan `program_id`, lalu Ops menentukan course per minggu | [05](05-course-progress.md#keputusan-2026-11-19-course-diambil-dari-mct-komentar-card-progress-status), [04](04-progress-status.md) |
+| Admin important links | Satu tabel, kategori/topik pakai combobox. Tabel grup gugur, SP perlu dicek ulang | [06](06-admin-important-links.md#keputusan-2026-11-19-satu-tabel-kategori-pakai-combobox) |
+| Email autocomplete, Map Facilitators, Facilitator progress, Students important links | Tidak ada komentar baru | - |

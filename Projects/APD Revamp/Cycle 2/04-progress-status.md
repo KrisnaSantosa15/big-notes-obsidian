@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-18
+updated: 2026-11-23
 type: plan
 tags:
   - plan
@@ -126,6 +126,10 @@ Konfigurasi `target_week` dihitung di card Course progress.
 ## Komentar Krisna di card (2026-11-18 05:56)
 
 "Kalau memang progress status ini intinya membandingkan progress saat ini dan target mingguan, expected condition di card ini sudah tidak relevan." AC card (input manual satu per satu, CSV, audit) perlu ditulis ulang sesuai desain kalkulasi otomatis.
+
+## Keputusan 2026-11-19 (komentar Krisna di card)
+
+- Course di setiap learning path diambil dari MCT memakai `program_id`. Ops menambah learning path saat setup campaign, memilih course dari MCT, lalu menentukan course yang harus selesai tiap minggu. Jumlah course per minggu itu yang dibandingkan untuk menentukan status. Detail di [bagian 5](05-course-progress.md#keputusan-2026-11-19-course-diambil-dari-mct-komentar-card-progress-status).
 
 ## Arsip
 

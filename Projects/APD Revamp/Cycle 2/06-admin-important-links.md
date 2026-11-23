@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-18
+updated: 2026-11-23
 type: plan
 tags:
   - plan
@@ -126,3 +126,11 @@ Semua terjawab 2026-11-17:
 | Link: CRUD, daftar checkbox target (kategori + Fasilitator, minimal satu), validasi URL, soft delete, audit FK `users`, UI | 1,5 |
 | Drag-and-drop link dan grup (`@dnd-kit/sortable`, library baru) | 1 |
 | **Total** | **4** (disepakati Krisna 2026-11-17) |
+
+## Keputusan 2026-11-19: satu tabel, kategori pakai combobox
+
+Sumber: komentar Krisna di card, 2026-11-19 04:16 sampai 09:07 (dibawa ke meeting tim Ops x tim revamp APD).
+
+- **Satu tabel saja.** `academic_program_dashboard_important_link_groups` di "Desain tabel" **gugur**. Judul bagian (heading) menjadi kolom kategori/topik di tabel link, dan link dengan isi kolom yang sama tampil di bawah heading yang sama.
+- **Input kategori/topik pakai combobox:** pilih kategori yang sudah ada, atau ketik untuk menambah yang baru.
+- **Perlu disesuaikan:** desain tabel, drag-and-drop grup (urutan heading tidak lagi punya tabel sendiri), dan rincian SP (baris "Grup" 1,5 SP). SP card belum diubah dari 4.

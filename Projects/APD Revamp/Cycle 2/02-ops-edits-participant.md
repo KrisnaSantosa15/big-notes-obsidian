@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-18
+updated: 2026-11-23
 type: plan
 tags:
   - plan
@@ -12,13 +12,14 @@ card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/104932
 sp: "4"
 status: Brainstorm selesai, belum dikerjakan
 pr: []
-depends-on:
-  - 05-course-progress
+depends-on: []
 index: "[[Projects/APD Revamp/Cycle 2/index]]"
 related-people:
   - "[[People/Krisna]]"
 ---
 # Ops edits a campaign participant (4 SP, draft)
+
+> **Pembaruan 2026-11-19:** card ini **tidak lagi bergantung ke Course progress**. Learning path tidak diedit, dan Program User ID tidak boleh diubah. Lihat [Keputusan 2026-11-19](#keputusan-2026-11-19-komentar-card-dan-meeting-ops). Keputusan B2, B3, P3, dan baris "Learning path bisa diedit" di bawah sudah diganti.
 
 [Index Cycle 2](index.md) · [Card Basecamp](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711)
 
@@ -188,4 +189,25 @@ Kesimpulan: "token jadi ENDED" di tengah program yang dimaksud Krisna dan Ops **
 - 06:07: harapan field yang bisa diubah: Kategori, Program User ID, Status Peserta (Withdraw/Terminated), Learning Path(?), field free text.
 - 07:10: SP bisa 2-4 tergantung dependensinya, khususnya learning path. Judul card diisi 4.
 
-Ketergantungan baru: **Course progress ([bagian 5](05-course-progress.md)) harus selesai lebih dulu**, karena pilihan learning path di form edit membaca tabel learning path campaign.
+~~Ketergantungan baru: Course progress harus selesai lebih dulu.~~ Gugur 2026-11-19, learning path tidak diedit.
+
+
+## Keputusan 2026-11-19 (komentar card dan meeting Ops)
+
+Sumber: komentar Krisna di card, 2026-11-18 07:42 sampai 2026-11-19 09:05.
+
+| # | Keputusan | Menggantikan |
+| --- | --- | --- |
+| L1 | **Learning path tidak diedit** ("learning path berarti gak perlu", 2026-11-19 04:03). Card ini lepas dari card Course progress | "Baru" 2026-11-18, ketergantungan di `depends-on` |
+| L2 | **Program User ID tidak boleh diubah.** "Kalau salah ya salah aja", kesepakatan meeting revamp APD bersama tim Ops (2026-11-19 09:05) | B3, sebagian B2 |
+| L3 | **CSV import tetap menolak Program User ID yang sudah ada** (`PROGRAM_USER_ID_ALREADY_SET`), mengikuti L2 | P3 (+0,5 SP dihapus) |
+| L4 | **Field registrasi free text ikut diedit:** Jurusan, NIM, institusi, prodi, dari `scholarship_participants` dan `scholarship_cohorts` (2026-11-18 07:42). P2 bergeser ke **tafsiran A** | P2 tafsiran B |
+
+Field yang bisa diedit sekarang: kategori, `accessible_from`/`accessible_until`, dan data registrasi free text (L4). Keluarkan peserta (`exit_reason` + `accessible_until` + dropout MCT) tetap.
+
+**Catatan untuk nanti, bukan scope card ini (2026-11-18 07:46):** import peserta diharapkan sekaligus mengisi access list, grup, mapping Lecturer, dan learning path. Ditunda supaya fokus per fitur dulu.
+
+**Yang perlu dicek sebelum implementasi:**
+- Bentuk field free text berbeda per program (JSON `education_info`/`other_requirements`, ViewModel registrasi per program, lihat P2 di atas). Perlu dipastikan field mana di `scholarship_cohorts` dan apakah form edit dibuat generik atau per program.
+- **SP perlu dihitung ulang.** Berkurang: edit Program User ID dan learning path, P3 (0,5). Bertambah: tafsiran A, yang sebelumnya diperkirakan sekitar 2 SP atau lebih.
+

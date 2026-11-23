@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-18
+updated: 2026-11-23
 type: plan
 tags:
   - plan
@@ -10,7 +10,7 @@ tags:
   - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784
 sp: "5"
-status: Brainstorm selesai, belum dikerjakan
+status: Rencana PR ditulis 2026-11-23, belum dikerjakan
 pr: []
 depends-on: []
 index: "[[Projects/APD Revamp/Cycle 2/index]]"
@@ -166,8 +166,8 @@ Desain usulan:
 | `campaign_id` | FK ke campaigns, cascade |
 | `name` | Nama learning path di campaign ini, diisi Ops |
 | `scholarship_package_id` | nullable. Pemetaan ke pilihan learning path di form registrasi, khusus peserta auto-register. Kosong untuk campaign tanpa registrasi Dicoding |
-| `created_by`, `updated_by` | FK users |
 | timestamps | |
+| unique `(campaign_id, name)` dan `(campaign_id, scholarship_package_id)` | NULL boleh lebih dari satu |
 
 `academic_program_dashboard_learning_path_courses`
 
@@ -177,7 +177,6 @@ Desain usulan:
 | `learning_path_id` | FK ke campaign learning paths |
 | `course_id` | FK ke course Dicoding |
 | `target_week` | unsignedTinyInteger, minggu ke-N sejak `open_at` |
-| `created_by`, `updated_by` | FK users |
 | timestamps | |
 | unique `(learning_path_id, course_id)` | |
 
@@ -226,3 +225,119 @@ Estimasi Claude 5,5 SP:
 - **Nama kolom tetap `scholarship_package_id`** di `academic_program_dashboard_campaign_learning_paths` (Krisna). Isinya key `token_packages` program (atau nilai tetap config untuk program satu paket seperti mastercard, `config/scholarships.php:862`), dan kolom ini di-join ke `scholarship_participants.scholarship_package_id` saat auto-enroll.
 - **Kalkulasi progres tetap di card ini, ditambah tampilan kecil** (Krisna), supaya service-nya langsung terpakai. Kolom "x/y lulus" dan status tetap di card Progress status.
 - **Freeze persentase modul bisa dilakukan:** `developer_journey_trackings.completed_at` (nullable, sejak migration 2021-06-17, diisi di `AcademyProgressGateway.php:589`). Persentase saat freeze = modul published dengan `completed_at <= close_at` (null dianggap selesai sebelumnya). Butuh query baru dengan batas tanggal, karena `CodingCampProgressiveCourseProgressChecker::getPercentages()` tidak memfilter tanggal.
+
+## Keputusan 2026-11-19: course diambil dari MCT (komentar card Progress status)
+
+Sumber: komentar Krisna di card [Ops manages Students' progress status](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257815), 2026-11-19 04:00 dan 04:32.
+
+- Course di setiap learning path **diambil dari MCT berdasarkan `program_id`** campaign (`partner_program_id`), bukan dari semua course Dicoding.
+- Alur setup: Ops menambah learning path campaign saat setup, lalu memilih course dari daftar course MCT program itu, lalu menentukan course yang harus selesai tiap minggu (`target_week`). Jumlah course per minggu dipakai untuk status peserta ([bagian 4](04-progress-status.md)).
+- Dampak ke opsi di "Sumber daftar course": opsi A tetap (Ops mengatur per learning path), tapi **pilihan combobox dibatasi ke course MCT program**. Ini beda dengan opsi B lama (course dari token milik tiap Student), yang tetap ditunda.
+- **Perlu dicek sebelum implementasi:** tabel MCT mana yang jadi sumber daftar course per program (misalnya `multi_course_token_courses` lewat token ber-`program_id`), dan cara memisahkan course tes seleksi dari course kelas kalau keduanya satu program.
+- Card Ops edits **tidak lagi bergantung ke card ini** (learning path tidak diedit, lihat [02](02-ops-edits-participant.md)).
+
+## Keputusan 2026-11-23 (sebelum rencana PR)
+
+| # | Keputusan |
+| --- | --- |
+| R1 | **Opsi A, tampil sebagai tab di halaman Settings** (diputuskan 2026-11-23). Halaman `campaign-edit` diberi tab "Umum" (form Settings yang sudah ada, isinya tidak diubah) dan "Learning paths". Backend tetap terpisah: endpoint dan aggregate sendiri per learning path, `CampaignSettingsUpdate` tidak diubah, simpan per learning path tidak menyentuh pengaturan umum. Endpoint mengikuti pola Groups (index, store, update, destroy). Perubahan di tab Umum yang belum disimpan perlu dijaga saat pindah tab (peringatan atau isi form dipertahankan) |
+| R2 | **Diganti 2026-11-23, lihat "Revisi R2" di bawah.** ~~Isi combobox course = semua course MCT program~~: DISTINCT `multi_course_token_courses.course_id` dari token dengan `program_id` = `partner_program_id` campaign. Course tes seleksi ikut tampil, Ops yang memilih. Data lokal Pijak 2027 (2208): token Assessment (5, 19, 86, 887), Not Eligible (1), Progressive (2, 3, 5, 10) |
+| R3 | **`learning_path_id` peserta diisi dua arah (cara 1)**, supaya urutan setup tidak berpengaruh: listener auto-enroll mengisi kalau learning path dengan `scholarship_package_id` yang cocok sudah ada, dan saat learning path disimpan, peserta campaign dengan `learning_path_id` null dan paket registrasi sama ikut diisi. Satu sumber untuk semua jalur (auto, manual, CSV) |
+| R4 | `scholarship_package_id` learning path **tidak bisa diganti** kalau learning path sudah punya peserta. Learning path yang sudah punya peserta **tidak bisa dihapus** (pola `CATEGORY_IN_USE`). **Diperjelas 2026-11-23:** mengisi paket dari kosong ke X tetap boleh walau sudah ada peserta, lalu backfill R3 dijalankan. Yang ditolak hanya X ke Y dan X ke kosong saat sudah ada peserta. Alasannya, peserta di learning path tanpa paket pasti dimasukkan manual, jadi tidak bergantung pada paket; kasus Ops lupa mengisi paket di tengah jalan selesai tanpa pemindahan manual. Aturan aggregate: tolak kalau sudah punya peserta DAN paket lama tidak kosong DAN paket baru berbeda |
+| R5 | **G7 ikut card ini sebagai PR terakhir.** Kalau card melebar, PR ini yang dilepas |
+
+### Revisi R2 (2026-11-23): course dipilih dari semua kelas Dicoding
+
+**Keputusan:** daftar course di dialog learning path diambil dari semua kelas `developer_journeys` (hanya kelas published lewat `AcademyGateway::getPublishedCourses()`, sumber yang sama dengan form pembuatan MCT; semua dikirim sekaligus dan disaring di combobox client), bukan dari MCT program. Aturan domain "course harus ada di daftar course MCT program" diganti menjadi "course harus ada". Penanda "sudah dibagikan ke peserta" untuk course yang ada di MCT program tidak dibuat dulu (YAGNI), tambahkan kalau Ops meminta.
+
+**Alasan:** `multi_course_tokens` adalah token per peserta (`student_id`, `redeemed_at`), dibuat saat grant atau offering, bukan paket course yang dibuat di awal. Kalau sumbernya MCT, daftar course kosong sebelum ada grant dan hanya berisi course yang kebetulan sudah dibagikan. Ini bertentangan dengan alur di thread (Ops menambah learning path saat setup campaign) dan dengan R3 (urutan setup tidak berpengaruh).
+
+> Krisna (2026-11-23): "gimana kalo misalkan tim ops pengen setup campaign ini jauh jauh hari sebelum pendaftaran dibuka, atau dalam tahap registrasi? sedangkan MCT akan dibuat ketika offering ke peserta, otomatis kan courses tidak akan muncul di setup learning path, malah jadi telor-ayam"
+
+**Risiko yang diterima:** Ops bisa memilih course yang tidak dibagikan ke peserta. Dampaknya terbatas: progress course itu terhitung 0% karena kalkulasi (PR 5-6) membaca tracking, completion, dan renewal peserta.
+
+**Opsi yang ditolak:** tetap MCT (Ops harus grant dulu); config `auto_enroll_scholarship_token[program_code].scholarship_packages.*.course_ids` (bentuk berbeda per program dan program tanpa entri jadi kosong, masalah P11).
+
+**Perubahan kode:** fixup di branch domain (aturan, pesan error, unit test), lalu branch 1b (gateway `isEveryCourseFound` cek course ada di `developer_journeys`; pilihan combobox dari `getPublishedCourses()`). Endpoint pencarian ke server sempat dibuat lalu dibatalkan: convention form admin di codebase memuat semua kelas sekaligus (form MCT, token kelas satuan, admin learning path katalog), dan production hanya punya 139 kelas published dari 319 total (dicek Krisna 2026-11-23).
+
+## Rencana PR (2026-11-23)
+
+Stack lurus, setiap PR di atas PR sebelumnya. Pemisahan mengikuti konvensi: PR domain (aggregate, VO, unit test, repository, gateway kosong, tanpa migration) lalu PR infra+web (migration, gateway, spec, web, integration test). TDD.
+
+| PR | Isi | Perkiraan SP |
+| --- | --- | --- |
+| 1. Domain learning path | Aggregate learning path campaign: simpan (nama, `scholarship_package_id` nullable, daftar course + `target_week`) dan hapus. VO course learning path. Aturan: hanya admin; nama unik per campaign; paket unik per campaign; course harus ada di daftar course MCT program; course tidak duplikat; `target_week` >= 1 dan tidak melewati jumlah minggu campaign (`open_at` sampai `close_at`); R4. Repository + gateway kosong | 0,75 |
+| 2. Infra + web learning path | Migration `academic_program_dashboard_campaign_learning_paths` dan `academic_program_dashboard_learning_path_courses`. Gateway (termasuk query course MCT program). Spec simpan dan hapus. Action dan route. UI: halaman `campaign-edit` dibungkus tab "Umum" dan "Learning paths"; tab Learning paths berisi daftar, dialog tambah/edit dengan combobox course dan input minggu, dan hapus; perubahan tab Umum yang belum disimpan dijaga saat pindah tab. Integration test jalur sukses, vitest halaman | 1 |
+| 3. Domain `learning_path_id` peserta | Aggregate tambah peserta manual, CSV import, dan auto-enroll menerima learning path (harus milik campaign yang sama). Aggregate pengisian learning path peserta (R3, backfill saat learning path disimpan). Unit test | 0,5 |
+| 4. Infra + web `learning_path_id` peserta | Migration kolom `learning_path_id` (nullable FK) di access list. Listener auto-enroll mencari learning path dari `scholarship_participants.scholarship_package_id`. Spec simpan learning path memanggil backfill. Form tambah peserta (pilihan learning path) dan kolom learning path di CSV. Integration test | 0,75 |
+| 5. Domain kalkulasi progress | Kalkulator murni per course: 100% (completion dalam periode, atau renew FINISHED dalam periode), NEED RENEW (completion sebelum `open_at` tanpa renew), atau % modul; dibekukan di `close_at`; jumlah kelas lulus (E5). Unit test | 0,75 |
+| 6. Infra + tampilan progress | Query batch: % modul dengan `developer_journey_trackings.completed_at <= batas`, completion, dan renewal per peserta dan course. Service baca. Tampilan kecil progress per course. Integration test | 0,75 |
+| 7. G7 kategori | Pemetaan kategori registrasi ke kategori campaign (isian "Kategori registrasi" di form kategori), dipakai listener auto-enroll, ditambah backfill dengan pola R3 | 0,5 (+0,5 risiko) |
+| **Total** | | **5** |
+
+**Pertanyaan yang perlu dijawab sebelum PR terkait:**
+- **O1 (PR 1-2), diputuskan 2026-11-23: pakai usulan.** Dari mana pilihan `scholarship_package_id` di form learning path? Usulan: dropdown dari DISTINCT `scholarship_participants.scholarship_package_id` program itu, ditambah `lp_name` dari config kalau ada. Isian angka bebas rawan salah. Cek dulu bentuk `token_packages` per program (P11).
+- **O2 (PR 6).** Lokasi "tampilan kecil" progress: baris yang bisa dibuka di halaman Students admin, atau dialog detail peserta? Kolom "x/y lulus" tetap di card Progress status.
+- **O3 (PR 4), diputuskan 2026-11-23: pakai nama.** Kolom learning path di CSV diisi nama learning path campaign, dicocokkan tanpa membedakan huruf besar/kecil. "Id" yang sempat dipertimbangkan adalah id row learning path, bukan id paket beasiswa (tidak semua learning path punya paket, dan pemetaan lewat paket sudah ditangani auto-enroll dan backfill). Nama yang tidak ditemukan ditolak per baris dengan alasan, tidak dibuat otomatis, karena learning path butuh daftar kelas dan minggu target, dan salah ketik akan menghasilkan learning path sampah. Kolom kosong berarti peserta tanpa learning path.
+
+### Revisi rencana PR (2026-11-23): satu PR satu aksi
+
+Konvensi codebase: **satu PR untuk satu aksi** (create, update, dan remove dipisah), masing-masing dengan pasangan PR domain lalu PR infra+web. PR 1 dan 2 di tabel atas dipecah menjadi:
+
+| PR | Isi |
+| --- | --- |
+| 1a. Domain create learning path | VO `CampaignLearningPath` dan `LearningPathCourse`, aggregate `CampaignLearningPathCreation`, event, repository, gateway kosong. Aturan create saja |
+| 1b. Infra + web create | Kedua migration, isi gateway (termasuk query course MCT program dan pilihan paket O1), spec, action, tab "Learning paths" di Settings dengan daftar dan dialog tambah |
+| 2a. Domain update learning path | Aggregate update + R4 (paket tidak bisa diganti kalau sudah punya peserta) |
+| 2b. Infra + web update | Spec, action, dialog edit |
+| 2c. Domain remove learning path | Aggregate removal + R4 (tidak bisa dihapus kalau sudah punya peserta) |
+| 2d. Infra + web remove | Spec, action, tombol hapus |
+
+Cek "sudah punya peserta" (R4) baru bisa diisi setelah kolom `learning_path_id` ada (PR 4). Karena itu PR 2a-2d bisa ditaruh **setelah PR 3-4**, atau gateway-nya sementara mengembalikan "belum ada peserta" dengan TODO. PR 3 sampai 7 tetap, dan PR 3 serta 4 juga dipecah per aksi kalau berisi lebih dari satu aksi.
+
+**Keputusan urutan (2026-11-23, Krisna):** PR 2a-2d (update dan remove learning path) dikerjakan **setelah PR 3-4**, supaya cek "sudah punya peserta" langsung memakai kolom `learning_path_id`.
+
+### Urutan PR final (2026-11-23)
+
+Menggantikan urutan di tabel "Rencana PR" dan "Revisi rencana PR". Satu PR satu aksi, stack lurus.
+
+| Urutan | PR | Isi singkat |
+| --- | --- | --- |
+| 1 | 1a. Domain create learning path | Selesai lokal, belum di-push. Branch `feature/apd/campaign-learning-path-domain` |
+| 2 | 1b. Infra + web create learning path | Selesai lokal, belum di-push. Branch `feature/apd/campaign-learning-path-creation`, termasuk UI dan build (lihat "Status implementasi PR 1a dan 1b") |
+| 3 | 3. Domain `learning_path_id` peserta | Dipecah per aksi kalau berisi lebih dari satu aksi (tambah manual, CSV, auto-enroll, backfill) |
+| 4 | 4. Infra + web `learning_path_id` peserta | Kolom `learning_path_id` di access list, listener, form tambah, kolom CSV |
+| 5 | 2a. Domain update learning path | R4: paket tidak bisa diganti kalau sudah punya peserta (pakai kolom dari PR 4). Kosong ke X tetap boleh dan memicu backfill R3 |
+| 6 | 2b. Infra + web update | Dialog edit |
+| 7 | 2c. Domain remove learning path | R4: tidak bisa dihapus kalau sudah punya peserta |
+| 8 | 2d. Infra + web remove | Tombol hapus |
+| 9 | 5. Domain kalkulasi progress | 100% / NEED RENEW / % modul, freeze di `close_at` |
+| 10 | 6. Infra + tampilan progress | Query batch, tampilan kecil (O2) |
+| 11 | 7. G7 kategori | Pemetaan kategori registrasi, dilepas kalau card melebar |
+
+Konvensi test PR domain: hanya test aggregate, yang membangun aggregate lewat repository asli dengan gateway di-prophesize. Tanpa test repository terpisah dan tanpa test VO.
+
+## Status implementasi PR 1a dan 1b (2026-11-23)
+
+Keduanya selesai di lokal, sudah di-commit, belum di-push. Riwayat kedua branch sempat ditulis ulang (fixup + autosquash, lalu rebase 1b), jadi kalau pernah di-push perlu force push.
+
+**PR 1a, `feature/apd/campaign-learning-path-domain`** (4 commit di atas master `b91c2a20adb`): VO learning path dan course, aggregate `CampaignLearningPathCreation`, event, repository, gateway kosong, terjemahan error. Aturan: hanya admin, nama unik per campaign, paket unik per campaign, setiap course harus ada (`COURSE_NOT_FOUND`, revisi R2), course tidak duplikat, `target_week` >= 1 dan minggu ke-N harus mulai sebelum `close_at`. `created_by`/`updated_by` tidak dipakai.
+
+**PR 1b, `feature/apd/campaign-learning-path-creation`** (8 commit):
+- Migration `academic_program_dashboard_campaign_learning_paths` dan `academic_program_dashboard_learning_path_courses` (tanpa kolom audit).
+- Gateway: query dan insert learning path beserta course-nya dalam satu method (pola `MultiCourseTokensGateway`), tanpa transaksi sendiri karena `UseCase::run()` sudah membungkus spec dalam transaksi.
+- Spec + integration test jalur sukses, action store + route `programcampaigns.learningpaths.store`, redirect ke `edit#learning-paths`.
+- Props halaman Settings: daftar learning path, kelas published, pilihan paket (DISTINCT `scholarship_participants.scholarship_package_id` program, label `lp_name` dari config, O1).
+- UI: tab "Umum" dan "Learning Path" (tab Umum tetap ter-mount supaya isian belum tersimpan tidak hilang), tabel daftar, dialog tambah. Bundle di-commit terpisah (`build(apd): rebuild the frontend bundle`).
+
+**Keputusan UI dialog tambah (2026-11-23):**
+- Kolom "Kelas", "Minggu ke-", "Tanggal" sebagai judul kolom di atas daftar, bukan placeholder (placeholder terpotong di input sempit).
+- Tanggal minggu ke-N dihitung dari `open_at` campaign: mulai `open_at` + (N-1) minggu, berakhir 6 hari kemudian atau `close_at` kalau lebih dulu. Minggu yang mulai setelah `close_at` tampil "Di luar periode campaign". Format ringkas, misalnya "3 - 9 Nov 2026". Tabel daftar memakai format yang sama.
+- Kelas yang sudah dipilih di baris lain tidak muncul di pilihan baris lain. Cek duplikat di zod, domain, dan server tetap ada sebagai pengaman.
+- Nama kelas panjang: kolom kelas mengambil sisa lebar, nama lengkap muncul sebagai tooltip, dan item dropdown boleh membungkus teks.
+- Tinggi dialog dibatasi tinggi layar dikurangi 10rem dan daftar kelas mengisi sisa ruang dengan scroll, supaya judul tidak tertutup navbar dan tombol Simpan tetap terlihat di layar pendek. Halaman terpisah dianggap berlebihan.
+
+**Data lokal untuk mencoba (AI Camp):** partner program 1708 (override lokal `ai_camp`) diganti nama menjadi "AI Camp powered by DBS Foundation" dengan `program_code` `aicamp_2026`. Campaign id 2 "AI Camp" (3 Nov 2026 sampai 31 Jan 2027), kategori SMK dan Universitas, 6 peserta scholarship dummy (user 6 sampai 11, paket 1 dan 2, isian registrasi mengikuti format `CodingCampRegistrationData`). Dua row access list lama user 284 (`codingcamp_2026`) dihapus. Config lokal yang masih memakai kunci `codingcamp_2026` tidak lagi cocok dengan program 1708. Row uji "Smoke LP" di campaign 1 (Pijak) masih ada.
+
+**Temuan di luar scope:** unique key access list `(program_user_id, user_id, program_code)` membolehkan satu user punya dua row di campaign yang sama selama `program_user_id` berbeda, dan sejak `program_user_id` nullable, juga dua row dengan NULL. Relevan untuk PR 4 (`learning_path_id` bisa terisi di dua row, progress terhitung dobel).
+
