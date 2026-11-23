@@ -1,0 +1,1166 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/campaign-learning-path-domain",
+    "base_sha": "00f8c2785b9d5aa141c583e5b17ade2742f51d61",
+    "merge_base": "00f8c2785b9d5aa141c583e5b17ade2742f51d61",
+    "head_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "diff_sha256": "a5c66f2cf305d16e5f74013bce8b05e98d9c60de21ac6bd4db63cce5a0d5990b",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/campaign-learning-path-domain",
+    "base_sha": "8d55ead764e44b116ec4577d79010db749d91a05",
+    "merge_base": "8d55ead764e44b116ec4577d79010db749d91a05",
+    "head_sha": "ae68ddba7dd41231b37349f8c302fe8ff71d1a92",
+    "diff_sha256": "ccf8d67359ed8a4be0e0386d23137366588c7c51ce7524df4b2037682921e055",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/UseCases/AcademicProgramDashboard/CampaignLearningPathCreationSpecification.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/Admin/CampaignEditAction.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/Admin/CampaignLearningPathStoreAction.php"
+      },
+      {
+        "status": "A",
+        "path": "app/database/migrations/2026_11_23_100000_create_academic_program_dashboard_campaign_learning_paths_table.php"
+      },
+      {
+        "status": "A",
+        "path": "app/database/migrations/2026_11_23_100001_create_academic_program_dashboard_learning_path_courses_table.php"
+      },
+      {
+        "status": "M",
+        "path": "app/routes.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/IntegrationTests/Specifications/AcademicProgramDashboard/CampaignLearningPathCreationIntegrationTest.php"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-edit.tsx"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-edit.types.ts"
+      },
+      {
+        "status": "A",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-learning-path.helpers.ts"
+      },
+      {
+        "status": "A",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-learning-path.schema.ts"
+      },
+      {
+        "status": "A",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-learning-paths.tsx"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/CompositeItem-Cf5NSfQd.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/CompositeItem-aTZ7Q3-T.js"
+      },
+      {
+        "status": "R089",
+        "path": "public/bundle/CompositeList-ChN25Lo7.js",
+        "previous_path": "public/bundle/CompositeList-Kegz5Na7.js"
+      },
+      {
+        "status": "R053",
+        "path": "public/bundle/CompositeRoot-BaskYVhg.js",
+        "previous_path": "public/bundle/CompositeRoot-CO3jxabj.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/DialogDescription-_Uv1PQfg.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/DialogRoot-Ck3ovS-T.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/DialogRoot-st5PX_jT.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/DialogTitle-CWKJmNpf.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/DialogTitle-DWZ31ayn.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/DialogTrigger-BmZPTiWu.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/DialogTrigger-CX2HoaGn.js"
+      },
+      {
+        "status": "R081",
+        "path": "public/bundle/DialogViewport-Ly0MWysa.js",
+        "previous_path": "public/bundle/DialogViewport-YuuWv_nP.js"
+      },
+      {
+        "status": "R068",
+        "path": "public/bundle/FloatingPortalLite-CEaVUHIJ.js",
+        "previous_path": "public/bundle/FloatingPortalLite-H_xIlVAm.js"
+      },
+      {
+        "status": "R073",
+        "path": "public/bundle/FormContext-uIDU9UkS.js",
+        "previous_path": "public/bundle/FormContext-GLuPLnpw.js"
+      },
+      {
+        "status": "R097",
+        "path": "public/bundle/ItemIndicator-DydTOd6y.js",
+        "previous_path": "public/bundle/ItemIndicator-BUP7Nzdf.js"
+      },
+      {
+        "status": "R062",
+        "path": "public/bundle/PopoverTitle-DWXDEKbx.js",
+        "previous_path": "public/bundle/PopoverTitle-BOC5xbMN.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/TabsList-BXXgLtW0.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/TabsList-Dajfpx23.js"
+      },
+      {
+        "status": "R090",
+        "path": "public/bundle/ToolbarRootContext-cqeZrrKp.js",
+        "previous_path": "public/bundle/ToolbarRootContext-BMnBymAX.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/_group_id_-COTM1UXW.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/_group_id_-Dn4FbY40.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/_page_-Dp1Qd8EG.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/_page_-DzuytaZq.js"
+      },
+      {
+        "status": "R065",
+        "path": "public/bundle/about-Ci6nLqJG.js",
+        "previous_path": "public/bundle/about-B9LPteip.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-create-BT8tze8i.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-create-CQ-I6ezL.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-edit-5mUYR482.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-edit-WXJw2WdH.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-index-BAYj7zOD.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-index-DPL0zTK_.js"
+      },
+      {
+        "status": "R077",
+        "path": "public/bundle/academies-BOq19Lg0.js",
+        "previous_path": "public/bundle/academies-njdnFq3Q.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/accordion-C9q1ZCcs.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/accordion-p-fVSt2Y.js"
+      },
+      {
+        "status": "R096",
+        "path": "public/bundle/admin-shell-D9ezYBA9.js",
+        "previous_path": "public/bundle/admin-shell-IGmSiF_X.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/alert-dialog-CWj9YHWE.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/alert-dialog-DpTiAi-4.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/app-shell-3ZigBeTn.js",
+        "previous_path": "public/bundle/app-shell-B4Kf4NnN.js"
+      },
+      {
+        "status": "R092",
+        "path": "public/bundle/article-body-D8ROXAGX.js",
+        "previous_path": "public/bundle/article-body-DbLaqxfp.js"
+      },
+      {
+        "status": "R092",
+        "path": "public/bundle/badge-CJZ9B9TR.js",
+        "previous_path": "public/bundle/badge-x86FQvMa.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/bangun-negeri-registration-class-selection-B_0PLVy7.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/bangun-negeri-registration-class-selection-CA7dArxE.js"
+      },
+      {
+        "status": "R092",
+        "path": "public/bundle/breadcrumbs-XtfWkC9g.js",
+        "previous_path": "public/bundle/breadcrumbs-BvLYYtKL.js"
+      },
+      {
+        "status": "R093",
+        "path": "public/bundle/button-DFOFnxJt.js",
+        "previous_path": "public/bundle/button-Dl_YrIl2.js"
+      },
+      {
+        "status": "R095",
+        "path": "public/bundle/campaign-form.schema-DUw4_xDP.js",
+        "previous_path": "public/bundle/campaign-form.schema-CLfb6zKZ.js"
+      },
+      {
+        "status": "R097",
+        "path": "public/bundle/campaign-promotions-D_X1ErOt.js",
+        "previous_path": "public/bundle/campaign-promotions-D-2Gdu4B.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/campaigns-offering-C55mkYv2.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/campaigns-offering-DwRAimgV.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/campaigns-offering-components-offering-import-form-ChmzWSCz.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/campaigns-offering-components-offering-import-form-eeQkQxVA.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/campaigns-offering-components-offering-result-1onOHbb9.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/campaigns-offering-components-offering-result-DpMzJ34k.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/checkbox-CQOZbgtg.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/checkbox-Dn2pBuAe.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/classroom-BLjribYh.css"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/classroom-Cab8TRDI.css"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/combobox-DyvpWBkp.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/combobox-LioiSSek.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/contributors-BYuKIRk7.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/contributors-BdRH4fw7.js"
+      },
+      {
+        "status": "R083",
+        "path": "public/bundle/corridor-B6pLF2pi.js",
+        "previous_path": "public/bundle/corridor-CZJkgd07.js"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/course-card--5HWpZEg.js",
+        "previous_path": "public/bundle/course-card-97DcfQwf.js"
+      },
+      {
+        "status": "R094",
+        "path": "public/bundle/course-island-HWJA0ohZ.js",
+        "previous_path": "public/bundle/course-island-CRArbC3A.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/create-Bmr5zz9J.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/create-D1mWLs_o.js"
+      },
+      {
+        "status": "R095",
+        "path": "public/bundle/dashboard-dwS1J5C0.js",
+        "previous_path": "public/bundle/dashboard-CU1R5ctx.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/data-table-B8IlIqrK.js",
+        "previous_path": "public/bundle/data-table-B2xTzdyK.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/dialog-Cat2LV4V.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/dialog-DwVTJsyg.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/dialog-card-BVA6LyFh.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/dialog-card-D--l_-jp.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/drawer-CArtSDV7.js",
+        "previous_path": "public/bundle/drawer-OJi23jK0.js"
+      },
+      {
+        "status": "R077",
+        "path": "public/bundle/dropdown-menu-BOKjluuT.js",
+        "previous_path": "public/bundle/dropdown-menu-CWoWW_ba.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/edit-Dxa8rNru.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/edit-UCUmX3qW.js"
+      },
+      {
+        "status": "R090",
+        "path": "public/bundle/email-platform-campaign-BEknoCUA.js",
+        "previous_path": "public/bundle/email-platform-campaign-C_xpSii5.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/email-platform-drafts-B6h6Kfcy.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/email-platform-drafts-DxGLEvyF.js"
+      },
+      {
+        "status": "R097",
+        "path": "public/bundle/email-platform-edit-DmAIvZ5y.js",
+        "previous_path": "public/bundle/email-platform-edit-4gsIE98N.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/events-BUB2G27d.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/events-D4tJWgsw.js"
+      },
+      {
+        "status": "R097",
+        "path": "public/bundle/feature-card-GUVX6G4b.js",
+        "previous_path": "public/bundle/feature-card-BsDT7UBr.js"
+      },
+      {
+        "status": "R092",
+        "path": "public/bundle/form-field-CCT_-9h7.js",
+        "previous_path": "public/bundle/form-field-C4hHMWmm.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/getCssDimensions-D-Jp2Q3i.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/getCssDimensions-DOA1uUje.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/getElementTransform-BGpMsCNm.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/getElementTransform-QbifqzLS.js"
+      },
+      {
+        "status": "R068",
+        "path": "public/bundle/getHighlightReason-u2hHoYCn.js",
+        "previous_path": "public/bundle/getHighlightReason-CZszzfSZ.js"
+      },
+      {
+        "status": "R050",
+        "path": "public/bundle/getPseudoElementBounds-BM0CYrFB.js",
+        "previous_path": "public/bundle/getPseudoElementBounds-CGd_5PBG.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/globals-CjgZB8XY.css"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/globals-CoiudTZN.css"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/groups-DQ6j-Qdr.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/groups-jRjjWMu_.js"
+      },
+      {
+        "status": "R096",
+        "path": "public/bundle/home-CJpq8KeL.js",
+        "previous_path": "public/bundle/home-CxNGE5GA.js"
+      },
+      {
+        "status": "R068",
+        "path": "public/bundle/impact-DboRgHNz.js",
+        "previous_path": "public/bundle/impact-aq_HHZMT.js"
+      },
+      {
+        "status": "R096",
+        "path": "public/bundle/impact-reel-CXTvlw_O.js",
+        "previous_path": "public/bundle/impact-reel-D4BDAKt2.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/index-5B8qaS2o.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/index-B3m6Gbhz.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/index-B4HREASC.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/index-B6NCK2Df.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/index-B81-iHOQ.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/index-BDjOx9z_.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/index-BYT0hem_.js",
+        "previous_path": "public/bundle/index-C09DSty9.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/index-BefHDykV.js",
+        "previous_path": "public/bundle/index-g127hpXq.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/index-CJrs_mkE.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/index-Cf1M3RTI.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/index-DPn3EUo6.js"
+      },
+      {
+        "status": "R093",
+        "path": "public/bundle/index-Da2Ad5Bb.js",
+        "previous_path": "public/bundle/index-BGdBB347.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/index-DoCRQx9X.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/index-QMK9ZYIz.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/index-csvbUvjT.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/index-dfP4nQG1.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/index-uQyXC4vw.js"
+      },
+      {
+        "status": "R069",
+        "path": "public/bundle/index-we4PYCEA.js",
+        "previous_path": "public/bundle/index-BTk2EeCh.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/inertia-BcUjGAuJ.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/inertia-Dj0nqgox.js"
+      },
+      {
+        "status": "R074",
+        "path": "public/bundle/information-tooltip-c1rgYCtv.js",
+        "previous_path": "public/bundle/information-tooltip-yCW434Hi.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/input-CLwllqx4.js"
+      },
+      {
+        "status": "R095",
+        "path": "public/bundle/input-group-B5dCWs7D.js",
+        "previous_path": "public/bundle/input-group-B4DDExhL.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/input-n1SeDg5A.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/learning-path-detail-dialog-CVABZPXQ.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/learning-path-detail-dialog-DmBNUb7i.js"
+      },
+      {
+        "status": "R078",
+        "path": "public/bundle/learning-progress-CAbW4I6g.js",
+        "previous_path": "public/bundle/learning-progress-DGq_QNnc.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/learningpaths-BiMpsqm1.js"
+      },
+      {
+        "status": "R077",
+        "path": "public/bundle/learningpaths-BpUWAqjO.js",
+        "previous_path": "public/bundle/learningpaths-Bja2Xi2W.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/learningpaths-D4rjpzpc.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/lecturers-CugYvcT-.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/lecturers-D_XsqA7Q.js"
+      },
+      {
+        "status": "R097",
+        "path": "public/bundle/legal-B0QlPQ0M.js",
+        "previous_path": "public/bundle/legal--pLzyYR4.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/list-BwvmACVM.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/list-D_r0UNWy.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/login-BlVi9vzp.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/login-DHQL8I9h.js"
+      },
+      {
+        "status": "R096",
+        "path": "public/bundle/modal-context-DJbtodr0.js",
+        "previous_path": "public/bundle/modal-context-B3j3LWp8.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/modal-mcL3hDeW.js",
+        "previous_path": "public/bundle/modal-Bt8IkbVl.js"
+      },
+      {
+        "status": "R082",
+        "path": "public/bundle/mountReactPage-CGifzrm_.js",
+        "previous_path": "public/bundle/mountReactPage-BO3K9QmT.js"
+      },
+      {
+        "status": "R083",
+        "path": "public/bundle/navigation-menu-o6stloeL.js",
+        "previous_path": "public/bundle/navigation-menu-D7jlJYSu.js"
+      },
+      {
+        "status": "R093",
+        "path": "public/bundle/offering-import-form-CuEgN7_W.js",
+        "previous_path": "public/bundle/offering-import-form-OX3rzwnI.js"
+      },
+      {
+        "status": "R089",
+        "path": "public/bundle/offering-result-X8RvqLEw.js",
+        "previous_path": "public/bundle/offering-result-FTg_3Fyt.js"
+      },
+      {
+        "status": "R076",
+        "path": "public/bundle/page-divider-DSkYBsWa.js",
+        "previous_path": "public/bundle/page-divider-CVAfKaT5.js"
+      },
+      {
+        "status": "R084",
+        "path": "public/bundle/page-grid-MLm4kdBM.js",
+        "previous_path": "public/bundle/page-grid-DD1_hQDT.js"
+      },
+      {
+        "status": "R071",
+        "path": "public/bundle/page-header-DWxBH6MZ.js",
+        "previous_path": "public/bundle/page-header-qTvqCJew.js"
+      },
+      {
+        "status": "R096",
+        "path": "public/bundle/partner-logo-marquee-DEnWs3mk.js",
+        "previous_path": "public/bundle/partner-logo-marquee-DbLORLnv.js"
+      },
+      {
+        "status": "R075",
+        "path": "public/bundle/partner-wall-CYl9jmkL.js",
+        "previous_path": "public/bundle/partner-wall-BLl-3e6w.js"
+      },
+      {
+        "status": "R062",
+        "path": "public/bundle/popover-gdvkup4G.js",
+        "previous_path": "public/bundle/popover-DzXksX-x.js"
+      },
+      {
+        "status": "R097",
+        "path": "public/bundle/portal-container-B_ioG5xZ.js",
+        "previous_path": "public/bundle/portal-container-D2slSG57.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/privacy-CPGzLZPq.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/privacy-DyCSbFfF.js"
+      },
+      {
+        "status": "R089",
+        "path": "public/bundle/program-sidebar-D3bw-u5U.js",
+        "previous_path": "public/bundle/program-sidebar-BaIdkhnW.js"
+      },
+      {
+        "status": "R057",
+        "path": "public/bundle/purchases-Cs28Nh0m.js",
+        "previous_path": "public/bundle/purchases-DXiZuEH6.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/radio-group-BrMHUeSb.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/radio-group-BuiYeEU3.js"
+      },
+      {
+        "status": "R075",
+        "path": "public/bundle/referral-Bg92SB5C.js",
+        "previous_path": "public/bundle/referral-F-2xhZAZ.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/registration-CQf0GGx4.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/registration-hH9Y_WeD.js"
+      },
+      {
+        "status": "R059",
+        "path": "public/bundle/safePolygon-huXyx3-g.js",
+        "previous_path": "public/bundle/safePolygon-BTBVjsIG.js"
+      },
+      {
+        "status": "R096",
+        "path": "public/bundle/schedule-form-DEMOJYR_.js",
+        "previous_path": "public/bundle/schedule-form-BRJb06lY.js"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/schedule-slots-CtHbChI-.js",
+        "previous_path": "public/bundle/schedule-slots-Bav7pfbq.js"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/schemas-Dp63D_UM.js",
+        "previous_path": "public/bundle/schemas-CFlkqR52.js"
+      },
+      {
+        "status": "R056",
+        "path": "public/bundle/scrollable-uscigVT1.js",
+        "previous_path": "public/bundle/scrollable-DRdQmj3O.js"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/search-island-Ztie_c6P.js",
+        "previous_path": "public/bundle/search-island-BoMpWADe.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/select-BM8_hY3c.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/select-B_NYyZ5B.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/show-B1qUWRBG.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/show-B4Va5E6c.js"
+      },
+      {
+        "status": "R096",
+        "path": "public/bundle/show-B7H8baab.js",
+        "previous_path": "public/bundle/show-D20BG_iK.js"
+      },
+      {
+        "status": "R089",
+        "path": "public/bundle/show-BgK2URMl.js",
+        "previous_path": "public/bundle/show-BRKCv3hT.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/show-C8sEjLmZ.js"
+      },
+      {
+        "status": "R073",
+        "path": "public/bundle/show-CwP7rL2q.js",
+        "previous_path": "public/bundle/show-DuhNEBw_.js"
+      },
+      {
+        "status": "R090",
+        "path": "public/bundle/show-Cz5qNz35.js",
+        "previous_path": "public/bundle/show-CjZvjIZJ.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/show-D7Hm_ldM.js"
+      },
+      {
+        "status": "R077",
+        "path": "public/bundle/show-D_jd8Nag.js",
+        "previous_path": "public/bundle/show-D1ProiwX.js"
+      },
+      {
+        "status": "R078",
+        "path": "public/bundle/show-SyOnMpAv.js",
+        "previous_path": "public/bundle/show-DZl4xhnr.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/show-jriInySb.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/show-xMycdbzu.js"
+      },
+      {
+        "status": "R094",
+        "path": "public/bundle/snap-carousel-controls-DMbpnEij.js",
+        "previous_path": "public/bundle/snap-carousel-controls-L-oPiOVz.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/store-B4dLPtju.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/store-D_AgMUc0.js"
+      },
+      {
+        "status": "R078",
+        "path": "public/bundle/stories-DiBfZKWH.js",
+        "previous_path": "public/bundle/stories-CzvjZL8K.js"
+      },
+      {
+        "status": "R097",
+        "path": "public/bundle/streak-leaderboard-XA39Ao-f.js",
+        "previous_path": "public/bundle/streak-leaderboard-D0CZbh_E.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/students-D9GZIj6h.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/students-DBFF217j.js"
+      },
+      {
+        "status": "R093",
+        "path": "public/bundle/submission-DcOqSI34.js",
+        "previous_path": "public/bundle/submission-3jRtAQsw.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/submission-guidance-CR6m3rVg.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/submission-guidance-DXd3OkOM.js"
+      },
+      {
+        "status": "R075",
+        "path": "public/bundle/subscription-BEU1PWlq.js",
+        "previous_path": "public/bundle/subscription-BZaVktmu.js"
+      },
+      {
+        "status": "R096",
+        "path": "public/bundle/switcher-tabs-DzZOnXZS.js",
+        "previous_path": "public/bundle/switcher-tabs-B7KRh-gV.js"
+      },
+      {
+        "status": "R092",
+        "path": "public/bundle/tab-group-Bfm0GDHT.js",
+        "previous_path": "public/bundle/tab-group-D5ZrRFk1.js"
+      },
+      {
+        "status": "R080",
+        "path": "public/bundle/tabs-BR5SmCwS.js",
+        "previous_path": "public/bundle/tabs-C6fsS152.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/termsofuse-CT-Wkdrd.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/termsofuse-D3LN0sQr.js"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/theme-switcher-DZkGJdIZ.js",
+        "previous_path": "public/bundle/theme-switcher-BIOnjO_G.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/time-picker-2YDncZp9.js",
+        "previous_path": "public/bundle/time-picker-DdPoCIPA.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/tooltip-D3QYdGdE.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/tooltip-DYQnRfML.js"
+      },
+      {
+        "status": "R096",
+        "path": "public/bundle/use-auth-form-post-CQQ_XxBQ.js",
+        "previous_path": "public/bundle/use-auth-form-post-B9AR8HNK.js"
+      },
+      {
+        "status": "R094",
+        "path": "public/bundle/use-csv-import-BhwynK5g.js",
+        "previous_path": "public/bundle/use-csv-import-B4oC48yM.js"
+      },
+      {
+        "status": "R082",
+        "path": "public/bundle/use-enrollment-guard-CL_7h8br.js",
+        "previous_path": "public/bundle/use-enrollment-guard-CC6oSjMN.js"
+      },
+      {
+        "status": "R060",
+        "path": "public/bundle/useAriaLabelledBy-DdZdsnTY.js",
+        "previous_path": "public/bundle/useAriaLabelledBy-BCmtJ5uP.js"
+      },
+      {
+        "status": "R063",
+        "path": "public/bundle/useCompositeItem-3jFDD7k6.js",
+        "previous_path": "public/bundle/useCompositeItem-1tbbKFDw.js"
+      },
+      {
+        "status": "R081",
+        "path": "public/bundle/useFloatingRootContext-DjcUm-8w.js",
+        "previous_path": "public/bundle/useFloatingRootContext-BShRFY_l.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/useFocus-CDl8vLXU.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/useFocus-F12NxX48.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/useOpenInteractionType-BJH5dP-_.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/useOpenInteractionType-Cuc5cCl_.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/useRender-BdHLBG-8.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/useRender-DC_n60Mj.js"
+      },
+      {
+        "status": "R087",
+        "path": "public/bundle/useTriggerFocusGuards-B-V9uhyb.js",
+        "previous_path": "public/bundle/useTriggerFocusGuards-Bn8rRIYM.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/useValueChanged-WQdNJfFL.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/users-roles-CEaQntp8.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/users-roles-components-add-user-role-modal-CJWYAzM-.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/users-roles-components-add-user-role-modal-Cjbx46_c.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/users-roles-ngjmIPiR.js"
+      },
+      {
+        "status": "R093",
+        "path": "public/bundle/youtube-CTiS9xZf.js",
+        "previous_path": "public/bundle/youtube-DlPaPlMx.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/zod-ByvdnR_D.js",
+        "previous_path": "public/bundle/zod-DrZpN-7x.js"
+      },
+      {
+        "status": "M",
+        "path": "public/vite-manifest.json"
+      }
+    ],
+    "required_checks": [
+      "build",
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Infra, web and UI for creating an APD campaign learning path (PR 1b, stacked on 1a): migrations, gateway implementation, UseCase specification, store action and route, campaign settings props, Learning Path tab with list and create dialog, rebuilt bundle.",
+  "acceptance_criteria": [
+    "Migrations create the learning path and learning path course tables with unique constraints",
+    "Gateway persists a learning path with its courses and reads them back for the campaign",
+    "Admin can submit the create form from the campaign settings Learning Path tab and is redirected back to that tab",
+    "Course options come from published Dicoding courses; scholarship package options come from registrants with config lp_name labels",
+    "Dialog shows target week dates from campaign open_at, hides courses picked in other rows, and stays within the viewport",
+    "Integration test covers the successful creation"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "ae68ddba7dd41231b37349f8c302fe8ff71d1a92",
+      "started_at": "2026-11-23T13:56:38+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched 13:56:38 or later); reviewed full diff artifact excluding generated bundle, all 13 source files; findings: none"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "ae68ddba7dd41231b37349f8c302fe8ff71d1a92",
+      "started_at": "2026-11-23T13:56:38+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched 13:56:38 or later); reviewed full diff artifact excluding generated bundle, all 13 source files; findings: 4 nits, 1 question"
+    }
+  ],
+  "findings": [
+    {
+      "id": "1b-S1",
+      "severity": "nit",
+      "status": "fixed",
+      "location": "AcademicProgramDashboardCampaignLearningPathGateway.php isEveryCourseFound",
+      "evidence": "array_unique is redundant because the VO distinct rule already rejects duplicates",
+      "commit": "8d959fa1e643f3989b03733e4d8eec0ed8773271",
+      "resolution": "Accepted by author. Fixed by Claude Code pr-fixer subagent (model claude-opus-5-5) in one pass; coordinator verified the repair diff."
+    },
+    {
+      "id": "1b-S2",
+      "severity": "nit",
+      "status": "fixed",
+      "location": "campaign-learning-path.schema.ts duplicate-course refine",
+      "evidence": "UI hides chosen courses and the server rejects duplicates",
+      "commit": "660a42d8da2ecbd0b200ac1140cb8c313b665875",
+      "resolution": "Accepted by author. Fixed by Claude Code pr-fixer subagent (model claude-opus-5-5) in one pass; coordinator verified the repair diff."
+    },
+    {
+      "id": "1b-S3",
+      "severity": "nit",
+      "status": "fixed",
+      "location": "campaign-edit.tsx tab selection old.courses check",
+      "evidence": "store action always redirects with #learning-paths so the hash check alone selects the tab",
+      "commit": "660a42d8da2ecbd0b200ac1140cb8c313b665875",
+      "resolution": "Accepted by author. Fixed by Claude Code pr-fixer subagent (model claude-opus-5-5) in one pass; coordinator verified the repair diff."
+    },
+    {
+      "id": "1b-S4",
+      "severity": "nit",
+      "status": "fixed",
+      "location": "CampaignLearningPathStoreAction input('courses', []) and Specification scholarship_package_id ?? null",
+      "evidence": "defaults nothing needs; required rule and both callers already cover them",
+      "commit": "8d959fa1e643f3989b03733e4d8eec0ed8773271",
+      "resolution": "Accepted by author. Fixed by Claude Code pr-fixer subagent (model claude-opus-5-5) in one pass; coordinator verified the repair diff."
+    },
+    {
+      "id": "1b-S5",
+      "severity": "question",
+      "status": "dismissed",
+      "location": "gateway getScholarshipPackages fallback \"Paket {id}\" and campaign-learning-paths.tsx packageLabel fallback",
+      "evidence": "backend and frontend each build the same fallback label",
+      "accepted_by": "krisnasantosa15",
+      "resolution": "Author chose to keep both fallbacks. Evidence: they cover different cases. Gateway fallback labels packages that have registrants but no lp_name in config; frontend fallback labels saved learning paths whose package no longer appears in the registrant-derived list."
+    },
+    {
+      "id": "1b-C1",
+      "severity": "blocker",
+      "status": "fixed",
+      "location": "Dicoding/UseCases/AcademicProgramDashboard/CampaignLearningPathCreationSpecification.php createAggregate call",
+      "evidence": "Coordinator finding: after merging base fix 1a-S1, the Specification still passed the removed campaignId argument to createAggregate",
+      "commit": "1ac32cfa0c421a6045a0fd03a4b1cb7c53fe6569",
+      "resolution": "Accepted by author. Fixed by Claude Code pr-fixer subagent (model claude-opus-5-5) in one pass; coordinator verified the repair diff."
+    },
+    {
+      "id": "1b-C2",
+      "severity": "nit",
+      "status": "fixed",
+      "location": "AcademicProgramDashboardCampaignLearningPathGateway::getScholarshipPackages",
+      "evidence": "Coordinator finding: whereNotNull on scholarship_participants.scholarship_package_id is redundant because the column is NOT NULL",
+      "commit": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+      "resolution": "Accepted by author (\"perbaiki dulu\"). Fixed by the coordinator (claude-opus-5-5) directly; verified with psalm and integration tests."
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/campaign-learning-path-domain...HEAD -- . ':!public/bundle' ':!public/build'",
+      "head_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <4 changed PHP files>",
+      "head_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='CampaignLearningPathCreationIntegrationTest' --testsuite=integration; deck ai:test --filter='CampaignLearningPathCreationTest' --testsuite=unit; npx eslint src/pages/academic-program-dashboard/admin/campaign-edit",
+      "head_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+      "evidence": "integration exit 0, 2 tests 12 assertions; unit exit 0, 11 tests; eslint exit 0. tsc -p . has 653 pre-existing errors, 0 in campaign-edit files"
+    },
+    {
+      "name": "build",
+      "status": "passed",
+      "command": "cd frontend && npm run build",
+      "head_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+      "evidence": "exit 0; rebuilt bundle identical to committed bundle (clean git status)"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-23T13:56:16+07:00",
+    "assessment": "add ui for creating campaign learning path",
+    "level": "medium",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

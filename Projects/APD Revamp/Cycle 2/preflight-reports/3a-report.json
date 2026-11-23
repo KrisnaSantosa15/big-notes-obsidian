@@ -1,0 +1,132 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/campaign-learning-path-creation",
+    "base_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "merge_base": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "head_sha": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+    "diff_sha256": "972b8e161b24f910bfe1c8f5cbe075ab74ae733508685172e6f8caa092aaa1cc",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/campaign-learning-path-creation",
+    "base_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "merge_base": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "head_sha": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+    "diff_sha256": "972b8e161b24f910bfe1c8f5cbe075ab74ae733508685172e6f8caa092aaa1cc",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ContributorCreation.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantCreation.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantEnrollment.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantImport.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/Participant.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/ParticipantEnrollmentRepository.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/ParticipantEnrollmentTest.php"
+      }
+    ],
+    "required_checks": [
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Domain layer for giving an enrolling APD student the campaign learning path of their scholarship package (course progress card, PR 3a): Participant value object carries a nullable learning path id, ParticipantEnrollment receives it from the repository, and an empty storage gateway lookup.",
+  "acceptance_criteria": [
+    "A student whose scholarship package has a campaign learning path joins with that learning path id",
+    "A student without a learning path for their scholarship package still joins the campaign with a null learning path",
+    "Manual creation, CSV import and contributor creation keep a null learning path in this PR",
+    "Aggregate unit test covers the negative rules before the success case"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+      "started_at": "2026-11-23T16:21:14+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched 16:21:14 or later); reviewed full diff artifact, all 8 changed files; findings: none"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+      "started_at": "2026-11-23T16:21:14+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched 16:21:14 or later); reviewed full diff artifact, all 8 changed files; findings: 1 question"
+    }
+  ],
+  "findings": [
+    {
+      "id": "3a-KY1",
+      "severity": "question",
+      "status": "dismissed",
+      "location": "ParticipantEnrollmentRepository.php:37; AcademicProgramDashboardAccessListGateway::createParticipant(s)",
+      "evidence": "learningPathId reaches Participant but createParticipant(s) do not write learning_path_id in this snapshot",
+      "resolution": "Answered from evidence: the stacked infra PR 4a adds the column (39a3ade7ff6) and writes it in createParticipant(s) (3eb1a9a0732); a domain PR carries no migration. Dismissal accepted by author krisnasantosa15 on 2026-11-23 (\"setuju\").",
+      "accepted_by": "krisnasantosa15"
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/campaign-learning-path-creation...HEAD",
+      "head_sha": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <8 changed PHP files>",
+      "head_sha": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='ParticipantEnrollmentTest|ParticipantCreationTest|ParticipantImportTest|ContributorCreationTest' --testsuite=unit",
+      "head_sha": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+      "evidence": "exit 0, 47 tests, 185 assertions"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-23T16:20:49+07:00",
+    "assessment": "nambah learningpathid ketika enroll peserta ke campaign",
+    "level": "low",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

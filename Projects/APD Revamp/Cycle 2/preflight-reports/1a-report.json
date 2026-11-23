@@ -1,0 +1,134 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "origin/master",
+    "base_sha": "b91c2a20adbd6f2ef5aad63f977192d45f4cdf22",
+    "merge_base": "b91c2a20adbd6f2ef5aad63f977192d45f4cdf22",
+    "head_sha": "00f8c2785b9d5aa141c583e5b17ade2742f51d61",
+    "diff_sha256": "8ac90825b924872ff467f324966db52300775dc20b199741f18cf9e8541721a8",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "origin/master",
+    "base_sha": "b91c2a20adbd6f2ef5aad63f977192d45f4cdf22",
+    "merge_base": "b91c2a20adbd6f2ef5aad63f977192d45f4cdf22",
+    "head_sha": "8d55ead764e44b116ec4577d79010db749d91a05",
+    "diff_sha256": "78b3cfae9c6fc50d7d4be4f6f7be75610c0a0153d703aab77149a3aa79fd0ef7",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathCreation.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Events/CampaignLearningPathWasCreated.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/CampaignLearningPath.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/CampaignLearningPathCreationRepository.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathCreationTest.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/en/exception.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/id/exception.php"
+      }
+    ],
+    "required_checks": [
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Domain layer for creating an APD campaign learning path (course progress card, PR 1a): value objects, aggregate CampaignLearningPathCreation, event, repository and an empty storage gateway.",
+  "acceptance_criteria": [
+    "Only admins can create a learning path",
+    "Learning path name is unique per campaign",
+    "Scholarship package is unique per campaign when set",
+    "Every course must exist and courses are not duplicated",
+    "Target week is at least 1 and week N must start before the campaign close_at",
+    "Aggregate unit test covers the negative rules before the success case"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "8d55ead764e44b116ec4577d79010db749d91a05",
+      "started_at": "2026-11-23T13:56:38+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched 13:56:38 or later); reviewed full diff artifact, all 8 changed files; findings: none"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "8d55ead764e44b116ec4577d79010db749d91a05",
+      "started_at": "2026-11-23T13:56:38+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched 13:56:38 or later); reviewed full diff artifact, all 8 changed files; findings: 1 should-fix"
+    }
+  ],
+  "findings": [
+    {
+      "id": "1a-S1",
+      "severity": "should-fix",
+      "status": "fixed",
+      "location": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/CampaignLearningPathCreationRepository.php createAggregate; CampaignLearningPathCreation CAMPAIGN_MISMATCH",
+      "evidence": "campaign id passed both inside CampaignLearningPath and as a separate parameter; the only caller fills both from the same input, so CAMPAIGN_MISMATCH cannot fail in practice",
+      "commit": "00f8c2785b9d5aa141c583e5b17ade2742f51d61",
+      "resolution": "Accepted by author. Fixed by Claude Code pr-fixer subagent (model claude-opus-5-5) in one pass: createAggregate reads campaign id from the learning path, CAMPAIGN_MISMATCH check, lang keys and test removed; event payload unchanged. Coordinator verified the repair diff."
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check origin/master...HEAD",
+      "head_sha": "00f8c2785b9d5aa141c583e5b17ade2742f51d61",
+      "evidence": "exit 0, no whitespace errors"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <5 changed PHP files>",
+      "head_sha": "00f8c2785b9d5aa141c583e5b17ade2742f51d61",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='CampaignLearningPathCreationTest' --testsuite=unit",
+      "head_sha": "00f8c2785b9d5aa141c583e5b17ade2742f51d61",
+      "evidence": "exit 0, 11 tests, 36 assertions"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-23T13:56:16+07:00",
+    "assessment": "add domain for creating campaign learning path",
+    "level": "medium",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

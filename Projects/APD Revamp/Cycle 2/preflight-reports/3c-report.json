@@ -1,0 +1,119 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-auto-enroll-storage",
+    "base_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+    "merge_base": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+    "head_sha": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+    "diff_sha256": "45b2d698ab0a41eabbe9e185603c4274ff71273ae2f4a421eee4ebb0d7a81d3c",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-auto-enroll-storage",
+    "base_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+    "merge_base": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+    "head_sha": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+    "diff_sha256": "45b2d698ab0a41eabbe9e185603c4274ff71273ae2f4a421eee4ebb0d7a81d3c",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantCreation.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/ParticipantCreationRepository.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/UseCases/AcademicProgramDashboard/ParticipantCreationSpecification.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/ParticipantCreationTest.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/en/exception.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/id/exception.php"
+      }
+    ],
+    "required_checks": [
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Domain layer for adding an APD student manually with a campaign learning path (course progress card, PR 3c): ParticipantCreation accepts an optional learning path id that must belong to the campaign, the Specification validates and passes learning_path_id, and an empty storage gateway lookup of the campaign learning path ids.",
+  "acceptance_criteria": [
+    "A learning path that does not belong to the campaign is rejected with PARTICIPANT_CREATION.LEARNING_PATH_NOT_IN_CAMPAIGN",
+    "An empty learning path is still allowed",
+    "A valid learning path is stored on the created participant",
+    "learning_path_id is validated as nullable integer min 1",
+    "Aggregate unit test covers the negative rules before the success case"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+      "started_at": "2026-11-23T16:41:31+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched 16:41:31 or later); reviewed full diff artifact, all 7 changed files; findings: none"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+      "started_at": "2026-11-23T16:41:31+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched 16:41:31 or later); reviewed full diff artifact, all 7 changed files; findings: none"
+    }
+  ],
+  "findings": [],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/participant-learning-path-auto-enroll-storage...HEAD",
+      "head_sha": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <4 changed PHP files under Dicoding/>",
+      "head_sha": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='ParticipantCreationTest' --testsuite=unit; deck ai:test --filter='AcademicProgramDashboardParticipantStoreIntegrationTest' --testsuite=integration",
+      "head_sha": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+      "evidence": "unit exit 0, 13 tests 49 assertions; integration exit 0, 5 tests 18 assertions"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-23T16:41:31+07:00",
+    "assessment": "nambah learning path id ketika tambah peserta manual",
+    "level": "low",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

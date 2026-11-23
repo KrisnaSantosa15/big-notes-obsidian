@@ -260,6 +260,21 @@ Sumber: komentar Krisna di card [Ops manages Students' progress status](https://
 
 **Perubahan kode:** fixup di branch domain (aturan, pesan error, unit test), lalu branch 1b (gateway `isEveryCourseFound` cek course ada di `developer_journeys`; pilihan combobox dari `getPublishedCourses()`). Endpoint pencarian ke server sempat dibuat lalu dibatalkan: convention form admin di codebase memuat semua kelas sekaligus (form MCT, token kelas satuan, admin learning path katalog), dan production hanya punya 139 kelas published dari 319 total (dicek Krisna 2026-11-23).
 
+### Klarifikasi peran MCT (2026-11-23 sore)
+
+Keputusan "course diambil dari MCT" (2026-11-19) ternyata maksudnya untuk **menampilkan progress peserta**, bukan untuk sumber course saat setup learning path. Revisi R2 tetap berlaku.
+
+- **MCT:** sumber daftar course yang dimiliki tiap peserta, berdasarkan `program_id`. Dipakai di tampilan progress (PR 5-6): peserta dapat course apa saja dari program itu.
+- **Learning path:** tetap wajib mendefinisikan course apa saja dan target minggu ke-berapa tiap course harus selesai. Ini dasar status mingguan peserta, dan tidak bisa diambil dari MCT.
+
+> Krisna (2026-11-23 15:31): "ohh maksudnya diambil dari MCT ini untuk nampilin progress siswa aja ya dia dapat course apa aja berdasarkan program id itu. Kalo ini make sense. Tapi kalo untuk bikin target minggu keberapa harus selesai x course, mau gamau setiap LP harus define course nya apa aja dan target per minggu nya berapa"
+
+Konteks thread sebelumnya:
+
+> Krisna (2026-11-19): "jadi flownya gini: tim ops bakal tambah learning path untuk campaign tersebut apa saja pas setup campaign, dan untuk coursenya bisa diambil dari MCT pake program id, nanti setelah ada tinggal tentukan setiap minggunya course apa aja yang harus diselesaikan peserta dan nanti diambil jumlahnya per minggu untuk menentukan status pesertanya"
+
+**Perlu diputuskan sebelum PR 5:** bagaimana kalau course di learning path tidak ada di MCT peserta, atau sebaliknya peserta punya course MCT yang tidak ada di learning path? Apakah course itu tetap ditampilkan dan dihitung dalam status mingguan?
+
 ## Rencana PR (2026-11-23)
 
 Stack lurus, setiap PR di atas PR sebelumnya. Pemisahan mengikuti konvensi: PR domain (aggregate, VO, unit test, repository, gateway kosong, tanpa migration) lalu PR infra+web (migration, gateway, spec, web, integration test). TDD.
@@ -301,19 +316,22 @@ Cek "sudah punya peserta" (R4) baru bisa diisi setelah kolom `learning_path_id` 
 
 Menggantikan urutan di tabel "Rencana PR" dan "Revisi rencana PR". Satu PR satu aksi, stack lurus.
 
-| Urutan | PR | Isi singkat |
-| --- | --- | --- |
-| 1 | 1a. Domain create learning path | Selesai lokal, belum di-push. Branch `feature/apd/campaign-learning-path-domain` |
-| 2 | 1b. Infra + web create learning path | Selesai lokal, belum di-push. Branch `feature/apd/campaign-learning-path-creation`, termasuk UI dan build (lihat "Status implementasi PR 1a dan 1b") |
-| 3 | 3. Domain `learning_path_id` peserta | Dipecah per aksi kalau berisi lebih dari satu aksi (tambah manual, CSV, auto-enroll, backfill) |
-| 4 | 4. Infra + web `learning_path_id` peserta | Kolom `learning_path_id` di access list, listener, form tambah, kolom CSV |
-| 5 | 2a. Domain update learning path | R4: paket tidak bisa diganti kalau sudah punya peserta (pakai kolom dari PR 4). Kosong ke X tetap boleh dan memicu backfill R3 |
-| 6 | 2b. Infra + web update | Dialog edit |
-| 7 | 2c. Domain remove learning path | R4: tidak bisa dihapus kalau sudah punya peserta |
-| 8 | 2d. Infra + web remove | Tombol hapus |
-| 9 | 5. Domain kalkulasi progress | 100% / NEED RENEW / % modul, freeze di `close_at` |
-| 10 | 6. Infra + tampilan progress | Query batch, tampilan kecil (O2) |
-| 11 | 7. G7 kategori | Pemetaan kategori registrasi, dilepas kalau card melebar |
+| Urutan | PR                                                | Isi singkat                                                                                                                                                                            |
+| ------ | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1      | 1a. Domain create learning path                   | Selesai lokal, preflight valid, belum di-ack dan belum di-push. Branch `feature/apd/campaign-learning-path-domain`                                                                     |
+| 2      | 1b. Infra + web create learning path              | Selesai lokal, preflight valid, belum di-ack dan belum di-push. Branch `feature/apd/campaign-learning-path-creation`, termasuk UI dan build (lihat "Status implementasi PR 1a dan 1b") |
+| 3      | 3a. Domain auto-enroll                            | Selesai lokal, belum di-push. Branch `feature/apd/participant-learning-path-auto-enroll`                                                                                               |
+| 4      | 4a. Infra auto-enroll                             | Selesai lokal, belum di-push. Branch `feature/apd/participant-learning-path-auto-enroll-storage` (migration kolom `learning_path_id`)                                                  |
+| 4b     | Backfill saat learning path dibuat                | Selesai lokal, belum di-push. Branch `feature/apd/participant-learning-path-backfill`. **Digabung dengan 4a jadi satu PR** (2026-11-23): PR dibuka dari branch backfill dengan base 3a, branch 4a tidak dibuatkan PR sendiri. |
+| 4c     | 3c/4c. Tambah peserta manual dengan learning path | Selesai lokal, belum di-push. Branch 3c `feature/apd/participant-learning-path-creation-domain`, 4c `feature/apd/participant-learning-path-creation` |
+| 4d     | 3d/4d. Impor CSV dengan kolom learning path       | Selesai lokal, belum di-push. Branch 3d `feature/apd/participant-learning-path-import-domain`, 4d `feature/apd/participant-learning-path-import`. Pakai nama learning path (O3) |
+| 5      | 2a. Domain update learning path                   | R4: paket tidak bisa diganti kalau sudah punya peserta (pakai kolom dari PR 4). Kosong ke X tetap boleh dan memicu backfill R3                                                         |
+| 6      | 2b. Infra + web update                            | Dialog edit                                                                                                                                                                            |
+| 7      | 2c. Domain remove learning path                   | R4: tidak bisa dihapus kalau sudah punya peserta                                                                                                                                       |
+| 8      | 2d. Infra + web remove                            | Tombol hapus                                                                                                                                                                           |
+| 9      | 5. Domain kalkulasi progress                      | 100% / NEED RENEW / % modul, freeze di `close_at`                                                                                                                                      |
+| 10     | 6. Infra + tampilan progress                      | Query batch, tampilan kecil (O2)                                                                                                                                                       |
+| 11     | 7. G7 kategori                                    | Pemetaan kategori registrasi, dilepas kalau card melebar                                                                                                                               |
 
 Konvensi test PR domain: hanya test aggregate, yang membangun aggregate lewat repository asli dengan gateway di-prophesize. Tanpa test repository terpisah dan tanpa test VO.
 
@@ -339,5 +357,52 @@ Keduanya selesai di lokal, sudah di-commit, belum di-push. Riwayat kedua branch 
 
 **Data lokal untuk mencoba (AI Camp):** partner program 1708 (override lokal `ai_camp`) diganti nama menjadi "AI Camp powered by DBS Foundation" dengan `program_code` `aicamp_2026`. Campaign id 2 "AI Camp" (3 Nov 2026 sampai 31 Jan 2027), kategori SMK dan Universitas, 6 peserta scholarship dummy (user 6 sampai 11, paket 1 dan 2, isian registrasi mengikuti format `CodingCampRegistrationData`). Dua row access list lama user 284 (`codingcamp_2026`) dihapus. Config lokal yang masih memakai kunci `codingcamp_2026` tidak lagi cocok dengan program 1708. Row uji "Smoke LP" di campaign 1 (Pijak) masih ada.
 
+**Hasil preflight:** dipindah ke [[05-course-progress-preflight]] (temuan, check, digest, dan salinan report per PR).
+
 **Temuan di luar scope:** unique key access list `(program_user_id, user_id, program_code)` membolehkan satu user punya dua row di campaign yang sama selama `program_user_id` berbeda, dan sejak `program_user_id` nullable, juga dua row dengan NULL. Relevan untuk PR 4 (`learning_path_id` bisa terisi di dua row, progress terhitung dobel).
 
+## Status implementasi PR 3a, 4a, dan backfill (2026-11-23)
+
+Stack: master, 1a, 1b, 3a, 4a, backfill. Semua sudah di-commit, belum di-push, belum di-preflight.
+
+**PR 3a, `feature/apd/participant-learning-path-auto-enroll`** (2 commit):
+- VO `Participant` ditambah `?int $learningPathId` tanpa default, mengikuti `categoryId` (tidak ada default `= null` di domain APD). `ParticipantCreation`, `ParticipantImport`, `ContributorCreation` mengirim `learningPathId: null`. Contributor tetap memakai VO yang sama karena VO ini mewakili satu row access list untuk semua peran; memisahkan VO `Contributor` dianggap refactor di luar scope.
+- `ParticipantEnrollment` menerima `?int $learningPathId` dari repository, tanpa invariant baru. Gateway stub `findLearningPathIdByScholarshipPackage(userId, partnerProgramId)`.
+
+**PR 4a, `feature/apd/participant-learning-path-auto-enroll-storage`** (3 commit):
+- Migration kolom `academic_program_dashboard_access_lists.learning_path_id` (nullable, setelah `category_id`, FK `restrict` ke learning path).
+- `createParticipant` dan `createParticipants` menulis kolomnya.
+- Query: `scholarship_participants` join campaign (lewat `partner_program_id`) join learning path dengan paket yang sama.
+- Sync Participants tidak diubah: peserta baru yang masuk lewat Sync otomatis dapat learning path karena memakai spec enrollment yang sama, tapi peserta yang sudah ada dilewati.
+
+**Backfill, `feature/apd/participant-learning-path-backfill`** (2 commit): saat learning path dengan paket X disimpan, dalam transaksi yang sama semua STUDENT campaign itu dengan paket registrasi X dan `learning_path_id` NULL diisi. Learning path tanpa paket tidak memicu backfill, peserta yang sudah punya learning path tidak dipindah. Auto-enroll hanya berjalan sekali saat cohort form diisi, jadi tanpa backfill peserta yang terdaftar sebelum learning path dibuat tetap NULL. Alternatif menghitung learning path saat dibaca (tanpa disimpan) ditolak karena setiap query progress jadi bercabang dan peserta ikut pindah diam-diam kalau paket diganti.
+
+**Alasan `learning_path_id` nullable:** peran selain STUDENT (dosen, mentor), campaign tanpa learning path, learning path untuk paket peserta belum dibuat (diisi backfill), data access list lama, dan tambah manual atau CSV dengan kolom kosong. Bukan karena peserta tanpa paket: `scholarship_participants.scholarship_package_id` NOT NULL.
+
+## Status implementasi PR 3c, 4c, 3d, dan 4d (2026-11-23)
+
+Stack: master, 1a, 1b, 3a, 4a, backfill, 3c, 4c, 3d, 4d. Semua sudah di-commit, belum di-push, belum di-preflight (preflight baru untuk 1a dan 1b).
+
+Dengan ini student mendapat learning path lewat empat jalur: auto-enroll saat cohort form diisi (3a/4a), backfill saat learning path dibuat, tambah manual (3c/4c), dan impor CSV (3d/4d).
+
+**PR 3c, `feature/apd/participant-learning-path-creation-domain`** (3 commit):
+- Gateway stub `getLearningPathIdsByProgramCode`, terjemahan `PARTICIPANT_CREATION.LEARNING_PATH_NOT_IN_CAMPAIGN`.
+- `ParticipantCreation::create(?int $categoryId, ?int $learningPathId)`: learning path harus milik campaign ini, dicek setelah kategori. Kosong tetap boleh.
+- Spec: rule `learning_path_id` `nullable|integer|min:1`, label "Learning path".
+
+**PR 4c, `feature/apd/participant-learning-path-creation`** (5 commit):
+- Query id learning path per `program_code` dan pilihan learning path per campaign (urut nama).
+- Action store mengirim `learning_path_id`, halaman Students menerima prop `learningPaths`.
+- Dialog tambah peserta: Select "Learning path" dengan pilihan "No learning path". Bundle di-commit terpisah.
+
+**PR 3d, `feature/apd/participant-learning-path-import-domain`** (4 commit):
+- Pembaca CSV membaca kolom `learning_path`.
+- Kolom dicocokkan dengan **nama** learning path, tanpa membedakan huruf besar kecil dan spasi di ujung, sama seperti kategori. Nama yang tidak ada di campaign ditolak per baris (`LEARNING_PATH_NOT_IN_CAMPAIGN`), tidak dibuat otomatis.
+- Student terdaftar memakai aturan kunci sekali seperti `program_user_id`: learning path kosong diisi; nama yang sama dilewati; nama berbeda ditolak per baris (`LEARNING_PATH_ALREADY_SET`); kolom kosong tidak menghapus learning path. Alasannya keputusan L1: learning path peserta tidak diganti lewat impor.
+- `EnrolledParticipant` dan event `ParticipantWasUpdated` membawa `learning_path_id`.
+
+**PR 4d, `feature/apd/participant-learning-path-import`** (3 commit): query nama learning path per `program_code`, `updateParticipant` ikut menulis `learning_path_id`, keterangan kolom di dialog impor, build. Integration test impor mencakup peserta baru dan peserta lama yang learning path-nya masih kosong.
+
+**Template impor** ([APD Import Template](https://docs.google.com/spreadsheets/d/1fdLxbSePC0NVPFcL-03uwleyKDoj0nIKNKuQc1PRPNU/edit)): sheet "Import Students" ditambah kolom `learning_path` (isi nama learning path persis seperti di tab Learning Path campaign, boleh kosong). Sheet "Mapping Student-Lecturer" tidak berubah.
+
+**Berikutnya:** 2a-2d (edit dan hapus learning path, R4), PR 5/6 (progress, O2 dan selisih course learning path vs MCT), preflight 3a sampai 4d, hapus row uji "Smoke LP".

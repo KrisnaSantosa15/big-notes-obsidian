@@ -1,0 +1,160 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-creation-domain",
+    "base_sha": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+    "merge_base": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+    "head_sha": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+    "diff_sha256": "582c2777fbe8b3d27fd56d1a2ae0362b662bcb810db22970f5f1d564c0185db9",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-creation-domain",
+    "base_sha": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+    "merge_base": "f5a2fff749c18f2fb2b28200003ab34c688ed1cc",
+    "head_sha": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+    "diff_sha256": "582c2777fbe8b3d27fd56d1a2ae0362b662bcb810db22970f5f1d564c0185db9",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/AcademicProgramDashboardParticipantStoreAction.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/AcademicProgramDashboardStudentIndexAction.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/IntegrationTests/Web/AcademicProgramDashboard/AcademicProgramDashboardParticipantStoreIntegrationTest.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/IntegrationTests/Web/AcademicProgramDashboard/AcademicProgramDashboardStudentIndexIntegrationTest.php"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/components/participant-create-dialog/participant-create-dialog.tsx"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.hooks.ts"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.test.ts"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.tsx"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.types.ts"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/normalizers/student.ts"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/inertia-Dg0rv1EB.js",
+        "previous_path": "public/bundle/inertia-Dj0nqgox.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/students-D9GZIj6h.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/students-jsE6Rukp.js"
+      },
+      {
+        "status": "M",
+        "path": "public/vite-manifest.json"
+      }
+    ],
+    "required_checks": [
+      "build",
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Infra and web for adding an APD student manually with a campaign learning path (course progress card, PR 4c): real campaign learning path id lookup, learning path options for the students page, the store action passing learning_path_id, and a Learning path select in the add student dialog.",
+  "acceptance_criteria": [
+    "The add student dialog shows a Learning path select with the campaign learning paths ordered by name and a No learning path option",
+    "Choosing a learning path stores its id on the new access list row; choosing none stores null",
+    "A learning path id of another campaign is rejected (domain rule from PR 3c, backed by the real lookup query)",
+    "The students page receives the campaign learning paths as a prop",
+    "Frontend bundle is rebuilt and committed separately"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+      "started_at": "2026-11-23T16:44:34+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched 16:44:34 or later); reviewed full source diff artifact (generated bundle excluded), all 11 changed source files; findings: none"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+      "started_at": "2026-11-23T16:44:34+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched 16:44:34 or later); reviewed full source diff artifact (generated bundle excluded), all 11 changed source files; findings: none"
+    }
+  ],
+  "findings": [],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/participant-learning-path-creation-domain...HEAD -- . ':!public'",
+      "head_sha": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <3 changed PHP files under Dicoding/>",
+      "head_sha": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='AcademicProgramDashboardParticipantStoreIntegrationTest|AcademicProgramDashboardStudentIndexIntegrationTest' --testsuite=integration; npx vitest run src/modules/academic-program-dashboard/features/student-list; npx eslint <changed student-list files>",
+      "head_sha": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+      "evidence": "integration exit 0, 10 tests 34 assertions; vitest exit 0, 22 tests; eslint exit 0"
+    },
+    {
+      "name": "build",
+      "status": "passed",
+      "command": "cd frontend && npm run build",
+      "head_sha": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+      "evidence": "exit 0; rebuilt bundle identical to committed bundle (clean git status)"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-23T16:44:34+07:00",
+    "assessment": "ui nambah pilihan learning path ketika tambah peserta manual",
+    "level": "medium",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

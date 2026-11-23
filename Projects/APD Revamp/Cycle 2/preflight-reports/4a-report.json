@@ -1,0 +1,139 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-auto-enroll",
+    "base_sha": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+    "merge_base": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+    "head_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+    "diff_sha256": "e5500d95c835dd362bc86019e2a29d900a1f8fafbdbf73a79fddf90ba529bb65",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-auto-enroll",
+    "base_sha": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+    "merge_base": "f8c0cefe769d8ebbb9e310ee4bd894be3b9589ea",
+    "head_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+    "diff_sha256": "e5500d95c835dd362bc86019e2a29d900a1f8fafbdbf73a79fddf90ba529bb65",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/CampaignLearningPathCreationRepository.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/Academies/AcademicProgramDashboardAccessListGateway.php"
+      },
+      {
+        "status": "A",
+        "path": "app/database/migrations/2026_11_23_100002_add_learning_path_id_to_academic_program_dashboard_access_lists.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/IntegrationTests/Specifications/AcademicProgramDashboard/CampaignLearningPathCreationIntegrationTest.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/IntegrationTests/Specifications/AcademicProgramDashboard/ParticipantEnrollmentIntegrationTest.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathCreationTest.php"
+      }
+    ],
+    "required_checks": [
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Storage for the APD participant learning path (course progress card, PR 4a with the backfill merged in): access list learning_path_id column, writing it on enrollment, the scholarship package lookup query, and assigning a newly created learning path to already enrolled students of its scholarship package.",
+  "acceptance_criteria": [
+    "access_lists.learning_path_id is nullable with a restrict foreign key to the campaign learning path",
+    "A student enrolling through the cohort form is stored with the learning path of their scholarship package",
+    "A student whose package has no learning path is stored with a null learning path",
+    "Creating a learning path with a scholarship package gives it to enrolled STUDENT rows of that campaign and package whose learning_path_id is null, in the same transaction",
+    "Students that already have a learning path and other roles are not changed; a learning path without a package assigns nobody"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+      "started_at": "2026-11-23T16:29:17+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched 16:29:17 or later); reviewed full diff artifact, all 7 changed files; findings: 2 questions"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+      "started_at": "2026-11-23T16:29:17+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched 16:29:17 or later); reviewed full diff artifact, all 7 changed files; findings: none"
+    }
+  ],
+  "findings": [
+    {
+      "id": "4a-Q1",
+      "severity": "question",
+      "status": "dismissed",
+      "location": "CampaignLearningPathCreationRepository.php:39-45",
+      "evidence": "Repository save decides the backfill (only when the learning path has a scholarship package) and updates access list rows",
+      "resolution": "Matches codebase convention: RequestBookingRepository::saveBookingRequest saves the booking then branches on hasVoucher()/hasPackageId() to write other tables with the new id; PlagiarismAppealStatusUpdateRepository::save branches on isAccepted() to update reports and suspensions. No other aggregate is loaded or created. Dismissal accepted by author krisnasantosa15 on 2026-11-23.",
+      "accepted_by": "krisnasantosa15"
+    },
+    {
+      "id": "4a-Q2",
+      "severity": "question",
+      "status": "dismissed",
+      "location": "CampaignLearningPathCreationIntegrationTest.php:172-174",
+      "evidence": "Test inserts rows for user ids 6 and 7; unclear whether they are seeded",
+      "resolution": "dicoding_test.users has ids 5, 6 and 7. Dismissal accepted by author krisnasantosa15 on 2026-11-23.",
+      "accepted_by": "krisnasantosa15"
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/participant-learning-path-auto-enroll...HEAD",
+      "head_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <3 changed PHP files under Dicoding/>",
+      "head_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+      "evidence": "exit 0, no issues. The migration is outside psalm.xml projectFiles (only Dicoding/ and DicodingUtils/); a forced run reports Schema facade UndefinedMagicMethod, the same as every existing migration"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='CampaignLearningPathCreationTest' --testsuite=unit; deck ai:test --filter='ParticipantEnrollmentIntegrationTest|CampaignLearningPathCreationIntegrationTest' --testsuite=integration",
+      "head_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+      "evidence": "unit exit 0, 11 tests 37 assertions; integration exit 0, 5 tests 25 assertions"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-23T16:29:17+07:00",
+    "assessment": "nambah kolom lerning path id dan ketika bikin lp dengan paket beasiswa yang sudah ada pesertanya langsung backfill biar langsung termapping",
+    "level": "medium",
+    "review_route": "post-merge",
+    "updated_at": "2026-11-23T16:30:53+07:00"
+  },
+  "acknowledgement": null
+}

@@ -1,0 +1,180 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-creation",
+    "base_sha": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+    "merge_base": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+    "head_sha": "864e0381db77219a5e36216f7c876a5eaaebc689",
+    "diff_sha256": "3e402a1330220ef05d2db8b23a8a8ea60a7194bc918e2eeefe9163a2f593b31f",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-creation",
+    "base_sha": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+    "merge_base": "65057e7eb6051e623f5e2ebf1e3e1d8e842b4fce",
+    "head_sha": "864e0381db77219a5e36216f7c876a5eaaebc689",
+    "diff_sha256": "3e402a1330220ef05d2db8b23a8a8ea60a7194bc918e2eeefe9163a2f593b31f",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantImport.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Events/ParticipantWasUpdated.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/EnrolledParticipant.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/ParticipantImportRow.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/ParticipantImportRepository.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/Services/Academies/AcademicProgramDashboardParticipantCsvReader.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/Academies/AcademicProgramDashboardAccessListGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/UseCases/AcademicProgramDashboard/ParticipantImportSpecification.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/AcademicProgramDashboardParticipantCsvUpload.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/ParticipantImportTest.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/SupervisedStudentCreationTest.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/SupervisedStudentImportTest.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/UnitTests/Infrastructure/Services/Academies/AcademicProgramDashboardParticipantCsvReaderTest.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/UnitTests/Web/AcademicProgramDashboard/AcademicProgramDashboardParticipantCsvUploadTest.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/en/exception.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/id/exception.php"
+      }
+    ],
+    "required_checks": [
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Domain layer for importing APD students into a campaign learning path by its name from the participants CSV (course progress card, PR 3d): CSV reader reads the learning_path column, ParticipantImport resolves the name per row, registered students follow a set-once rule, and an empty storage gateway lookup of learning path names.",
+  "acceptance_criteria": [
+    "The CSV learning_path column is matched to a campaign learning path name case-insensitively and trimmed, like the category column",
+    "An unknown name fails only that row with PARTICIPANT_IMPORT.LEARNING_PATH_NOT_IN_CAMPAIGN; learning paths are never created by import",
+    "A new student is created with the resolved learning path; an empty cell leaves it null",
+    "A registered student without a learning path gets it; the same name is a no-op; a different name fails the row with PARTICIPANT_IMPORT.LEARNING_PATH_ALREADY_SET; an empty cell keeps the current learning path",
+    "EnrolledParticipant and ParticipantWasUpdated carry learning_path_id",
+    "Aggregate unit test covers the negative rules before the success case"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "864e0381db77219a5e36216f7c876a5eaaebc689",
+      "started_at": "2026-11-23T16:49:20+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched after 16:49:20); reviewed full diff artifact, all 17 changed files; findings: 1 question"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "864e0381db77219a5e36216f7c876a5eaaebc689",
+      "started_at": "2026-11-23T16:49:20+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched after 16:49:20); reviewed full diff artifact, all 17 changed files; findings: 1 nit"
+    }
+  ],
+  "findings": [
+    {
+      "id": "3d-R1",
+      "severity": "question",
+      "status": "dismissed",
+      "location": "AcademicProgramDashboardAccessListGateway::updateParticipant; ParticipantImport::update",
+      "evidence": "update() carries learningPathId and raises ParticipantWasUpdated with learning_path_id, but updateParticipant() does not write learning_path_id in this snapshot",
+      "resolution": "Answered from evidence: stacked PR 4d commit 0a675fccfe8 adds learning_path_id to updateParticipant with an integration test for a registered student; in this snapshot the lookup stub returns [] so no learning path can be assigned. Dismissal accepted by author krisnasantosa15 on 2026-11-23 (\"tutup R1\").",
+      "accepted_by": "krisnasantosa15"
+    },
+    {
+      "id": "3d-KY1",
+      "severity": "nit",
+      "status": "dismissed",
+      "location": "AcademicProgramDashboardCampaignLearningPathGateway::getLearningPathNamesByProgramCode (stub) next to getLearningPathIdsByProgramCode",
+      "evidence": "Once PR 4d fills the stub, two methods share the same learning_paths -> campaigns -> partner_programs join",
+      "resolution": "Kept as two gateway methods per codebase convention: gateways return the exact shape each caller needs (category uses getCategoryIdsByProgramCode and getCategoriesByProgramCode with the same join; no repository calls array_keys on a gateway result). Dismissed by author krisnasantosa15 on 2026-11-23 (\"tutup KY-1\").",
+      "accepted_by": "krisnasantosa15"
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/participant-learning-path-creation...HEAD",
+      "head_sha": "864e0381db77219a5e36216f7c876a5eaaebc689",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <10 changed PHP files under Dicoding/>",
+      "head_sha": "864e0381db77219a5e36216f7c876a5eaaebc689",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='ParticipantImportTest|SupervisedStudentCreationTest|SupervisedStudentImportTest|AcademicProgramDashboardParticipantCsvReaderTest|AcademicProgramDashboardParticipantCsvUploadTest' --testsuite=unit; deck ai:test --filter='AcademicProgramDashboardParticipantImportIntegrationTest' --testsuite=integration",
+      "head_sha": "864e0381db77219a5e36216f7c876a5eaaebc689",
+      "evidence": "unit exit 0, 54 tests 180 assertions; integration exit 0, 5 tests 24 assertions"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-23T16:49:20+07:00",
+    "assessment": "nambah learning path ketika import dengan aturan jika kolom di db masih kosong akan update, jika sudah ada maka ditolak",
+    "level": "low",
+    "review_route": "post-merge",
+    "updated_at": "2026-11-23T16:51:19+07:00"
+  },
+  "acknowledgement": null
+}
