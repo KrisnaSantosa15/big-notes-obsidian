@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-23
+updated: 2026-11-24
 type: plan
 tags:
   - plan
@@ -10,8 +10,9 @@ tags:
   - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257815
 sp: "2"
-status: Brainstorm selesai, belum dikerjakan
-pr: []
+status: PR 8 selesai preflight, menunggu ack
+pr:
+  - branch feature/apd/campaign-progress-status-view (PR 8, belum di-push)
 depends-on:
   - 05-course-progress
 index: "[[Projects/APD Revamp/Cycle 2/index]]"
@@ -164,3 +165,51 @@ Arah scope: card ini input manual (mengganti jalur sinkronisasi sheet ke APD). P
 ## Pertanyaan terbuka dari card Course progress (2026-11-24)
 
 Dipindah dari [[05-course-progress]]: card ini yang membandingkan progress course dengan `target_week` learning path. Perlu diputuskan sebelum mulai card ini: bagaimana kalau course di learning path tidak ada di MCT peserta, atau peserta punya course MCT yang tidak ada di learning path? Apakah course itu ikut dihitung dalam status mingguan dan "x/y lulus"?
+
+## Implementasi PR 8 (2026-11-24)
+
+Branch `feature/apd/campaign-progress-status-view`, stack di atas PR 6. Preflight di [[05-course-progress-preflight#8. Progress status (AS, IS, LB, NSA)]].
+
+**Keputusan yang dipakai:**
+- Kolom **Progress** di tabel Students (badge status + "x/y passed") dan badge + "Week N · Target T · Passed P" di dialog progress.
+- **Tanpa filter status.** Status dihitung saat dibaca, jadi filter butuh menghitung semua siswa campaign. Menyusul kalau Ops butuh.
+- Course di learning path yang tidak ada di MCT peserta **tetap dihitung** dalam target dan "x/y".
+- Sebelum `open_at`: tidak ada status, tampil "-".
+- Label mengikuti APD lama (`progress-statuses.ts`): Ahead of Schedule, On Ideal Schedule, Lagging Behind, Need Special Attention. Warna: hijau, abu-abu, kuning, merah.
+
+```mermaid
+flowchart TD
+    A[evaluated_at = min now, close_at] --> B{sebelum open_at?}
+    B -- ya --> N[status null, tampil -]
+    B -- tidak --> W["N = floor(hari sejak open_at / 7) + 1"]
+    W --> T["target(N) = jumlah course dengan target_week <= N"]
+    T --> C{passed vs target}
+    C -- "passed > target(N)" --> AS[AS]
+    C -- "passed = target(N)" --> IS[IS]
+    C -- "passed >= target(N-1)" --> LB[LB]
+    C -- lainnya --> NSA[NSA]
+```
+
+**Kode:**
+- `ProgressStatus` (enum `AS`/`IS`/`LB`/`NSA`) dan VO `LearningPathProgress` (input `target_weeks`, `passed_count`, `open_at`, `close_at`, `evaluated_at`).
+- `AcademicProgramDashboardStudentIndexAction::presentLearningPath()` menghitung `passed_count` dari `CourseProgress::hasPassed()` (PR 5) dan mengirim `progress` (`status`, `currentWeek`, `targetCount`, `passedCount`).
+
+**Data uji lokal (AI Camp `aicamp_2026`, campaign 2, buka 3 Nov 2026, minggu 4):**
+
+| User | Learning path | Lulus | Status |
+| --- | --- | --- | --- |
+| 12 Qodi | Data Scientist (target 5) | 6 | AS 6/8 |
+| 13 Aqila Hamidah | AI Engineer (target 1) | 1 | IS 1/1 |
+| 14 Bwahaha | Data Scientist | 4 | LB 4/8 |
+| 15 MrPartner | AI Engineer | 0 | NSA 0/1 |
+
+Masuk lewat tombol Sync (`scholarship_participants` 166-169, `scholarship_cohorts` 23-26, completion 40-56). Hapus:
+
+```sql
+DELETE FROM academic_program_dashboard_access_lists WHERE program_code = 'aicamp_2026' AND user_id IN (12, 13, 14, 15);
+DELETE FROM developer_journey_completions WHERE id BETWEEN 40 AND 56;
+DELETE FROM scholarship_cohorts WHERE id IN (23, 24, 25, 26);
+DELETE FROM scholarship_participants WHERE id IN (166, 167, 168, 169);
+```
+
+**Berikutnya:** ack dan push setelah PR 5 dan PR 6. AC card Basecamp masih menyebut input manual dan CSV, perlu ditulis ulang Krisna.

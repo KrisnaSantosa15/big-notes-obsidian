@@ -1,0 +1,201 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/campaign-course-progress-view",
+    "base_sha": "05cf691e1aa6512c2c8832841d8001911cc41d5d",
+    "merge_base": "05cf691e1aa6512c2c8832841d8001911cc41d5d",
+    "head_sha": "515000fdbf4266c3984c2175f4d977f04ce61b0f",
+    "diff_sha256": "20b12b84449a7903c54e3b1cee5cea25fb22b05f6e3a0bbc28e71a2913f72a4a",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/campaign-course-progress-view",
+    "base_sha": "05cf691e1aa6512c2c8832841d8001911cc41d5d",
+    "merge_base": "05cf691e1aa6512c2c8832841d8001911cc41d5d",
+    "head_sha": "ac369ac1913872a8c9e46bc858f404160a1d82c9",
+    "diff_sha256": "d500142896462953116cab8d9983ef639cb2dc8e3c56cd40fccc9a0b3dcbd712",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Enums/ProgressStatus.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/LearningPathProgress.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/AcademicProgramDashboardStudentIndexAction.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/IntegrationTests/Web/AcademicProgramDashboard/AcademicProgramDashboardStudentIndexIntegrationTest.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/ValueObjects/LearningPathProgressTest.php"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/components/student-progress-dialog/student-progress-dialog.tsx"
+      },
+      {
+        "status": "A",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.constants.ts"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.test.ts"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.tsx"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.types.ts"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/inertia-AOrWj0Uc.js",
+        "previous_path": "public/bundle/inertia-qtUZQnzY.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/students-CX39mUE8.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/students-sVLLbW5v.js"
+      },
+      {
+        "status": "M",
+        "path": "public/vite-manifest.json"
+      }
+    ],
+    "required_checks": [
+      "build",
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Show the progress status verdict (AS, IS, LB, NSA) of each campaign student on the students page, calculated from the passed learning path courses against the cumulative target per week.",
+  "acceptance_criteria": [
+    "The week is counted in 7-day blocks from the campaign open_at and is frozen at close_at; before open_at there is no status.",
+    "Target(N) is the number of learning path courses with target_week <= N; more passed than the target is AS, equal is IS, at least target(N-1) is LB, otherwise NSA.",
+    "The students table has a Progress column with the status badge and passed/total courses, or - without a learning path or status.",
+    "The student progress dialog shows the status badge with the week, target and passed count."
+  ],
+  "harness": {
+    "name": "Claude Code",
+    "version": "2.1.331"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "ac369ac1913872a8c9e46bc858f404160a1d82c9",
+      "started_at": "2026-11-24T09:19:44Z",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent, read pf8/diff.patch (10 source files, bundle skipped), ValueObject, CourseProgress, Campaign, badge variants, frontend-inertia.md; 1 should-fix, 1 question."
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "ac369ac1913872a8c9e46bc858f404160a1d82c9",
+      "started_at": "2026-11-24T09:19:44Z",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent, read pf8/diff.patch, ValueObject base, grepped LearningPathProgress/ProgressStatus usages; 3 nits."
+    }
+  ],
+  "findings": [
+    {
+      "id": "P8-R1",
+      "severity": "should-fix",
+      "status": "fixed",
+      "location": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.helpers.ts:17",
+      "evidence": "progressStatuses is a data map in .helpers.ts; frontend-inertia.md puts data in {feature}.constants.ts with SCREAMING_SNAKE_CASE names.",
+      "resolution": "Moved the status map to student-list.constants.ts as PROGRESS_STATUSES.",
+      "commit": "1dc2d4caac189b6945eadf55984b006c73c462f5"
+    },
+    {
+      "id": "P8-R2",
+      "severity": "question",
+      "status": "dismissed",
+      "location": "Dicoding/Web/Http/AcademicProgramDashboard/AcademicProgramDashboardStudentIndexAction.php:91",
+      "evidence": "Action builds the LearningPathProgress VO from gateway data; APD has no read-side UseCase and the action already reads gateways.",
+      "resolution": "No read-side UseCases exist; read actions build VOs from gateways (Users/Settings/AcademyEditAction::createUserInterest), and this action already does so for CourseProgress.",
+      "accepted_by": "krisnasantosa15"
+    },
+    {
+      "id": "P8-S1",
+      "severity": "nit",
+      "status": "dismissed",
+      "location": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/LearningPathProgress.php:80",
+      "evidence": "toArray() and the action's getter mapping list the same five fields.",
+      "resolution": "Kept toArray() (required by ValueObject) and getter mapping in the action, like CourseProgress in the same action.",
+      "accepted_by": "krisnasantosa15"
+    },
+    {
+      "id": "P8-S2",
+      "severity": "nit",
+      "status": "fixed",
+      "location": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/LearningPathProgress.php:57",
+      "evidence": "courseCount duplicates learningPath.courses.length already sent in the same payload.",
+      "resolution": "Dropped courseCount; the column uses learningPath.courses.length.",
+      "commit": "07d22aba36cb9a27104dec7a50eb57adc46c7006"
+    },
+    {
+      "id": "P8-S3",
+      "severity": "nit",
+      "status": "fixed",
+      "location": "Dicoding/Web/Http/AcademicProgramDashboard/AcademicProgramDashboardStudentIndexAction.php:193",
+      "evidence": "presentLearningPath maps the same course/progress pairs twice.",
+      "resolution": "LearningPathProgress takes target_weeks and passed_count, so the action maps the courses once.",
+      "commit": "08ace49fe1aca9741937fc6659f8c58a191421dc"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build",
+      "status": "passed",
+      "command": "cd frontend && npm run build",
+      "head_sha": "515000fdbf4266c3984c2175f4d977f04ce61b0f",
+      "evidence": "build exit 0; committed bundle reproduced with no working tree diff"
+    },
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check 05cf691e1aa..HEAD -- . ':!public'",
+      "head_sha": "515000fdbf4266c3984c2175f4d977f04ce61b0f",
+      "evidence": "no whitespace errors"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm LearningPathProgress, ProgressStatus, StudentIndexAction, LearningPathProgressTest, StudentIndexIntegrationTest",
+      "head_sha": "515000fdbf4266c3984c2175f4d977f04ce61b0f",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='LearningPathProgressTest|CourseProgressTest' --testsuite=unit; deck ai:test --filter='AcademicProgramDashboardStudentIndexIntegrationTest' --testsuite=integration; npx vitest run src/modules/academic-program-dashboard; npx eslint student-list",
+      "head_sha": "515000fdbf4266c3984c2175f4d977f04ce61b0f",
+      "evidence": "unit 8/8 (LearningPathProgressTest) and 14/14 with CourseProgressTest; integration 6 tests/18 assertions OK; vitest 100 passed; eslint clean"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-24T09:18:44Z",
+    "assessment": "tambahkan verdict status peserta (AS,IS,LB,NSA) berdasarkan progress dan target week per learning path",
+    "level": "medium",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

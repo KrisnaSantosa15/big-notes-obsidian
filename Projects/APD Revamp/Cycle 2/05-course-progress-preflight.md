@@ -30,6 +30,7 @@ Report asli disalin ke `preflight-reports/` di folder ini, karena salinan di `/t
 | 2d | `feature/apd/campaign-learning-path-removal` | 2b (+ merge 2c) | `152700c4a2b` | medium | 1 ditutup | Valid, menunggu ack |
 | 5 | `feature/apd/campaign-course-progress` | 4d | `46fc87d683f` | low | 1 ditutup | Valid, menunggu ack |
 | 6 | `feature/apd/campaign-course-progress-view` | 5 | `05cf691e1aa` | medium | 1 diperbaiki, 2 ditutup | Valid, menunggu ack |
+| 8 | `feature/apd/campaign-progress-status-view` | 6 | `515000fdbf4` | medium | 3 diperbaiki, 2 ditutup | Valid, menunggu ack |
 
 PR stacked harus memakai `--base <branch di bawahnya>` di setiap perintah helper (`validate-risk`, `validate`, `digest`, `refresh`). Tanpa itu helper membandingkan ke `origin/master` dan melaporkan snapshot basi.
 
@@ -224,3 +225,21 @@ Reviewer tidak dijalankan ulang setelah perbaikan; hanya dicek bahwa commit perb
 - Temuan: learning path dimuat dua kali (diperbaiki di `05cf691e1aa`), campaign dicari dua kali (ditutup, butuh `ExistingCampaign`), page factory (ditutup).
 - Validasi dengan `--base feature/apd/campaign-course-progress`. Report: `preflight-reports/6-report.json`.
 
+
+## 8. Progress status (AS, IS, LB, NSA)
+
+Card [[04-progress-status]]. Domain dan web digabung satu PR: domain hanya VO murni dan enum, tanpa gateway, migration, atau aggregate.
+
+- Base `feature/apd/campaign-course-progress-view` (`05cf691e1aa`), direview di `ac369ac1913`, HEAD final `515000fdbf4`, digest `c0019b95f1767aa231251d5bdef7cad312af2a9321f8bcafce47cf512f9dafec`.
+- Risiko (Krisna, medium): "tambahkan verdict status peserta (AS,IS,LB,NSA) berdasarkan progress dan target week per learning path".
+- Checks di `515000fdbf4`: psalm exit 0, unit 8/8 (14/14 dengan `CourseProgressTest`), integration 6/6, vitest APD 100/100, ESLint bersih, build mereproduksi bundle.
+
+| ID | Tingkat | Temuan | Keputusan |
+| --- | --- | --- | --- |
+| P8-R1 | should-fix | Map label status ada di `.helpers.ts` | Diperbaiki `1dc2d4caac1`: `PROGRESS_STATUSES` di `student-list.constants.ts` |
+| P8-S2 | nit | `courseCount` sama dengan `courses.length` | Diperbaiki `07d22aba36c` |
+| P8-S3 | nit | Dua `array_map` atas course yang sama | Diperbaiki `08ace49fe1a`: VO menerima `target_weeks` dan `passed_count` |
+| P8-S1 | nit | `toArray()` dan getter menyusun field yang sama | Ditutup Krisna: `toArray()` wajib dari `ValueObject`, action memakai getter seperti `CourseProgress` |
+| P8-R2 | question | Action membangun VO sendiri | Ditutup Krisna: codebase tidak punya UseCase baca, contoh `AcademyEditAction::createUserInterest()` |
+
+- Validasi dengan `--base feature/apd/campaign-course-progress-view`. Report: `preflight-reports/8-report.json`.
