@@ -1162,5 +1162,11 @@
     "level": "medium",
     "review_route": "post-merge"
   },
-  "acknowledgement": null
+  "acknowledgement": {
+    "actor": "krisnasantosa15",
+    "head_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "report_sha256": "f071396f28ca475adfcff4d5756c1c5fd4c7462f144acb705d9f261e4af33c9d",
+    "statement": "Ya, ack keduanya",
+    "timestamp": "2026-11-24T07:39:13Z"
+  }
 }

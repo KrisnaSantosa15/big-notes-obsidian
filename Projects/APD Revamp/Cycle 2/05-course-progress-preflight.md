@@ -6,7 +6,9 @@ updated: 2026-11-24
 
 # Preflight PR course progress
 
-Hasil PR preflight untuk stack learning path (card [[05-course-progress]]). Setiap PR direview dua reviewer (rules dan simplicity) satu kali, risiko ditulis Krisna sebelum review. Belum ada PR yang di-ack atau di-push.
+Hasil PR preflight untuk stack learning path (card [[05-course-progress]]). Setiap PR direview dua reviewer (rules dan simplicity) satu kali, risiko ditulis Krisna sebelum review. 1a dan 1b sudah di-ack dan di-push (2026-11-24), sisanya belum.
+
+**Catatan push:** push dari `git worktree` tidak menjalankan pre-push hook, karena `.husky/_` tidak ada di worktree. Psalm penuh dijalankan manual setelahnya di `00f8c2785b9` dan `8ba5aa4986a`, keduanya lolos. Push berikutnya dari working tree utama.
 
 Report asli disalin ke `preflight-reports/` di folder ini, karena salinan di `/tmp` hilang kalau mesin di-restart. Untuk validasi ulang, arahkan `--report` ke file di folder itu.
 
@@ -14,8 +16,8 @@ Report asli disalin ke `preflight-reports/` di folder ini, karena salinan di `/t
 
 | PR | Branch | Base | HEAD final | Risiko | Temuan | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1a | `feature/apd/campaign-learning-path-domain` | `origin/master` | `00f8c2785b9` | medium | 1 diperbaiki | Valid, menunggu ack |
-| 1b | `feature/apd/campaign-learning-path-creation` | 1a | `8ba5aa4986a` | medium | 6 diperbaiki, 1 ditutup | Valid, menunggu ack |
+| 1a | `feature/apd/campaign-learning-path-domain` | `origin/master` | `00f8c2785b9` | medium | 1 diperbaiki | Ack 2026-11-24, PR [#6494](https://github.com/dicoding-dev/dicoding/pull/6494) |
+| 1b | `feature/apd/campaign-learning-path-creation` | 1a | `8ba5aa4986a` | medium | 6 diperbaiki, 1 ditutup | Ack 2026-11-24, PR draft [#6495](https://github.com/dicoding-dev/dicoding/pull/6495) |
 | 3a | `feature/apd/participant-learning-path-auto-enroll` | 1b | `f8c0cefe769` | low | 1 ditutup | Valid, menunggu ack |
 | 4a + backfill | `feature/apd/participant-learning-path-auto-enroll-storage` | 3a | `d8cd70bbbbd` | medium | 2 ditutup | Valid, menunggu ack |
 | 3c | `feature/apd/participant-learning-path-creation-domain` | 4a | `f5a2fff749c` | low | 0 | Valid, menunggu ack |

@@ -343,13 +343,13 @@ Konvensi test PR domain: hanya test aggregate, yang membangun aggregate lewat re
 
 ## Stack PR (2026-11-24)
 
-Semua PR di bawah sudah lolos preflight, belum di-push, menunggu ack. Base tiap PR dipilih dari branch terendah yang punya semua yang dibutuhkan, supaya stack tidak terlalu dalam (lihat [[05-course-progress-preflight]]).
+Semua PR di bawah sudah lolos preflight. 1a (#6494) dan 1b (#6495, draft) sudah di-push, sisanya menunggu ack. Base tiap PR dipilih dari branch terendah yang punya semua yang dibutuhkan, supaya stack tidak terlalu dalam (lihat [[05-course-progress-preflight]]).
 
 ```mermaid
 flowchart LR
     master([master])
-    1a["1a domain create LP<br/>00f8c2785b9"]
-    1b["1b infra+web create LP<br/>8ba5aa4986a"]
+    1a["1a domain create LP<br/>00f8c2785b9 · #6494"]
+    1b["1b infra+web create LP<br/>8ba5aa4986a · #6495 draft"]
     3a["3a domain auto-enroll<br/>f8c0cefe769"]
     4a["4a kolom learning_path_id + backfill<br/>d8cd70bbbbd"]
     3c["3c domain tambah peserta<br/>f5a2fff749c"]
@@ -528,7 +528,7 @@ Catatan: setelah build ulang, browser sempat memuat bundle lama dari cache (tomb
 - Commit: `051b5de12ee` gateway, `f8a201c9d36` use case + integration test, `94e260010c2` action + route, `d03f529b770` UI hapus, `152700c4a2b` bundle.
 - Status: preflight valid (risiko medium), menunggu ack. Detail di [[05-course-progress-preflight]].
 
-**Berikutnya:** push 1a lalu 1b (draft), ack dan push sisanya (2a sebelum 2b, 2b sebelum 2d, 5 sebelum 6), PR 7 (G7) dari master, hapus row uji "Smoke LP" dan data uji course progress.
+**Berikutnya:** 1a sudah jadi PR [#6494](https://github.com/dicoding-dev/dicoding/pull/6494) dan 1b PR draft [#6495](https://github.com/dicoding-dev/dicoding/pull/6495) (2026-11-24). Ack dan push sisanya (2a sebelum 2b, 2b sebelum 2d, 5 sebelum 6), PR 7 (G7) dari master, hapus row uji "Smoke LP" dan data uji course progress.
 
 
 ## PR 5 (2026-11-24): service progress course
