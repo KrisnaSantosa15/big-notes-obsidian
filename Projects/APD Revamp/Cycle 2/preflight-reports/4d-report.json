@@ -1,0 +1,138 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-import-domain",
+    "base_sha": "864e0381db77219a5e36216f7c876a5eaaebc689",
+    "merge_base": "864e0381db77219a5e36216f7c876a5eaaebc689",
+    "head_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+    "diff_sha256": "93a72ca3705549d3bba0f4de5644e6c8b80d04f9d6f59297f7c557303259dfbb",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-import-domain",
+    "base_sha": "864e0381db77219a5e36216f7c876a5eaaebc689",
+    "merge_base": "864e0381db77219a5e36216f7c876a5eaaebc689",
+    "head_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+    "diff_sha256": "93a72ca3705549d3bba0f4de5644e6c8b80d04f9d6f59297f7c557303259dfbb",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/Academies/AcademicProgramDashboardAccessListGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/IntegrationTests/Web/AcademicProgramDashboard/AcademicProgramDashboardParticipantImportIntegrationTest.php"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/components/participant-import-dialog/participant-import-dialog.tsx"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/inertia-CgA9Ykz4.js",
+        "previous_path": "public/bundle/inertia-Dg0rv1EB.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/students-Dfp46rKb.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/students-jsE6Rukp.js"
+      },
+      {
+        "status": "M",
+        "path": "public/vite-manifest.json"
+      }
+    ],
+    "required_checks": [
+      "build",
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Save the learning path of students imported from the participants CSV",
+  "acceptance_criteria": [
+    "getLearningPathNamesByProgramCode returns id=>name for the program's campaign learning paths",
+    "updateParticipant writes learning_path_id",
+    "Integration test proves new and registered students get the learning path",
+    "Import dialog copy mentions the learning_path column"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+      "started_at": "2026-11-23T17:06:30+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched after 17:06:30); reviewed diff artifact for all 4 source files (public/ rebuild excluded) plus callers of updateParticipant; findings: none"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+      "started_at": "2026-11-23T17:06:30+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched after 17:06:30); reviewed diff artifact for all 4 source files (public/ rebuild excluded); findings: none. Coverage note about the getEnrolledParticipantsByEmail stub checked by coordinator: only SupervisedStudentImportRepository calls it, participant import uses getEnrolledParticipants"
+    }
+  ],
+  "findings": [],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/participant-learning-path-import-domain...HEAD",
+      "head_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <2 changed PHP files under Dicoding/>",
+      "head_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='AcademicProgramDashboardParticipantImportIntegrationTest' --testsuite=integration",
+      "head_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+      "evidence": "5 tests, 24 assertions, OK"
+    },
+    {
+      "name": "eslint",
+      "status": "passed",
+      "command": "npx eslint participant-import-dialog.tsx",
+      "head_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "build",
+      "status": "passed",
+      "command": "npm run build",
+      "head_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+      "evidence": "exit 0, rebuilt bundle identical to committed (clean worktree)"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-23T17:05:53+07:00",
+    "assessment": "tambah learning path id untuk import",
+    "level": "low",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

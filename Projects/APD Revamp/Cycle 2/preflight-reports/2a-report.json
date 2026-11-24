@@ -1,0 +1,127 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/campaign-learning-path-creation",
+    "base_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "merge_base": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "head_sha": "efee467a87aca60c8c427bfc14de9aa251f71d12",
+    "diff_sha256": "953ba12b5c77d602970bf03b1308cdf2bb576c112d08d53af4b854c12302230c",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/campaign-learning-path-creation",
+    "base_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "merge_base": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "head_sha": "efee467a87aca60c8c427bfc14de9aa251f71d12",
+    "diff_sha256": "953ba12b5c77d602970bf03b1308cdf2bb576c112d08d53af4b854c12302230c",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathCreation.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathUpdate.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Events/CampaignLearningPathWasUpdated.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/CampaignLearningPath.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/CampaignLearningPathUpdateRepository.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathUpdateTest.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/en/exception.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/id/exception.php"
+      }
+    ],
+    "required_checks": [
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Domain for updating an APD campaign learning path: CampaignLearningPathUpdate aggregate, event, repository, gateway stubs, translations; target-week check moved into the CampaignLearningPath value object.",
+  "acceptance_criteria": [
+    "Only admin may update a campaign learning path",
+    "Name and scholarship package stay unique within the campaign",
+    "Every course exists and target weeks fit the campaign period",
+    "Once the learning path has students its scholarship package cannot be replaced or cleared; empty to package and unchanged are allowed",
+    "Creation reuses the value object target-week check"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "efee467a87aca60c8c427bfc14de9aa251f71d12",
+      "started_at": "2026-11-24T08:54:30+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched after 08:54:30); reviewed diff artifact for all 9 changed paths plus the gateway file and creation aggregate; findings: none"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "efee467a87aca60c8c427bfc14de9aa251f71d12",
+      "started_at": "2026-11-24T08:54:30+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched after 08:54:30); reviewed diff artifact for all 9 changed paths plus the creation aggregate; findings: none"
+    }
+  ],
+  "findings": [],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/campaign-learning-path-creation...HEAD",
+      "head_sha": "efee467a87aca60c8c427bfc14de9aa251f71d12",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <9 changed PHP files>",
+      "head_sha": "efee467a87aca60c8c427bfc14de9aa251f71d12",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='CampaignLearningPath(Creation|Update)Test' --testsuite=unit",
+      "head_sha": "efee467a87aca60c8c427bfc14de9aa251f71d12",
+      "evidence": "25 tests, 82 assertions, OK (PHPUnit deprecation notices only)"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-24T08:53:30+07:00",
+    "assessment": "tambah kapabilitas untuk edit campaign learning path",
+    "level": "medium",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

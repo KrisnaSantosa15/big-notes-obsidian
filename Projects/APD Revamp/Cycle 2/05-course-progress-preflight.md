@@ -1,7 +1,7 @@
 ---
 tags: [apd-revamp, cycle-2, pr-preflight]
 parent: "[[05-course-progress]]"
-updated: 2026-11-23
+updated: 2026-11-24
 ---
 
 # Preflight PR course progress
@@ -21,7 +21,8 @@ Report asli disalin ke `preflight-reports/` di folder ini, karena salinan di `/t
 | 3c | `feature/apd/participant-learning-path-creation-domain` | 4a | `f5a2fff749c` | low | 0 | Valid, menunggu ack |
 | 4c | `feature/apd/participant-learning-path-creation` | 3c | `65057e7eb60` | medium | 0 | Valid, menunggu ack |
 | 3d | `feature/apd/participant-learning-path-import-domain` | 4c | `864e0381db7` | low | 2 ditutup | Valid, menunggu ack |
-| 4d | `feature/apd/participant-learning-path-import` | 3d | | | | Belum |
+| 4d | `feature/apd/participant-learning-path-import` | 3d | `9596b200e52` | low | 0 | Valid, menunggu ack |
+| 2a | `feature/apd/campaign-learning-path-update-domain` | 1b | `efee467a87a` | medium | 0 | Valid, menunggu ack |
 
 PR stacked harus memakai `--base <branch di bawahnya>` di setiap perintah helper (`validate-risk`, `validate`, `digest`, `refresh`). Tanpa itu helper membandingkan ke `origin/master` dan melaporkan snapshot basi.
 
@@ -131,3 +132,26 @@ PR stacked harus memakai `--base <branch di bawahnya>` di setiap perintah helper
 - **3d-KY1 (nit, ditutup atas persetujuan Krisna):** setelah 4d, `getLearningPathIdsByProgramCode` dan `getLearningPathNamesByProgramCode` memakai join yang sama. Tetap dua method mengikuti konvensi gateway: satu method per bentuk hasil (kategori punya pasangan `getCategoryIdsByProgramCode` dan `getCategoriesByProgramCode` dengan join identik), dan tidak ada repository di codebase yang memanggil `array_keys` pada hasil gateway.
 
 **Check:** diff bersih, psalm bersih, 54 unit test dan 5 integration test lulus.
+
+## 4d. Infra + web impor CSV dengan learning path
+
+- Report: `preflight-reports/4d-report.json`
+- Review dan HEAD final `9596b200e52`, tanpa commit perbaikan. Reviewer membaca diff tanpa bundle `public/`.
+- Digest: `786e86867a178c8f9f047ac1fefd1ff9ef1e5e4bb1102507ed9dccb0c400a92b`
+- Risiko (low, review setelah merge): "tambah learning path id untuk import"
+
+**Temuan:** tidak ada dari kedua reviewer. Catatan reviewer simplicity: `getEnrolledParticipantsByEmail` di access list gateway masih stub. Dicek dari kode: method itu hanya dipakai `SupervisedStudentImportRepository` (impor mapping, stub sudah ada di master); impor peserta memakai `getEnrolledParticipants`, dan test membuktikan `updated_count` 1 untuk peserta terdaftar.
+
+**Check:** diff bersih, psalm bersih (2 file), 5 integration test lulus, eslint bersih, build ulang identik dengan bundle yang di-commit.
+
+## 2a. Domain update learning path
+
+- Report: `preflight-reports/2a-report.json`
+- Review dan HEAD final `efee467a87a`, tanpa commit perbaikan
+- Digest: `88f7d2d9da65c1b5e9c03d81dc75a53f9e357bd7fcd320ccd3f330586a14ecf5`
+- Risiko (medium, review setelah merge): "tambah kapabilitas untuk edit campaign learning path"
+- Base 1b, bukan ujung stack, supaya stack tetap dangkal. Commit `f55cf0e3d82` memindahkan cek minggu target ke `CampaignLearningPath::fitsCampaignPeriod` dan ikut mengubah aggregate create dari 1a; sebutkan di deskripsi PR.
+
+**Temuan:** tidak ada dari kedua reviewer.
+
+**Check:** diff bersih, psalm bersih (9 file), 25 unit test lulus (11 create, 14 update).
