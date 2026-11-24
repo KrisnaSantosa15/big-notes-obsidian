@@ -23,6 +23,7 @@ Report asli disalin ke `preflight-reports/` di folder ini, karena salinan di `/t
 | 3d | `feature/apd/participant-learning-path-import-domain` | 4c | `864e0381db7` | low | 2 ditutup | Valid, menunggu ack |
 | 4d | `feature/apd/participant-learning-path-import` | 3d | `9596b200e52` | low | 0 | Valid, menunggu ack |
 | 2a | `feature/apd/campaign-learning-path-update-domain` | 1b | `efee467a87a` | medium | 0 | Valid, menunggu ack |
+| 2c | `feature/apd/campaign-learning-path-removal-domain` | 1b | `4df7169fc0f` | medium | 1 ditutup | Valid, menunggu ack |
 
 PR stacked harus memakai `--base <branch di bawahnya>` di setiap perintah helper (`validate-risk`, `validate`, `digest`, `refresh`). Tanpa itu helper membandingkan ke `origin/master` dan melaporkan snapshot basi.
 
@@ -155,3 +156,17 @@ PR stacked harus memakai `--base <branch di bawahnya>` di setiap perintah helper
 **Temuan:** tidak ada dari kedua reviewer.
 
 **Check:** diff bersih, psalm bersih (9 file), 25 unit test lulus (11 create, 14 update).
+
+## 2c. Domain hapus learning path
+
+- Report: `preflight-reports/2c-report.json`
+- Review dan HEAD final `4df7169fc0f`, tanpa commit perbaikan
+- Digest: `367d20934cae9db1a36a8aa8291100718059e388d459e3d00dbf386cf50218dd`
+- Risiko (medium, review setelah merge): "tambah domain untuk remove campaign learning path"
+- Base 1b. Stub `findLearningPath` dan `hasStudents` identik dengan 2a, jadi saat bertemu hanya konflik penambahan di posisi yang sama (gateway dan file terjemahan).
+
+**Temuan**
+
+- **2c-KY1 (nit, ditutup atas persetujuan Krisna):** repository removal hanya mengecek `findLearningPath` null, `scholarship_package_id` tidak dipakai. Dibiarkan: repository update di 2a membaca kolom itu, dan satu method gateway untuk aturan "learning path milik campaign" lebih sederhana daripada method bool kedua dengan query yang hampir sama.
+
+**Check:** diff bersih, psalm bersih (7 file), 6 unit test lulus.

@@ -335,6 +335,49 @@ Menggantikan urutan di tabel "Rencana PR" dan "Revisi rencana PR". Satu PR satu 
 
 Konvensi test PR domain: hanya test aggregate, yang membangun aggregate lewat repository asli dengan gateway di-prophesize. Tanpa test repository terpisah dan tanpa test VO.
 
+## Stack PR (2026-11-24)
+
+Semua PR di bawah sudah lolos preflight, belum di-push, menunggu ack. Base tiap PR dipilih dari branch terendah yang punya semua yang dibutuhkan, supaya stack tidak terlalu dalam (lihat [[05-course-progress-preflight]]).
+
+```mermaid
+flowchart LR
+    master([master])
+    1a["1a domain create LP<br/>00f8c2785b9"]
+    1b["1b infra+web create LP<br/>8ba5aa4986a"]
+    3a["3a domain auto-enroll<br/>f8c0cefe769"]
+    4a["4a kolom learning_path_id + backfill<br/>d8cd70bbbbd"]
+    3c["3c domain tambah peserta<br/>f5a2fff749c"]
+    4c["4c infra+web tambah peserta<br/>65057e7eb60"]
+    3d["3d domain impor CSV<br/>864e0381db7"]
+    4d["4d infra+web impor CSV<br/>9596b200e52"]
+    2a["2a domain edit LP<br/>efee467a87a"]
+    2c["2c domain hapus LP<br/>4df7169fc0f"]
+    2b["2b infra+web edit LP<br/>(butuh 2a + 4a)"]
+    2d["2d infra+web hapus LP<br/>(butuh 2c + 4a)"]
+
+    master --> 1a --> 1b
+    1b --> 3a --> 4a --> 3c --> 4c --> 3d --> 4d
+    1b --> 2a
+    1b --> 2c
+    2a -.-> 2b
+    4a -.-> 2b
+    2c -.-> 2d
+    4a -.-> 2d
+```
+
+Versi teks:
+
+```
+master
+ └─ 1a ─ 1b ─┬─ 3a ─ 4a ─ 3c ─ 4c ─ 3d ─ 4d
+             ├─ 2a ┄┄┐
+             │       ├┄ 2b  (butuh 2a dan kolom dari 4a)
+             └─ 2c ┄┄┼┄ 2d  (butuh 2c dan kolom dari 4a)
+                 4a ┄┘
+```
+
+Garis putus-putus berarti PR belum dibuat dan bergantung pada dua branch.
+
 ## Status implementasi PR 1a dan 1b (2026-11-23)
 
 Keduanya selesai di lokal, sudah di-commit, belum di-push. Riwayat kedua branch sempat ditulis ulang (fixup + autosquash, lalu rebase 1b), jadi kalau pernah di-push perlu force push.
@@ -405,4 +448,12 @@ Dengan ini student mendapat learning path lewat empat jalur: auto-enroll saat co
 
 **Template impor** ([APD Import Template](https://docs.google.com/spreadsheets/d/1fdLxbSePC0NVPFcL-03uwleyKDoj0nIKNKuQc1PRPNU/edit)): sheet "Import Students" ditambah kolom `learning_path` (isi nama learning path persis seperti di tab Learning Path campaign, boleh kosong). Sheet "Mapping Student-Lecturer" tidak berubah.
 
-**Berikutnya:** 2a-2d (edit dan hapus learning path, R4), PR 5/6 (progress, O2 dan selisih course learning path vs MCT), preflight 3a sampai 4d, hapus row uji "Smoke LP".
+**PR 2a, `feature/apd/campaign-learning-path-update-domain`** (4 commit di atas 1b `8ba5aa4986a`, base 1b supaya stack dangkal):
+- Cek minggu target pindah ke `CampaignLearningPath::fitsCampaignPeriod`, dipakai aggregate create dan update (mengubah file dari 1a).
+- Aggregate `CampaignLearningPathUpdate`: hanya admin, nama dan paket unik per campaign (selain dirinya), course harus ada, minggu target muat di periode campaign, R4: kalau sudah punya peserta paket tidak boleh diganti atau dikosongkan; kosong ke X dan paket sama tetap boleh.
+- Event `CampaignLearningPathWasUpdated`, repository create dan save, stub gateway (`findLearningPath` mengembalikan `?object`, `hasStudents`, cek nama/paket dipakai learning path lain, `updateLearningPath`), 8 key terjemahan.
+- Preflight selesai (medium, 0 temuan), menunggu ack. Lihat [[05-course-progress-preflight]].
+
+**PR 2c, `feature/apd/campaign-learning-path-removal-domain`** (5 commit di atas 1b `8ba5aa4986a`): aggregate `CampaignLearningPathRemoval` (hanya admin, R4: tidak bisa dihapus kalau sudah punya peserta), event `CampaignLearningPathWasRemoved`, repository (learning path harus milik campaign, `LEARNING_PATH_NOT_FOUND`), stub gateway `findLearningPath`/`hasStudents` (identik 2a) dan `removeLearningPath`, 3 key terjemahan. Preflight selesai (medium, 1 nit ditutup), menunggu ack.
+
+**Berikutnya:** 2b dan 2d (infra + web edit/hapus, isi `hasStudents` dari kolom 4a dan backfill R3 saat paket kosong ke X) menunggu 1a sampai 4a merge lalu dari master. PR 5/6 (progress, O2 dan selisih course learning path vs MCT), ack dan push 1a sampai 4d dan 2a, hapus row uji "Smoke LP".

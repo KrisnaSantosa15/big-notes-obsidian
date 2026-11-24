@@ -1,0 +1,127 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/campaign-learning-path-creation",
+    "base_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "merge_base": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "head_sha": "4df7169fc0fc9d1d27fdb6f9c6520925048e0ae7",
+    "diff_sha256": "3a429e298ebe199233d183c392c25bd6c13ffffb1d8075740b59a2c2708822cd",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/campaign-learning-path-creation",
+    "base_sha": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "merge_base": "8ba5aa4986a125c9edc3cca3dca8506da9419f68",
+    "head_sha": "4df7169fc0fc9d1d27fdb6f9c6520925048e0ae7",
+    "diff_sha256": "3a429e298ebe199233d183c392c25bd6c13ffffb1d8075740b59a2c2708822cd",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathRemoval.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Events/CampaignLearningPathWasRemoved.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/CampaignLearningPathRemovalRepository.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathRemovalTest.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/en/exception.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/id/exception.php"
+      }
+    ],
+    "required_checks": [
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Domain for removing an APD campaign learning path: CampaignLearningPathRemoval aggregate, CampaignLearningPathWasRemoved event, repository, gateway stubs, id/en translations.",
+  "acceptance_criteria": [
+    "Only admin may remove a campaign learning path",
+    "The learning path must belong to the campaign",
+    "A learning path that already has students cannot be removed"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "4df7169fc0fc9d1d27fdb6f9c6520925048e0ae7",
+      "started_at": "2026-11-24T09:16:20+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched after 09:16:20); reviewed diff artifact for all 7 changed paths plus SupervisedStudentRemoval aggregate/repository and other APD repositories; findings: none"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "4df7169fc0fc9d1d27fdb6f9c6520925048e0ae7",
+      "started_at": "2026-11-24T09:16:20+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched after 09:16:20); reviewed diff artifact for all 7 changed paths plus sibling APD aggregates; findings: 1 nit (2c-KY1)"
+    }
+  ],
+  "findings": [
+    {
+      "id": "2c-KY1",
+      "severity": "nit",
+      "status": "dismissed",
+      "location": "AcademicProgramDashboardCampaignLearningPathGateway::findLearningPath used by CampaignLearningPathRemovalRepository::createAggregate",
+      "evidence": "Removal only null-checks findLearningPath; the returned scholarship_package_id is unused there and the unit test builds an object nobody reads",
+      "resolution": "Kept: findLearningPath and hasStudents are byte-identical to PR 2a, whose CampaignLearningPathUpdateRepository reads scholarship_package_id (line 33). One gateway method for the rule 'learning path belongs to the campaign' is simpler than a second near-identical bool query, and keeps the 2a/2c merge clean. Dismissed by author krisnasantosa15 on 2026-11-24 (\"oke biarkan saja\").",
+      "accepted_by": "krisnasantosa15"
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/campaign-learning-path-creation...HEAD",
+      "head_sha": "4df7169fc0fc9d1d27fdb6f9c6520925048e0ae7",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <7 changed PHP files>",
+      "head_sha": "4df7169fc0fc9d1d27fdb6f9c6520925048e0ae7",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='CampaignLearningPathRemovalTest' --testsuite=unit",
+      "head_sha": "4df7169fc0fc9d1d27fdb6f9c6520925048e0ae7",
+      "evidence": "6 tests, 23 assertions, OK (PHPUnit deprecation notices only)"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-24T09:15:40+07:00",
+    "assessment": "tambah domain untuk remove campaign learning path",
+    "level": "medium",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}
