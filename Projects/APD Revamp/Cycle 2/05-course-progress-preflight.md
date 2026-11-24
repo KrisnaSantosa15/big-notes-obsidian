@@ -26,6 +26,8 @@ Report asli disalin ke `preflight-reports/` di folder ini, karena salinan di `/t
 | 2c | `feature/apd/campaign-learning-path-removal-domain` | 1b | `4df7169fc0f` | medium | 1 ditutup | Valid, menunggu ack |
 | 2b | `feature/apd/campaign-learning-path-update` | 4a (+ merge 2a) | `9c6520748ff` | low | 2 diperbaiki | Valid, menunggu ack |
 | 2d | `feature/apd/campaign-learning-path-removal` | 2b (+ merge 2c) | `152700c4a2b` | medium | 1 ditutup | Valid, menunggu ack |
+| 5 | `feature/apd/campaign-course-progress` | 4d | `46fc87d683f` | low | 1 ditutup | Valid, menunggu ack |
+| 6 | `feature/apd/campaign-course-progress-view` | 5 | `05cf691e1aa` | medium | 1 diperbaiki, 2 ditutup | Valid, menunggu ack |
 
 PR stacked harus memakai `--base <branch di bawahnya>` di setiap perintah helper (`validate-risk`, `validate`, `digest`, `refresh`). Tanpa itu helper membandingkan ke `origin/master` dan melaporkan snapshot basi.
 
@@ -205,3 +207,18 @@ Reviewer tidak dijalankan ulang setelah perbaikan; hanya dicek bahwa commit perb
 - **2d-Q1 (question, ditutup atas persetujuan Krisna):** `hasStudents` hanya menghitung role STUDENT, sedangkan FK `access_lists.learning_path_id` RESTRICT berlaku untuk semua role. Ditutup tanpa perubahan: semua jalur tulis hanya memberi `learning_path_id` ke STUDENT (ParticipantCreation 4c, ParticipantEnrollment 4a, ParticipantImport 4d menolak role lain, ContributorCreation null, backfill filter STUDENT); data lokal 21 baris, semua STUDENT.
 
 **Check:** diff bersih, psalm bersih (7 file), unit 6 test / 23 assertion, integration 10 test / 49 assertion, eslint dan tsc bersih, vite build sukses.
+
+## 5. Hitung course progress
+
+- Base `feature/apd/participant-learning-path-import` (`9596b200e52`), HEAD `46fc87d683f`, digest `141b9af5b25e50db91dbed8bc367ae4d463425b988d33407ca57ba9002d7774c`.
+- Risiko (Krisna, low): "tambah gateway untuk ambil progress course".
+- Rules: 0 temuan. Simplicity: 1 nit (hash di SQL vs PHP), ditutup Krisna: tetap SQL supaya tidak perlu komentar `nosemgrep`.
+- Validasi dari worktree branch ini dengan `--base feature/apd/participant-learning-path-import`. Report: `preflight-reports/5-report.json`.
+
+## 6. Tampilan course progress
+
+- Base `feature/apd/campaign-course-progress` (`46fc87d683f`), direview di `340f2fbdec3`, HEAD final `05cf691e1aa`, digest `865678e9b87ad121f7fd37b7f66b3cc00dd1104995759f13ce373c7d2cb7d44f`.
+- Risiko (Krisna, medium): "tampilkan learning path dan course progress setiap peserta".
+- Temuan: learning path dimuat dua kali (diperbaiki di `05cf691e1aa`), campaign dicari dua kali (ditutup, butuh `ExistingCampaign`), page factory (ditutup).
+- Validasi dengan `--base feature/apd/campaign-course-progress`. Report: `preflight-reports/6-report.json`.
+

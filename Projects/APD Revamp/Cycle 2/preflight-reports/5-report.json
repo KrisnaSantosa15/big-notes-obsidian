@@ -1,0 +1,116 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-import",
+    "base_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+    "merge_base": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+    "head_sha": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+    "diff_sha256": "74238635fd11fde6c4faeef2d9054d293863b62103510d70df43686d1283088a",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-import",
+    "base_sha": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+    "merge_base": "9596b200e52b3a4f03f0557d41780f1c8eccf2c4",
+    "head_sha": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+    "diff_sha256": "74238635fd11fde6c4faeef2d9054d293863b62103510d70df43686d1283088a",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/CourseProgress.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCourseProgressGateway.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/IntegrationTests/Infrastructure/StorageGateways/AcademicProgramDashboardCourseProgressGatewayTest.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/ValueObjects/CourseProgressTest.php"
+      }
+    ],
+    "required_checks": [
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Calculate the course progress of each campaign student for the learning path courses, ready for the students page and the progress status card.",
+  "acceptance_criteria": [
+    "A course completed or renewed after the campaign opened counts as passed and 100%.",
+    "A course completed before the campaign opened and not renewed during it needs renewal and shows 0%.",
+    "Otherwise progress is completed published modules over published modules, rounded down.",
+    "Nothing recorded after the campaign closed is counted."
+  ],
+  "harness": {
+    "name": "Claude Code",
+    "version": "2.1.331"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+      "started_at": "2026-11-24T06:58:45Z",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent, read pf5/diff.patch and snapshot worktree; 4 files covered; no findings."
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+      "started_at": "2026-11-24T06:58:45Z",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent, read pf5/diff.patch and snapshot worktree; 4 files covered; 1 nit."
+    }
+  ],
+  "findings": [
+    {
+      "id": "P5-S1",
+      "severity": "nit",
+      "status": "dismissed",
+      "location": "AcademicProgramDashboardCourseProgressGateway.php getCompletedModuleCounts",
+      "evidence": "Hand-built whereRaw IN (UNHEX(MD5(?)),...) while AcademyTrackingGateway.php:78-90 computes hex2bin(md5()) in PHP and uses whereIn; raw IN also forces the empty-list early return.",
+      "accepted_by": "krisnasantosa15",
+      "resolution": "Author kept the SQL UNHEX(MD5(?)) form: PHP md5() needs a nosemgrep weak-crypto suppression comment, which the no-comments rule avoids; same index and result."
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check 9596b200e52..HEAD",
+      "head_sha": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+      "evidence": "no whitespace errors"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm CourseProgress.php AcademicProgramDashboardCourseProgressGateway.php",
+      "head_sha": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='AcademicProgramDashboardCourseProgressGatewayTest' --testsuite=integration; deck ai:test --filter='CourseProgressTest' --testsuite=unit",
+      "head_sha": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+      "evidence": "integration 6 tests/6 assertions OK; unit 6 tests/6 assertions OK"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-24T06:58:24Z",
+    "assessment": "tambah gateway untuk ambil progress course",
+    "level": "low",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

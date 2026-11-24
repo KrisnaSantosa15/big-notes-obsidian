@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-23
+updated: 2026-11-24
 type: plan
 tags:
   - plan
@@ -10,7 +10,7 @@ tags:
   - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784
 sp: "5"
-status: Rencana PR ditulis 2026-11-23, belum dikerjakan
+status: PR 1a sampai 6 selesai lokal dan lolos preflight, menunggu ack dan push. PR 7 (G7) belum dikerjakan
 pr: []
 depends-on: []
 index: "[[Projects/APD Revamp/Cycle 2/index]]"
@@ -360,6 +360,9 @@ flowchart LR
     2c["2c domain hapus LP<br/>4df7169fc0f"]
     2b["2b infra+web edit LP<br/>9c6520748ff"]
     2d["2d infra+web hapus LP<br/>152700c4a2b"]
+    5["5 hitung progress<br/>46fc87d683f"]
+    6["6 tampilan progress<br/>05cf691e1aa"]
+    7["7 G7 kategori<br/>belum dibuat"]
 
     master --> 1a --> 1b
     1b --> 3a --> 4a --> 3c --> 4c --> 3d --> 4d
@@ -369,17 +372,20 @@ flowchart LR
     2a -- merge --> 2b
     2b --> 2d
     2c -- merge --> 2d
+    4d --> 5 --> 6
+    master -.-> 7
 ```
 
 Versi teks:
 
 ```
 master
- └─ 1a ─ 1b ─┬─ 3a ─ 4a ─┬─ 3c ─ 4c ─ 3d ─ 4d
-             │           └─ 2b  (dari 4a, lalu 2a di-merge ke dalamnya)
-             ├─ 2a ──────────┘
-             └─ 2c
-                   2d dari 2b, lalu 2c di-merge ke dalamnya
+ ├─ 1a ─ 1b ─┬─ 3a ─ 4a ─┬─ 3c ─ 4c ─ 3d ─ 4d ─ 5 ─ 6
+ │           │           └─ 2b  (dari 4a, lalu 2a di-merge ke dalamnya)
+ │           ├─ 2a ──────────┘
+ │           └─ 2c
+ │                 2d dari 2b, lalu 2c di-merge ke dalamnya
+ └─ 7 (G7, belum dibuat)
 ```
 
 Garis putus-putus di diagram mermaid berarti PR belum dibuat. 2b memakai dua induk: branch dibuat dari 4a (butuh kolom `learning_path_id`), lalu 2a di-merge lokal (bukan cherry-pick) supaya SHA commit 2a tetap sama. Setelah PR 2a merge ke master, diff PR 2b di GitHub otomatis hanya berisi perubahan 2b.
@@ -522,7 +528,7 @@ Catatan: setelah build ulang, browser sempat memuat bundle lama dari cache (tomb
 - Commit: `051b5de12ee` gateway, `f8a201c9d36` use case + integration test, `94e260010c2` action + route, `d03f529b770` UI hapus, `152700c4a2b` bundle.
 - Status: preflight valid (risiko medium), menunggu ack. Detail di [[05-course-progress-preflight]].
 
-**Berikutnya:** PR 5 sedang dikerjakan (lihat "PR 5 (2026-11-24)"), lalu PR 6 (O2 diputuskan saat PR 6), ack dan push 1a sampai 4d, 2a sampai 2d (2a sebelum 2b, 2b sebelum 2d), hapus row uji "Smoke LP".
+**Berikutnya:** push 1a lalu 1b (draft), ack dan push sisanya (2a sebelum 2b, 2b sebelum 2d, 5 sebelum 6), PR 7 (G7) dari master, hapus row uji "Smoke LP" dan data uji course progress.
 
 
 ## PR 5 (2026-11-24): service progress course
@@ -556,3 +562,97 @@ Akibatnya:
 - **Peserta tanpa `learning_path_id`:** tidak punya tampilan progress sampai learning path-nya diisi. Pengisian lewat backfill (paket ada di `scholarship_participants`), impor CSV ulang (kosong ke X), atau form edit peserta nanti (card Ops edits, kosong ke X).
 - **Base PR 5+6:** pindah ke 4a (`feature/apd/participant-learning-path-backfill`), karena butuh tabel course learning path dan `learning_path_id`.
 - **PR 5 dan 6 digabung** (Krisna, 2026-11-24), karena file yang berubah sedikit.
+
+### PR 5+6 digabung (2026-11-24): service progress + dialog peserta
+
+- **Base:** 4d (`9596b200e52`), branch `feature/apd/campaign-course-progress`. O2 = **B, dialog detail peserta** (Krisna).
+- **Backend:**
+  - `AcademicProgramDashboardStudentIndexAction` menambah prop `learningPath: { name, courses: [{ id, name, targetWeek, percentage, needsRenewal }] } | null` per peserta di halaman yang tampil.
+  - Course diambil dari `getLearningPaths()` (urut minggu target lalu nama), progress dari `AcademicProgramDashboardCourseProgressGateway`.
+  - `paginateCampaignStudents` ikut memilih `userId` dan `learningPathId`. Ini perubahan di file bersama, jadi commit-nya dipisah.
+  - `hasPassed` tidak dikirim ke halaman (YAGNI). Getter-nya tetap ada di VO untuk card Progress status (E5).
+- **Frontend:**
+  - Nama peserta menjadi link yang membuka `StudentProgressDialog`: "Learning path: X", lalu baris "Week N, nama course, persen" atau badge merah "Need renew". Peserta tanpa learning path mendapat teks "No learning path yet.".
+- **Cek:**
+  - Integration Students 6 test, gateway 6 test, dan unit VO 6 test hijau. Vitest student-list 24 test hijau.
+  - Psalm bersih. Eslint bersih.
+  - Diuji di browser dengan data lokal: Arifah Najidah (Data Scientist Pro, 0% dan 75%) dan ABC Corporation (tanpa learning path).
+- **Status:** dipisah lagi jadi PR 5 dan PR 6, lihat "PR 5 dan PR 6 dipisah (2026-11-24)".
+
+## PR 5 dan PR 6 dipisah (2026-11-24)
+
+**Keputusan (Krisna):** dipisah lagi. Alasan: `docs/guidelines/review/review.md` meminta PR di atas 400 baris dipecah kalau bisa, dan gabungannya sekitar 730 baris di luar bundle. Batasnya jelas: PR 5 menghitung, PR 6 menampilkan.
+
+```mermaid
+flowchart LR
+    4d["4d impor CSV<br/>9596b200e52"]
+    subgraph PR5["PR 5: hitung progress (low)"]
+        vo["VO CourseProgress<br/>bfb1e7e6292"]
+        gw["Gateway course progress<br/>46fc87d683f"]
+    end
+    subgraph PR6["PR 6: tampilan progress (medium)"]
+        al["Access list pilih userId + learningPathId<br/>18846ce728f"]
+        act["Props Students<br/>0c95932b0bd"]
+        ui["Kolom LP + dialog<br/>977977f0a02"]
+        bd["Bundle<br/>340f2fbdec3"]
+        fx["Perbaikan preflight<br/>05cf691e1aa"]
+    end
+    4d --> vo --> gw --> al --> act --> ui --> bd --> fx
+```
+
+| PR | Branch | Base | HEAD final | Risiko (Krisna) | Status |
+| --- | --- | --- | --- | --- | --- |
+| 5 | `feature/apd/campaign-course-progress` | 4d `9596b200e52` | `46fc87d683f` | low: "tambah gateway untuk ambil progress course" | Preflight valid, menunggu ack |
+| 6 | `feature/apd/campaign-course-progress-view` | PR 5 `46fc87d683f` | `05cf691e1aa` | medium: "tampilkan learning path dan course progress setiap peserta" | Preflight valid, menunggu ack |
+
+**Isi PR 6 tambahan sejak catatan gabungan:**
+- Kolom "Learning path" di tabel Students, setelah kolom Category.
+- Dialog peserta dirapikan: badge nama learning path, course dikelompokkan per "Week N", progress bar (hijau 100%, kuning di atas 0%), dan "Need renew" berupa badge merah dengan penjelasan "Finished before the campaign started. The certificate must be renewed to count."
+- Pembulatan persen kembali ke `(int) floor(...)` (Krisna), bukan `intdiv`.
+
+**Temuan preflight:**
+
+| PR | Temuan | Keputusan Krisna |
+| --- | --- | --- |
+| 5 | Hash tracking dibuat di SQL (`UNHEX(MD5(?))`), sedangkan `AcademyTrackingGateway` memakai `hex2bin(md5())` + `whereIn` | Tetap SQL. `md5()` di PHP ditandai Semgrep (`php.lang.security.weak-crypto`) dan harus diberi komentar `nosemgrep` (ada 35 di codebase), sedangkan aturan kita tanpa komentar. Indeks dan hasil sama |
+| 6 | Learning path dimuat dua kali (`getLearningPaths` dan `getLearningPathOptions`) | Diperbaiki di `05cf691e1aa`: opsi filter dibentuk dari data yang sudah dimuat, `getLearningPathOptions` dihapus |
+| 6 | Campaign dicari dua kali (id, lalu VO untuk `open_at`/`close_at`) | Dibiarkan. Konvensi codebase untuk VO tersimpan dengan id adalah VO terpisah `Existing*` (37 VO, misalnya `ExistingSessionSchedule`), bukan id opsional. Buat `ExistingCampaign` kalau card Progress status juga butuh |
+| 6 | Perakitan payload di action, saran page factory | Dibiarkan. Pedoman itu untuk dashboard shell, halaman APD lain juga merakit di action |
+
+Perbaikan dikerjakan langsung tanpa agent fixer (permintaan Krisna). Reviewer tidak diulang.
+
+**Check di HEAD final:** PR 5 integration gateway 6/6, unit VO 6/6, psalm bersih. PR 6 integration 12 test, unit 6/6, vitest 24/24, psalm dan eslint bersih, build ulang tanpa perubahan bundle.
+
+### Completion vs progress 100%
+
+```mermaid
+flowchart TD
+    A{Ada completion<br/>sebelum close_at?} -- tidak --> P["% = modul published selesai / modul published<br/>(floor, tracking sampai close_at)"]
+    A -- ya --> B{completion >= open_at?}
+    B -- ya --> L["100% (lulus di periode)"]
+    B -- tidak --> C{renewal FINISHED<br/>>= open_at dan <= close_at?}
+    C -- ya --> L
+    C -- tidak --> R["Need renew (0%)"]
+```
+
+- **Progress %:** modul selesai dibagi modul published (`developer_journey_trackings`), hanya menunjukkan seberapa jauh materi dibaca.
+- **Completion:** baris `developer_journey_completions`, terbentuk saat peserta lulus course (submission atau ujian akhir diterima). Unik per `(user_id, journey_id)`.
+- Modul 100% tanpa completion: belum lulus, angkanya tetap dari modul. Completion dengan modul di bawah 100% (modul ditambah setelah lulus): tetap 100%.
+
+### Data uji lokal (2026-11-24, campaign 1 pijak_2027, buka 2026-10-01)
+
+| Peserta | Course | Data | Hasil di dialog |
+| --- | --- | --- | --- |
+| Arifah Najidah (53) | Utak Atik PHP (3) | completion id 37, 2026-05-01 | Need renew |
+| Arifah Najidah (53) | ReactJS Associate Kedua (2) | completion id 38, 2026-11-10 | 100% |
+| baru acp (65) | Utak Atik PHP (3) | completion id 39, 2026-03-01 + renewal id 1 FINISHED 2026-11-15 | 100% lewat renewal |
+
+Hapus nanti: `DELETE FROM developer_journey_completions WHERE id IN (37, 38, 39); DELETE FROM course_certificate_renewals WHERE id = 1;`
+
+### PR 7 (G7) dari master (2026-11-24)
+
+- Semua yang dibutuhkan sudah di master: TODO di `ParticipantEnrollmentSpecification.php:32` (`enrollStudent(categoryId: null)`), kategori campaign, listener auto-enroll, aggregate `ParticipantEnrollment`. G7 tidak butuh learning path.
+- Konsekuensi: konflik kecil dengan 3a/4a yang juga menambah parameter di `ParticipantEnrollment.php` (2 baris) dan `ParticipantEnrollmentRepository.php` (3 baris). Siapa yang merge belakangan menyelesaikannya.
+- Rencana: 7a domain (pemetaan kategori registrasi di aggregate, TODO diganti), 7b infra + web (isian "Kategori registrasi" di form kategori, lookup gateway, backfill pola R3).
+- Belum dicek: sumber kategori registrasi peserta (kolom dan nilainya).
+

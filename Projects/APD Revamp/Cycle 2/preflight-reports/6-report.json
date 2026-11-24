@@ -1,0 +1,248 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/campaign-course-progress",
+    "base_sha": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+    "merge_base": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+    "head_sha": "05cf691e1aa6512c2c8832841d8001911cc41d5d",
+    "diff_sha256": "08e90a1d0c3093227cd8096e67a640c7be09bb9b536fd9512f168bcbba4374de",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/campaign-course-progress",
+    "base_sha": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+    "merge_base": "46fc87d683f81e7882a1a68fe9d99039864d4b42",
+    "head_sha": "340f2fbdec38ba2387ea7140232a6769be9276d0",
+    "diff_sha256": "680bb8dbb99dd79befc28aa94884f40d54ca270ca679102a37c2cef982761b6a",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/Academies/AcademicProgramDashboardAccessListGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/AcademicProgramDashboardStudentIndexAction.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/IntegrationTests/Web/AcademicProgramDashboard/AcademicProgramDashboardStudentIndexIntegrationTest.php"
+      },
+      {
+        "status": "A",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/components/student-progress-dialog/index.ts"
+      },
+      {
+        "status": "A",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/components/student-progress-dialog/student-progress-dialog.tsx"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.hooks.ts"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.test.ts"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.tsx"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/modules/academic-program-dashboard/features/student-list/student-list.types.ts"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-create-Bj_0W1T7.js",
+        "previous_path": "public/bundle/academic-program-dashboard-admin-campaign-create-BT8tze8i.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-edit-Dk-zrtj6.js",
+        "previous_path": "public/bundle/academic-program-dashboard-admin-campaign-edit-WXJw2WdH.js"
+      },
+      {
+        "status": "R097",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-index-C0pnjvPb.js",
+        "previous_path": "public/bundle/academic-program-dashboard-admin-campaign-index-DPL0zTK_.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/bangun-negeri-registration-class-selection--kD7_gzO.js",
+        "previous_path": "public/bundle/bangun-negeri-registration-class-selection-CA7dArxE.js"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/campaigns-offering-BfWUQAIT.js",
+        "previous_path": "public/bundle/campaigns-offering-C55mkYv2.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/classroom-Cab8TRDI.css"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/classroom-D8jR3VfJ.css"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/email-platform-campaign-DBnODWEx.js",
+        "previous_path": "public/bundle/email-platform-campaign-BEknoCUA.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/email-platform-drafts-2MCZqPEO.js",
+        "previous_path": "public/bundle/email-platform-drafts-B6h6Kfcy.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/email-platform-edit-DTWDRPxs.js",
+        "previous_path": "public/bundle/email-platform-edit-DmAIvZ5y.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/globals-CoiudTZN.css"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/globals-CsSaE-1C.css"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/inertia-qtUZQnzY.js",
+        "previous_path": "public/bundle/inertia-CgA9Ykz4.js"
+      },
+      {
+        "status": "R100",
+        "path": "public/bundle/mountReactPage-XyeH4t_o.js",
+        "previous_path": "public/bundle/mountReactPage-CGifzrm_.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/students-Dfp46rKb.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/students-sVLLbW5v.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/users-roles-DgNuJ5wH.js",
+        "previous_path": "public/bundle/users-roles-CEaQntp8.js"
+      },
+      {
+        "status": "M",
+        "path": "public/vite-manifest.json"
+      }
+    ],
+    "required_checks": [
+      "build",
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Show the learning path of each campaign student in the students table and a dialog with the progress of each learning path course.",
+  "acceptance_criteria": [
+    "The students table has a Learning path column.",
+    "Clicking a student opens a dialog with the learning path courses grouped by target week, each with its percentage or a Need renew badge.",
+    "A student without a learning path shows No learning path yet."
+  ],
+  "harness": {
+    "name": "Claude Code",
+    "version": "2.1.331"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "340f2fbdec38ba2387ea7140232a6769be9276d0",
+      "started_at": "2026-11-24T06:58:45Z",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent, read pf6/diff.patch (9 source files, bundles skipped) and the action/gateways; 2 nits."
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "340f2fbdec38ba2387ea7140232a6769be9276d0",
+      "started_at": "2026-11-24T06:58:45Z",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent, read pf6/diff.patch (9 source files, bundles skipped); 2 nits."
+    }
+  ],
+  "findings": [
+    {
+      "id": "P6-S1",
+      "severity": "nit",
+      "status": "fixed",
+      "location": "AcademicProgramDashboardStudentIndexAction.php:52,89",
+      "evidence": "getLearningPaths and getLearningPathOptions query the same learning paths twice per request; options can be derived from the loaded paths and getLearningPathOptions has no other caller.",
+      "commit": "05cf691e1aa6512c2c8832841d8001911cc41d5d",
+      "resolution": "Filter options are built from the learning paths already loaded; getLearningPathOptions removed."
+    },
+    {
+      "id": "P6-S2",
+      "severity": "nit",
+      "status": "dismissed",
+      "location": "AcademicProgramDashboardStudentIndexAction.php:31,108-110",
+      "evidence": "Campaign is looked up twice (findCampaignIdByProgramCode then findCampaignByProgramCode) only to read open/close dates; second result is ?Campaign used without null check (guarded by the earlier 404). Also reported by rules reviewer as R2.",
+      "accepted_by": "krisnasantosa15",
+      "resolution": "Author left it: a single lookup needs an ExistingCampaign VO (codebase convention for persisted VOs with id), out of scope for one small query."
+    },
+    {
+      "id": "P6-R1",
+      "severity": "nit",
+      "status": "dismissed",
+      "location": "AcademicProgramDashboardStudentIndexAction.php:52-111",
+      "evidence": "Action assembles the payload from three gateways; frontend-inertia.md:419 suggests a page factory when a page draws on several sources (written for the dashboard shell, so a preference).",
+      "accepted_by": "krisnasantosa15",
+      "resolution": "Author left it: page factory guidance targets the dashboard shell; other APD pages assemble props in the action."
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check 46fc87d683f..HEAD -- . ':!public'",
+      "head_sha": "05cf691e1aa6512c2c8832841d8001911cc41d5d",
+      "evidence": "no whitespace errors"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm AccessListGateway, StudentIndexAction, CampaignLearningPathGateway",
+      "head_sha": "05cf691e1aa6512c2c8832841d8001911cc41d5d",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='AcademicProgramDashboardStudentIndexIntegrationTest|AcademicProgramDashboardCourseProgressGatewayTest' --testsuite=integration; deck ai:test --filter='CourseProgressTest' --testsuite=unit; npx vitest run student-list",
+      "head_sha": "05cf691e1aa6512c2c8832841d8001911cc41d5d",
+      "evidence": "integration 12 tests/24 assertions OK; unit 6/6 OK (unchanged code); vitest 24 passed; eslint clean"
+    },
+    {
+      "name": "build",
+      "status": "passed",
+      "command": "cd frontend && npm run build",
+      "head_sha": "05cf691e1aa6512c2c8832841d8001911cc41d5d",
+      "evidence": "build exit 0; committed bundle reproduced with no working tree diff"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-24T06:58:24Z",
+    "assessment": "tampilkan learning path dan course progress setiap peserta",
+    "level": "medium",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}
