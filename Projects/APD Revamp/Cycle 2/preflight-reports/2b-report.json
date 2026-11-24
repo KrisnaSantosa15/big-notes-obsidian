@@ -1,0 +1,328 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-auto-enroll-storage",
+    "base_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+    "merge_base": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+    "head_sha": "9c6520748ff2b8f93533a2a192630eea0e8d9690",
+    "diff_sha256": "052f50721010d9ad368d3d795dde2f8ca9fe7fa306bd46560600017d7a2edc72",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/participant-learning-path-auto-enroll-storage",
+    "base_sha": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+    "merge_base": "d8cd70bbbbdd29e768a6c95b4fae30d6d0376fa5",
+    "head_sha": "d21b0ced3d39eb9f5fa99e15287b4d085cccd8b7",
+    "diff_sha256": "c87bd5f9234193b8e0be7f88ebc799d633147cd98b1f720211c56878937d12d6",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathCreation.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathUpdate.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Events/CampaignLearningPathWasUpdated.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/CampaignLearningPath.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/CampaignLearningPathUpdateRepository.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/UseCases/AcademicProgramDashboard/CampaignLearningPathUpdateSpecification.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/Admin/CampaignEditAction.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/Admin/CampaignLearningPathUpdateAction.php"
+      },
+      {
+        "status": "M",
+        "path": "app/routes.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/IntegrationTests/Specifications/AcademicProgramDashboard/CampaignLearningPathUpdateIntegrationTest.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathUpdateTest.php"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/components/ui/tooltip/tooltip.tsx"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-edit.types.ts"
+      },
+      {
+        "status": "A",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-learning-path-dialog.tsx"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-learning-path.helpers.ts"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-learning-paths.tsx"
+      },
+      {
+        "status": "M",
+        "path": "lang/en/exception.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/id/exception.php"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-create-Cbv3uEmE.js",
+        "previous_path": "public/bundle/academic-program-dashboard-admin-campaign-create-BT8tze8i.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-edit-Ul_aRvqO.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-edit-WXJw2WdH.js"
+      },
+      {
+        "status": "R097",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-index-NYXT7kK6.js",
+        "previous_path": "public/bundle/academic-program-dashboard-admin-campaign-index-DPL0zTK_.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/bangun-negeri-registration-class-selection-Za_jxYTe.js",
+        "previous_path": "public/bundle/bangun-negeri-registration-class-selection-CA7dArxE.js"
+      },
+      {
+        "status": "R096",
+        "path": "public/bundle/campaigns-offering-BCxP4f8P.js",
+        "previous_path": "public/bundle/campaigns-offering-C55mkYv2.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/classroom-CNcnxTpU.css"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/classroom-Cab8TRDI.css"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/email-platform-campaign-DrOHCU8z.js",
+        "previous_path": "public/bundle/email-platform-campaign-BEknoCUA.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/email-platform-drafts-1KyQngRr.js",
+        "previous_path": "public/bundle/email-platform-drafts-B6h6Kfcy.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/email-platform-edit-BRwl_Siy.js",
+        "previous_path": "public/bundle/email-platform-edit-DmAIvZ5y.js"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/globals-C54dV8Wi.css"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/globals-CoiudTZN.css"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/index-BtMY1uia.js",
+        "previous_path": "public/bundle/index-DPn3EUo6.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/index-DN4qIYLJ.js",
+        "previous_path": "public/bundle/index-B6NCK2Df.js"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/index-NO7U2d-T.js",
+        "previous_path": "public/bundle/index-CJrs_mkE.js"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/index-uJupgCAH.js",
+        "previous_path": "public/bundle/index-QMK9ZYIz.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/index-x8R1eZw0.js",
+        "previous_path": "public/bundle/index-Cf1M3RTI.js"
+      },
+      {
+        "status": "R098",
+        "path": "public/bundle/inertia-s8jO1srh.js",
+        "previous_path": "public/bundle/inertia-Dj0nqgox.js"
+      },
+      {
+        "status": "R074",
+        "path": "public/bundle/information-tooltip-B3yGzPBF.js",
+        "previous_path": "public/bundle/information-tooltip-c1rgYCtv.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/learning-progress-BK8tvN2K.js",
+        "previous_path": "public/bundle/learning-progress-CAbW4I6g.js"
+      },
+      {
+        "status": "R100",
+        "path": "public/bundle/mountReactPage-BCgSaKy8.js",
+        "previous_path": "public/bundle/mountReactPage-CGifzrm_.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/show-CA3BQpM6.js",
+        "previous_path": "public/bundle/show-B7H8baab.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/show-CzzONRRo.js",
+        "previous_path": "public/bundle/show-D7Hm_ldM.js"
+      },
+      {
+        "status": "R067",
+        "path": "public/bundle/tooltip-D7NB2mDg.js",
+        "previous_path": "public/bundle/tooltip-D3QYdGdE.js"
+      },
+      {
+        "status": "R099",
+        "path": "public/bundle/users-roles-G3jzRmQi.js",
+        "previous_path": "public/bundle/users-roles-CEaQntp8.js"
+      },
+      {
+        "status": "M",
+        "path": "public/vite-manifest.json"
+      }
+    ],
+    "required_checks": [
+      "build",
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Infra and web for updating an APD campaign learning path: gateway storage and rule queries, repository save with scholarship package student backfill, update use case, thin action and route, edit dialog on the campaign edit page (shared create/edit dialog, campaign period tooltip, used packages hidden, courses grouped by week). Includes the merged PR 2a domain.",
+  "acceptance_criteria": [
+    "Admin can edit name, scholarship package and courses with target weeks of a campaign learning path",
+    "Aggregate enforces admin only, unique name in campaign, package not used by another learning path, package locked once students exist, target weeks inside the campaign period",
+    "Failed validation reopens the matching dialog with old input",
+    "Filling a package assigns the learning path to package students that have none yet"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "d21b0ced3d39eb9f5fa99e15287b4d085cccd8b7",
+      "started_at": "2026-11-24T10:36:47+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched after 2026-11-24T10:36:47+07:00); reviewed diff artifact for all non-generated changed paths incl. merged PR 2a domain files, plus CampaignLearningPathStoreAction, CampaignLearningPathCreationRepository, UseCase transaction wrapper; findings: none"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "d21b0ced3d39eb9f5fa99e15287b4d085cccd8b7",
+      "started_at": "2026-11-24T10:36:47+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched after 2026-11-24T10:36:47+07:00); reviewed diff artifact for all non-generated changed paths plus the full learning path gateway; findings: 2 nits (2b-KY1, 2b-KY2)"
+    }
+  ],
+  "findings": [
+    {
+      "id": "2b-KY1",
+      "severity": "nit",
+      "status": "fixed",
+      "location": "AcademicProgramDashboardCampaignLearningPathGateway::updateLearningPath / createLearningPath",
+      "evidence": "updateLearningPath re-inserted courses with a block identical to createLearningPath",
+      "resolution": "Extracted private insertCourses(learningPathId, learningPath, now) used by both, following AcademicProgramDashboardSessionScheduleGateway::insertFacilitators (shared by createSchedule and updateSchedule). Fix requested by author krisnasantosa15 (\"oke perbaiki juga\").",
+      "commit": "4c621a3ec3eb1a073856de3a57de006bacf73453"
+    },
+    {
+      "id": "2b-KY2",
+      "severity": "nit",
+      "status": "fixed",
+      "location": "frontend/.../campaign-edit/campaign-learning-paths.tsx weeksOf",
+      "evidence": "Courses already arrive ordered by target_week; the .sort was a no-op and filter ran once per week",
+      "resolution": "Grouped in one reduce into a Map keeping server order, dropped the sort; bundle rebuilt in a generated-only commit. Fix requested by author krisnasantosa15 (\"KY-2 perbaiki\").",
+      "commit": "e76144f495ee21e42994080c5e9a4ff952fdedd5"
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/participant-learning-path-auto-enroll-storage...HEAD",
+      "head_sha": "9c6520748ff2b8f93533a2a192630eea0e8d9690",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <9 changed PHP files>",
+      "head_sha": "9c6520748ff2b8f93533a2a192630eea0e8d9690",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "frontend-lint",
+      "status": "passed",
+      "command": "npx eslint campaign-edit + ui/tooltip; npx tsc --noEmit -p frontend",
+      "head_sha": "9c6520748ff2b8f93533a2a192630eea0e8d9690",
+      "evidence": "eslint no output; 0 tsc errors in changed frontend files"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='CampaignLearningPath(Creation|Update)' --testsuite=unit && deck ai:test --filter='CampaignLearningPath(Creation|Update)IntegrationTest' --testsuite=integration",
+      "head_sha": "9c6520748ff2b8f93533a2a192630eea0e8d9690",
+      "evidence": "unit: 25 tests, 84 assertions OK; integration: 7 tests, 38 assertions OK (PHPUnit deprecation notices only)"
+    },
+    {
+      "name": "build",
+      "status": "passed",
+      "command": "cd frontend && npm run build",
+      "head_sha": "9c6520748ff2b8f93533a2a192630eea0e8d9690",
+      "evidence": "vite build succeeded (built in 19.43s) from frontend source identical to HEAD; output committed in 9c6520748ff, working tree clean"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-24T10:36:47+07:00",
+    "assessment": "namabh UI untuk edit campaign learning path dan perbaiki UI table biar lebih terbaca",
+    "level": "low",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

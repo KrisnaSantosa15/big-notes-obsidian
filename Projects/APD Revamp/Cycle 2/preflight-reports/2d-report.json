@@ -1,0 +1,187 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "feature/apd/campaign-learning-path-update",
+    "base_sha": "9c6520748ff2b8f93533a2a192630eea0e8d9690",
+    "merge_base": "9c6520748ff2b8f93533a2a192630eea0e8d9690",
+    "head_sha": "152700c4a2ba59e84518141e65ba1798ebc291da",
+    "diff_sha256": "9e4df979f791388b1054c0aa1fb42b280a6f3ca373553300b76422512e57bf6b",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "review_snapshot": {
+    "base_ref": "feature/apd/campaign-learning-path-update",
+    "base_sha": "9c6520748ff2b8f93533a2a192630eea0e8d9690",
+    "merge_base": "9c6520748ff2b8f93533a2a192630eea0e8d9690",
+    "head_sha": "152700c4a2ba59e84518141e65ba1798ebc291da",
+    "diff_sha256": "9e4df979f791388b1054c0aa1fb42b280a6f3ca373553300b76422512e57bf6b",
+    "policy_sha256": "bc347e2a69827e8b6b21839fa418772cc2abb372c62b1fe89b9b1d635eccde5a"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathRemoval.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Events/CampaignLearningPathWasRemoved.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/CampaignLearningPathRemovalRepository.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardCampaignLearningPathGateway.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/UseCases/AcademicProgramDashboard/CampaignLearningPathRemovalSpecification.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/Admin/CampaignEditAction.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Web/Http/AcademicProgramDashboard/Admin/CampaignLearningPathDestroyAction.php"
+      },
+      {
+        "status": "M",
+        "path": "app/routes.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/IntegrationTests/Specifications/AcademicProgramDashboard/CampaignLearningPathRemovalIntegrationTest.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/CampaignLearningPathRemovalTest.php"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-edit.types.ts"
+      },
+      {
+        "status": "A",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-learning-path-remove-dialog.tsx"
+      },
+      {
+        "status": "M",
+        "path": "frontend/src/pages/academic-program-dashboard/admin/campaign-edit/campaign-learning-paths.tsx"
+      },
+      {
+        "status": "M",
+        "path": "lang/en/exception.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/id/exception.php"
+      },
+      {
+        "status": "A",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-edit-Di37HYh8.js"
+      },
+      {
+        "status": "D",
+        "path": "public/bundle/academic-program-dashboard-admin-campaign-edit-Ul_aRvqO.js"
+      },
+      {
+        "status": "M",
+        "path": "public/vite-manifest.json"
+      }
+    ],
+    "required_checks": [
+      "build",
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Infra and web for removing an APD campaign learning path: gateway delete (courses via FK cascade), removal use case, thin destroy action and DELETE route, destroy_url per learning path, red Hapus button with confirmation dialog on the campaign edit page. Includes the merged PR 2c domain.",
+  "acceptance_criteria": [
+    "Only admins can remove a campaign learning path",
+    "The learning path must belong to the campaign, otherwise not found",
+    "A learning path that already has students cannot be removed",
+    "Removing deletes the learning path with its courses and logs CampaignLearningPathWasRemoved"
+  ],
+  "harness": {
+    "name": "claude-code",
+    "version": "2.1.329"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "152700c4a2ba59e84518141e65ba1798ebc291da",
+      "started_at": "2026-11-24T11:13:40+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-rules subagent (background run launched after 2026-11-24T11:13:40+07:00); reviewed diff artifact for all non-generated changed paths incl. merged PR 2c domain files, plus CampaignLearningPathUpdateSpecification/Action siblings, gateway findLearningPath/hasStudents, access_lists learning_path_id migration; findings: 1 question (2d-Q1)"
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "152700c4a2ba59e84518141e65ba1798ebc291da",
+      "started_at": "2026-11-24T11:13:40+07:00",
+      "model": "claude-opus-5-5",
+      "evidence": "Claude Code pr-simplicity subagent (background run launched after 2026-11-24T11:13:40+07:00); reviewed diff artifact for all non-generated changed paths plus the learning path courses migration (cascade); findings: none"
+    }
+  ],
+  "findings": [
+    {
+      "id": "2d-Q1",
+      "severity": "question",
+      "status": "dismissed",
+      "location": "AcademicProgramDashboardCampaignLearningPathGateway::hasStudents used by CampaignLearningPathRemovalRepository::createAggregate",
+      "evidence": "hasStudents counts only STUDENT access_lists rows while the access_lists.learning_path_id FK is RESTRICT for every role; a non-STUDENT row with learning_path_id would bypass ALREADY_HAS_STUDENTS and fail with a generic error",
+      "resolution": "Only STUDENT rows can carry learning_path_id: ParticipantCreation (4c) and ParticipantEnrollment (4a) build Participant with role STUDENT, ParticipantImport (4d) creates STUDENT only and rejects rows registered with another role (REGISTERED_WITH_OTHER_ROLE), ContributorCreation sets learningPathId null, and the backfill filters role STUDENT. Local data: all 21 rows with learning_path_id are STUDENT. No code change. Dismissed by author krisnasantosa15 on 2026-11-24 (\"oke tutup\").",
+      "accepted_by": "krisnasantosa15"
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check feature/apd/campaign-learning-path-update...HEAD",
+      "head_sha": "152700c4a2ba59e84518141e65ba1798ebc291da",
+      "evidence": "exit 0"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck ai:psalm <7 changed PHP files>",
+      "head_sha": "152700c4a2ba59e84518141e65ba1798ebc291da",
+      "evidence": "exit 0, no issues"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='CampaignLearningPathRemovalTest' --testsuite=unit && deck ai:test --filter='CampaignLearningPath(Creation|Update|Removal)IntegrationTest' --testsuite=integration",
+      "head_sha": "152700c4a2ba59e84518141e65ba1798ebc291da",
+      "evidence": "unit: 6 tests, 23 assertions OK; integration: 10 tests, 49 assertions OK (PHPUnit deprecation notices only)"
+    },
+    {
+      "name": "build",
+      "status": "passed",
+      "command": "cd frontend && npm run build",
+      "head_sha": "152700c4a2ba59e84518141e65ba1798ebc291da",
+      "evidence": "vite build succeeded on HEAD, working tree clean afterwards (output identical to committed bundle)"
+    },
+    {
+      "name": "frontend-lint",
+      "status": "passed",
+      "command": "npx eslint campaign-edit; npx tsc --noEmit -p frontend",
+      "head_sha": "152700c4a2ba59e84518141e65ba1798ebc291da",
+      "evidence": "eslint no output; 0 tsc errors in campaign-edit"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "krisnasantosa15",
+    "written_at": "2026-11-24T11:13:40+07:00",
+    "assessment": "tambah fitur hapus campaign learning paths beserta course didalamnya",
+    "level": "medium",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": null
+}

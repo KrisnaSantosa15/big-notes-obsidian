@@ -160,3 +160,7 @@ Arah scope: card ini input manual (mengganti jalur sinkronisasi sheet ke APD). P
 | CSV | 1 |
 | Kolom dan filter | 0,5 |
 | **Total** | **3** |
+
+## Pertanyaan terbuka dari card Course progress (2026-11-24)
+
+Dipindah dari [[05-course-progress]]: card ini yang membandingkan progress course dengan `target_week` learning path. Perlu diputuskan sebelum mulai card ini: bagaimana kalau course di learning path tidak ada di MCT peserta, atau peserta punya course MCT yang tidak ada di learning path? Apakah course itu ikut dihitung dalam status mingguan dan "x/y lulus"?

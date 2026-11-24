@@ -275,6 +275,12 @@ Konteks thread sebelumnya:
 
 **Perlu diputuskan sebelum PR 5:** bagaimana kalau course di learning path tidak ada di MCT peserta, atau sebaliknya peserta punya course MCT yang tidak ada di learning path? Apakah course itu tetap ditampilkan dan dihitung dalam status mingguan?
 
+**Jawaban (2026-11-24, Krisna):** pertanyaan ini milik card Progress status, bukan card ini. Card Course progress hanya menghitung sejauh mana progress tiap course dan apakah perlu renew. Card Progress status yang membandingkan progress itu dengan `target_week` learning path untuk label seperti ahead of schedule.
+
+> Krisna (2026-11-24): "jadi gini, ada 2 card berbeda tapi saling berkaitan, card kita yaitu course progress itu menghitung sudah sejauh mana progressnya dan apakah perlu renew? sedangkan card progress status itu berhubungnan dengna label ahead of schedule dan lainnya dari course progress dibandingkan dengan target week di learning path."
+
+Akibatnya untuk PR 5-6: kalkulator tidak membaca learning path. PR 5 cukup kalkulator murni per peserta dan course, sehingga bisa berbasis `master`. Selisih course learning path vs MCT dipindah ke [[04-progress-status]]. O2 diputuskan saat PR 6.
+
 ## Rencana PR (2026-11-23)
 
 Stack lurus, setiap PR di atas PR sebelumnya. Pemisahan mengikuti konvensi: PR domain (aggregate, VO, unit test, repository, gateway kosong, tanpa migration) lalu PR infra+web (migration, gateway, spec, web, integration test). TDD.
@@ -352,31 +358,31 @@ flowchart LR
     4d["4d infra+web impor CSV<br/>9596b200e52"]
     2a["2a domain edit LP<br/>efee467a87a"]
     2c["2c domain hapus LP<br/>4df7169fc0f"]
-    2b["2b infra+web edit LP<br/>(butuh 2a + 4a)"]
-    2d["2d infra+web hapus LP<br/>(butuh 2c + 4a)"]
+    2b["2b infra+web edit LP<br/>9c6520748ff"]
+    2d["2d infra+web hapus LP<br/>152700c4a2b"]
 
     master --> 1a --> 1b
     1b --> 3a --> 4a --> 3c --> 4c --> 3d --> 4d
     1b --> 2a
     1b --> 2c
-    2a -.-> 2b
-    4a -.-> 2b
-    2c -.-> 2d
-    4a -.-> 2d
+    4a --> 2b
+    2a -- merge --> 2b
+    2b --> 2d
+    2c -- merge --> 2d
 ```
 
 Versi teks:
 
 ```
 master
- └─ 1a ─ 1b ─┬─ 3a ─ 4a ─ 3c ─ 4c ─ 3d ─ 4d
-             ├─ 2a ┄┄┐
-             │       ├┄ 2b  (butuh 2a dan kolom dari 4a)
-             └─ 2c ┄┄┼┄ 2d  (butuh 2c dan kolom dari 4a)
-                 4a ┄┘
+ └─ 1a ─ 1b ─┬─ 3a ─ 4a ─┬─ 3c ─ 4c ─ 3d ─ 4d
+             │           └─ 2b  (dari 4a, lalu 2a di-merge ke dalamnya)
+             ├─ 2a ──────────┘
+             └─ 2c
+                   2d dari 2b, lalu 2c di-merge ke dalamnya
 ```
 
-Garis putus-putus berarti PR belum dibuat dan bergantung pada dua branch.
+Garis putus-putus di diagram mermaid berarti PR belum dibuat. 2b memakai dua induk: branch dibuat dari 4a (butuh kolom `learning_path_id`), lalu 2a di-merge lokal (bukan cherry-pick) supaya SHA commit 2a tetap sama. Setelah PR 2a merge ke master, diff PR 2b di GitHub otomatis hanya berisi perubahan 2b.
 
 ## Status implementasi PR 1a dan 1b (2026-11-23)
 
@@ -456,4 +462,97 @@ Dengan ini student mendapat learning path lewat empat jalur: auto-enroll saat co
 
 **PR 2c, `feature/apd/campaign-learning-path-removal-domain`** (5 commit di atas 1b `8ba5aa4986a`): aggregate `CampaignLearningPathRemoval` (hanya admin, R4: tidak bisa dihapus kalau sudah punya peserta), event `CampaignLearningPathWasRemoved`, repository (learning path harus milik campaign, `LEARNING_PATH_NOT_FOUND`), stub gateway `findLearningPath`/`hasStudents` (identik 2a) dan `removeLearningPath`, 3 key terjemahan. Preflight selesai (medium, 1 nit ditutup), menunggu ack.
 
-**Berikutnya:** 2b dan 2d (infra + web edit/hapus, isi `hasStudents` dari kolom 4a dan backfill R3 saat paket kosong ke X) menunggu 1a sampai 4a merge lalu dari master. PR 5/6 (progress, O2 dan selisih course learning path vs MCT), ack dan push 1a sampai 4d dan 2a, hapus row uji "Smoke LP".
+**PR 2b, `feature/apd/campaign-learning-path-update`** (base 4a `d8cd70bbbbd`, lalu merge 2a di `50758b929d6`; konflik gateway diselesaikan dengan menyimpan method kedua sisi dan `createLearningPath(): int` versi 4a):
+- Gateway: query `findLearningPath` (dibatasi campaign), `isNameUsedByOtherLearningPath` dan `isScholarshipPackageUsedByOtherLearningPath` (selain dirinya), `hasStudents` (access list role STUDENT dengan `learning_path_id` ini), `updateLearningPath` (update nama dan paket, hapus lalu insert ulang course).
+- Repository update: setelah simpan, kalau paket terisi memanggil `assignLearningPathToScholarshipPackageStudents` dari 4a (backfill R3, hanya peserta yang `learning_path_id`-nya masih kosong).
+- `CampaignLearningPathUpdateSpecification`, `CampaignLearningPathUpdateAction`, route `POST program-campaigns/{campaignId}/learning-paths/{learningPathId}` (`programcampaigns.learningpaths.update`), `update_url` per learning path di `CampaignEditAction`.
+- UI: form dialog dipisah ke `campaign-learning-path-dialog.tsx`, dipakai dialog Tambah dan dialog Ubah per baris. Hidden `learning_path_id` dipakai agar dialog yang benar terbuka lagi saat validasi server gagal.
+- Integration test (4): learning path campaign lain tidak bisa diubah, paket terkunci kalau sudah ada peserta, update dengan course diganti, backfill saat paket diisi. Unit test saved 2a ditambah ekspektasi backfill.
+- Dicek di browser: tombol Ubah muncul per baris, dialog terisi nama, paket, dan 7 kelas dengan minggu dan tanggalnya.
+- Tambahan UI (keputusan Krisna 2026-11-24, ditaruh di 2b bukan 1b supaya 1b dan turunannya tidak perlu preflight ulang):
+  - Ikon info di header kolom "Tanggal" dengan tooltip "Periode campaign: 3 Nov 2026 - 31 Jan 2027" (helper `formatCampaignPeriod`, komponen `InformationTooltip`). Berlaku di dialog Tambah dan Ubah.
+  - Paket beasiswa yang sudah dipakai learning path lain disembunyikan dari pilihan. Dialog Tambah menyembunyikan semua paket terpakai; dialog Ubah tetap menampilkan paket miliknya sendiri. Validasi server `SCHOLARSHIP_PACKAGE_ALREADY_USED` tetap ada sebagai pengaman.
+  - Dicek di campaign 2 (paket 1 dan 2 terpakai): Tambah hanya "Tanpa paket"; Ubah Data Scientist "Tanpa paket" dan "2 · Data Scientist".
+  - Tombol "Ubah" per baris (ikon + teks). Kolom Kelas dikelompokkan per minggu: kiri "Minggu ke-N" dengan rentang tanggal, kanan daftar kelas berbullet, garis tipis antar minggu. Ditaruh di 2b (bukan 1b) karena 1b sudah jadi dasar 8 branch dan semua punya commit bundle.
+- Commit: `5699aff8a8d` sampai `9e807bcc3de` (10 commit), `09bc3b8e0cc` + `d21b0ced3d3` (tabel per minggu), `4c621a3ec3e` + `e76144f495e` + `9c6520748ff` (perbaikan preflight KY1/KY2).
+- Status: preflight valid (risiko low), menunggu ack. Detail di [[05-course-progress-preflight]].
+
+**Uji manual 2b di UI lokal (2026-11-24, campaign 1 pijak_2027):**
+
+| # | Skenario | Hasil |
+| --- | --- | --- |
+| 1 | Smoke LP diganti nama jadi "Data Scientist" (dipakai LP lain) | Ditolak "Nama learning path sudah digunakan pada campaign ini.", dialog Ubah Smoke LP terbuka lagi dengan isian terakhir |
+| 2 | Smoke LP diberi paket 1 (dipakai Data Scientist) | Ditolak "Paket beasiswa sudah digunakan oleh learning path lain pada campaign ini." |
+| 3 | Minggu ke-45 (periode 1 Okt 2026 sampai 30 Jun 2027) | Form menulis "Di luar periode campaign", server menolak "Minggu target melebihi jumlah minggu campaign." |
+| 4 | Nama dikosongkan | Ditolak di client "Nama learning path wajib diisi.", form tidak terkirim |
+| 5 | Edit berhasil (nama jadi "Smoke LP Lanjutan", minggu 2 jadi 3) | "Learning path Smoke LP Lanjutan berhasil diperbarui.", DB ikut berubah |
+| 6 | Data Scientist (paket 1) disimpan tanpa perubahan | Backfill R3: 21 peserta paket 1 yang `learning_path_id`-nya kosong terpetakan ke LP ini |
+| 7 | Paket Data Scientist dikosongkan setelah punya peserta | Ditolak "Paket beasiswa tidak dapat diganti atau dikosongkan karena learning path ini sudah memiliki peserta." |
+| 8 | Data Scientist diganti nama jadi "Data Scientist Pro", paket tetap, sudah punya peserta | Berhasil (R4: paket sama boleh) |
+| 9 | Dialog Tambah dengan nama yang sudah dipakai | Ditolak, yang terbuka lagi dialog Tambah dengan isiannya, bukan dialog Ubah |
+
+Catatan: backfill jalan setiap simpan learning path berpaket, bukan hanya saat paket kosong ke terisi. Aman karena hanya mengisi peserta yang `learning_path_id`-nya kosong, dan learning path lama (dibuat sebelum ada backfill) ikut terpetakan saat disimpan ulang.
+
+Data lokal setelah uji: LP 1 jadi "Smoke LP Lanjutan" minggu 3, LP 2 jadi "Data Scientist Pro", 21 peserta paket 1 punya `learning_path_id` 2.
+
+**PR 2d, `feature/apd/campaign-learning-path-removal`** (keputusan Krisna 2026-11-24: base 2b, bukan 4a, lalu merge 2c di `160973cdf3f`):
+- Alasan base 2b: implementasi `findLearningPath` dan `hasStudents` sudah ada di 2b (dari 4a+2c masih stub), dan tombol Hapus ada di kolom aksi yang dirombak 2b. Konsekuensi: 2b harus merge sebelum 2d.
+- Konflik merge: file terjemahan (simpan kunci UPDATE dan REMOVAL), gateway (simpan implementasi 2b).
+- Gateway `removeLearningPath`: hapus baris learning path saja; course ikut terhapus lewat FK `ON DELETE CASCADE`. `access_lists.learning_path_id` FK RESTRICT, tapi aggregate sudah menolak learning path yang punya peserta.
+- `CampaignLearningPathRemovalSpecification`, `CampaignLearningPathDestroyAction`, route `DELETE program-campaigns/{campaignId}/learning-paths/{learningPathId}` (`programcampaigns.learningpaths.destroy`), `destroy_url` per learning path.
+- UI: tombol "Hapus" merah (`variant="destructive"`) di samping "Ubah", konfirmasi `AlertDialog` (`campaign-learning-path-remove-dialog.tsx`), form `_method=DELETE`.
+- Integration test (3): learning path campaign lain tidak bisa dihapus, learning path dengan peserta tidak bisa dihapus, admin menghapus learning path beserta course-nya.
+
+**Uji manual 2d di UI lokal (2026-11-24, campaign 1 pijak_2027):**
+
+| # | Skenario | Hasil |
+| --- | --- | --- |
+| 1 | Klik Hapus pada "Smoke LP Lanjutan", lalu Batal | Dialog tertutup, learning path tetap ada |
+| 2 | Klik Hapus, lalu tekan Escape | Dialog tertutup, learning path tetap ada |
+| 3 | Hapus "Data Scientist Pro" (paket 1, 21 peserta) | Ditolak "Learning path tidak dapat dihapus karena sudah memiliki peserta.", data dan peserta tetap |
+| 4 | Hapus LP sementara "Uji Hapus 2" (tanpa paket, 2 kelas) lewat dialog | "Learning path berhasil dihapus.", baris hilang dari tabel, 2 baris course ikut terhapus (cascade) |
+| 5 | Kirim ulang hapus untuk LP yang sudah dihapus (tab basi) | "Learning path tidak ditemukan pada campaign ini." |
+| 6 | Hapus LP campaign 2 (id 3) lewat URL campaign 1 | "Learning path tidak ditemukan pada campaign ini.", LP 3 tetap ada |
+| 7 | User biasa (test@dicoding.local) mengirim hapus untuk LP 1 | Dialihkan ke `/home` oleh middleware admin, LP 1 tetap ada |
+| 8 | Admin mengirim hapus tanpa token CSRF | "Sesi Anda telah kadaluarsa. Mohon muat ulang halaman dan coba lagi." (diuji ke id 9999 supaya data aman) |
+
+Tidak diuji: paket beasiswa kembali muncul di dialog Tambah setelah learning path berpaket dihapus. Data lokal hanya punya satu paket per campaign dan semuanya terpakai learning path milik Krisna; daftar paket di dialog dihitung dari daftar learning path, jadi ikut berubah setelah halaman dimuat ulang.
+
+Catatan: setelah build ulang, browser sempat memuat bundle lama dari cache (tombol masih putih); reload tanpa cache memuat bundle baru. LP sementara dibuat lewat endpoint tambah, bukan tulis langsung ke DB.
+- Commit: `051b5de12ee` gateway, `f8a201c9d36` use case + integration test, `94e260010c2` action + route, `d03f529b770` UI hapus, `152700c4a2b` bundle.
+- Status: preflight valid (risiko medium), menunggu ack. Detail di [[05-course-progress-preflight]].
+
+**Berikutnya:** PR 5 sedang dikerjakan (lihat "PR 5 (2026-11-24)"), lalu PR 6 (O2 diputuskan saat PR 6), ack dan push 1a sampai 4d, 2a sampai 2d (2a sebelum 2b, 2b sebelum 2d), hapus row uji "Smoke LP".
+
+
+## PR 5 (2026-11-24): service progress course
+
+**Keputusan sumber course (Krisna, 2026-11-24): setuju.** Nilai progress satu sumber, yaitu satu kalkulator. Daftar course yang dikirim berbeda per pemakai:
+- **Card Progress status:** course learning path peserta.
+- **Tampilan progress (PR 6):** course learning path peserta ditambah course MCT di luar learning path.
+
+**Keputusan bentuk PR (Krisna, 2026-11-24): setuju.** Tanpa PR domain terpisah, karena ini perhitungan baca tanpa aksi tulis. PR 5 berisi backend baca, PR 6 berisi UI.
+
+- **Branch:** `feature/apd/campaign-course-progress`, base `master`.
+- **VO `CourseProgress`:** aturan 100%, NEED RENEW, dan persentase modul (floor, modul published, sama dengan progress bar kelas). `hasPassed()` dipakai untuk E5, dan `toArray()` menghasilkan `course_id`, `percentage`, `has_passed`, `needs_renewal`.
+- **Gateway `AcademicProgramDashboardCourseProgressGateway::getCourseProgresses($courseIdsByUserId, $openAt, $closeAt)`:** 4 query batch.
+  - Jumlah modul published per course.
+  - Modul selesai per pasangan peserta dan course, lewat hash tracking yang ber-index, dengan `completed_at` null atau <= `close_at`.
+  - Completion <= `close_at`.
+  - Renewal FINISHED <= `close_at` (MAX).
+- **Freeze:** semua data dibatasi `close_at` di query.
+- **Tracking lama:** `completed_at` null dihitung, karena dianggap data lama. Di DB lokal ada 72 dari 158 tracking selesai dengan `completed_at` null.
+- **Test:** 6 unit test VO dan 6 integration test gateway, semua hijau. Psalm bersih. Belum di-commit.
+
+### Keputusan sumber course tampilan progress (2026-11-24, Krisna)
+
+**Satu sumber: course learning path peserta yang didefinisikan Ops.** Keputusan ini menggantikan usulan gabungan learning path dan MCT, serta keputusan 2026-11-23 bahwa MCT dipakai untuk menampilkan course peserta. Card Course progress dan Progress status membaca daftar course yang sama.
+
+> Krisna (2026-11-24): "kenapa tidak satu sumber saja yaitu courses yang di define oleh tim ops biar satu sumber?"
+
+Akibatnya:
+- **Course learning path yang belum di-grant MCT:** tetap tampil (0%), tidak hilang.
+- **Course MCT di luar learning path:** tidak tampil.
+- **Peserta tanpa `learning_path_id`:** tidak punya tampilan progress sampai learning path-nya diisi. Pengisian lewat backfill (paket ada di `scholarship_participants`), impor CSV ulang (kosong ke X), atau form edit peserta nanti (card Ops edits, kosong ke X).
+- **Base PR 5+6:** pindah ke 4a (`feature/apd/participant-learning-path-backfill`), karena butuh tabel course learning path dan `learning_path_id`.
+- **PR 5 dan 6 digabung** (Krisna, 2026-11-24), karena file yang berubah sedikit.

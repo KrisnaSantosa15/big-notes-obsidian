@@ -24,6 +24,8 @@ Report asli disalin ke `preflight-reports/` di folder ini, karena salinan di `/t
 | 4d | `feature/apd/participant-learning-path-import` | 3d | `9596b200e52` | low | 0 | Valid, menunggu ack |
 | 2a | `feature/apd/campaign-learning-path-update-domain` | 1b | `efee467a87a` | medium | 0 | Valid, menunggu ack |
 | 2c | `feature/apd/campaign-learning-path-removal-domain` | 1b | `4df7169fc0f` | medium | 1 ditutup | Valid, menunggu ack |
+| 2b | `feature/apd/campaign-learning-path-update` | 4a (+ merge 2a) | `9c6520748ff` | low | 2 diperbaiki | Valid, menunggu ack |
+| 2d | `feature/apd/campaign-learning-path-removal` | 2b (+ merge 2c) | `152700c4a2b` | medium | 1 ditutup | Valid, menunggu ack |
 
 PR stacked harus memakai `--base <branch di bawahnya>` di setiap perintah helper (`validate-risk`, `validate`, `digest`, `refresh`). Tanpa itu helper membandingkan ke `origin/master` dan melaporkan snapshot basi.
 
@@ -170,3 +172,36 @@ PR stacked harus memakai `--base <branch di bawahnya>` di setiap perintah helper
 - **2c-KY1 (nit, ditutup atas persetujuan Krisna):** repository removal hanya mengecek `findLearningPath` null, `scholarship_package_id` tidak dipakai. Dibiarkan: repository update di 2a membaca kolom itu, dan satu method gateway untuk aturan "learning path milik campaign" lebih sederhana daripada method bool kedua dengan query yang hampir sama.
 
 **Check:** diff bersih, psalm bersih (7 file), 6 unit test lulus.
+
+## 2b. Infra + web update learning path
+
+- Report: `preflight-reports/2b-report.json`
+- Review di `d21b0ced3d3`, HEAD final `9c6520748ff`
+- Digest: `bb61198eb131a5ac0b77d8423d54dc4d671faccf2794e195f804dab17fbf4c58`
+- Risiko (low, review setelah merge): "namabh UI untuk edit campaign learning path dan perbaiki UI table biar lebih terbaca"
+- Base 4a (`feature/apd/participant-learning-path-auto-enroll-storage`) dengan `--base` di setiap perintah helper. Diff ikut membawa file 2a lewat merge `50758b929d6`, jadi reviewer juga mencakup file domain 2a. 2a harus merge lebih dulu.
+
+**Temuan**
+
+- pr-rules: tidak ada.
+- **2b-KY1 (nit, diperbaiki di `4c621a3ec3e`):** `updateLearningPath` mengulang blok insert course dari `createLearningPath`. Dipindah ke private `insertCourses`, mengikuti `AcademicProgramDashboardSessionScheduleGateway::insertFacilitators` yang dipakai `createSchedule` dan `updateSchedule`.
+- **2b-KY2 (nit, diperbaiki di `e76144f495e`):** `weeksOf` memakai `.sort` yang tidak berpengaruh dan `filter` per minggu. Diganti satu `reduce` ke `Map` dengan urutan dari server. Bundle di-build ulang di `9c6520748ff`.
+
+Reviewer tidak dijalankan ulang setelah perbaikan; hanya dicek bahwa commit perbaikan menjawab temuan.
+
+**Check:** diff bersih, psalm bersih (9 file), unit 25 test / 84 assertion, integration 7 test / 38 assertion, eslint dan tsc bersih di file yang berubah, vite build sukses.
+
+## 2d. Infra + web hapus learning path
+
+- Report: `preflight-reports/2d-report.json`
+- Review dan HEAD final `152700c4a2b`, tanpa commit perbaikan
+- Digest: `df9e39a362a8e22e56b8044926f41a10d63deed93ae965e5545546fec916b6ca`
+- Risiko (medium, review setelah merge): "tambah fitur hapus campaign learning paths beserta course didalamnya"
+- Base 2b (`feature/apd/campaign-learning-path-update`) dengan `--base` di setiap perintah helper. Diff ikut membawa file 2c lewat merge `160973cdf3f`. 2b harus merge lebih dulu.
+
+**Temuan**
+
+- pr-simplicity: tidak ada.
+- **2d-Q1 (question, ditutup atas persetujuan Krisna):** `hasStudents` hanya menghitung role STUDENT, sedangkan FK `access_lists.learning_path_id` RESTRICT berlaku untuk semua role. Ditutup tanpa perubahan: semua jalur tulis hanya memberi `learning_path_id` ke STUDENT (ParticipantCreation 4c, ParticipantEnrollment 4a, ParticipantImport 4d menolak role lain, ContributorCreation null, backfill filter STUDENT); data lokal 21 baris, semua STUDENT.
+
+**Check:** diff bersih, psalm bersih (7 file), unit 6 test / 23 assertion, integration 10 test / 49 assertion, eslint dan tsc bersih, vite build sukses.

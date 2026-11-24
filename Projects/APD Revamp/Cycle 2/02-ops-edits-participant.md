@@ -211,3 +211,25 @@ Field yang bisa diedit sekarang: kategori, `accessible_from`/`accessible_until`,
 - Bentuk field free text berbeda per program (JSON `education_info`/`other_requirements`, ViewModel registrasi per program, lihat P2 di atas). Perlu dipastikan field mana di `scholarship_cohorts` dan apakah form edit dibuat generik atau per program.
 - **SP perlu dihitung ulang.** Berkurang: edit Program User ID dan learning path, P3 (0,5). Bertambah: tafsiran A, yang sebelumnya diperkirakan sekitar 2 SP atau lebih.
 
+
+
+## Revisi 2026-11-24: learning path boleh diisi dari kosong
+
+**L1 direvisi (Krisna, 2026-11-24):** learning path peserta **boleh diedit dari kosong ke X**, tetapi **tidak boleh dari X ke Y**. Aturan ini sama dengan impor CSV (`ParticipantImport::resolveLearningPathId`, error `LEARNING_PATH_ALREADY_SET`). Pilihan learning path diambil dari learning path campaign. Card ini kembali bergantung ke tabel learning path campaign (stack Course progress).
+
+> Krisna (2026-11-24): "opsi edit diperbolehkan untuk LP tapi asalakan dari kosong ke X, bukan dari X ke Y."
+
+## Masalah: peserta manual tidak punya baris `scholarship_participants` (2026-11-24)
+
+> Krisna (2026-11-24): "jika peserta yang ditambahkan manual oleh ops tidak masuk ke scholarship_participants nanti ketika edit profile seperti jurusan dan lain sebagainya tidak bisa dong karena dia tidak punya row di scholarship participant"
+
+**Fakta (dicek di kode):**
+- Tambah manual dan impor CSV APD hanya menulis `academic_program_dashboard_access_lists`.
+- Baris `scholarship_participants` hanya ada kalau user mendaftar sendiri lewat form beasiswa program itu.
+- Field registrasi free text (L4: jurusan, NIM, institusi, prodi) ada di `scholarship_participants.education_info` dan `other_requirements` (JSON), jadi peserta manual tanpa pendaftaran memang tidak punya data itu untuk diedit.
+
+**Usulan Claude: tampilkan sebagai "tidak ada data registrasi", jangan buat baris `scholarship_participants` dari APD.**
+- **Form edit:** bagian field registrasi hanya muncul kalau baris `scholarship_participants` ada. Peserta tanpa baris mendapat teks "Peserta ini tidak mendaftar lewat form registrasi, jadi tidak ada data registrasi". Ini memang kondisi datanya, bukan error.
+- **Kenapa tidak membuat baris baru:** baris `scholarship_participants` berarti "user mendaftar program beasiswa". Ada 17 gateway di `master` yang membacanya, misalnya offering (`ScholarshipOfferingGateway`), leaderboard referral Pijak, export peserta, mailer, dan gateway per program. Baris buatan APD bisa ikut terhitung sebagai pendaftar, ikut offering, atau mengubah statistik. Baris itu juga memicu backfill learning path kalau diberi paket.
+- **Kalau Ops tetap perlu mengisi jurusan dan sejenisnya untuk peserta manual,** tanyakan dulu kasus nyatanya (misalnya daftar dari partner). Opsinya simpan data profil APD terpisah di access list (kolom JSON sendiri), dengan konsekuensi ada dua sumber data profil. Jangan dibuat sebelum ada kebutuhan nyata (YAGNI).
+- **Perlu dikonfirmasi ke Ops:** seberapa sering peserta ditambah manual tanpa pernah mendaftar, dan apakah mereka butuh field registrasi.
