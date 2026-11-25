@@ -123,5 +123,11 @@
     "level": "medium",
     "review_route": "post-merge"
   },
-  "acknowledgement": null
+  "acknowledgement": {
+    "actor": "krisnasantosa15",
+    "head_sha": "efee467a87aca60c8c427bfc14de9aa251f71d12",
+    "report_sha256": "88f7d2d9da65c1b5e9c03d81dc75a53f9e357bd7fcd320ccd3f330586a14ecf5",
+    "statement": "Ya, ack ketiganya",
+    "timestamp": "2026-11-24T09:59:04Z"
+  }
 }

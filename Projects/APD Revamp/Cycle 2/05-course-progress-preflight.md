@@ -6,7 +6,7 @@ updated: 2026-11-24
 
 # Preflight PR course progress
 
-Hasil PR preflight untuk stack learning path (card [[05-course-progress]]). Setiap PR direview dua reviewer (rules dan simplicity) satu kali, risiko ditulis Krisna sebelum review. 1a dan 1b sudah di-ack dan di-push (2026-11-24), sisanya belum.
+Hasil PR preflight untuk stack learning path (card [[05-course-progress]]). Setiap PR direview dua reviewer (rules dan simplicity) satu kali, risiko ditulis Krisna sebelum review. 1a dan 1b sudah di-ack dan di-push (2026-11-24). 3a, 2a, dan 2c menyusul sebagai draft di atas 1b (2026-11-24, push dari main tree dengan hook Psalm). Sisanya belum, push bertahap supaya reviewer tidak kewalahan.
 
 **Catatan push:** push dari `git worktree` tidak menjalankan pre-push hook, karena `.husky/_` tidak ada di worktree. Psalm penuh dijalankan manual setelahnya di `00f8c2785b9` dan `8ba5aa4986a`, keduanya lolos. Push berikutnya dari working tree utama.
 
@@ -18,14 +18,14 @@ Report asli disalin ke `preflight-reports/` di folder ini, karena salinan di `/t
 | --- | --- | --- | --- | --- | --- | --- |
 | 1a | `feature/apd/campaign-learning-path-domain` | `origin/master` | `00f8c2785b9` | medium | 1 diperbaiki | Ack 2026-11-24, PR [#6494](https://github.com/dicoding-dev/dicoding/pull/6494) |
 | 1b | `feature/apd/campaign-learning-path-creation` | 1a | `8ba5aa4986a` | medium | 6 diperbaiki, 1 ditutup | Ack 2026-11-24, PR draft [#6495](https://github.com/dicoding-dev/dicoding/pull/6495) |
-| 3a | `feature/apd/participant-learning-path-auto-enroll` | 1b | `f8c0cefe769` | low | 1 ditutup | Valid, menunggu ack |
+| 3a | `feature/apd/participant-learning-path-auto-enroll` | 1b | `f8c0cefe769` | low | 1 ditutup | Ack 2026-11-24, PR draft [#6500](https://github.com/dicoding-dev/dicoding/pull/6500) |
 | 4a + backfill | `feature/apd/participant-learning-path-auto-enroll-storage` | 3a | `d8cd70bbbbd` | medium | 2 ditutup | Valid, menunggu ack |
 | 3c | `feature/apd/participant-learning-path-creation-domain` | 4a | `f5a2fff749c` | low | 0 | Valid, menunggu ack |
 | 4c | `feature/apd/participant-learning-path-creation` | 3c | `65057e7eb60` | medium | 0 | Valid, menunggu ack |
 | 3d | `feature/apd/participant-learning-path-import-domain` | 4c | `864e0381db7` | low | 2 ditutup | Valid, menunggu ack |
 | 4d | `feature/apd/participant-learning-path-import` | 3d | `9596b200e52` | low | 0 | Valid, menunggu ack |
-| 2a | `feature/apd/campaign-learning-path-update-domain` | 1b | `efee467a87a` | medium | 0 | Valid, menunggu ack |
-| 2c | `feature/apd/campaign-learning-path-removal-domain` | 1b | `4df7169fc0f` | medium | 1 ditutup | Valid, menunggu ack |
+| 2a | `feature/apd/campaign-learning-path-update-domain` | 1b | `efee467a87a` | medium | 0 | Ack 2026-11-24, PR draft [#6501](https://github.com/dicoding-dev/dicoding/pull/6501) |
+| 2c | `feature/apd/campaign-learning-path-removal-domain` | 1b | `4df7169fc0f` | medium | 1 ditutup | Ack 2026-11-24, PR draft [#6502](https://github.com/dicoding-dev/dicoding/pull/6502) |
 | 2b | `feature/apd/campaign-learning-path-update` | 4a (+ merge 2a) | `9c6520748ff` | low | 2 diperbaiki | Valid, menunggu ack |
 | 2d | `feature/apd/campaign-learning-path-removal` | 2b (+ merge 2c) | `152700c4a2b` | medium | 1 ditutup | Valid, menunggu ack |
 | 5 | `feature/apd/campaign-course-progress` | 4d | `46fc87d683f` | low | 1 ditutup | Valid, menunggu ack |

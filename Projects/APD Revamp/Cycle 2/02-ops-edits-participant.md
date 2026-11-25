@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-23
+updated: 2026-11-25
 type: plan
 tags:
   - plan
@@ -233,3 +233,52 @@ Field yang bisa diedit sekarang: kategori, `accessible_from`/`accessible_until`,
 - **Kenapa tidak membuat baris baru:** baris `scholarship_participants` berarti "user mendaftar program beasiswa". Ada 17 gateway di `master` yang membacanya, misalnya offering (`ScholarshipOfferingGateway`), leaderboard referral Pijak, export peserta, mailer, dan gateway per program. Baris buatan APD bisa ikut terhitung sebagai pendaftar, ikut offering, atau mengubah statistik. Baris itu juga memicu backfill learning path kalau diberi paket.
 - **Kalau Ops tetap perlu mengisi jurusan dan sejenisnya untuk peserta manual,** tanyakan dulu kasus nyatanya (misalnya daftar dari partner). Opsinya simpan data profil APD terpisah di access list (kolom JSON sendiri), dengan konsekuensi ada dua sumber data profil. Jangan dibuat sebelum ada kebutuhan nyata (YAGNI).
 - **Perlu dikonfirmasi ke Ops:** seberapa sering peserta ditambah manual tanpa pernah mendaftar, dan apakah mereka butuh field registrasi.
+
+
+## Keputusan 2026-11-25: scope edit, peserta manual, dan bulk Withdraw/Terminated
+
+Sumber: diskusi Krisna dengan Claude (2026-11-25), sheet `[Asah 2026] Final Cohort` (hanya dibaca), branch Alfian `feature/apd/student-profile-backend`.
+
+**Profil peserta terpisah dari card ini.** Ada dua jenis profil: yang diedit Student sendiri (onboarding), dan yang hanya bisa diubah Ops lewat request form. Card ini mengerjakan jenis kedua di halaman admin.
+
+**Field yang bisa diedit, per tabel:**
+
+| Field | Tabel | Status |
+| --- | --- | --- |
+| Kategori, Withdraw/Terminated | `academic_program_dashboard_access_lists` (+ dropout MCT) | Siap dikerjakan |
+| Institusi, Jurusan/Prodi, NIM | `scholarship_participants` / `scholarship_cohorts` (JSON) | Siap dikerjakan |
+| Nama, Nomor WhatsApp | `academic_program_dashboard_student_profiles` (Alfian) | Menunggu branch Alfian di-merge. Profil Dicoding tidak boleh ditimpa (aturan Ops) |
+| Lecturer/supervisor, WA, email | Belum jelas, menunggu jalur masuk lecturer dari Alfian | Ditunda |
+
+**Data revisi Asah (tab Revisi Cohort Data):** sekitar 470 permintaan. Sekitar 437 soal supervisor, sekitar 33 soal data pribadi (WA 12, nama 11, institusi 6, NIM 3, jurusan 2). Ops selalu mencatat data lama dan baru (tab Student Update History), jadi event edit menyimpan nilai lama, nilai baru, aktor, dan waktu.
+
+**K-M1. Field tanpa row sumber ditampilkan read-only dengan alasannya** (Krisna setuju).
+- Field registrasi hanya bisa diedit kalau row `scholarship_participants`/`scholarship_cohorts` ada **dan** program punya field tersebut. Contoh teks: "Not registered through the registration form".
+- Nama/WA hanya bisa diedit kalau row student profile ada (dibuat saat onboarding). Contoh teks: "Onboarding not completed yet".
+- APD tidak membuat row baru di tabel registrasi (17 gateway membacanya).
+- Key JSON per program di config `scholarships.<program>`, mengikuti pola `AsahGateway::updateParticipantFinalData`:
+
+| Program | Institusi | Jurusan | NIM |
+| --- | --- | --- | --- |
+| Asah | `school_name` | `study_major` | `student_identity_number` |
+| AI Camp kuliah | tidak ada | `major` | `student_identity_number` |
+| AI Camp SMK | `school_name` | `school_major` | `student_identity_number` |
+| Pijak | `last_education_institution` | tidak ada | tidak ada |
+
+**Bulk Withdraw/Terminated:**
+
+Data sheet (dicek 2026-11-25):
+- Tab Terminated: 137 baris, Alasan terisi semua, semuanya `TERMINATED MA #2` dengan tanggal sama. Terminate dilakukan per batch.
+- Tab Withdraw: 6 baris, Alasan terisi semua (4 `Withdraw after LoA`, 2 alasan pribadi teks bebas). Kolom Surat Pengunduran diri kosong semua.
+
+| # | Keputusan |
+| --- | --- |
+| K-W1 | Alasan **wajib**, teks bebas, satu alasan untuk semua peserta yang dipilih. Tanpa upload surat, tanpa field tanggal (waktu = saat aksi, `accessible_until = now()`) |
+| K-W2 | Status keluar **final**, tidak bisa dipulihkan, karena MCT sudah di-dropout. Peserta keluar diberi badge Withdrawn/Terminated dan checkbox-nya nonaktif |
+| K-W3 | Dialog: daftar peserta terpilih, radio Withdraw atau Terminated, field alasan, satu tombol konfirmasi berlabel jumlah (misalnya "Terminate 137 students"), Cancel, dan close di kanan atas |
+| K-W4 | Checkbox per baris; **pilihan tetap tersimpan saat pindah halaman atau ganti filter** (per user ID di state halaman). Tombol di samping Add participant menampilkan jumlah terpilih. Peserta bisa dilepas dari daftar di dialog |
+| K-W5 | Import CSV untuk keluar massal tidak dibuat sekarang, baru kalau Ops meminta |
+
+**Masih terbuka:**
+- Edit `accessible_from`/`accessible_until` manual dan pengisian learning path dari kosong (revisi L1 2026-11-24) tidak disebut di daftar field 2026-11-25. Perlu konfirmasi apakah masih masuk card ini.
+- Penyimpanan teks alasan: usulan kolom `exit_note` di access list di samping `exit_reason`.
