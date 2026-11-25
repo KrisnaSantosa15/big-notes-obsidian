@@ -282,3 +282,86 @@ Data sheet (dicek 2026-11-25):
 **Masih terbuka:**
 - Edit `accessible_from`/`accessible_until` manual dan pengisian learning path dari kosong (revisi L1 2026-11-24) tidak disebut di daftar field 2026-11-25. Perlu konfirmasi apakah masih masuk card ini.
 - Penyimpanan teks alasan: usulan kolom `exit_note` di access list di samping `exit_reason`.
+
+**Pemisahan card (2026-11-25):** Withdraw/Terminated (termasuk bulk lewat checkbox dan CSV) dipindah ke card baru [[4][P1] Ops withdraws or terminates campaign participants in bulk](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10545178127). Keputusan K-W1 sampai K-W5 di atas berlaku untuk card itu. Card ini fokus ke edit. Urutan PR card ini: domain edit kategori (base master), infra + web edit kategori, field registrasi, lalu nama/WA setelah branch Alfian di-merge.
+
+**Scope final (komentar card 2026-11-25):** kategori, learning path (kosong ke X saja), institusi/jurusan/NIM, nama/WA (setelah tabel Alfian). Periode akses **tidak** diedit dari card ini: pencabutan lewat card Withdraw/Terminated, perpanjangan dibuat kalau Ops meminta. Program User ID tidak bisa diubah. [Komentar](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711#__recording_10545190286).
+
+
+## Progres PR 1 dan cek konvensi (2026-11-25, ditunda)
+
+**Status:** PR 1 sudah dikerjakan dengan TDD di branch `feature/apd/participant-edit-domain` (dari master `042dfe13892`), lalu disimpan di `git stash` dengan pesan `apd participant-edit-domain wip`. Desainnya perlu di-refactor sebelum commit.
+
+**Yang sudah ditulis (di stash):**
+- `ParticipantCategoryUpdate` (aggregate), `ParticipantCategoryWasUpdated` (event, `previous_category_id` + `category_id`), `ParticipantCategoryUpdateRepository`.
+- `ParticipantCategoryUpdateTest`: 6 test hijau, psalm bersih.
+- Terjemahan en/id `ACADEMIC_PROGRAM_DASHBOARD.PARTICIPANT_CATEGORY_UPDATE.*` (PARTICIPANT_NOT_FOUND, NOT_ADMIN, CATEGORY_NOT_IN_CAMPAIGN).
+- Tanpa stub gateway: cukup `getEnrolledParticipantsByAccessListIds`, `getCategoriesByProgramCode`, `updateParticipant` yang sudah ada.
+- Kategori tidak bisa dikosongkan (`update(int $categoryId)`, sama seperti import CSV).
+
+**Koreksi Krisna:** edit tidak boleh dipecah per tabel, karena satu dialog edit mengubah beberapa tabel sekaligus.
+
+**Konvensi codebase (dicek 2026-11-25):**
+- Aggregate dipisah **per aksi user, bukan per tabel**:
+  - `CampaignSettingsUpdate`: satu form, dua tabel. `save()` memanggil `updateCampaignSettings` dan `syncCampaignCategories`.
+  - `DicodingProgramUpdate`, `DicodingProgramStatusUpdate`, `DicodingProgramPositionUpdate`: tiga aggregate karena ada tiga aksi UI.
+- Transaksi sudah ditangani: `UseCase::run()` (`Dicoding/UseCases/Contracts/UseCase.php:213`) membungkus Specification dalam transaksi DB.
+- Nilai lama di event memakai field datar `previous_*` (`MentoringPackageWasUpdated`). Precedent lain: `old_*`/`new_*` (`MentoringPackageMenteeWasUpdated`), `before`/`after` (`EmailSubscriptionWasUpdated`). Tidak ada precedent `changes: {field: {old, new}}`.
+- Data existing masuk lewat VO di constructor (`ExistingMentoringPackage`), data baru lewat argumen `update(...)`. `EnrolledParticipant` sudah berperan sebagai VO existing.
+
+**Rencana refactor:**
+- Rename menjadi `ParticipantUpdate` dengan `update(int $categoryId)`. Parameter bertambah per PR: learning path, field registrasi, lalu nama/WA.
+- Key error menjadi `ACADEMIC_PROGRAM_DASHBOARD.PARTICIPANT_UPDATE.*`.
+- Event memakai semua field baru plus `previous_*`.
+
+**Belum diputuskan: nama event.** `ParticipantWasUpdated` sudah dipakai import CSV (`category_id`, `program_user_id`).
+- **A.** Pakai ulang `ParticipantWasUpdated` + `previous_category_id`, dan import ikut mengisinya. Kekurangannya: event import ikut berubah dan membawa field registrasi yang selalu null.
+- **B.** Event baru khusus form edit admin dengan pola `previous_*`, misalnya `ParticipantWasEditedByAdmin`. Import tidak tersentuh.
+- Usulan Claude: **B**, karena bentuk data import dan form edit makin berbeda setelah field registrasi masuk.
+
+**Cara melanjutkan:** `git checkout feature/apd/participant-edit-domain && git stash list`, lalu `git stash pop` untuk stash `apd participant-edit-domain wip`, putuskan A/B, refactor, jalankan `deck ai:test --filter='ParticipantUpdateTest' --testsuite=unit` dan `deck ai:psalm`.
+
+
+## Lanjutan PR 1 (2026-11-25): desain final domain
+
+**Status:** 5 commit di `feature/apd/participant-edit-domain` (belum push, belum PR, atas permintaan Krisna):
+`0691e8ca165` VO `ParticipantRegistration`, `bac55689eca` event dengan nilai lama, `c37c12a941e` terjemahan, `6dd82cf63d9` stub gateway registrasi, `c0eff18843a` aggregate `ParticipantUpdate` + repository + test.
+
+**Keputusan:**
+- **Satu aggregate per aksi user:** `ParticipantUpdate::update(int $categoryId, array $registrationFields)`. Kategori dan field registrasi digabung di satu PR domain (sekitar 470 baris). Learning path menunggu stack #6494/#6495, nama/WA menunggu tabel Alfian.
+- **Event mengikuti konvensi satu event per fakta:** `ParticipantWasUpdated` dipakai bersama oleh import CSV dan edit manual (precedent: `ParticipantWasCreated`, `SupervisedStudentWasCreated`, `CampaignGroupWasCreated`). Constructor menerima VO lama dan baru (precedent `SubscriptionPromotionCodesWasUpdated`), `eventData` berisi `previous_*` untuk kategori, Program User ID, `school_name`, `study_major`, `student_identity_number`. Import mengirim registrasi `null`.
+- **Nilai lama cukup di event** (log domain event `AcademicProgramDashboard/`, tanpa rotasi hapus). Tabel riwayat baru dibuat kalau Ops minta melihat riwayat di UI.
+- **Nama field domain = key standar codebase:** `school_name`, `study_major`, `student_identity_number` (sama dengan `ParticipantEducationInfo` dan kode generik seperti `ScholarshipParticipantGateway::getEducationInfoValue`).
+- **VO `ParticipantRegistration`:** `null` = tidak mendaftar lewat form (`REGISTRATION_NOT_FOUND`); key tidak ada = field tidak tersedia (`REGISTRATION_FIELD_NOT_AVAILABLE`).
+
+## Riset pemetaan key registrasi (2026-11-25)
+
+**Fokus ke AI Camp dulu**, karena APD revamp pertama kali dipakai AI Camp (Krisna). Asah dan program lain menyusul. **Pijak ditunda** (data tersebar di `education_info` dan `other_requirements`).
+
+**Tanpa config mapping.** Precedent: kode generik membaca key standar langsung; pengetahuan key per program ada di gateway program itu (`AsahGateway`, `CodingCampGateway`), bukan di config.
+
+**Key AI Camp** (`CodingCampRegistrationData::toEducationInfo`, `CodingCampRegistrationData.php:335-382`, config `scholarships.ai_camp`):
+
+| Field domain | SMK | Kuliah (D1-S1, sedang kuliah) |
+| --- | --- | --- |
+| `school_name` | `school_name` (atau `abroad_school_name` kalau luar negeri) | sama |
+| `study_major` | `school_major` | `major` |
+| `student_identity_number` | `student_identity_number` (NISN) | `student_identity_number` (NIM) |
+
+Koreksi tabel 2026-11-25 sebelumnya: AI Camp kuliah **punya** `school_name` (diisi kalau tidak kosong). Key `study_major` tidak dipakai AI Camp sama sekali.
+
+**Rencana gateway PR 2:** konstanta kandidat key di gateway registrasi APD (`school_name` → `school_name`, `abroad_school_name`; `study_major` → `major`, `school_major`; `student_identity_number` → `student_identity_number`). Baca key pertama yang ada di `education_info` user, tulis kembali ke key yang sama, mengikuti pola decode/merge/encode `AsahGateway::updateParticipantFinalData`. Key yang tidak ada berarti field read-only.
+
+**Catatan untuk nanti:** Asah memakai `study_major` (perlu ditambah ke kandidat saat campaign Asah memakai APD revamp). Pijak: `other_requirements.institution` atau `education_info.last_education_institution`, tergantung `is_currently_studying`.
+
+
+## Lanjutan PR 2 (2026-11-25): Program User ID masuk, sisanya menyusul
+
+**Program User ID ditambahkan ke edit** (Krisna, 2026-11-25). Aturannya sama dengan import CSV (`ParticipantImport::resolveProgramUserId`): kosong ke X boleh, X ke Y ditolak (`PROGRAM_USER_ID_ALREADY_SET`), dan ID yang sudah dipakai peserta lain di campaign yang sama ditolak (`PROGRAM_USER_ID_ALREADY_USED`). Di dialog: input kalau masih kosong, read-only kalau sudah terisi. Ini memperjelas L2: "tidak boleh diubah" berarti X ke Y.
+
+**Menyusul, PR terpisah setelah dependensinya merge:**
+- **Learning path (kosong ke X saja):** menunggu stack #6494 → #6495 → `participant-learning-path-*` (kolom learning path peserta dan `LEARNING_PATH_ALREADY_SET` belum ada di master). Satu PR kecil yang menambah pilihan learning path campaign di dialog edit.
+- **Lecturer/supervisor:** menunggu jalur masuk lecturer dari Alfian.
+- **Profil onboarding (nama, WA):** menunggu tabel `academic_program_dashboard_student_profiles` dari Alfian di-merge. Read-only dengan alasan "Onboarding not completed yet" kalau row belum ada.
+
+**Data lokal untuk cek browser (2026-11-25):** 4 peserta `aicamp_2026` (`scholarship_participants` 166-169, user 12-15) diisi `education_info` fiktif yang eligible offering: S1 dan D3 (`major`), dua SMK (`school_major`, NISN). `other_requirements` hanya `is_indonesian_citizen`, `current_country`, `timezone`.
