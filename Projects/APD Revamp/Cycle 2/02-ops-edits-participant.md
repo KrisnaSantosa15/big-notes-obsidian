@@ -365,3 +365,31 @@ Koreksi tabel 2026-11-25 sebelumnya: AI Camp kuliah **punya** `school_name` (dii
 - **Profil onboarding (nama, WA):** menunggu tabel `academic_program_dashboard_student_profiles` dari Alfian di-merge. Read-only dengan alasan "Onboarding not completed yet" kalau row belum ada.
 
 **Data lokal untuk cek browser (2026-11-25):** 4 peserta `aicamp_2026` (`scholarship_participants` 166-169, user 12-15) diisi `education_info` fiktif yang eligible offering: S1 dan D3 (`major`), dua SMK (`school_major`, NISN). `other_requirements` hanya `is_indonesian_citizen`, `current_country`, `timezone`.
+
+
+## Uji skenario edit (2026-11-25)
+
+Diuji lewat PUT sungguhan dari halaman Students `aicamp_2026` lokal (CSRF + header Inertia), lalu dicek di DB.
+
+**Lolos:**
+
+| Skenario | Hasil |
+| --- | --- |
+| Program User ID dipakai peserta lain di campaign | Ditolak `PROGRAM_USER_ID_ALREADY_USED` |
+| Mengganti Program User ID yang sudah terisi | Ditolak `PROGRAM_USER_ID_ALREADY_SET` |
+| Isi Program User ID kosong + ganti Major SMK | Tersimpan, key lain `education_info` tetap |
+| Kategori dari campaign lain (Pijak) | Ditolak `CATEGORY_NOT_IN_CAMPAIGN` |
+| Kategori tidak dikirim | Ditolak validasi |
+| Program User ID atau Major > 255 karakter | Ditolak validasi |
+| Key registrasi di luar whitelist (`gpa`) | Ditolak `REGISTRATION_FIELD_NOT_AVAILABLE` |
+| Peserta program lain lewat URL AI Camp, ID tidak ada | Ditolak `PARTICIPANT_NOT_FOUND` |
+| UI: Program User ID kosong bisa diisi, terisi jadi read-only | Sesuai |
+
+**Bug ditemukan:**
+1. Program User ID tidak di-trim di server (import CSV trim di `ParticipantImportRow`). `"   "` tersimpan dan mengunci peserta (`ALREADY_SET`). Dari UI aman karena frontend trim.
+2. Field registrasi bisa dikosongkan: menghapus isi School di UI lalu Save menyimpan `school_name: ""`. Spasi saja juga diterima.
+3. Minor: label atribut validasi ("Study major", "Student identity number") beda dengan label UI ("Major", "Student ID number").
+
+**Perbaikan (Krisna setuju):** aggregate trim Program User ID (kosong = tidak diubah, sama dengan import) dan nilai registrasi; spec `registration_fields.*` jadi `sometimes|filled|string|max:255`; frontend mewajibkan field registrasi yang tampil; label atribut disamakan dengan UI. Dilipat ke commit asal (branch belum di-push).
+
+Catatan teknis uji: `fetch` dengan `redirect: 'follow'` pada PUT membuat error flash tampak kosong; pakai `redirect: 'manual'` lalu GET halaman untuk membaca `props.errors`.
