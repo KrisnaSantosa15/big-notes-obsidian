@@ -438,7 +438,7 @@ Card: [[4][P1] Ops withdraws or terminates campaign participants in bulk](https:
 | --- | --- |
 | K-W6 | Tanpa CSV dulu, ikut K-W5. AC card di Basecamp masih menyebut CSV dan **perlu diperbarui** (belum diubah) |
 | K-W7 | Kolom baru di `academic_program_dashboard_access_lists`: `exit_reason` (WITHDRAWN atau TERMINATED, nullable) dan `exit_note` (teks alasan, nullable). Akses tetap dicabut lewat `accessible_until = now()` |
-| K-W8 | Peserta tanpa token MCT di program itu tetap dikeluarkan. Dropout hanya untuk token yang ditemukan, dan batch tidak gagal karena peserta tanpa token |
+| K-W8 | ~~Peserta tanpa token MCT tetap dikeluarkan.~~ Direvisi 2026-11-26 (Krisna): setiap peserta APD pasti punya token MCT di program itu, jadi kasus tanpa token tidak ditangani. Guard token kosong dan test peserta tanpa token dihapus. Contoh "ditambah manual tanpa token" sebelumnya hanya asumsi AI, tidak berdasar data |
 | K-W9 | Untuk peserta yang sudah keluar, tombol Edit dan checkbox dinonaktifkan |
 
 **Temuan teknis:**
