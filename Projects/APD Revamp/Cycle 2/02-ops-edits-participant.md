@@ -393,3 +393,59 @@ Diuji lewat PUT sungguhan dari halaman Students `aicamp_2026` lokal (CSRF + head
 **Perbaikan (Krisna setuju):** aggregate trim Program User ID (kosong = tidak diubah, sama dengan import) dan nilai registrasi; spec `registration_fields.*` jadi `sometimes|filled|string|max:255`; frontend mewajibkan field registrasi yang tampil; label atribut disamakan dengan UI. Dilipat ke commit asal (branch belum di-push).
 
 Catatan teknis uji: `fetch` dengan `redirect: 'follow'` pada PUT membuat error flash tampak kosong; pakai `redirect: 'manual'` lalu GET halaman untuk membaca `props.errors`.
+
+
+## Perbaikan dialog dan preflight (2026-11-25)
+
+### Dua masalah kecil di dialog, sudah beres
+- `?participant_id` tertinggal di URL: `router.reload` sekarang memakai `preserveUrl: true`. Percobaan pertama dengan `router.replace` gagal, karena Inertia melewati `replaceState` kalau page tujuan sama dengan state history saat ini (dialog dibuka kedua kali).
+- Spinner muncul saat dialog menutup: data peserta disimpan di state hook (diisi dari `onSuccess` reload), lalu dibuka/tutup lewat `isEditOpen`. Props tidak dibaca langsung lagi, karena redirect back setelah PUT menghapus optional prop.
+- Catatan uji browser: di tab background animasi tertahan, jadi `[role=dialog]` yang sedang menutup masih ada di DOM dan membuat script salah membaca hasil. Untuk uji buka ulang, pakai klik MCP sungguhan.
+
+### Preflight
+- Risiko dari author, sama untuk kedua PR: "add capability to edit student campaign", level medium, review post-merge.
+- PR domain `feature/apd/participant-edit-domain`, base master.
+  - Commit yang direview: `fe3c38ac8af`. SHA final: `bc70a979775`.
+  - Digest: `90a1859e9a5b3ba8a5adac62486c76ef6a21525048cec171e9abfe39a4d9bdb9`
+- PR web `feature/apd/participant-edit`, base branch domain.
+  - Commit yang direview: `5957c66`. SHA final: `1ac001ec372`.
+  - Digest: `2d53515e270744410625ba870d8837dd1eca284e00ebcd0bf15558abc3caf59f`
+- Report: `/tmp/claude-1000/pf-domain/report.json` dan `/tmp/claude-1000/pf-web/report.json`. Kalau `/tmp` terhapus, preflight harus diulang dari awal.
+- Temuan reviewer dan penyelesaiannya:
+  - Domain S1 (should-fix, diperbaiki atas pilihan author): Program User ID dikirim dua kali. Sekarang hanya lewat `createAggregate()`, lalu diteruskan ke constructor bersama id pemiliknya. `update(categoryId, registrationFields)` tidak lagi menerimanya.
+  - Domain S2 ditolak: `toArray()` dipakai di PR web.
+  - Domain S3 ditolak: event dipakai bersama oleh import dan edit, jadi bentuk payload-nya sama.
+  - Web R1 (should-fix, diperbaiki atas pilihan author): update action memakai `lock()` dengan pesan `PARTICIPANT_UPDATE.IN_PROGRESS`.
+  - Web R2: shape `@return` dilengkapi `programUserId`.
+  - Web R3 dan S2: nilai form edit dan opsi kategori sekarang dibentuk di `normalizers/student.ts`.
+  - Web S1: prop `registration` diisi `null`, tidak lagi `undefined`.
+- Penting soal R1: kunci `lock()` dibuat dari nama class Specification ditambah programCode. Akibatnya yang dicegah hanya dua edit bersamaan. Race antara edit dan create atau import tetap ada, karena DB hanya punya unique index pada `(program_user_id, user_id, program_code)`.
+- Riwayat branch web: domain di-merge (`ad51354`), tidak di-rebase, supaya hasil review tetap berlaku.
+- Checks di SHA final: lulus semua.
+  - Domain: psalm 6 file, unit 33 test.
+  - Web: psalm 4 file, integration 11, unit 33, vitest 29, eslint, build. tsc tidak menemukan error di file yang diubah.
+
+### Status
+- **Ack author belum diberikan** (ditunda per 2026-11-25). Belum di-push dan belum ada PR. Push dan PR hanya dibuat kalau diminta.
+- Langkah berikutnya: ack kedua SHA final, lalu jalankan create-pr (domain dulu, kemudian web yang base-nya branch domain).
+
+
+## Card Withdraw/Terminated: keputusan mulai kerja (2026-11-25)
+
+Card: [[4][P1] Ops withdraws or terminates campaign participants in bulk](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10545178127)
+
+| # | Keputusan |
+| --- | --- |
+| K-W6 | Tanpa CSV dulu, ikut K-W5. AC card di Basecamp masih menyebut CSV dan **perlu diperbarui** (belum diubah) |
+| K-W7 | Kolom baru di `academic_program_dashboard_access_lists`: `exit_reason` (WITHDRAWN atau TERMINATED, nullable) dan `exit_note` (teks alasan, nullable). Akses tetap dicabut lewat `accessible_until = now()` |
+| K-W8 | Peserta tanpa token MCT di program itu tetap dikeluarkan. Dropout hanya untuk token yang ditemukan, dan batch tidak gagal karena peserta tanpa token |
+| K-W9 | Untuk peserta yang sudah keluar, tombol Edit dan checkbox dinonaktifkan |
+
+**Temuan teknis:**
+- `UseCase::run` sudah membungkus Specification dalam transaksi DB. Jadi satu Specification menjalankan aggregate APD lalu `MultiCourseTokenDropoutRepository` (createAggregate dengan kode token, `proceedDropout`, `save`), dan keduanya berada dalam satu transaksi.
+- Dropout MCT berjalan sinkron untuk daftar kode token, dengan syarat actor admin. Halaman admin MCT baru memakai queue (chunk 500) untuk upload file. Untuk sekitar 137 peserta, sinkron masih aman.
+- Token peserta dicari dengan `multi_course_tokens.program_id = campaign.partner_program_id` dan `student_id = user_id`.
+
+**Rencana PR:**
+1. Domain (base master): aggregate `ParticipantExit`, enum alasan, event, repository, dan stub gateway.
+2. Infra + web (base PR domain): migration, gateway, Specification exit dan dropout MCT, route POST, checkbox yang tetap tersimpan antar halaman, dialog, badge, serta Edit dan checkbox nonaktif.
