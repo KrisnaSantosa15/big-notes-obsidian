@@ -24,7 +24,7 @@ $participant = new UpdateParticipant(
 - Ketika bikin object bisa berhasil meskipun datanya tidak valid secara domain.
 - Maka dari itu kita harus melakukan validasi, misalkan di domain, ini bisa saja tapi aggregate bisnis update participant ini jadi banyak yang dilakukan, padahal semuanya bisa punya makna domain sendiri
 ```php
-class UpdateParticipant
+class UpdateParticipant extends Aggregates
 {
     private string $email;
     private string $status;
