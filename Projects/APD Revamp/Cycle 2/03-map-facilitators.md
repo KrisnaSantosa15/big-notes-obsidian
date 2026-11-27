@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-18
+updated: 2026-11-27
 type: plan
 tags:
   - plan
@@ -10,8 +10,10 @@ tags:
   - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894512
 sp: "2"
-status: Brainstorm selesai, belum dikerjakan
-pr: []
+status: "PR #6457 merged, lanjutan PR #6458 akan dikerjakan Alfian"
+pr:
+  - 6457
+  - 6458
 depends-on: []
 index: "[[Projects/APD Revamp/Cycle 2/index]]"
 related-people:
@@ -87,3 +89,8 @@ related-people:
 - **Pengecekan master (2026-11-18):** `ContributorCreation` (Store dan Index Action, serta test) sudah ada di `origin/master`, jadi Fasilitator sudah bisa ditambahkan ke campaign. Card Alfian [Add Facilitators, Lecturers, and Instructors to a campaign](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894097) masih In progress, tapi **bukan blocker** card ini.
 - Jalur grup di master masih STUDENT-only (`AcademicProgramDashboardCampaignGroupMemberGateway::campaignStudents()`, filter `access_lists.role = STUDENT`). UI grup (`features/group-list`, `features/group-members`) belum menyebut Fasilitator. Ini yang diubah card ini.
 - SP tetap **2**.
+
+## Status Implementasi (2026-11-27)
+
+- PR [#6457](https://github.com/dicoding-dev/dicoding/pull/6457) (`feature/apd/facilitator-group-roster`, domain/roster 1 fasilitator per grup) — **MERGED** (2026-11-25).
+- PR [#6458](https://github.com/dicoding-dev/dicoding/pull/6458) (`feature/apd/facilitator-group-mapping-web`, web/UI) — **OPEN** (conflicting). Dicatat atas info [[People/Krisna]] (2026-11-27): bagian lanjutan Map Facilitators ini akan dikerjakan oleh Alfian.

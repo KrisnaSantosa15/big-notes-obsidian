@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-23
+updated: 2026-11-27
 type: plan
 tags: [plan, brainstorm, estimation, dicoding, apd]
 related-projects: ["[[Projects/Dicoding Platform]]"]
@@ -26,9 +26,10 @@ Dokumen ini index. Detail tiap card ada di folder ini, satu file per card. Cycle
 
 | Card | SP | Status brainstorm | Detail |
 | --- | --- | --- | --- |
-| [Email autocomplete in the add-participant form](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720) | 1 | Selesai. Diimplementasikan di PR [#6450](https://github.com/dicoding-dev/dicoding/pull/6450) | [01-email-autocomplete](01-email-autocomplete.md) |
-| [Ops edits a campaign participant](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711) | 4 | Selesai. Edit kategori, periode akses, dan field registrasi free text (Jurusan, NIM, institusi, prodi). Program User ID dan learning path tidak diedit (2026-11-19). Keluarkan peserta = `exit_reason` + `accessible_until` + dropout MCT. Tidak bergantung ke card lain. SP perlu dihitung ulang | [02-ops-edits-participant](02-ops-edits-participant.md) |
-| [Map Facilitators to the groups they accompany](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894512) | 2 | Selesai | [03-map-facilitators](03-map-facilitators.md) |
+| [Email autocomplete in the add-participant form](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720) | 1 | Selesai. PR [#6450](https://github.com/dicoding-dev/dicoding/pull/6450) merged (2026-11-25), card di Confirmation | [01-email-autocomplete](01-email-autocomplete.md) |
+| [Ops edits a campaign participant](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711) | 4 | In progress. PR domain & web selesai lokal dan lolos preflight (menunggu ack/push). Withdraw/Terminated dipisah ke [09](09-ops-withdraws-terminates-participants.md) | [02-ops-edits-participant](02-ops-edits-participant.md) |
+| [Ops withdraws or terminates campaign participants in bulk](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10545178127) | 4 | In progress. Dipisah dari [02](02-ops-edits-participant.md). PR domain & web selesai lokal dan lolos preflight (menunggu ack/push) | [09-ops-withdraws-terminates-participants](09-ops-withdraws-terminates-participants.md) |
+| [Map Facilitators to the groups they accompany](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894512) | 2 | In Review. PR [#6457](https://github.com/dicoding-dev/dicoding/pull/6457) merged, lanjutan PR [#6458](https://github.com/dicoding-dev/dicoding/pull/6458) akan dikerjakan Alfian | [03-map-facilitators](03-map-facilitators.md) |
 | [Ops manages Students' progress status](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257815) | 2 | Selesai. Kalkulasi otomatis. Kolom status dan course "x/y lulus" di daftar peserta admin. AC card perlu ditulis ulang | [04-progress-status](04-progress-status.md) |
 | [Course progress is calculated automatically from Dicoding learning data](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257784) | 5 (ditetapkan Krisna) | Selesai. Setup learning path dan course, `learning_path_id` peserta, pemetaan auto-enroll termasuk TODO kategori [6], NEED RENEW, dan freeze. Estimasi Claude 5,5 (lihat [bagian 5](05-course-progress.md)). Dikerjakan paling awal | [05-course-progress](05-course-progress.md) |
 | [Facilitator see the progress of their supervised Students](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257765) | 2 (draft) | Di-hold sampai semua dependensi selesai (P16-P19). SP belum diisi di judul card | [08-facilitator-progress](08-facilitator-progress.md) |

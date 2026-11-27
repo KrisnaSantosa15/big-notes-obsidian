@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-25
+updated: 2026-11-27
 type: plan
 tags:
   - plan
@@ -10,7 +10,7 @@ tags:
   - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711
 sp: "4"
-status: Brainstorm selesai, belum dikerjakan
+status: "PR domain & web selesai lokal dan lolos preflight, menunggu ack dan push (Basecamp: In progress)"
 pr: []
 depends-on: []
 index: "[[Projects/APD Revamp/Cycle 2/index]]"
@@ -283,7 +283,7 @@ Data sheet (dicek 2026-11-25):
 - Edit `accessible_from`/`accessible_until` manual dan pengisian learning path dari kosong (revisi L1 2026-11-24) tidak disebut di daftar field 2026-11-25. Perlu konfirmasi apakah masih masuk card ini.
 - Penyimpanan teks alasan: usulan kolom `exit_note` di access list di samping `exit_reason`.
 
-**Pemisahan card (2026-11-25):** Withdraw/Terminated (termasuk bulk lewat checkbox dan CSV) dipindah ke card baru [[4][P1] Ops withdraws or terminates campaign participants in bulk](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10545178127). Keputusan K-W1 sampai K-W5 di atas berlaku untuk card itu. Card ini fokus ke edit. Urutan PR card ini: domain edit kategori (base master), infra + web edit kategori, field registrasi, lalu nama/WA setelah branch Alfian di-merge.
+**Pemisahan card (2026-11-25):** Withdraw/Terminated (termasuk bulk lewat checkbox dan CSV) dipindah ke card baru [[4][P1] Ops withdraws or terminates campaign participants in bulk](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10545178127). Keputusan K-W1 sampai K-W5 di atas berlaku untuk card itu. Card ini fokus ke edit. Urutan PR card ini: domain edit kategori (base master), infra + web edit kategori, field registrasi, lalu nama/WA setelah branch Alfian di-merge. Lihat catatan terpisah: [[Projects/APD Revamp/Cycle 2/09-ops-withdraws-terminates-participants]] ([09-ops-withdraws-terminates-participants](09-ops-withdraws-terminates-participants.md)).
 
 **Scope final (komentar card 2026-11-25):** kategori, learning path (kosong ke X saja), institusi/jurusan/NIM, nama/WA (setelah tabel Alfian). Periode akses **tidak** diedit dari card ini: pencabutan lewat card Withdraw/Terminated, perpanjangan dibuat kalau Ops meminta. Program User ID tidak bisa diubah. [Komentar](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711#__recording_10545190286).
 
@@ -430,65 +430,6 @@ Catatan teknis uji: `fetch` dengan `redirect: 'follow'` pada PUT membuat error f
 - Langkah berikutnya: ack kedua SHA final, lalu jalankan create-pr (domain dulu, kemudian web yang base-nya branch domain).
 
 
-## Card Withdraw/Terminated: keputusan mulai kerja (2026-11-25)
+## Card Withdraw/Terminated (dipindah)
 
-Card: [[4][P1] Ops withdraws or terminates campaign participants in bulk](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10545178127)
-
-| # | Keputusan |
-| --- | --- |
-| K-W6 | Tanpa CSV dulu, ikut K-W5. AC card di Basecamp masih menyebut CSV dan **perlu diperbarui** (belum diubah) |
-| K-W7 | Kolom baru di `academic_program_dashboard_access_lists`: `exit_reason` (WITHDRAWN atau TERMINATED, nullable) dan `exit_note` (teks alasan, nullable). Akses tetap dicabut lewat `accessible_until = now()` |
-| K-W8 | ~~Peserta tanpa token MCT tetap dikeluarkan.~~ Direvisi 2026-11-26 (Krisna): setiap peserta APD pasti punya token MCT di program itu, jadi kasus tanpa token tidak ditangani. Guard token kosong dan test peserta tanpa token dihapus. Contoh "ditambah manual tanpa token" sebelumnya hanya asumsi AI, tidak berdasar data |
-| K-W9 | Untuk peserta yang sudah keluar, tombol Edit dan checkbox dinonaktifkan |
-
-**Temuan teknis:**
-- `UseCase::run` sudah membungkus Specification dalam transaksi DB. Jadi satu Specification menjalankan aggregate APD lalu `MultiCourseTokenDropoutRepository` (createAggregate dengan kode token, `proceedDropout`, `save`), dan keduanya berada dalam satu transaksi.
-- Dropout MCT berjalan sinkron untuk daftar kode token, dengan syarat actor admin. Halaman admin MCT baru memakai queue (chunk 500) untuk upload file. Untuk sekitar 137 peserta, sinkron masih aman.
-- Token peserta dicari dengan `multi_course_tokens.program_id = campaign.partner_program_id` dan `student_id = user_id`.
-
-**Rencana PR:**
-1. Domain (base master): aggregate `ParticipantExit`, enum alasan, event, repository, dan stub gateway.
-2. Infra + web (base PR domain): migration, gateway, Specification exit dan dropout MCT, route POST, checkbox yang tetap tersimpan antar halaman, dialog, badge, serta Edit dan checkbox nonaktif.
-
-## Preflight Dropout (Withdraw/Terminated), 2026-11-26
-
-**Perubahan sebelum preflight**
-- Nama fitur "participant exit" diganti jadi **participant dropout**. Alasannya: selaras dengan `MultiCourseTokenDropout` dan status enrollment `DROPOUT`. "Removal" di APD berarti barisnya dihapus.
-- Kolom dan field: `dropout_type` (enum `ParticipantDropoutType`: WITHDRAWN/TERMINATED) dan `dropout_reason` (teks bebas, label UI "Reason"). Sebelumnya `exit_reason` + `exit_note`, diganti karena kata "reason" sering tertukar.
-- Event tetap `ParticipantsWereDroppedOut`. Bentuk `Were` sesuai konvensi APD saat ini (CampaignSettingsWereUpdated, ParticipantGroupsWereRemoved). `user_ids` berupa `list<int>`.
-- Route tetap POST (`participants/dropout`), sama seperti import, sync, dan reschedule.
-- Token diambil dengan satu query (`MultiCourseTokensGateway::getTokensByStudentIdsAndProgramCode`), bukan `array_merge` di dalam loop.
-- K-W8 direvisi: setiap peserta pasti punya token. Test dan guard untuk peserta tanpa token dihapus. Kalau seluruh batch tidak punya token, domain MCT menolak dengan `TOKENS_EMPTY` dan seluruh transaksi di-rollback.
-- Branch di-rename: `feature/apd/participant-dropout-domain` dan `feature/apd/participant-dropout`. Keduanya belum di-push.
-
-**PR domain** (`feature/apd/participant-dropout-domain`, base master)
-- Risk (Krisna): **high**, "add dropout (withdrawn/terminated) feature". Route pre-merge.
-- Di-review di `4a41b5cb88c`. Final `8518c626b2d`. Digest `d96127b04f40d5777f00c196a605bc32e5b89c6922a02dbcbc75eb735cbc26ed`.
-- Temuan:
-  - D-R1 (nit, urutan import gateway): diperbaiki dalam 2 commit (`eb83e0eefde` lalu `8518c626b2d`).
-  - D-S1 (nit, value object cukup bool): dibiarkan, enum tetap dipakai.
-- Cek: diff bersih, psalm 7 file bersih, unit test 9 lolos (41 assertion).
-
-**PR web** (`feature/apd/participant-dropout`, base PR domain)
-- Risk (Krisna): **medium**, "allow ops to dropout campaign participants with reason". Route post-merge.
-- Di-review di `7deaa5cef18`. Final `6b663613fcc` (merge branch domain). Digest `414e38f520eefb989dc4b2fa1180957201d757ab84ad2fb526f0af5adf4b5414`.
-- Temuan:
-  - W-S1 (should-fix): dua penanda program. Sekarang cukup `program_code`, dan lookup campaign, `abort(404)`, serta `partner_program_id` dihapus (`b1fc8e621f0`).
-  - W-S2 (nit): validasi reason diserahkan ke domain. Spec cukup `present|string` (`5e570b67b28`). W-R2 (label 'Reason') ikut selesai.
-  - W-S3 (nit): satu konstanta `DROPOUT_TYPES` di `student-list.constants.ts` (`a24c01bf926`). Bundle di-rebuild di `dd06cab76d7`.
-  - W-R1 (question): event `MultiCourseTokenWasDroppedOut` tidak di-dispatch. Dibiarkan, karena `ParticipantsWereDroppedOut` sudah menjadi catatan audit dan event token tidak punya listener.
-- Cek:
-  - Build lolos, bundle identik dengan yang di-commit.
-  - diff bersih.
-  - psalm 6 file bersih. Migration di luar scope psalm dan error-nya sama dengan migration lain di master.
-  - Integration test 5 lolos (28 assertion), unit test 9 lolos.
-  - Vitest 29/29, eslint bersih.
-
-**Status:** menunggu acknowledgement dari Krisna untuk kedua digest. Belum push, belum ada PR.
-- Report: `/tmp/claude-1000/pf-dropout-domain/report.json`, `/tmp/claude-1000/pf-dropout-web/report.json`.
-- Worktree domain: `scratchpad/wt-pd-domain`.
-
-**Lanjutan:**
-- Search multi-email (input chips, beberapa kata kunci dipisah koma dan tetap LIKE), dijadikan card terpisah.
-- Nonaktifkan Edit untuk peserta yang sudah dropout, setelah PR edit merge.
-- Hapus backup: `backup/participant-exit-domain-pre-*` dan dua stash backup rename.
+Catatan implementasi, keputusan teknis (`K-W1`–`K-W9`), dan hasil preflight untuk branch `feature/apd/participant-dropout-domain` serta `feature/apd/participant-dropout` telah dipindahkan ke note terpisah: [[Projects/APD Revamp/Cycle 2/09-ops-withdraws-terminates-participants]] ([09-ops-withdraws-terminates-participants](09-ops-withdraws-terminates-participants.md)).

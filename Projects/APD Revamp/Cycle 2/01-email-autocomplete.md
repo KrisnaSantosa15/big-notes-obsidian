@@ -1,6 +1,6 @@
 ---
 date: 2026-11-17
-updated: 2026-11-18
+updated: 2026-11-27
 type: plan
 tags:
   - plan
@@ -10,7 +10,7 @@ tags:
   - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720
 sp: "1"
-status: "Diimplementasikan, PR #6450 open"
+status: "PR #6450 merged, card di Confirmation"
 pr:
   - 6450
 depends-on: []
@@ -58,3 +58,4 @@ Combobox email sudah diimplementasikan di PR [#6450](https://github.com/dicoding
 - Logika pencarian di frontend digabung menjadi hook bersama `useAccountEmailSearch`. `ComboboxField` sekarang mendukung opsi disabled.
 - Prop yang menjalankan query (`students`, `categories`, `contributors`) dibungkus closure supaya partial reload pencarian email tidak ikut menjalankan query itu. Lihat [[Knowledge/Inertia Partial Reload dan Closure Props]].
 - Tombol "Import CSV" di halaman Students diganti menjadi "Import students" (hasil diskusi UI/UX).
+- **Status (2026-11-27):** PR [#6450](https://github.com/dicoding-dev/dicoding/pull/6450) sudah **MERGED** (2026-11-25) dan card Basecamp dipindah ke **Confirmation**.
