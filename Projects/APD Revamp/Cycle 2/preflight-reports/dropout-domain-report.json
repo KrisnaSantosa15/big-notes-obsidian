@@ -144,5 +144,11 @@
     "level": "high",
     "review_route": "pre-merge"
   },
-  "acknowledgement": null
+  "acknowledgement": {
+    "actor": "KrisnaSantosa15",
+    "head_sha": "8518c626b2d65f3d03ddc11e64ac33a6e6adae88",
+    "report_sha256": "1a6d0a67dc7a39a9b2b880c546bc612677862684f308ff5c9785638482a16e0c",
+    "statement": "ack",
+    "timestamp": "2026-11-27T11:16:42+07:00"
+  }
 }

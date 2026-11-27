@@ -10,8 +10,9 @@ tags:
   - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10545178127
 sp: "4"
-status: "PR domain & web selesai lokal dan lolos preflight, menunggu ack dan push (Basecamp: In progress)"
-pr: []
+status: "PR #6535 (domain) open; PR web selesai lokal (menunggu ack & merge domain)"
+pr:
+  - 6535
 depends-on: []
 index: "[[Projects/APD Revamp/Cycle 2/index]]"
 related-projects:
@@ -81,9 +82,10 @@ Sumber keputusan awal ada di [[Projects/APD Revamp/Cycle 2/02-ops-edits-particip
      - `W-R1` (question): event `MultiCourseTokenWasDroppedOut` tidak di-dispatch, dibiarkan karena `ParticipantsWereDroppedOut` sudah menjadi audit.
    - Cek: build lolos & bundle identik, diff bersih, psalm 6 file bersih (migration di luar scope psalm), integration test 5 lolos (28 assertion), unit test 9 lolos, vitest 29/29, eslint bersih.
 
-**Status saat ini (2026-11-27):** Menunggu acknowledgement dari [[People/Krisna]] untuk kedua digest. Belum push, belum ada PR.
-- Report: `/tmp/claude-1000/pf-dropout-domain/report.json`, `/tmp/claude-1000/pf-dropout-web/report.json`.
-- Worktree domain: `scratchpad/wt-pd-domain`.
+**Status saat ini (2026-11-27):**
+- **PR Domain ([#6535](https://github.com/dicoding-dev/dicoding/pull/6535)) open (2026-11-27):** `feature/apd/participant-dropout-domain`, HEAD `8518c626b2d`, risk **high** (`pre-merge`, wajib human code review & approval sebelum merge). Report preflight: `preflight-reports/dropout-domain-report.json`.
+- **PR Web (`feature/apd/participant-dropout`) belum di-push:** menunggu acknowledgement & merge PR `#6535` (atau merge `feature/apd/participant-dropout-domain` jika perlu sinkronisasi sebelum preflight web). Report lama di `/tmp/claude-1000/pf-dropout-web/report.json` sudah terhapus; perlu preflight ulang untuk web.
+- Worktree domain lama: `scratchpad/wt-pd-domain` (sudah di-prune).
 
 **Lanjutan:**
 - Search multi-email (input chips, beberapa kata kunci dipisah koma dan tetap `LIKE`), dijadikan card terpisah.
