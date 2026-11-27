@@ -64,7 +64,7 @@ This vault is **Obsidian-style** (no `wiki/` folder at root). Only two folders e
 | `Boards/` | Kanban boards | Not yet created |
 | `Templates/` | Note templates | Not yet created |
 
-`.opencode/` at the vault root is the OpenCode build of the obsidian-second-brain skill itself (commands, scripts, references) - not vault content. `AGENTS.md` is its OpenCode-side operating manual, mirroring this file for OpenCode sessions.
+`.agents/skills/` at the vault root holds the agent-agnostic Agent Skills build of the obsidian-second-brain skill itself (commands, scripts, references) - not vault content. `AGENTS.md` is its agent-agnostic operating manual, mirroring this file for Antigravity, Codex CLI, OpenCode, and other `.agents/skills/` harnesses.
 
 ---
 
