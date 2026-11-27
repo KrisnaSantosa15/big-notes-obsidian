@@ -1,0 +1,159 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "origin/master",
+    "base_sha": "065a8da49cff5ce386af0104e7d29fc248eba753",
+    "merge_base": "042dfe13892e6e8867cc792f9490a0c5e28ae0d4",
+    "head_sha": "9e7b50c1c014847c25eb5b0e717fbacb1097fb8b",
+    "diff_sha256": "70cd0804448f9c4108b319279fccce57d4b73cf4d1c0536a6743ed648f390f62",
+    "policy_sha256": "ead232d9a585c1f09f58d4a66f233897f2ba6aa359c4573f0c813f6c86a2a696"
+  },
+  "review_snapshot": {
+    "base_ref": "origin/master",
+    "base_sha": "065a8da49cff5ce386af0104e7d29fc248eba753",
+    "merge_base": "042dfe13892e6e8867cc792f9490a0c5e28ae0d4",
+    "head_sha": "bc70a979775c62df57fb9bb36acef392bb5c7080",
+    "diff_sha256": "830217e38a003c0f52e02845ed88c3aaaf9ab680fd382b753817954c2649def2",
+    "policy_sha256": "ead232d9a585c1f09f58d4a66f233897f2ba6aa359c4573f0c813f6c86a2a696"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantImport.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantUpdate.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Events/ParticipantWasUpdated.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/ParticipantRegistration.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/ParticipantUpdateRepository.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardParticipantRegistrationGateway.php"
+      },
+      {
+        "status": "M",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/ParticipantImportTest.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/ParticipantUpdateTest.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/en/exception.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/id/exception.php"
+      }
+    ],
+    "required_checks": [
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Let APD admins edit a campaign student's category, an empty Program User ID, and free-text registration data (school name, study major, student identity number) through one ParticipantUpdate aggregate; the participant update event records previous values.",
+  "acceptance_criteria": [
+    "Only admins can update a participant of the campaign; participants outside the campaign are rejected (PARTICIPANT_NOT_FOUND).",
+    "Category must belong to the campaign (CATEGORY_NOT_IN_CAMPAIGN) and cannot be cleared.",
+    "Program User ID can be filled from empty but not changed from X to Y (PROGRAM_USER_ID_ALREADY_SET), and must be unique within the campaign (PROGRAM_USER_ID_ALREADY_USED); values are trimmed.",
+    "Registration fields are editable only when the participant has registration data (REGISTRATION_NOT_FOUND) and the field exists for the program (REGISTRATION_FIELD_NOT_AVAILABLE); values cannot be emptied.",
+    "ParticipantWasUpdated is shared by CSV import and manual edit and carries previous_* values in eventData.",
+    "Translations exist in id and en."
+  ],
+  "harness": {
+    "name": "Antigravity",
+    "version": "1.5.18"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "bc70a979775c62df57fb9bb36acef392bb5c7080",
+      "started_at": "2026-11-27T10:57:47+07:00",
+      "model": "Gemini 4 Neon (Medium)",
+      "evidence": "Subagent 5aca4867-a23b-49d0-bae1-4c365be7ee5d reviewed full merge_base..head diff across all 10 changed files against AGENTS.md, domain-layer.md, infrastructure-layer.md, translations.md, and review-do-and-donts.md."
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "bc70a979775c62df57fb9bb36acef392bb5c7080",
+      "started_at": "2026-11-27T10:57:48+07:00",
+      "model": "Gemini 4 Neon (Medium)",
+      "evidence": "Subagent eb8772ad-395c-49e9-b83f-d29790884a14 reviewed full merge_base..head diff across all 10 changed files, EnrolledParticipant, gateways, and callers; 0 findings."
+    }
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "role": "rules",
+      "severity": "blocker",
+      "status": "fixed",
+      "commit": "9e7b50c1c014847c25eb5b0e717fbacb1097fb8b",
+      "location": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantUpdate.php:135-145",
+      "evidence": "validateRegistrationFields() did not reject trimmed empty strings, allowing callers to overwrite registration fields with empty string.",
+      "resolution": "Added empty-string check throwing ACADEMIC_PROGRAM_DASHBOARD.PARTICIPANT_UPDATE.EMPTY_REGISTRATION_FIELD with id/en translations and unit test in 9e7b50c1c014847c25eb5b0e717fbacb1097fb8b."
+    },
+    {
+      "id": "R2",
+      "role": "rules",
+      "severity": "should-fix",
+      "status": "dismissed",
+      "accepted_by": "KrisnaSantosa15",
+      "location": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantUpdate.php:28; Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/ParticipantUpdateRepository.php:22-28",
+      "evidence": "requestedProgramUserId is passed via constructor and trimmed in repository createAggregate() instead of update().",
+      "resolution": "Dismissed with human author acceptance (KrisnaSantosa15, 2026-11-27): keeps ParticipantCreation precedent (#6248) and commit bc70a979775 so programUserId is not passed twice."
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check 042dfe13892e6e8867cc792f9490a0c5e28ae0d4 9e7b50c1c014847c25eb5b0e717fbacb1097fb8b",
+      "head_sha": "9e7b50c1c014847c25eb5b0e717fbacb1097fb8b",
+      "evidence": "DIFF_CHECK_OK (0 whitespace/conflict issues)"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck php vendor/bin/psalm.phar --no-progress Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantImport.php Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantUpdate.php Dicoding/Domain/AcademicProgramDashboard/Events/ParticipantWasUpdated.php Dicoding/Domain/AcademicProgramDashboard/ValueObjects/ParticipantRegistration.php Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/ParticipantUpdateRepository.php Dicoding/Infrastructure/StorageGateways/AcademicProgramDashboard/AcademicProgramDashboardParticipantRegistrationGateway.php",
+      "head_sha": "9e7b50c1c014847c25eb5b0e717fbacb1097fb8b",
+      "evidence": "Psalm exit 0 on all 6 PHP files in PR (80.8272% type inference)"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='ParticipantUpdateTest|ParticipantImportTest' --testsuite=unit",
+      "head_sha": "9e7b50c1c014847c25eb5b0e717fbacb1097fb8b",
+      "evidence": "Unit tests passed: 34 tests, 160 assertions (exit 0)"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "KrisnaSantosa15",
+    "written_at": "2026-11-27T10:54:47+07:00",
+    "assessment": "add capability to edit student campaign",
+    "level": "medium",
+    "review_route": "post-merge"
+  },
+  "acknowledgement": {
+    "actor": "KrisnaSantosa15",
+    "head_sha": "9e7b50c1c014847c25eb5b0e717fbacb1097fb8b",
+    "report_sha256": "2ddbbb023f0c26468791d14ef73123e2de67ee91c0b55194f29fd73334be0684",
+    "statement": "ack, push dan buat pr dulu nanti preflight lagi",
+    "timestamp": "2026-11-27T11:09:23+07:00"
+  }
+}

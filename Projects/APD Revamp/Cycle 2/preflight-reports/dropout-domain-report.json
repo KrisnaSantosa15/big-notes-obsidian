@@ -1,0 +1,148 @@
+{
+  "schema_version": 3,
+  "snapshot": {
+    "base_ref": "origin/master",
+    "base_sha": "065a8da49cff5ce386af0104e7d29fc248eba753",
+    "merge_base": "042dfe13892e6e8867cc792f9490a0c5e28ae0d4",
+    "head_sha": "8518c626b2d65f3d03ddc11e64ac33a6e6adae88",
+    "diff_sha256": "b27449aaea7cc2966c5055af4426b8c7ef38bf42bf45c63876e7860d2746266b",
+    "policy_sha256": "ead232d9a585c1f09f58d4a66f233897f2ba6aa359c4573f0c813f6c86a2a696"
+  },
+  "review_snapshot": {
+    "base_ref": "origin/master",
+    "base_sha": "065a8da49cff5ce386af0104e7d29fc248eba753",
+    "merge_base": "042dfe13892e6e8867cc792f9490a0c5e28ae0d4",
+    "head_sha": "8518c626b2d65f3d03ddc11e64ac33a6e6adae88",
+    "diff_sha256": "b27449aaea7cc2966c5055af4426b8c7ef38bf42bf45c63876e7860d2746266b",
+    "policy_sha256": "ead232d9a585c1f09f58d4a66f233897f2ba6aa359c4573f0c813f6c86a2a696"
+  },
+  "context": {
+    "changes": [
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantDropout.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Enums/ParticipantDropoutType.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/Events/ParticipantsWereDroppedOut.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/ParticipantToBeDroppedOut.php"
+      },
+      {
+        "status": "A",
+        "path": "Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/ParticipantDropoutRepository.php"
+      },
+      {
+        "status": "M",
+        "path": "Dicoding/Infrastructure/StorageGateways/Academies/AcademicProgramDashboardAccessListGateway.php"
+      },
+      {
+        "status": "A",
+        "path": "app/tests/UnitTests/Domain/AcademicProgramDashboard/Aggregates/ParticipantDropoutTest.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/en/exception.php"
+      },
+      {
+        "status": "M",
+        "path": "lang/id/exception.php"
+      }
+    ],
+    "required_checks": [
+      "diff",
+      "psalm",
+      "tests"
+    ]
+  },
+  "purpose": "Add the domain layer for bulk participant dropout (Withdrawn or Terminated) in APD campaigns with a mandatory single reason, immutable final exit status, and domain event audit trail.",
+  "acceptance_criteria": [
+    "Only admins can drop out participants (NOT_ADMIN); empty user selection is rejected (NO_PARTICIPANTS).",
+    "All selected participants must belong to the campaign (PARTICIPANT_NOT_IN_CAMPAIGN) and must not have been dropped out previously (ALREADY_DROPPED_OUT).",
+    "Dropout type uses ParticipantDropoutType (WITHDRAWN or TERMINATED) and reason is mandatory, non-blank after trim, and at most 255 characters (REASON_REQUIRED, REASON_TOO_LONG).",
+    "ParticipantsWereDroppedOut records actor_id, program_code, user_ids (list<int>), dropout_type, and trimmed dropout_reason.",
+    "Gateway methods in AcademicProgramDashboardAccessListGateway are intentional stubs for the stacked web PR; translations exist in id and en."
+  ],
+  "harness": {
+    "name": "Antigravity",
+    "version": "1.5.18"
+  },
+  "reviews": [
+    {
+      "role": "rules",
+      "status": "completed",
+      "head_sha": "8518c626b2d65f3d03ddc11e64ac33a6e6adae88",
+      "started_at": "2026-11-27T11:14:09+07:00",
+      "model": "Gemini 4 Neon (Medium)",
+      "evidence": "Subagent 71006942-bae0-4cf5-aae4-50e54aa6d8fb reviewed full merge_base..head diff across all 9 changed files against AGENTS.md, domain-layer.md, infrastructure-layer.md, translations.md, testing.md, review-criteria.md, review-do-and-donts.md, DomainEventLogWriter, and sibling APD files."
+    },
+    {
+      "role": "simplicity",
+      "status": "completed",
+      "head_sha": "8518c626b2d65f3d03ddc11e64ac33a6e6adae88",
+      "started_at": "2026-11-27T11:14:10+07:00",
+      "model": "Gemini 4 Neon (Medium)",
+      "evidence": "Subagent e4eb7143-aea5-446a-b4f6-25fed8512068 reviewed full merge_base..head diff across all 9 changed files, AcademicProgramDashboardAccessListGateway, ValueObject, and sibling APD aggregates/repositories; 0 findings."
+    }
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "role": "rules",
+      "severity": "should-fix",
+      "status": "dismissed",
+      "accepted_by": "KrisnaSantosa15",
+      "location": "Dicoding/Domain/AcademicProgramDashboard/ValueObjects/ParticipantToBeDroppedOut.php:10-20",
+      "evidence": "Extends ValueObject with promoted typed constructor params without $rules or validateData().",
+      "resolution": "Dismissed with human author acceptance (KrisnaSantosa15, 2026-11-27): keeps sibling APD VO convention (EnrolledParticipant, SupervisedStudent)."
+    },
+    {
+      "id": "R2",
+      "role": "rules",
+      "severity": "question",
+      "status": "dismissed",
+      "accepted_by": "KrisnaSantosa15",
+      "location": "Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantDropout.php:96,109",
+      "evidence": "Aggregate throws PARTICIPANT_NOT_IN_CAMPAIGN and REASON_REQUIRED (matching translations & tests), differing from coordinator shorthand in AC packet.",
+      "resolution": "Dismissed with human author confirmation (KrisnaSantosa15, 2026-11-27): PARTICIPANT_NOT_IN_CAMPAIGN and REASON_REQUIRED (+ REASON_TOO_LONG) are the intended canonical keys."
+    }
+  ],
+  "checks": [
+    {
+      "name": "diff",
+      "status": "passed",
+      "command": "git diff --check 042dfe13892e6e8867cc792f9490a0c5e28ae0d4 8518c626b2d65f3d03ddc11e64ac33a6e6adae88",
+      "head_sha": "8518c626b2d65f3d03ddc11e64ac33a6e6adae88",
+      "evidence": "DIFF_CHECK_OK (0 whitespace/conflict issues)"
+    },
+    {
+      "name": "psalm",
+      "status": "passed",
+      "command": "deck php vendor/bin/psalm.phar --no-progress Dicoding/Domain/AcademicProgramDashboard/Aggregates/ParticipantDropout.php Dicoding/Domain/AcademicProgramDashboard/Enums/ParticipantDropoutType.php Dicoding/Domain/AcademicProgramDashboard/Events/ParticipantsWereDroppedOut.php Dicoding/Domain/AcademicProgramDashboard/ValueObjects/ParticipantToBeDroppedOut.php Dicoding/Infrastructure/Repositories/AcademicProgramDashboard/ParticipantDropoutRepository.php Dicoding/Infrastructure/StorageGateways/Academies/AcademicProgramDashboardAccessListGateway.php",
+      "head_sha": "8518c626b2d65f3d03ddc11e64ac33a6e6adae88",
+      "evidence": "Psalm exit 0 on all 6 PHP files in PR (80.8408% type inference)"
+    },
+    {
+      "name": "tests",
+      "status": "passed",
+      "command": "deck ai:test --filter='ParticipantDropoutTest' --testsuite=unit",
+      "head_sha": "8518c626b2d65f3d03ddc11e64ac33a6e6adae88",
+      "evidence": "Unit tests passed: 9 tests, 41 assertions (exit 0)"
+    }
+  ],
+  "risk": {
+    "source": "human",
+    "author": "KrisnaSantosa15",
+    "written_at": "2026-11-27T10:54:47+07:00",
+    "assessment": "add dropout (withdrawn/terminated) feature",
+    "level": "high",
+    "review_route": "pre-merge"
+  },
+  "acknowledgement": null
+}

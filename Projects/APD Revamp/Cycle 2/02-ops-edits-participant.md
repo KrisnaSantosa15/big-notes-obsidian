@@ -10,8 +10,9 @@ tags:
   - apd
 card: https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711
 sp: "4"
-status: "PR domain & web selesai lokal dan lolos preflight, menunggu ack dan push (Basecamp: In progress)"
-pr: []
+status: "PR #6534 (domain) open; PR web selesai lokal (menunggu ack & merge domain)"
+pr:
+  - 6534
 depends-on: []
 index: "[[Projects/APD Revamp/Cycle 2/index]]"
 related-people:
@@ -426,8 +427,8 @@ Catatan teknis uji: `fetch` dengan `redirect: 'follow'` pada PUT membuat error f
   - Web: psalm 4 file, integration 11, unit 33, vitest 29, eslint, build. tsc tidak menemukan error di file yang diubah.
 
 ### Status
-- **Ack author belum diberikan** (ditunda per 2026-11-25). Belum di-push dan belum ada PR. Push dan PR hanya dibuat kalau diminta.
-- Langkah berikutnya: ack kedua SHA final, lalu jalankan create-pr (domain dulu, kemudian web yang base-nya branch domain).
+- **PR Domain ([#6534](https://github.com/dicoding-dev/dicoding/pull/6534)) open (2026-11-27):** `feature/apd/participant-edit-domain`, HEAD `9e7b50c1c01` (perbaikan R1 `EMPTY_REGISTRATION_FIELD`), risk medium (`post-merge`). Report preflight: `preflight-reports/edit-domain-report.json`.
+- **PR Web (`feature/apd/participant-edit`) belum di-push:** perlu merge `feature/apd/participant-edit-domain` (`9e7b50c1c01`) ke dalamnya lalu preflight & ack ulang sebelum push/create PR.
 
 
 ## Card Withdraw/Terminated (dipindah)

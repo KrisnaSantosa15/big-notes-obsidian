@@ -27,7 +27,7 @@ Dokumen ini index. Detail tiap card ada di folder ini, satu file per card. Cycle
 | Card | SP | Status brainstorm | Detail |
 | --- | --- | --- | --- |
 | [Email autocomplete in the add-participant form](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257720) | 1 | Selesai. PR [#6450](https://github.com/dicoding-dev/dicoding/pull/6450) merged (2026-11-25), card di Confirmation | [01-email-autocomplete](01-email-autocomplete.md) |
-| [Ops edits a campaign participant](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711) | 4 | In progress. PR domain & web selesai lokal dan lolos preflight (menunggu ack/push). Withdraw/Terminated dipisah ke [09](09-ops-withdraws-terminates-participants.md) | [02-ops-edits-participant](02-ops-edits-participant.md) |
+| [Ops edits a campaign participant](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257711) | 4 | In progress. PR [#6534](https://github.com/dicoding-dev/dicoding/pull/6534) (domain) open; PR web lokal (menunggu merge domain & ack). Withdraw/Terminated dipisah ke [09](09-ops-withdraws-terminates-participants.md) | [02-ops-edits-participant](02-ops-edits-participant.md) |
 | [Ops withdraws or terminates campaign participants in bulk](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10545178127) | 4 | In progress. Dipisah dari [02](02-ops-edits-participant.md). PR domain & web selesai lokal dan lolos preflight (menunggu ack/push) | [09-ops-withdraws-terminates-participants](09-ops-withdraws-terminates-participants.md) |
 | [Map Facilitators to the groups they accompany](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10411894512) | 2 | In Review. PR [#6457](https://github.com/dicoding-dev/dicoding/pull/6457) merged, lanjutan PR [#6458](https://github.com/dicoding-dev/dicoding/pull/6458) akan dikerjakan Alfian | [03-map-facilitators](03-map-facilitators.md) |
 | [Ops manages Students' progress status](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257815) | 2 | Selesai. Kalkulasi otomatis. Kolom status dan course "x/y lulus" di daftar peserta admin. AC card perlu ditulis ulang | [04-progress-status](04-progress-status.md) |
@@ -56,7 +56,7 @@ flowchart TD
     end
 
     subgraph sg_edit ["02. Ops Edits Participant (In progress)"]
-        editDom["participant-edit-domain (Lokal preflight)"]:::localDone
+        editDom["PR #6534 participant-edit-domain (OPEN Ready)"]:::prOpen
         editWeb["participant-edit (Lokal preflight)"]:::localDone
     end
 
