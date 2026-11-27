@@ -39,6 +39,99 @@ Dokumen ini index. Detail tiap card ada di folder ini, satu file per card. Cycle
 
 SP di judul card Basecamp sudah disamakan dengan tabel ini (2026-11-18), kecuali card Fasilitator yang belum diisi.
 
+## Peta Stack & Status Card (2026-11-27)
+
+Legenda warna: **Hijau** = Merged ke `master` · **Biru** = PR Open (Ready) · **Ungu** = PR Draft / Hand-off · **Kuning** = Implemented lokal & lolos preflight (belum PR) · **Abu-abu** = Belum diimplementasi.
+
+Buka versi interaktif (fullscreen / zoom bebas): [[Cycle 2 Stack Map.canvas]]
+
+```mermaid
+flowchart TD
+    master["master"]
+
+    subgraph sg_done ["01. Email Autocomplete & 03. Map Facilitators"]
+        pr6450["01: PR #6450 Email autocomplete (MERGED)"]:::merged
+        pr6457["03: PR #6457 Facilitator roster (MERGED)"]:::merged
+        pr6458["03: PR #6458 Facilitator web (OPEN Conflict - Alfian)"]:::prDraft
+    end
+
+    subgraph sg_edit ["02. Ops Edits Participant (In progress)"]
+        editDom["participant-edit-domain (Lokal preflight)"]:::localDone
+        editWeb["participant-edit (Lokal preflight)"]:::localDone
+    end
+
+    subgraph sg_dropout ["09. Ops Withdraws / Terminates Bulk (In progress)"]
+        dropDom["participant-dropout-domain (Lokal preflight)"]:::localDone
+        dropWeb["participant-dropout (Lokal preflight)"]:::localDone
+    end
+
+    subgraph sg_cp ["05. Course Progress & 04. Progress Status (In progress)"]
+        lp1a["1a: PR #6494 LP create domain (MERGED)"]:::merged
+        lp1b["1b: PR #6495 LP create web (OPEN Ready)"]:::prOpen
+        lp3a["3a: PR #6500 Auto-enroll LP domain (DRAFT)"]:::prDraft
+        lp4a["4a: auto-enroll-storage + backfill (Lokal preflight)"]:::localDone
+        lp3c["3c: manual add LP domain (Lokal preflight)"]:::localDone
+        lp4c["4c: manual add LP web (Lokal preflight)"]:::localDone
+        lp3d["3d: CSV import LP domain (Lokal preflight)"]:::localDone
+        lp4d["4d: CSV import LP web (Lokal preflight)"]:::localDone
+        cp5["5: campaign-course-progress (Lokal preflight)"]:::localDone
+        cp6["6: campaign-course-progress-view (Lokal preflight)"]:::localDone
+        ps8["8: Card 04 progress-status-view (Lokal preflight)"]:::localDone
+
+        lp2a["2a: PR #6501 LP update domain (DRAFT)"]:::prDraft
+        lp2c["2c: PR #6502 LP removal domain (DRAFT)"]:::prDraft
+        lp2b["2b: LP update web (Lokal preflight)"]:::localDone
+        lp2d["2d: LP removal web (Lokal preflight)"]:::localDone
+    end
+
+    subgraph sg_todo ["Belum Diimplementasi"]
+        catAuto["Auto-enroll registration category - 3 SP (Belum dikerjakan)"]:::notStarted
+        adminLinks["06: Admin important links - 4 SP (Belum, Unassigned)"]:::notStarted
+        studLinks["07: Students important links - 2 SP (Belum, Unassigned)"]:::notStarted
+        facilProg["08: Facilitator see progress - 2 SP (Hold, Unassigned)"]:::notStarted
+    end
+
+    master --> pr6450
+    master --> pr6457
+    pr6457 --> pr6458
+
+    master --> editDom
+    editDom --> editWeb
+
+    master --> dropDom
+    dropDom --> dropWeb
+
+    master --> lp1a
+    lp1a --> lp1b
+    lp1b --> lp3a
+    lp3a --> lp4a
+    lp4a --> lp3c
+    lp3c --> lp4c
+    lp4c --> lp3d
+    lp3d --> lp4d
+    lp4d --> cp5
+    cp5 --> cp6
+    cp6 --> ps8
+
+    lp1b --> lp2a
+    lp1b --> lp2c
+    lp4a --> lp2b
+    lp2a -.-> lp2b
+    lp2b --> lp2d
+    lp2c -.-> lp2d
+
+    adminLinks -.-> studLinks
+    catAuto -.-> studLinks
+    pr6458 -.-> facilProg
+    ps8 -.-> facilProg
+
+    classDef merged fill:#166534,stroke:#22c55e,color:#ffffff
+    classDef prOpen fill:#1d4ed8,stroke:#60a5fa,color:#ffffff
+    classDef prDraft fill:#5b21b6,stroke:#a78bfa,color:#ffffff
+    classDef localDone fill:#a16207,stroke:#facc15,color:#ffffff
+    classDef notStarted fill:#374151,stroke:#9ca3af,color:#f3f4f6
+```
+
 ### Perubahan assignee (2026-11-17)
 
 - Krisna sempat mengambil card progress status dan melepas [Facilitator see the progress of their supervised Students](https://app.basecamp.com/5135326/buckets/44666023/card_tables/cards/10493257765). Belakangan card Fasilitator **kembali ke Krisna**, jadi Krisna memegang keduanya (8 card aktif Cycle-2, ditambah Map Lecturers In Review).
