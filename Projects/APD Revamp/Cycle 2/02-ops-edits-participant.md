@@ -449,3 +449,46 @@ Card: [[4][P1] Ops withdraws or terminates campaign participants in bulk](https:
 **Rencana PR:**
 1. Domain (base master): aggregate `ParticipantExit`, enum alasan, event, repository, dan stub gateway.
 2. Infra + web (base PR domain): migration, gateway, Specification exit dan dropout MCT, route POST, checkbox yang tetap tersimpan antar halaman, dialog, badge, serta Edit dan checkbox nonaktif.
+
+## Preflight Dropout (Withdraw/Terminated), 2026-11-26
+
+**Perubahan sebelum preflight**
+- Nama fitur "participant exit" diganti jadi **participant dropout**. Alasannya: selaras dengan `MultiCourseTokenDropout` dan status enrollment `DROPOUT`. "Removal" di APD berarti barisnya dihapus.
+- Kolom dan field: `dropout_type` (enum `ParticipantDropoutType`: WITHDRAWN/TERMINATED) dan `dropout_reason` (teks bebas, label UI "Reason"). Sebelumnya `exit_reason` + `exit_note`, diganti karena kata "reason" sering tertukar.
+- Event tetap `ParticipantsWereDroppedOut`. Bentuk `Were` sesuai konvensi APD saat ini (CampaignSettingsWereUpdated, ParticipantGroupsWereRemoved). `user_ids` berupa `list<int>`.
+- Route tetap POST (`participants/dropout`), sama seperti import, sync, dan reschedule.
+- Token diambil dengan satu query (`MultiCourseTokensGateway::getTokensByStudentIdsAndProgramCode`), bukan `array_merge` di dalam loop.
+- K-W8 direvisi: setiap peserta pasti punya token. Test dan guard untuk peserta tanpa token dihapus. Kalau seluruh batch tidak punya token, domain MCT menolak dengan `TOKENS_EMPTY` dan seluruh transaksi di-rollback.
+- Branch di-rename: `feature/apd/participant-dropout-domain` dan `feature/apd/participant-dropout`. Keduanya belum di-push.
+
+**PR domain** (`feature/apd/participant-dropout-domain`, base master)
+- Risk (Krisna): **high**, "add dropout (withdrawn/terminated) feature". Route pre-merge.
+- Di-review di `4a41b5cb88c`. Final `8518c626b2d`. Digest `d96127b04f40d5777f00c196a605bc32e5b89c6922a02dbcbc75eb735cbc26ed`.
+- Temuan:
+  - D-R1 (nit, urutan import gateway): diperbaiki dalam 2 commit (`eb83e0eefde` lalu `8518c626b2d`).
+  - D-S1 (nit, value object cukup bool): dibiarkan, enum tetap dipakai.
+- Cek: diff bersih, psalm 7 file bersih, unit test 9 lolos (41 assertion).
+
+**PR web** (`feature/apd/participant-dropout`, base PR domain)
+- Risk (Krisna): **medium**, "allow ops to dropout campaign participants with reason". Route post-merge.
+- Di-review di `7deaa5cef18`. Final `6b663613fcc` (merge branch domain). Digest `414e38f520eefb989dc4b2fa1180957201d757ab84ad2fb526f0af5adf4b5414`.
+- Temuan:
+  - W-S1 (should-fix): dua penanda program. Sekarang cukup `program_code`, dan lookup campaign, `abort(404)`, serta `partner_program_id` dihapus (`b1fc8e621f0`).
+  - W-S2 (nit): validasi reason diserahkan ke domain. Spec cukup `present|string` (`5e570b67b28`). W-R2 (label 'Reason') ikut selesai.
+  - W-S3 (nit): satu konstanta `DROPOUT_TYPES` di `student-list.constants.ts` (`a24c01bf926`). Bundle di-rebuild di `dd06cab76d7`.
+  - W-R1 (question): event `MultiCourseTokenWasDroppedOut` tidak di-dispatch. Dibiarkan, karena `ParticipantsWereDroppedOut` sudah menjadi catatan audit dan event token tidak punya listener.
+- Cek:
+  - Build lolos, bundle identik dengan yang di-commit.
+  - diff bersih.
+  - psalm 6 file bersih. Migration di luar scope psalm dan error-nya sama dengan migration lain di master.
+  - Integration test 5 lolos (28 assertion), unit test 9 lolos.
+  - Vitest 29/29, eslint bersih.
+
+**Status:** menunggu acknowledgement dari Krisna untuk kedua digest. Belum push, belum ada PR.
+- Report: `/tmp/claude-1000/pf-dropout-domain/report.json`, `/tmp/claude-1000/pf-dropout-web/report.json`.
+- Worktree domain: `scratchpad/wt-pd-domain`.
+
+**Lanjutan:**
+- Search multi-email (input chips, beberapa kata kunci dipisah koma dan tetap LIKE), dijadikan card terpisah.
+- Nonaktifkan Edit untuk peserta yang sudah dropout, setelah PR edit merge.
+- Hapus backup: `backup/participant-exit-domain-pre-*` dan dua stash backup rename.
