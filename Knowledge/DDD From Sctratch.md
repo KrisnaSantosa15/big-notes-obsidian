@@ -2,7 +2,7 @@
 
 - Ketika sedang membuat aggregate, hindari primitive obsession: kondisi di mana suatu aggregate itu memiliki banyak tipe data primitif -> string, int, bool, etc. misalnya:
 ```php
-class UpdateParticipant
+class UpdateParticipant extends Aggregates
 {
     public function __construct(
         public string $email,
